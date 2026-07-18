@@ -11,7 +11,7 @@ export const site = {
   // 公開データJSONの取得元。
   // GitHub Actions がコミットするリポジトリの raw URL を指定（デプロイを待たず15分毎の live.json が反映される）。
   // 空文字にするとサイト同梱の /data/*.json を読む。
-  dataBaseUrl: "https://raw.githubusercontent.com/Tawhite23/toilet-sensei/main/public/data", 
+  dataBaseUrl: "https://raw.githubusercontent.com/Tawhite23/Tawhite23-toilet-sensei/main/public/data", 
 // 例: "https://raw.githubusercontent.com/<owner>/<repo>/main/public/data"
 
   sns: {
