@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 保護データ: Discord招待URL等。ログイン済みユーザーのみ読み取り可、書き込みは常に不可
+    // （書き込みは管理者が Firebase コンソールから直接行う）
+    match /private/{doc} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    // その他は読み取り専用
+    match /{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

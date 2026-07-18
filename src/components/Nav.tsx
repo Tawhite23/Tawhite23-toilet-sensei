@@ -1,0 +1,39 @@
+"use client"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+const links = [
+  { href: "/", label: "ホーム" },
+  { href: "/calendar/", label: "カレンダー" },
+  { href: "/report/", label: "レポート" },
+  { href: "/profile/", label: "プロフィール" },
+]
+
+export default function Nav() {
+  const path = usePathname()
+  return (
+    <nav
+      aria-label="メインナビゲーション"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-base-700 bg-base-800/90 backdrop-blur md:inset-x-auto md:bottom-auto md:left-1/2 md:top-4 md:-translate-x-1/2 md:rounded-full md:border md:px-2"
+    >
+      <ul className="mx-auto flex max-w-md justify-around md:gap-1">
+        {links.map((l) => {
+          const active = path === l.href || (l.href !== "/" && path.startsWith(l.href.replace(/\/$/, "")))
+          return (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                aria-current={active ? "page" : undefined}
+                className={`block px-4 py-3 text-sm font-medium transition-colors md:rounded-full md:py-2 ${
+                  active ? "text-accent" : "text-ink-dim hover:text-ink"
+                }`}
+              >
+                {l.label}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}

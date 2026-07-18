@@ -1,0 +1,32 @@
+# コード変更時のみ Firebase Hosting にデプロイ（データJSONの15分毎コミットではデプロイしない。
+# サイトは site.config.ts の dataBaseUrl 経由で raw.githubusercontent.com から最新JSONを読むため、
+# デプロイ不要で live.json の更新が反映される）
+name: deploy
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "public/data/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_FB_API_KEY: ${{ vars.NEXT_PUBLIC_FB_API_KEY }}
+          NEXT_PUBLIC_FB_AUTH_DOMAIN: ${{ vars.NEXT_PUBLIC_FB_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FB_PROJECT_ID: ${{ vars.NEXT_PUBLIC_FB_PROJECT_ID }}
+          NEXT_PUBLIC_FB_APP_ID: ${{ vars.NEXT_PUBLIC_FB_APP_ID }}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: ${{ vars.NEXT_PUBLIC_FB_PROJECT_ID }}

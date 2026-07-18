@@ -1,0 +1,29 @@
+# 月次(毎月1日 00:30 JST = 前日15:30 UTC)で report.json を更新し、サイトを再デプロイ
+name: update-report
+on:
+  schedule:
+    - cron: "30 15 * * *" # 毎日実行し、月初のスナップショット漏れを防ぐ(1u/日)
+  workflow_dispatch:
+concurrency:
+  group: data-json
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node scripts/build-report.mjs
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+      - name: Commit if changed
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add public/data/report.json
+          git diff --cached --quiet || git commit -m "chore(data): update report.json [skip ci]"
+          git pull --rebase && git push
