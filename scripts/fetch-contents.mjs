@@ -43,7 +43,13 @@ for (let i = 0; i < ids.length; i += 50) {
     const isUpcoming = !!live?.scheduledStartTime && !live?.actualStartTime && !live?.actualEndTime
     const date = isUpcoming
       ? live.scheduledStartTime
-      : live?.actualStartTime ?? v.snippet.publishedAt
+      : live?.actualStartTime ?? v.snippet?.publishedAt
+    // 【バグ修正】作成直後の配信枠(liveStreamingDetailsが未確定でpublishedAtも未設定)など、
+    // 日付を特定できない項目はカレンダーに出しようがないためスキップする(sort時のクラッシュ防止)。
+    if (!date) {
+      console.warn(`日付不明のためスキップ: videoId=${v.id} title=${v.snippet?.title ?? "(不明)"}`)
+      continue
+    }
     contents.push({
       date,
       type: detectType(v),
@@ -55,7 +61,7 @@ for (let i = 0; i < ids.length; i += 50) {
     })
   }
 }
-contents.sort((a, b) => b.date.localeCompare(a.date))
+contents.sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))
 
 await mkdir("public/data", { recursive: true })
 await writeFile("public/data/contents.json", JSON.stringify(contents, null, 2))
