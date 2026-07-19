@@ -7,7 +7,17 @@ import {
 import { fetchReport } from "@/lib/data"
 import type { Report } from "@/lib/types"
 
-const C = { live: "#ff4d4d", video: "#38bdf8", hours: "#a78bfa", subs: "#f472b6", views: "#38bdf8" }
+// チャート色はCSS変数(テーマ)に追従
+const C = {
+  live: "var(--c-live)",
+  video: "var(--c-accent)",
+  hours: "var(--c-warm)",
+  subs: "var(--c-warm)",
+  views: "var(--c-accent)",
+}
+const tick = { fill: "var(--c-ink-dim)", fontSize: 11 }
+const tickS = { fill: "var(--c-ink-dim)", fontSize: 10 }
+const grid = "var(--c-border)"
 
 export default function ReportCharts() {
   const [report, setReport] = useState<Report | null>(null)
@@ -22,21 +32,29 @@ export default function ReportCharts() {
         配信回数: r.liveCount,
         動画本数: r.videoCount,
         配信時間h: Math.round(r.totalDurationSec / 360) / 10,
-        登録者: r.subscriberCount,
-        再生数: r.viewCount,
+        // 【2-4】未記録の月は null のまま = グラフに線を引かない(欠損)
+        登録者: r.subscriberCount ?? null,
+        再生数: r.viewCount ?? null,
       }))
   }, [report])
 
   if (!report) return <p className="p-8 text-center text-ink-dim" role="status">読み込み中…</p>
 
   const latest = rows[rows.length - 1]
+  const latestSubs = [...rows].reverse().find((r) => r.登録者 != null)?.登録者
   const totals = rows.reduce(
     (a, r) => ({ live: a.live + r.配信回数, video: a.video + r.動画本数, h: a.h + r.配信時間h }),
     { live: 0, video: 0, h: 0 }
   )
+  const hasGap = rows.some((r) => r.登録者 == null)
 
   const card = "rounded-2xl border border-base-700 bg-base-800 p-4"
-  const tooltipStyle = { backgroundColor: "#1c2230", border: "1px solid #2a3244", borderRadius: 8, color: "#e8ecf4" }
+  const tooltipStyle = {
+    backgroundColor: "var(--c-surface)",
+    border: "1px solid var(--c-border)",
+    borderRadius: 8,
+    color: "var(--c-ink)",
+  }
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 pb-28 pt-8 md:pt-24">
@@ -48,7 +66,7 @@ export default function ReportCharts() {
           ["累計配信", `${totals.live}回`],
           ["累計動画", `${totals.video}本`],
           ["累計配信時間", `${Math.round(totals.h)}時間`],
-          ["登録者", latest ? latest.登録者.toLocaleString() : "-"],
+          ["登録者", latestSubs != null ? latestSubs.toLocaleString() : "-"],
         ].map(([k, v]) => (
           <div key={k} className={card}>
             <p className="text-xs text-ink-dim">{k}</p>
@@ -62,10 +80,10 @@ export default function ReportCharts() {
         <div className="h-72">
           <ResponsiveContainer>
             <ComposedChart data={rows}>
-              <CartesianGrid stroke="#2a3244" strokeDasharray="3 3" />
-              <XAxis dataKey="ym" tick={{ fill: "#a8b3c7", fontSize: 11 }} />
-              <YAxis yAxisId="l" tick={{ fill: "#a8b3c7", fontSize: 11 }} />
-              <YAxis yAxisId="r" orientation="right" tick={{ fill: "#a8b3c7", fontSize: 11 }} unit="h" />
+              <CartesianGrid stroke={grid} strokeDasharray="3 3" />
+              <XAxis dataKey="ym" tick={tick} />
+              <YAxis yAxisId="l" tick={tick} />
+              <YAxis yAxisId="r" orientation="right" tick={tick} unit="h" />
               <Tooltip contentStyle={tooltipStyle} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
               <Bar yAxisId="l" dataKey="配信回数" fill={C.live} radius={[4, 4, 0, 0]} />
@@ -82,11 +100,11 @@ export default function ReportCharts() {
           <div className="h-56">
             <ResponsiveContainer>
               <AreaChart data={rows}>
-                <CartesianGrid stroke="#2a3244" strokeDasharray="3 3" />
-                <XAxis dataKey="ym" tick={{ fill: "#a8b3c7", fontSize: 10 }} />
-                <YAxis tick={{ fill: "#a8b3c7", fontSize: 10 }} domain={["auto", "auto"]} />
+                <CartesianGrid stroke={grid} strokeDasharray="3 3" />
+                <XAxis dataKey="ym" tick={tickS} />
+                <YAxis tick={tickS} domain={["auto", "auto"]} />
                 <Tooltip contentStyle={tooltipStyle} />
-                <Area dataKey="登録者" stroke={C.subs} fill={C.subs} fillOpacity={0.15} strokeWidth={2} />
+                <Area dataKey="登録者" connectNulls={false} stroke={C.subs} fill={C.subs} fillOpacity={0.15} strokeWidth={2} dot={{ r: 3 }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -96,11 +114,11 @@ export default function ReportCharts() {
           <div className="h-56">
             <ResponsiveContainer>
               <AreaChart data={rows}>
-                <CartesianGrid stroke="#2a3244" strokeDasharray="3 3" />
-                <XAxis dataKey="ym" tick={{ fill: "#a8b3c7", fontSize: 10 }} />
-                <YAxis tick={{ fill: "#a8b3c7", fontSize: 10 }} domain={["auto", "auto"]} />
+                <CartesianGrid stroke={grid} strokeDasharray="3 3" />
+                <XAxis dataKey="ym" tick={tickS} />
+                <YAxis tick={tickS} domain={["auto", "auto"]} />
                 <Tooltip contentStyle={tooltipStyle} />
-                <Area dataKey="再生数" stroke={C.views} fill={C.views} fillOpacity={0.15} strokeWidth={2} />
+                <Area dataKey="再生数" connectNulls={false} stroke={C.views} fill={C.views} fillOpacity={0.15} strokeWidth={2} dot={{ r: 3 }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -108,7 +126,8 @@ export default function ReportCharts() {
       </div>
 
       <p className="text-xs text-ink-dim">
-        ※ 登録者・再生数は各月の集計時点のスナップショット値です（GitHub Actionsで月次記録）。
+        ※ 登録者・再生数は実記録に基づくスナップショット値です（GitHub Actionsで月次記録）。
+        {hasGap && " 記録が無い期間は欠損として表示し、推測値で補完していません。"}
       </p>
     </div>
   )

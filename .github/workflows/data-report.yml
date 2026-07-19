@@ -5,7 +5,7 @@ on:
     - cron: "30 15 * * *" # 毎日実行し、月初のスナップショット漏れを防ぐ(1u/日)
   workflow_dispatch:
 concurrency:
-  group: data-json
+  group: data-json-report
   cancel-in-progress: false
 permissions:
   contents: write
@@ -26,4 +26,9 @@ jobs:
           git config user.email github-actions@github.com
           git add public/data/report.json
           git diff --cached --quiet || git commit -m "chore(data): update report.json [skip ci]"
-          git pull --rebase && git push
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            echo "push failed, retrying ($i)..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          exit 1

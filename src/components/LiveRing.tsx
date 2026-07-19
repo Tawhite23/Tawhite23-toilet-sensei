@@ -29,7 +29,7 @@ export default function LiveRing() {
         alt="おトイレ先生 チャンネルアイコン"
         width={144}
         height={144}
-        className="relative z-10 h-32 w-32 rounded-full border-2 border-base-700 sm:h-36 sm:w-36"
+        className="relative z-10 h-32 w-32 rounded-full border-2 border-base-700 sm:h-36 sm:w-36 md:h-56 md:w-56 lg:h-64 lg:w-64"
       />
       {isLive && (
         <span className="absolute -bottom-1 left-1/2 z-20 -translate-x-1/2 rounded-full bg-live px-3 py-0.5 text-xs font-black tracking-widest text-white shadow-lg">

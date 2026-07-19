@@ -1,15 +1,22 @@
 import type { Config } from "tailwindcss"
 
+// カラーは globals.css の CSS変数(ライト/ダーク2モード)に追従する。
+// クラス名は従来のまま(base-900=背景, base-800=面, base-700=境界線)。
 export default {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        // ダーク基調 + WCAG AA を満たす前景色
-        base: { 900: "#0b0e14", 800: "#131722", 700: "#1c2230" },
-        ink: { DEFAULT: "#e8ecf4", dim: "#a8b3c7" }, // base-900上でコントラスト比 13.9 / 7.2
-        accent: { DEFAULT: "#38bdf8", warm: "#f472b6" },
-        live: "#ff4d4d",
+        base: {
+          900: "var(--c-bg)",
+          800: "var(--c-surface)",
+          700: "var(--c-border)",
+        },
+        ink: { DEFAULT: "var(--c-ink)", dim: "var(--c-ink-dim)" },
+        accent: { DEFAULT: "var(--c-accent)", warm: "var(--c-warm)" },
+        live: "var(--c-live)",
+        plan: "var(--c-plan)", // 配信予定バッジ
+        paper: "var(--c-paper)", // トイレットペーパー(演出用)
       },
       fontFamily: {
         sans: ['"Noto Sans JP"', "system-ui", "sans-serif"],

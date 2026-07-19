@@ -2,19 +2,123 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* ============================================================
+   テーマ: 「上質なトイレットペーパー」2モード
+   - .light = オフホワイト(#F7F5F0系)。清潔で柔らかい白紙
+   - .dark  = 上質な黒/チャコール(#141210〜#1E1B18系)の"黒紙"
+   両モードとも 紙の重なり感・柔らかい影・繊維感 を同格に持つ。
+   差し色はオレンジ(両モードで映えるようトーン調整)。
+   デフォルト(:root)はダーク値 = JS無効時もダークで表示
+   ============================================================ */
+:root,
+:root.dark {
   color-scheme: dark;
+  --c-bg: #0f0e0d;        /* くっきりとした黒 */        /* チャコールの黒紙 */
+  --c-surface: #181716;   /* 一枚上のプライ */
+  --c-border: #2d2b28;
+  --c-ink: #efeae2;
+  --c-ink-dim: #a89e91;
+  --c-accent: #f08b33;    /* オレンジ(ダークで映える明るめ) */
+  --c-warm: #f078a0;
+  --c-live: #ff5a5a;
+  --c-plan: #7fd1ae;
+  --c-paper: #1e1d1b;     /* 演出用"黒紙" */
+  --c-paper-edge: #34322e;
+  --c-paper-shadow: rgba(0, 0, 0, 0.55);
+  --c-emboss-hi: rgba(255, 255, 255, 0.035);
+}
+:root.light {
+  color-scheme: light;
+  --c-bg: #f7f5f0;        /* オフホワイトの白紙 */
+  --c-surface: #fdfcf9;
+  --c-border: #e3ddd2;
+  --c-ink: #332b22;
+  --c-ink-dim: #7d7264;
+  --c-accent: #c25a10;    /* オレンジ(ライトで沈まない濃いめ) */
+  --c-warm: #d0447a;
+  --c-live: #d92d4a;
+  --c-paper: #fffdf9;
+  --c-paper-edge: #ece5d8;
+  --c-plan: #1d8a63;
+  --c-paper-shadow: rgba(122, 104, 76, 0.28);
+  --c-emboss-hi: rgba(255, 255, 255, 0.65);
 }
 
 html {
   @apply bg-base-900 text-ink antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* 紙の質感: 微細な繊維ノイズ + エンボス格子(ハイライト/シャドウの2層)を全面に */
+/* 最前面ではなくバックグラウンド(コンテンツの背後)に敷く */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 1px 1px, var(--c-emboss-hi) 1px, transparent 1.6px),
+    radial-gradient(circle at 2px 2px, color-mix(in srgb, var(--c-ink) 4%, transparent) 1px, transparent 1.5px);
+  background-size: 180px 180px, 14px 14px, 14px 14px;
+}
+
+/* 紙の重なり感: 面(bg-base-800)にプライの柔らかい影を与える */
+.bg-base-800 {
+  box-shadow:
+    inset 0 1px 0 var(--c-emboss-hi),
+    0 1px 2px var(--c-paper-shadow),
+    0 10px 28px -18px var(--c-paper-shadow);
 }
 
 /* アクセシビリティ: フォーカス可視化を全要素で保証 */
 :focus-visible {
-  outline: 2px solid theme("colors.accent.DEFAULT");
+  outline: 2px solid var(--c-accent);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* スキップリンク: キーボードフォーカス時のみ表示(マウス閲覧時は常に非表示) */
+.skip-link {
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--c-accent);
+  color: var(--c-bg);
+  font-size: 14px;
+  font-weight: 700;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
+}
+.skip-link:focus-visible {
+  clip-path: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ミシン目(ペーパー切り取り線)風のセクション区切り */
+.tear-line {
+  border: none;
+  height: 0;
+  border-top: 2px dashed var(--c-border);
+  position: relative;
+  margin: 0;
+}
+.tear-line::before {
+  content: "✂";
+  position: absolute;
+  top: -0.75em;
+  left: 8px;
+  transform: scaleX(-1);
+  font-size: 12px;
+  color: var(--c-ink-dim);
+  opacity: 0.6;
 }
 
 /* 配信中リング: グラデーションを回転させる */
@@ -38,7 +142,7 @@ html {
   position: absolute;
   inset: -1px;
   border-radius: 9999px;
-  background: theme("colors.base.900");
+  background: var(--c-bg);
 }
 @media (prefers-reduced-motion: reduce) {
   .live-ring::before { animation: none; }

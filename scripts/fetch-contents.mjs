@@ -33,13 +33,24 @@ for (let i = 0; i < ids.length; i += 50) {
     1
   )
   for (const v of vs.items) {
+    const live = v.liveStreamingDetails
+    // 【2-3修正】配信予定(まだ開始していない配信)は「実際の配信予定日」
+    // (scheduledStartTime) をdateに使い、status:"upcoming" を付与する。
+    // publishedAt(=予定を設定した日)は使わない。
+    const isUpcoming =
+      v.snippet.liveBroadcastContent === "upcoming" ||
+      (!!live?.scheduledStartTime && !live?.actualStartTime && !live?.actualEndTime)
+    const date = isUpcoming
+      ? live.scheduledStartTime
+      : live?.actualStartTime ?? v.snippet.publishedAt
     contents.push({
-      date: v.snippet.publishedAt,
+      date,
       type: detectType(v),
       title: v.snippet.title,
       videoId: v.id,
       thumbnail: bestThumb(v.snippet.thumbnails),
       durationSec: parseDurationSec(v.contentDetails?.duration),
+      ...(isUpcoming ? { status: "upcoming" } : {}),
     })
   }
 }

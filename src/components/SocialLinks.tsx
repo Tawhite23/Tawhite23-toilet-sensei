@@ -1,9 +1,10 @@
 import { site } from "@/lib/site.config"
 
 /**
- * 公式ブランドアイコン(無改変)。
+ * 公式ブランドアイコン。
  * YouTube / X は各社ブランドガイドラインの公式ロゴパスをそのまま使用。
- * マシュマロは公式サイト提供のアイコン画像を直接参照(改変なし)。
+ * 【2-1】マシュマロは提供ロゴ(白いマシュマロキャラクター)をSVGで再現。
+ * 外部画像参照をやめたことでリンク切れ(画像壊れ)が起きない。
  */
 const YouTubeIcon = () => (
   <svg viewBox="0 0 28.57 20" width="28" height="20" aria-hidden="true">
@@ -24,16 +25,31 @@ const XIcon = () => (
   </svg>
 )
 
+/** マシュマロ公式キャラクター(提供ロゴ準拠のベクター再現) */
 const MarshmallowIcon = () => (
-  // eslint-disable-next-line @next/next/no-img-element
-  <img
-    src="https://marshmallow-qa.com/apple-touch-icon.png"
-    alt=""
-    width={24}
-    height={24}
-    className="rounded"
-    aria-hidden="true"
-  />
+  <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
+    <g transform="rotate(14 44 44)">
+      {/* 本体(白いマシュマロ・角丸スクエア・太い輪郭) */}
+      <rect x="10" y="10" width="62" height="62" rx="20" fill="#fff" stroke="#4a4a4a" strokeWidth="7" />
+      {/* 上面のハイライト線 */}
+      <path d="M22 26 Q38 12 52 17" fill="none" stroke="#4a4a4a" strokeWidth="6" strokeLinecap="round" />
+      {/* 目 */}
+      <circle cx="34" cy="46" r="4.5" fill="#4a4a4a" />
+      <circle cx="54" cy="38" r="4.5" fill="#4a4a4a" />
+      {/* 頬 */}
+      <circle cx="27" cy="57" r="4.5" fill="#f7b29a" />
+      <circle cx="62" cy="45" r="4.5" fill="#f7b29a" />
+      {/* 口(開けた笑顔+舌) */}
+      <path d="M42 54 Q50 60 56 51 Q51 66 44 60 Z" fill="#4a4a4a" />
+      <path d="M46 58 Q50 61 53 56 Q50 62 47 60 Z" fill="#d9534f" />
+    </g>
+    {/* スピードライン */}
+    <g stroke="#4a4a4a" strokeWidth="6" strokeLinecap="round">
+      <line x1="76" y1="52" x2="88" y2="64" />
+      <line x1="64" y1="66" x2="76" y2="78" />
+      <line x1="50" y1="78" x2="62" y2="90" />
+    </g>
+  </svg>
 )
 
 const items = [

@@ -7,12 +7,16 @@ export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.name}` },
   description: site.intro,
 }
-export const viewport: Viewport = { themeColor: "#0b0e14" }
+export const viewport: Viewport = { themeColor: "#0f0e0d" }
+
+// 初回描画前にテーマクラスを適用(フラッシュ防止)。既定はダーク(黒ペーパー)。
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");var c=t==="light"?"light":"dark";document.documentElement.classList.add(c)}catch(e){document.documentElement.classList.add("dark")}})()`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -23,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh font-sans">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-base-900"
+          className="skip-link"
         >
           本文へスキップ
         </a>
