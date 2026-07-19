@@ -1,8 +1,8 @@
 {
   "2026-07": {
     "liveCount": 24,
-    "videoCount": 9,
-    "totalDurationSec": 209653,
+    "videoCount": 5,
+    "totalDurationSec": 247486,
     "subscriberCount": 341,
     "viewCount": 107060
   },
@@ -23,7 +23,7 @@
   "2026-04": {
     "liveCount": 78,
     "videoCount": 2,
-    "totalDurationSec": 870866,
+    "totalDurationSec": 870867,
     "subscriberCount": null,
     "viewCount": null
   },
@@ -35,16 +35,16 @@
     "viewCount": null
   },
   "2026-02": {
-    "liveCount": 46,
+    "liveCount": 45,
     "videoCount": 6,
-    "totalDurationSec": 570281,
+    "totalDurationSec": 566695,
     "subscriberCount": null,
     "viewCount": null
   },
   "2026-01": {
-    "liveCount": 32,
+    "liveCount": 33,
     "videoCount": 3,
-    "totalDurationSec": 435461,
+    "totalDurationSec": 439047,
     "subscriberCount": null,
     "viewCount": null
   },
@@ -56,16 +56,16 @@
     "viewCount": null
   },
   "2025-11": {
-    "liveCount": 33,
+    "liveCount": 32,
     "videoCount": 0,
-    "totalDurationSec": 715793,
+    "totalDurationSec": 672894,
     "subscriberCount": null,
     "viewCount": null
   },
   "2025-10": {
-    "liveCount": 36,
+    "liveCount": 37,
     "videoCount": 0,
-    "totalDurationSec": 479647,
+    "totalDurationSec": 522547,
     "subscriberCount": null,
     "viewCount": null
   },
