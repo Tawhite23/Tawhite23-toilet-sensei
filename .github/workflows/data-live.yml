@@ -1,4 +1,5 @@
 # 15分毎に配信状態を確認し live.json をコミット（3u/回 ≒ 288u/日）
+# 同じ channels.list 呼び出しで登録者数/再生数も取得し、report.json の当月分も更新する。
 name: update-live
 on:
   schedule:
@@ -24,8 +25,8 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add public/data/live.json
-          git diff --cached --quiet || git commit -m "chore(data): update live.json [skip ci]"
+          git add public/data/live.json public/data/report.json
+          git diff --cached --quiet || git commit -m "chore(data): update live.json/report.json [skip ci]"
           for i in 1 2 3 4 5; do
             git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
             echo "push failed, retrying ($i)..."
