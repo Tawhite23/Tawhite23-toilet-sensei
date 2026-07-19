@@ -34,12 +34,13 @@ for (let i = 0; i < ids.length; i += 50) {
   )
   for (const v of vs.items) {
     const live = v.liveStreamingDetails
-    // 【2-3修正】配信予定(まだ開始していない配信)は「実際の配信予定日」
-    // (scheduledStartTime) をdateに使い、status:"upcoming" を付与する。
-    // publishedAt(=予定を設定した日)は使わない。
-    const isUpcoming =
-      v.snippet.liveBroadcastContent === "upcoming" ||
-      (!!live?.scheduledStartTime && !live?.actualStartTime && !live?.actualEndTime)
+    // 【2-3修正 / 参考記事反映】snippet.liveBroadcastContent は videos.list からだと
+    // 更新が不安定なため判定に使わない。liveStreamingDetails の「有無」と
+    // scheduledStartTime/actualStartTime/actualEndTime の値だけで切り分ける
+    // (通常動画には liveStreamingDetails 自体が存在しない)。
+    // 配信予定(まだ開始していない配信)は「実際の配信予定日」(scheduledStartTime)を
+    // dateに使い、status:"upcoming" を付与する。publishedAt(=予定を設定した日)は使わない。
+    const isUpcoming = !!live?.scheduledStartTime && !live?.actualStartTime && !live?.actualEndTime
     const date = isUpcoming
       ? live.scheduledStartTime
       : live?.actualStartTime ?? v.snippet.publishedAt
