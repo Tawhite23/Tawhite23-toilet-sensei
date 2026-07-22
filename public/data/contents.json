@@ -1,6 +1,42 @@
 [
   {
-    "date": "2026-07-23T12:00:00Z",
+    "date": "2026-07-26T12:00:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx みそピー",
+    "videoId": "B5baDDxeIsc",
+    "thumbnail": "https://i.ytimg.com/vi/B5baDDxeIsc/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-07-26T08:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型  ドラゴンズ1.6 アドオン➀",
+    "videoId": "n3n9DLkKke8",
+    "thumbnail": "https://i.ytimg.com/vi/n3n9DLkKke8/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-07-25T07:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型  リアリズムクラフト アドオン➁",
+    "videoId": "V3Gg_XkSIOM",
+    "thumbnail": "https://i.ytimg.com/vi/V3Gg_XkSIOM/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-07-24T10:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型  リアリズムクラフト アドオン➀",
+    "videoId": "UIrqT4Ly3pw",
+    "thumbnail": "https://i.ytimg.com/vi/UIrqT4Ly3pw/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-07-23T12:15:00Z",
     "type": "live",
     "title": "#マリオカート8dx ダンボール戦機",
     "videoId": "oeSP30YenAk",
@@ -9,11 +45,11 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-07-23T10:30:00Z",
+    "date": "2026-07-23T09:45:00Z",
     "type": "live",
-    "title": "#スマブラsp  裏蓮華",
-    "videoId": "kQJ0jbCgnjM",
-    "thumbnail": "https://i.ytimg.com/vi/kQJ0jbCgnjM/maxresdefault_live.jpg",
+    "title": "#マイクラ参加型  ETERNAL CAVES アドオン④",
+    "videoId": "gkOISyaCBSw",
+    "thumbnail": "https://i.ytimg.com/vi/gkOISyaCBSw/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -22,8 +58,8 @@
     "type": "live",
     "title": "#マイクラ参加型  ETERNAL CAVES アドオン③",
     "videoId": "dDKbeGYLalQ",
-    "thumbnail": "https://i.ytimg.com/vi/dDKbeGYLalQ/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/dDKbeGYLalQ/maxresdefault.jpg",
+    "durationSec": 15132
   },
   {
     "date": "2026-07-21T12:15:53Z",
