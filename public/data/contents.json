@@ -54,12 +54,20 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-07-24T18:25:13Z",
+    "type": "video",
+    "title": "#マイクラ マケプレはクソコンテンツか？運営さんしっかりしなさい",
+    "videoId": "7yHHrEd1Edw",
+    "thumbnail": "https://i.ytimg.com/vi/7yHHrEd1Edw/maxresdefault.jpg",
+    "durationSec": 89
+  },
+  {
     "date": "2026-07-24T10:44:18Z",
     "type": "live",
     "title": "#マイクラ参加型  リアリズムクラフト アドオン➀",
     "videoId": "UIrqT4Ly3pw",
-    "thumbnail": "https://i.ytimg.com/vi/UIrqT4Ly3pw/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/UIrqT4Ly3pw/maxresdefault.jpg",
+    "durationSec": 26042
   },
   {
     "date": "2026-07-23T12:20:49Z",
