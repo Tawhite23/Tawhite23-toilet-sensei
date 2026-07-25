@@ -67,6 +67,13 @@ jobs:
           python -m yt_dlp --version
           node --version
 
+      # PO Token プロバイダのサーバースクリプトを用意する。
+      # 字幕が無く音声ダウンロードが必要な配信で "No video formats found!" になる問題への対策。
+      # bgutil-ytdlp-pot-provider (Pythonプラグイン)は上のrequirements.txtで導入済みで、
+      # ここでは対になるNode.js製のトークン生成スクリプト本体を $HOME 配下にビルドする。
+      - name: Set up PO Token provider
+        run: bash scripts/setup-pot.sh
+
       # YouTubeのボット判定対策(任意): Secret YT_COOKIES に Netscape形式の
       # cookies.txt の中身を入れておくと Cookie 付きで取得を試みる。
       # 未設定でも動作する（player_client の切り替えのみで試行）。

@@ -7,3 +7,8 @@
 yt-dlp[default]>=2026.6.0
 faster-whisper>=1.0.3
 pykakasi>=2.2.1
+
+# PO Token プロバイダ（字幕が無く音声ダウンロードが必要な配信向け）。
+# これが無いと字幕なし配信は "No video formats found!" で失敗することがある。
+# 対になるサーバー本体(Node.js製)を別途 setup-pot.sh / setup-pot.ps1 で用意する。
+bgutil-ytdlp-pot-provider>=1.3.1

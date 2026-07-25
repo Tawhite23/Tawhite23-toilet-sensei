@@ -206,7 +206,22 @@ def run_ytdlp(extra: list, timeout: int = 5400, retries_per_client: int = 2,
 
 
 class YtDlpBlocked(Exception):
-    """yt-dlp が全 player_client で失敗した（多くはYouTubeのボット判定）。"""
+    """
+    yt-dlp が全 player_client で失敗した。
+    .kind で原因の見当を持つ:
+      "bot"    = "Sign in to confirm you're not a bot" 等（ボット判定）
+      "format" = "No video formats found" 等（PO Token不足など、形式が取得できない）
+      "other"  = 上記以外
+    """
+    def __init__(self, message: str):
+        super().__init__(message)
+        low = message.lower()
+        if any(h in low for h in BOT_HINTS):
+            self.kind = "bot"
+        elif "no video formats" in low or "requested format is not available" in low:
+            self.kind = "format"
+        else:
+            self.kind = "other"
 
 
 # ---------------------------------------------------------------- 字幕(timedtext)
@@ -558,7 +573,7 @@ def main() -> int:
 
     attempted = 0
     succeeded = 0
-    blocked = 0  # 全滅したら「ボット判定が原因」と特定できるようにカウントする
+    fail_kinds: list = []  # 全滅時にどの種類の失敗だったか集計する（bot / format / other）
 
     for vid in targets:
         attempted += 1
@@ -566,9 +581,9 @@ def main() -> int:
         if not meta:
             try:
                 meta = ytdlp_meta(vid)
-            except YtDlpBlocked:
-                blocked += 1
-                log(f"{vid}: metadata fetch blocked (bot-check)")
+            except YtDlpBlocked as e:
+                fail_kinds.append(e.kind)
+                log(f"{vid}: metadata fetch failed ({e.kind}): {e}")
                 continue
             except Exception as e:
                 log(f"{vid}: metadata fetch failed: {e}")
@@ -582,12 +597,12 @@ def main() -> int:
                             "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         except YtDlpBlocked as e:
-            blocked += 1
+            fail_kinds.append(e.kind)
             n = fail_count.get(vid, 0) + 1
             fail_count[vid] = n
-            log(f"{vid}: yt-dlp blocked ({n}/{args.max_failures}回目): {e}")
+            log(f"{vid}: yt-dlp failed [{e.kind}] ({n}/{args.max_failures}回目): {e}")
             failures = [f for f in failures if f.get("videoId") != vid]
-            failures.append({"videoId": vid, "count": n, "reason": str(e)[:200],
+            failures.append({"videoId": vid, "count": n, "kind": e.kind, "reason": str(e)[:200],
                              "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         except Exception as e:
@@ -615,9 +630,18 @@ def main() -> int:
     # CIがボット判定で毎回全滅していても静かに「正常終了」していたのが本来の問題だったため、
     # ここでジョブを失敗させ、GitHub Actionsの失敗通知(赤いX・既定でメール通知)で気づけるようにする。
     if attempted > 0 and succeeded == 0:
-        reason = "YouTubeのボット判定(Sign in to confirm you're not a bot)" if blocked == attempted else "取得エラー"
+        bot_n = fail_kinds.count("bot")
+        fmt_n = fail_kinds.count("format")
+        if bot_n and bot_n >= fmt_n:
+            reason = "YouTubeのボット判定(Sign in to confirm you're not a bot)。Secret YT_COOKIES を設定/更新してください"
+        elif fmt_n:
+            reason = ("動画/音声の形式を取得できない(PO Token不足の可能性)。"
+                      "字幕がある配信は取れるはずなので、字幕の無い配信のみが対象なら"
+                      "手元PCでの実行が確実です")
+        else:
+            reason = "取得エラー"
         log(f"ALERT: {attempted}本すべて失敗しました（{reason}）。"
-            "このワークフローは失敗として終了します。手元PCでの実行、または Secret YT_COOKIES の設定を検討してください。")
+            "このワークフローは失敗として終了します。")
         return 1
     return 0
 

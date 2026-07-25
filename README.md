@@ -107,6 +107,23 @@ yt-dlp は YouTube の JavaScript チャレンジ（署名・n challenge）を�
 
 参考: [yt-dlp Wiki: EJS](https://github.com/yt-dlp/yt-dlp/wiki/EJS)
 
+### "No video formats found!" が出る場合（PO Token）
+
+字幕が無い配信はWhisperのために音声そのものをダウンロードする必要があり、これはEJS対応だけでは足りず、YouTubeが要求する**PO Token**（正規のアクセスであることを証明するトークン）が必要になることがあります。特に字幕が無い配信でよく発生します（字幕がある配信はこの問題の影響を受けません）。
+
+対策として [bgutil-ytdlp-pot-provider](https://github.com/Brainicism/bgutil-ytdlp-pot-provider) を導入しています。`scripts/requirements.txt` でPythonプラグイン本体を、`scripts/setup-pot.sh`（Windowsは `scripts/setup-pot.ps1`）でトークン生成用のNode.jsスクリプトをセットアップします。ワークフローでは自動実行されるため、通常は何もしなくて大丈夫です。
+
+ローカルで字幕なし配信を処理したい場合は、初回のみ以下を実行してください（Node.js 20+ が必要）。
+
+```bat
+pip install -r scripts\requirements.txt
+powershell -ExecutionPolicy Bypass -File scripts\setup-pot.ps1
+```
+
+**注意点**: このプロバイダはYouTube側の内部実装を利用してトークンを生成する仕組みのため、YouTubeの仕様変更によって将来また動かなくなる可能性があります。その場合もこのプロジェクトの設計上、失敗時はワークフローが失敗として通知されるので気づけます。気づいたら `pip install -U bgutil-ytdlp-pot-provider` と `scripts/setup-pot.sh`（or `.ps1`）の再実行、または本Wikiの更新を確認してください。
+
+参考: [yt-dlp Wiki: PO Token Guide](https://github.com/yt-dlp/yt-dlp/wiki/PO-Token-Guide)
+
 ### YouTubeのボット判定（"Sign in to confirm you're not a bot"）への対処
 
 GitHub Actions のIPアドレスはデータセンター帯のため、YouTubeからボットとみなされて
