@@ -6,7 +6,7 @@ import type { PopularPhrase } from "@/lib/types"
 
 /**
  * ホームの発見性導線カード。
- * popular.json（軽量）だけを読み、人気セリフを2〜3個チップで見せて
+ * popular.json（軽量）だけを読み、よく出るキーワードを2〜3個チップで見せて
  * /calendar?tab=quotes&q=... へ送る。検索インデックス本体は読み込まない。
  */
 export default function QuoteSearchCard() {
@@ -22,10 +22,10 @@ export default function QuoteSearchCard() {
       className="group block w-full max-w-md rounded-2xl border border-base-700 bg-base-800 p-3 text-left transition-colors hover:border-accent"
     >
       <p className="flex items-center gap-1.5 text-xs font-bold group-hover:text-accent">
-        <span aria-hidden="true">🔍</span> セリフから探す
+        <span aria-hidden="true">🔍</span> キーワードから探す
       </p>
       <p className="mt-1 text-[11px] leading-relaxed text-ink-dim">
-        配信アーカイブの発言を全文検索。その瞬間から再生できます。
+        配信アーカイブの発言を全文検索。名言集もあります。
       </p>
       {items.length > 0 && (
         <ul className="mt-2 flex flex-wrap gap-1.5">

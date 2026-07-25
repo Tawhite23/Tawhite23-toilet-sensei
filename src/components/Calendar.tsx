@@ -163,13 +163,13 @@ export default function Calendar() {
                           <p className="mt-1 line-clamp-2 text-sm leading-snug group-hover:text-accent">{it.title}</p>
                         </div>
                       </a>
-                      {/* 発見性導線: この配信のセリフ検索へ（1ページ+クエリで表現） */}
+                      {/* 発見性導線: この配信の発言検索へ（1ページ+クエリで表現） */}
                       {!plan && it.type === "live" && (
                         <Link
                           href={`/calendar/?tab=quotes&v=${it.videoId}`}
                           className="mt-1 inline-flex items-center gap-1 px-1 text-[11px] text-ink-dim underline underline-offset-4 hover:text-accent"
                         >
-                          この配信のセリフを見る →
+                          この配信の発言を検索 →
                         </Link>
                       )}
                     </li>

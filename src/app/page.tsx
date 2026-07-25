@@ -28,7 +28,7 @@ export default function Home() {
         </div>
         <SocialLinks />
         <DiscordGate />
-        {/* 発見性導線: セリフ全文検索へ */}
+        {/* 発見性導線: キーワード全文検索・名言集へ */}
         <QuoteSearchCard />
       </div>
     </div>

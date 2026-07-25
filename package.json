@@ -12,7 +12,7 @@
     "fetch:contents": "node scripts/fetch-contents.mjs",
     "build:report": "node scripts/build-report.mjs",
     "transcribe": "python scripts/transcribe.py",
-    "build:search": "node scripts/build-search-index.mjs && node scripts/build-popular.mjs"
+    "build:search": "node scripts/build-search-index.mjs && node scripts/build-popular.mjs && node scripts/build-quotes.mjs"
   },
   "dependencies": {
     "firebase": "^10.12.0",

@@ -31,9 +31,9 @@ export interface MonthlyReport {
 }
 export type Report = Record<string, MonthlyReport>
 
-// ---- セリフ全文検索用データ（public/data/transcripts, search-index, popular） -----
+// ---- 発言の全文検索用データ（public/data/transcripts, search-index, popular, quotes） ----
 
-/** transcripts/<videoId>.json の1セリフ */
+/** transcripts/<videoId>.json の1発言 */
 export interface TranscriptSegment {
   id: number
   start: number // 秒
@@ -83,7 +83,31 @@ export interface SearchIndexFile {
   year?: string
 }
 
-/** popular.json: 頻出セリフ/口癖ランキング */
+/** quotes.json: 自動抽出した名言候補（五十音索引つき） */
+export interface QuoteItem {
+  text: string
+  videoId: string
+  title: string
+  date: string
+  segmentId: number
+  start: number
+  yomi: string | null
+  /** 五十音の行（あ/か/さ/た/な/は/ま/や/ら/わ/その他） */
+  row: string
+  score: number
+  /** scripts/quote-picks.json で手動指定された「推し名言」 */
+  picked?: boolean
+}
+export interface QuotesFile {
+  version: number
+  generatedAt: string | null
+  segmentCount: number
+  /** 行ごとの件数（索引UI用） */
+  rows: Record<string, number>
+  items: QuoteItem[]
+}
+
+/** popular.json: よく出るキーワード/口癖ランキング */
 export interface PopularPhrase {
   text: string
   count: number

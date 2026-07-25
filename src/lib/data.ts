@@ -3,6 +3,7 @@ import type {
   ContentItem,
   LiveStatus,
   PopularFile,
+  QuotesFile,
   Report,
   SearchIndexFile,
   Transcript,
@@ -27,7 +28,7 @@ export const fetchLive = () => getJson<LiveStatus>("live.json", 60)
 export const fetchContents = () => getJson<ContentItem[]>("contents.json", 3600)
 export const fetchReport = () => getJson<Report>("report.json", 3600)
 
-// ---- セリフ全文検索用（既存の fetch* と同じ作り。dataBaseUrl 経由で取得） ----
+// ---- 発言検索・名言集用（既存の fetch* と同じ作り。dataBaseUrl 経由で取得） ----
 /** 文字起こし済み配信の一覧 */
 export const fetchTranscriptManifest = () =>
   getJson<TranscriptManifest>("transcripts/manifest.json", 3600)
@@ -35,9 +36,11 @@ export const fetchTranscriptManifest = () =>
 export const fetchSearchIndex = () => getJson<SearchIndexFile>("search-index.json", 3600)
 /** 年別シャード（search-index.json が sharded=true のとき） */
 export const fetchSearchIndexShard = (file: string) => getJson<SearchIndexFile>(file, 3600)
-/** 頻出セリフ/口癖ランキング */
+/** よく出るキーワード/口癖ランキング */
 export const fetchPopular = () => getJson<PopularFile>("popular.json", 3600)
-/** 1配信ぶんのセリフ本文（検索ヒット表示時に遅延取得する） */
+/** 自動抽出した名言候補（五十音索引つき）*/
+export const fetchQuotes = () => getJson<QuotesFile>("quotes.json", 3600)
+/** 1配信ぶんの発言本文（検索ヒット表示時に遅延取得する） */
 export const fetchTranscript = (videoId: string) =>
   getJson<Transcript>(`transcripts/${encodeURIComponent(videoId)}.json`, 3600)
 
