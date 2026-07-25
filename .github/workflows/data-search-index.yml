@@ -1,0 +1,71 @@
+# 文字起こし(transcripts/)がpushされたら、検索インデックス・よく出るキーワード・名言集を
+# 自動で再生成してコミットする。
+#
+# ねらい:
+#   手元PCでWhisper文字起こしをして push したあと、Actionsを手で叩かなくても
+#   本番データ(search-index.json / popular.json / quotes.json)が最新化される。
+#
+# コンフリクト対策:
+#   集計3ファイルを書き込むのは「このワークフロー」と data-transcripts.yml だけ。
+#   手元PCではコミットしない運用にしているため、pull時に衝突しない。
+#
+# 無限ループしない理由:
+#   GITHUB_TOKEN で行った push は、GitHubの仕様により新しいワークフローを起動しない。
+#   加えて paths を transcripts/** に限定しているので、集計ファイルの
+#   コミットはこのトリガー条件にも合致しない（二重の安全策）。
+#
+# 再デプロイもされない:
+#   deploy.yml は paths-ignore: public/data/** のため起動しない。
+#   サイトは raw.githubusercontent.com から直接JSONを読むので、コミットだけで反映される。
+name: update-search-index
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/data/transcripts/**"
+      - "scripts/build-search-index.mjs"
+      - "scripts/build-popular.mjs"
+      - "scripts/build-quotes.mjs"
+      - "scripts/stopwords.txt"
+      - "scripts/exclude.txt"
+      - "scripts/quote-picks.json"
+  workflow_dispatch:
+concurrency:
+  # data-transcripts.yml と同じデータを書くのでグループを共有し、同時実行を避ける
+  group: data-json-transcripts
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Build search index / popular / quotes
+        run: |
+          node scripts/build-search-index.mjs
+          node scripts/build-popular.mjs
+          node scripts/build-quotes.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add public/data/search-index*.json public/data/popular.json public/data/quotes.json
+          if git diff --cached --quiet; then
+            echo "変更なし（再生成結果が同一）"
+            exit 0
+          fi
+          git commit -m "chore(data): rebuild search index / popular / quotes [skip ci]"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            echo "push failed, retrying ($i)..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          exit 1

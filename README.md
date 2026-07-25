@@ -29,7 +29,8 @@ YouTuber「おトイレ先生」の非公式ファンサイト。Next.js の静�
 | `contents.json` | 6時間毎 | 動画/配信の一覧（サムネ・種別・日時など） | `.github/workflows/data-contents.yml` |
 | `report.json` | 日次 | 月別の配信回数・動画本数・配信時間・登録者数・再生数の集計 | `.github/workflows/data-report.yml` |
 | `wiki.json` | 日次 | WIKI「これまでの歩み」年表（登録者・再生数の桁上がりを自動追記） | `.github/workflows/data-report.yml` |
-| `transcripts/*.json`, `search-index.json`, `popular.json` | 日次 | セリフ文字起こし・検索インデックス・頻出セリフ | `.github/workflows/data-transcripts.yml` |
+| `transcripts/*.json`, `search-index.json`, `popular.json`, `quotes.json` | 日次 | 発言の文字起こし・検索インデックス・頻出キーワード・名言集 | `.github/workflows/data-transcripts.yml` |
+| `search-index.json`, `popular.json`, `quotes.json` | `transcripts/**` のpush時 | 手元PCで文字起こしをpushした直後の再集計（手動実行不要） | `.github/workflows/data-search-index.yml` |
 
 いずれも YouTube Data API v3 のクォータ消費を抑えた低コストな実装になっています（詳細は各スクリプト冒頭のコメント参照）。文字起こしワークフローは YouTube Data API を**一切呼びません**（追加クォータ 0u）。
 
@@ -93,7 +94,8 @@ data-transcripts.yml（1日1回 / 手動実行）
 | `public/data/transcripts/failures.json` | 取得に失敗した動画と連続失敗回数（3回でバッチ対象から一旦外れます） |
 | `public/data/transcripts/needs-whisper.json` | 字幕が無くCIでは処理できない動画（手元PCでの実行待ちリスト） |
 | `public/data/search-index.json` | MiniSearchの書き出しインデックス。セグメント総数が12万を超えると `search-index-<年>.json` に自動分割 |
-| `public/data/popular.json` | 頻出セリフ/口癖ランキング（フロントは上位20件をチップ表示） |
+| `public/data/popular.json` | 頻出キーワード/口癖ランキング（フロントは上位20件をチップ表示） |
+| `public/data/quotes.json` | 名言集（五十音索引つき）。**キーワード検索とは無関係**で、こちらは表示用の候補集。五十音の1行あたり最大400件（`MAX_PER_ROW`） |
 
 ### ローカルでの実行方法
 
@@ -124,8 +126,13 @@ git push
 ```
 
 `popular.json` / `search-index.json` / `quotes.json`（集計ファイル）は**手元では生成もコミットもしない**。
-push したら GitHub の `Actions` タブ → `update-transcripts` → `Run workflow`（`videoId` は空でOK）で手動実行すると、
-最新の `transcripts/` から集計ファイルをCI側だけが作り直してコミットしてくれる。
+push すると `update-search-index` ワークフロー（`.github/workflows/data-search-index.yml`）が
+**自動で起動**し、最新の `transcripts/` から集計ファイルを作り直してコミットしてくれる。
+手動実行は不要（`git push` したら数分待つだけ）。
+
+> `transcripts/**` への push だけをトリガーにしている。集計ファイルをコミットするのはCI自身だが、
+> GITHUB_TOKEN による push はワークフローを起動しない仕様なので無限ループしない。
+> `deploy.yml` は `paths-ignore: public/data/**` なので再デプロイも走らない。
 
 こうする理由: 以前は手元PCでも `npm run build:search` を実行してこの3ファイルをコミットしていたため、
 CIも同じファイルを別タイミングで再生成・コミットしてしまい、`git pull` のたびに毎回コンフリクトが起きていた。

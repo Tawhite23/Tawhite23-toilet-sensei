@@ -87,11 +87,13 @@ export interface SearchIndexFile {
 export interface QuoteItem {
   text: string
   videoId: string
-  title: string
+  /** 転送量削減のため quotes.json には持たせない（manifest.json から引く） */
+  title?: string
   date: string
   segmentId: number
   start: number
-  yomi: string | null
+  /** 同上（row の算出に使うだけなので出力しない） */
+  yomi?: string | null
   /** 五十音の行（あ/か/さ/た/な/は/ま/や/ら/わ/その他） */
   row: string
   score: number

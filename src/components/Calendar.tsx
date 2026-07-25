@@ -31,6 +31,8 @@ const isUpcoming = (it: ContentItem) =>
   (it.type === "live" && it.durationSec === 0 && new Date(it.date).getTime() > Date.now())
 
 type Cursor = { y: number; mo: number } // mo は 0-11
+/** カレンダー表示の切り替え。grid=日付マス / hours=日付×時間帯 */
+type View = "grid" | "hours"
 
 export default function Calendar() {
   const [items, setItems] = useState<ContentItem[]>([])
@@ -41,6 +43,7 @@ export default function Calendar() {
    */
   const [cursor, setCursor] = useState<Cursor | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
+  const [view, setView] = useState<View>("grid")
 
   useEffect(() => {
     const now = new Date(Date.now() + JST_OFFSET_MS)
@@ -115,6 +118,37 @@ export default function Calendar() {
         >→</button>
       </div>
 
+      {/* 表示切り替え: 日付マス / 日付×時間帯 */}
+      <div
+        role="group"
+        aria-label="カレンダーの表示形式"
+        className="mb-4 flex gap-1 rounded-full border border-base-700 bg-base-800 p-1"
+      >
+        {([["grid", "日付"], ["hours", "時間帯"]] as [View, string][]).map(([v, label]) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            aria-pressed={view === v}
+            className={`flex-1 rounded-full px-3 py-1.5 text-xs font-bold transition-colors ${
+              view === v ? "bg-base-700 text-accent" : "text-ink-dim hover:text-ink"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {view === "hours" ? (
+        <DayHours
+          y={y}
+          mo={mo}
+          daysInMonth={daysInMonth}
+          byDay={byDay}
+          selected={selected}
+          onSelect={(k) => setSelected(selected === k ? null : k)}
+          peak={hourStats.peak}
+        />
+      ) : (
       <table className="w-full table-fixed border-separate border-spacing-1" role="grid">
         <thead>
           <tr>
@@ -168,14 +202,13 @@ export default function Calendar() {
           ))}
         </tbody>
       </table>
+      )}
 
       <p className="mt-3 flex justify-center gap-4 text-xs text-ink-dim">
         <span><span className="mr-1 inline-block h-2 w-2 rounded-full bg-plan" aria-hidden="true" />配信予定</span>
         <span><span className="mr-1 inline-block h-2 w-2 rounded-full bg-live" aria-hidden="true" />配信アーカイブ</span>
         <span><span className="mr-1 inline-block h-2 w-2 rounded-full bg-accent" aria-hidden="true" />動画投稿</span>
       </p>
-
-      <HourBars y={y} mo={mo} stats={hourStats} />
 
       <AnimatePresence>
         {selected && (
@@ -245,73 +278,145 @@ export default function Calendar() {
 }
 
 /**
- * その月の配信開始時刻を0-23時で並べた棒グラフ。
- * 最多の時間帯を「ゴールデンタイム」として強調し、
- * 「だいたい何時に配信が始まる人なのか」を一目で分かるようにする。
+ * 「時間帯」表示: 左に日付、右にその日配信していた時間帯を横帯で描く。
+ * カレンダーの表示切り替えとして扱うため、日付の並びはそのまま1日〜末日。
+ * 帯は 0:00〜24:00(日本時間) を横幅100%に対応させ、
+ * 配信の開始時刻から配信時間ぶんの長さで置く（日を跨ぐ分は24時で切る）。
+ * 最も配信が始まりやすい時間帯(ゴールデンタイム)は背景を薄く塗って示す。
  */
-function HourBars({
+function DayHours({
   y,
   mo,
-  stats,
+  daysInMonth,
+  byDay,
+  selected,
+  onSelect,
+  peak,
 }: {
   y: number
   mo: number
-  stats: { counts: number[]; max: number; total: number; peak: number[] }
+  daysInMonth: number
+  byDay: Map<string, ContentItem[]>
+  selected: string | null
+  onSelect: (key: string) => void
+  peak: number[]
 }) {
-  const { counts, max, total, peak } = stats
-  const fmtRange = (h: number) => `${pad(h)}:00〜${pad((h + 1) % 24)}:00`
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)
+  const hasAny = days.some((d) => (byDay.get(`${y}-${pad(mo + 1)}-${pad(d)}`) ?? []).length > 0)
 
   return (
-    <section className="mt-6 rounded-2xl border border-base-700 bg-base-800 p-4" aria-label={`${y}年${mo + 1}月の配信時間帯`}>
-      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h2 className="text-sm font-bold text-ink-dim">配信時間帯（開始時刻・日本時間）</h2>
-        <p className="text-[11px] text-ink-dim">
-          {total > 0 ? `この月の配信 ${total}件` : "この月の配信記録はありません"}
-        </p>
+    <section aria-label={`${y}年${mo + 1}月の日付別 配信時間帯`}>
+      {/* 目盛り(0-24時) */}
+      <div className="mb-1 flex items-end gap-2">
+        <span className="w-14 shrink-0 text-[10px] text-ink-dim">日付</span>
+        <div className="relative h-4 flex-1" aria-hidden="true">
+          {[0, 6, 12, 18, 24].map((h) => (
+            <span
+              key={h}
+              className="absolute top-0 -translate-x-1/2 text-[10px] text-ink-dim"
+              style={{ left: `${(h / 24) * 100}%` }}
+            >
+              {h}
+            </span>
+          ))}
+        </div>
       </div>
 
-      {total === 0 ? (
-        <p className="py-4 text-center text-xs text-ink-dim">データがありません。</p>
-      ) : (
-        <>
-          <ul className="flex h-28 items-end gap-[2px]" role="img" aria-label="時間帯別の配信開始件数">
-            {counts.map((c, h) => {
-              const isPeak = peak.includes(h)
-              const ratio = max > 0 ? c / max : 0
-              return (
-                <li key={h} className="group relative flex h-full flex-1 flex-col justify-end">
-                  <span
-                    title={`${fmtRange(h)} ${c}件`}
-                    className={`w-full rounded-t transition-colors ${
-                      c === 0
-                        ? "bg-base-700/50"
-                        : isPeak
-                          ? "bg-accent"
-                          : "bg-live/70 group-hover:bg-live"
-                    }`}
-                    style={{ height: c === 0 ? 2 : `${Math.max(8, ratio * 100)}%` }}
-                  />
-                </li>
-              )
-            })}
-          </ul>
-          {/* 3時間おきの目盛り */}
-          <ul className="mt-1 flex gap-[2px] text-[9px] text-ink-dim" aria-hidden="true">
-            {counts.map((_, h) => (
-              <li key={h} className="flex-1 text-center">
-                {h % 3 === 0 ? h : ""}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-3 text-xs leading-relaxed text-ink-dim">
-            <span className="mr-1 inline-block h-2 w-2 rounded-sm bg-accent" aria-hidden="true" />
-            ゴールデンタイムは
-            <span className="mx-1 font-bold text-accent">
-              {peak.map(fmtRange).join(" / ")}
-            </span>
-            （{max}件）
-          </p>
-        </>
+      {!hasAny && (
+        <p className="rounded-2xl border border-dashed border-base-700 p-6 text-center text-sm text-ink-dim">
+          この月の記録はまだありません。
+        </p>
+      )}
+
+      <ul className="space-y-[3px]">
+        {days.map((d) => {
+          const key = `${y}-${pad(mo + 1)}-${pad(d)}`
+          const items = byDay.get(key) ?? []
+          const dow = new Date(Date.UTC(y, mo, d)).getUTCDay()
+          const isSel = selected === key
+          return (
+            <li key={d}>
+              <button
+                onClick={() => onSelect(key)}
+                aria-pressed={isSel}
+                aria-label={`${mo + 1}月${d}日 ${items.length}件`}
+                className={`flex w-full items-center gap-2 rounded-lg py-0.5 pr-1 text-left transition-colors ${
+                  isSel ? "bg-base-700" : "hover:bg-base-800"
+                }`}
+              >
+                <span
+                  className={`w-14 shrink-0 pl-1 text-[11px] tabular-nums ${
+                    dow === 0 ? "text-live" : dow === 6 ? "text-accent" : "text-ink-dim"
+                  }`}
+                >
+                  {d}日({WEEK[dow]})
+                </span>
+
+                {/* 24時間トラック */}
+                <span className="relative block h-5 flex-1 overflow-hidden rounded bg-base-800">
+                  {/* ゴールデンタイムの背景 */}
+                  {peak.map((h) => (
+                    <span
+                      key={`p${h}`}
+                      aria-hidden="true"
+                      className="absolute inset-y-0 bg-accent/10"
+                      style={{ left: `${(h / 24) * 100}%`, width: `${(1 / 24) * 100}%` }}
+                    />
+                  ))}
+                  {/* 3時間ごとの区切り */}
+                  {[3, 6, 9, 12, 15, 18, 21].map((h) => (
+                    <span
+                      key={`g${h}`}
+                      aria-hidden="true"
+                      className="absolute inset-y-0 w-px bg-base-700"
+                      style={{ left: `${(h / 24) * 100}%` }}
+                    />
+                  ))}
+
+                  {items.map((it) => {
+                    const plan = isUpcoming(it)
+                    const jst = toJst(it.date)
+                    const startH = jst.getUTCHours() + jst.getUTCMinutes() / 60
+                    // 予定と動画投稿は長さを持たないので、細い印として最小幅で置く
+                    const hours = plan || it.type === "video" ? 0 : it.durationSec / 3600
+                    const width = Math.max(hours, 0.35)
+                    const left = (startH / 24) * 100
+                    const w = Math.min(width / 24, 1 - startH / 24) * 100
+                    return (
+                      <span
+                        key={it.videoId}
+                        title={`${jstTimeLabel(it.date)} ${it.title}`}
+                        className={`absolute inset-y-[3px] rounded-sm ${
+                          plan
+                            ? "border border-dashed border-plan bg-transparent"
+                            : it.type === "live"
+                              ? "bg-live"
+                              : "bg-accent"
+                        }`}
+                        style={{ left: `${left}%`, width: `${Math.max(w, 1.2)}%` }}
+                      />
+                    )
+                  })}
+                </span>
+
+                <span className="w-6 shrink-0 text-right text-[10px] text-ink-dim tabular-nums">
+                  {items.length || ""}
+                </span>
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+
+      {peak.length > 0 && (
+        <p className="mt-3 text-xs leading-relaxed text-ink-dim">
+          <span className="mr-1 inline-block h-2 w-3 rounded-sm bg-accent/30" aria-hidden="true" />
+          この月のゴールデンタイム（配信が始まりやすい時間帯）は
+          <span className="mx-1 font-bold text-accent">
+            {peak.map((h) => `${pad(h)}:00〜${pad((h + 1) % 24)}:00`).join(" / ")}
+          </span>
+          です。帯の長さは配信時間、点線は配信予定です。
+        </p>
       )}
     </section>
   )

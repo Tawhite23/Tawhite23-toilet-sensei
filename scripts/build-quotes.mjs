@@ -24,7 +24,11 @@ const DATA = path.join(ROOT, "public", "data")
 const TDIR = path.join(DATA, "transcripts")
 const DIC = path.join(ROOT, "node_modules", "kuromoji", "dict")
 
-const MAX_ITEMS = 400        // 書き出す名言候補の上限
+// 【重要】ここは「名言集」の候補数であり、キーワード全文検索とは無関係。
+// 検索は search-index.json（全発言を漏れなく収録・件数上限なし）が担当する。
+// 五十音索引UIのため、行ごとに上限を設ける（全体の一律上限は設けない）。
+// 行別なので「ら行」「わ行」のような少数派が上位スコアに押し潰されない。
+const MAX_PER_ROW = 400      // 五十音の1行あたりの上限
 const MIN_CHARS = 12         // これ未満は名言として短すぎる
 const MAX_CHARS = 60         // これを超えると長すぎ(文字起こしの繋がりミスも多い)
 const MIN_SCORE = 2.0        // このスコア未満は採用しない
@@ -194,14 +198,14 @@ for (const file of files) {
 
     if (sc < MIN_SCORE) continue
     seenText.add(norm)
+    // 【転送量対策】title は manifest.json から引けるので持たせない。
+    // yomi も row の算出に使うだけなので出力しない。
     candidates.push({
       text,
       videoId,
-      title: titleById.get(videoId) ?? videoId,
-      date: doc.date ?? "",
+      date: (doc.date ?? "").slice(0, 10),
       segmentId: seg.id,
-      start: seg.start,
-      yomi: seg.yomi ?? null,
+      start: Math.round(seg.start * 10) / 10,
       row: gojuonRow(seg.yomi, text),
       score: Math.round(sc * 100) / 100,
       picked: isPicked || undefined,
@@ -210,28 +214,34 @@ for (const file of files) {
 }
 
 candidates.sort((a, b) => b.score - a.score)
-const items = candidates.slice(0, MAX_ITEMS)
+
+// 五十音の行ごとに上限を適用（スコア順に詰めるので各行の上位が残る）
+const perRow = {}
+const items = []
+for (const c of candidates) {
+  perRow[c.row] = (perRow[c.row] ?? 0) + 1
+  if (perRow[c.row] > MAX_PER_ROW) continue
+  items.push(c)
+}
 
 // 五十音の行ごとの件数（索引UIのため）
 const rows = {}
 for (const it of items) rows[it.row] = (rows[it.row] ?? 0) + 1
 
+// pretty-print しない（1.7MB → 350KB程度に収まる）
 await writeFile(
   path.join(DATA, "quotes.json"),
-  JSON.stringify(
-    {
-      version: 1,
-      generatedAt: new Date().toISOString(),
-      segmentCount: segTotal,
-      rows,
-      items,
-    },
-    null,
-    2
-  ) + "\n"
+  JSON.stringify({
+    version: 2,
+    generatedAt: new Date().toISOString(),
+    segmentCount: segTotal,
+    rows,
+    items,
+  }) + "\n"
 )
 console.log(
-  `quotes: ${items.length} quotes from ${segTotal} segments (${files.length} videos)` +
+  `quotes: ${items.length} quotes (候補${candidates.length}件から行別上限${MAX_PER_ROW}で採用) ` +
+  `from ${segTotal} segments (${files.length} videos)` +
   `${picks.length ? `, ${picks.length} manual pick(s)` : ""}`
 )
 console.log("  rows:", Object.entries(rows).map(([k, v]) => `${k}:${v}`).join(" "))

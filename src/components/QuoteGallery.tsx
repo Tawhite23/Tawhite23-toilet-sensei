@@ -1,7 +1,7 @@
 "use client"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { fetchQuotes, fetchTranscript } from "@/lib/data"
+import { fetchQuotes, fetchTranscript, fetchTranscriptManifest } from "@/lib/data"
 import type { QuoteItem, Transcript } from "@/lib/types"
 import { fmtTime } from "@/lib/quoteSearch"
 import QuotePlayerModal from "./QuotePlayerModal"
@@ -17,6 +17,9 @@ import QuotePlayerModal from "./QuotePlayerModal"
 const ROWS = ["あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ", "その他"] as const
 type SortMode = "score" | "newest" | "long"
 
+/** 一度に描画する件数。件数自体は制限せず、描画だけ小分けにして軽く保つ */
+const PAGE = 60
+
 export default function QuoteGallery() {
   const router = useRouter()
   const params = useSearchParams()
@@ -27,6 +30,9 @@ export default function QuoteGallery() {
   const [row, setRow] = useState(urlRow)
   const [sort, setSort] = useState<SortMode>("score")
   const [loading, setLoading] = useState(true)
+  const [limit, setLimit] = useState(PAGE)
+  /** videoId -> タイトル（quotes.json は転送量削減のためタイトルを持たない） */
+  const [titles, setTitles] = useState<Record<string, string>>({})
 
   const [texts, setTexts] = useState<Record<string, Transcript>>({})
   const fetching = useRef<Set<string>>(new Set())
@@ -34,11 +40,14 @@ export default function QuoteGallery() {
 
   useEffect(() => {
     let alive = true
-    fetchQuotes()
-      .then((q) => {
+    Promise.all([fetchQuotes(), fetchTranscriptManifest()])
+      .then(([q, m]) => {
         if (!alive) return
         setItems(q?.items ?? [])
         setRows(q?.rows ?? {})
+        const t: Record<string, string> = {}
+        for (const it of m ?? []) t[it.videoId] = it.title
+        setTitles(t)
       })
       .finally(() => alive && setLoading(false))
     return () => {
@@ -66,6 +75,7 @@ export default function QuoteGallery() {
   const selectRow = (r: string) => {
     const next = row === r ? "" : r
     setRow(next)
+    setLimit(PAGE) // 絞り込みを変えたら先頭から
     syncUrl({ row: next })
   }
 
@@ -77,6 +87,9 @@ export default function QuoteGallery() {
     else list.sort((a, b) => b.score - a.score)
     return list
   }, [items, row, sort])
+
+  /** 実際に描画するぶん（ページ読み込みを軽く保つため小分けにする） */
+  const visible = useMemo(() => shown.slice(0, limit), [shown, limit])
 
   // モーダル対象の本文を遅延取得（前後の発言表示のため）
   useEffect(() => {
@@ -100,8 +113,8 @@ export default function QuoteGallery() {
 
   // モーダルの「前/次」用に、表示中の並びをそのまま渡す
   const flatHits = useMemo(
-    () => shown.map((q) => ({ videoId: q.videoId, segId: q.segmentId })),
-    [shown]
+    () => visible.map((q) => ({ videoId: q.videoId, segId: q.segmentId })),
+    [visible]
   )
 
   if (loading) return <Skeleton />
@@ -164,7 +177,10 @@ export default function QuoteGallery() {
       <div className="flex flex-wrap items-center gap-2 text-xs">
         <select
           value={sort}
-          onChange={(e) => setSort(e.target.value as SortMode)}
+          onChange={(e) => {
+            setSort(e.target.value as SortMode)
+            setLimit(PAGE)
+          }}
           aria-label="並び順"
           className="rounded-full border border-base-700 bg-base-800 px-3 py-1.5 text-ink-dim focus:border-accent"
         >
@@ -173,13 +189,14 @@ export default function QuoteGallery() {
           <option value="long">長い順</option>
         </select>
         <span className="text-ink-dim">
-          {row ? `「${row}行」` : "全"} {shown.length} 件
+          {row ? `「${row}行」` : "全"} {shown.length.toLocaleString()} 件
+          {visible.length < shown.length && `（${visible.length}件表示中）`}
         </span>
       </div>
 
       {/* 名言カード */}
       <ul className="grid gap-3 sm:grid-cols-2">
-        {shown.map((q) => (
+        {visible.map((q) => (
           <li key={`${q.videoId}#${q.segmentId}`}>
             <button
               onClick={() => openModal(q)}
@@ -198,7 +215,7 @@ export default function QuoteGallery() {
                 <span className="rounded border border-base-700 px-1.5 py-0.5 font-mono text-accent">
                   {fmtTime(q.start)}
                 </span>
-                <span className="truncate">{q.title}</span>
+                <span className="truncate">{q.title ?? titles[q.videoId] ?? q.videoId}</span>
                 <span>{(q.date || "").slice(0, 10)}</span>
                 {q.picked && (
                   <span className="rounded-full border border-accent px-1.5 py-0.5 text-accent">推し</span>
@@ -208,6 +225,17 @@ export default function QuoteGallery() {
           </li>
         ))}
       </ul>
+
+      {visible.length < shown.length && (
+        <div className="text-center">
+          <button
+            onClick={() => setLimit((n) => n + PAGE)}
+            className="rounded-full border border-base-700 bg-base-800 px-6 py-2.5 text-sm font-bold text-ink-dim hover:border-accent hover:text-accent"
+          >
+            もっと見る（残り {(shown.length - visible.length).toLocaleString()} 件）
+          </button>
+        </div>
+      )}
 
       <p className="border-t border-base-700 pt-4 text-[11px] leading-relaxed text-ink-dim">
         ※ 本サイトは非公式のファンサイトです。文字起こしはAIによる自動生成のため、

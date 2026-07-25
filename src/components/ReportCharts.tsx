@@ -71,12 +71,13 @@ export default function ReportCharts() {
 
   const rows = grain === "year" ? yearly : monthly
 
+  // サマリーカードは選択中の期間の集計を出す（既定は最新の月/年）
+  const [period, setPeriod] = useState<string>("")
+  const activePeriod = period && rows.some((r) => r.label === period) ? period : rows.at(-1)?.label ?? ""
+  const active = rows.find((r) => r.label === activePeriod)
+
   if (!report) return <p className="p-8 text-center text-ink-dim" role="status">読み込み中…</p>
 
-  const totals = monthly.reduce(
-    (a, r) => ({ live: a.live + r.配信回数, video: a.video + r.動画本数, h: a.h + r.配信時間h }),
-    { live: 0, video: 0, h: 0 }
-  )
   const hasGap = monthly.some((r) => r.登録者 == null)
 
   const card = "rounded-2xl border border-base-700 bg-base-800 p-4"
@@ -89,7 +90,10 @@ export default function ReportCharts() {
   const grainBtn = (g: Grain, label: string) => (
     <button
       key={g}
-      onClick={() => setGrain(g)}
+      onClick={() => {
+        setGrain(g)
+        setPeriod("") // 期間選択は最新にリセット
+      }}
       aria-pressed={grain === g}
       className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors ${
         grain === g ? "bg-base-700 text-accent" : "text-ink-dim hover:text-ink"
@@ -114,12 +118,28 @@ export default function ReportCharts() {
         </div>
       </div>
 
-      {/* サマリーカード（登録者は「登録者推移」グラフとWIKIの「現在」に集約したのでここには出さない） */}
+      {/* サマリーカード: 月別/年別の切り替えと期間選択に連動する
+          （登録者は「登録者推移」グラフとWIKIの「現在」に集約したのでここには出さない） */}
+      <div className="flex flex-wrap items-center gap-2">
+        <select
+          value={activePeriod}
+          onChange={(e) => setPeriod(e.target.value)}
+          aria-label={grain === "year" ? "集計する年" : "集計する月"}
+          className="rounded-full border border-base-700 bg-base-800 px-3 py-1.5 text-xs text-ink-dim focus:border-accent"
+        >
+          {[...rows].reverse().map((r) => (
+            <option key={r.label} value={r.label}>
+              {grain === "year" ? r.label : r.label.replace("-", "年") + "月"}
+            </option>
+          ))}
+        </select>
+        <span className="text-xs text-ink-dim">の集計</span>
+      </div>
       <div className="grid grid-cols-3 gap-3">
         {[
-          ["累計配信", `${totals.live}回`],
-          ["累計動画", `${totals.video}本`],
-          ["累計配信時間", `${Math.round(totals.h)}時間`],
+          ["配信回数", `${active?.配信回数 ?? 0}回`],
+          ["動画本数", `${active?.動画本数 ?? 0}本`],
+          ["配信時間", `${Math.round(active?.配信時間h ?? 0)}時間`],
         ].map(([k, v]) => (
           <div key={k} className={card}>
             <p className="text-xs text-ink-dim">{k}</p>
