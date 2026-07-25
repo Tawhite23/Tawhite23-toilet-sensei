@@ -49,11 +49,23 @@ jobs:
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
 
+      # yt-dlp のJSチャレンジ解決(EJS)にはJSランタイムが必要。
+      # 下の setup-node より前にPythonだけ入れてもEJSは動かないため、
+      # Node を先に用意してから yt-dlp を実行する構成にしている。
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
       - name: Install Python deps
         run: |
+          # [default] を付けると yt-dlp-ejs（JSチャレンジ解決スクリプト）が同梱される。
+          # これが無いと "Requested format is not available" で失敗する。
           pip install -r scripts/requirements.txt
-          # YouTubeのボット判定回避策は頻繁に更新されるため yt-dlp は常に最新へ
-          pip install -U yt-dlp
+          # 回避策は頻繁に更新されるため yt-dlp は常に最新へ
+          pip install -U "yt-dlp[default]"
+          python -m yt_dlp --version
+          node --version
 
       # YouTubeのボット判定対策(任意): Secret YT_COOKIES に Netscape形式の
       # cookies.txt の中身を入れておくと Cookie 付きで取得を試みる。
@@ -70,16 +82,16 @@ jobs:
             echo "cookies: not set (player_client fallback only)"
           fi
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
       - name: Install Node deps (minisearch / kuromoji)
         run: npm ci
 
       # 1) 文字起こし（cron=バッチ最大2本 / workflow_dispatch=指定1本）
+      #    対象があったのに1本も成功しなかった場合（多くはYouTubeのボット判定）は
+      #    exit 1 でこのステップを失敗させ、ジョブ全体を失敗として終了する。
+      #    → GitHub Actionsの実行一覧に赤いXが付き、既定の通知設定なら失敗メールが届く。
+      #    「自動実行が実は毎回失敗していたのに気づけない」を防ぐための仕組み。
       - name: Transcribe
+        id: transcribe
         run: |
           if [ -n "${{ github.event.inputs.videoId }}" ]; then
             python scripts/transcribe.py \
@@ -92,13 +104,17 @@ jobs:
           fi
 
       # 2) 検索インデックスと人気セリフを再生成
+      #    Transcribeが失敗していても、skipped.json/failures.json の記録は
+      #    残したいので if: always() で必ず実行する（ジョブ自体は失敗のまま）。
       - name: Build search index / popular
+        if: always()
         run: |
           node scripts/build-search-index.mjs
           node scripts/build-popular.mjs
 
       # 3) public/data のみコミット（deploy.yml は paths-ignore で起動しない）
       - name: Commit if changed
+        if: always()
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -109,4 +125,12 @@ jobs:
             echo "push failed, retrying ($i)..."
             sleep $((RANDOM % 10 + 5))
           done
+          exit 1
+
+      # 4) 失敗を目立たせる（Transcribeが失敗していた場合、ここでジョブを再度失敗させる）
+      - name: Fail job if transcribe failed
+        if: always() && steps.transcribe.outcome == 'failure'
+        run: |
+          echo "::error::文字起こしが1本も成功しませんでした。多くはYouTubeのボット判定です。"
+          echo "::error::対処: 手元PCで 'python scripts/transcribe.py --max 3' を実行してpushする、または Secret YT_COOKIES を設定してください。"
           exit 1

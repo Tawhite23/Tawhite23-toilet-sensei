@@ -1,4 +1,9 @@
 # セリフ文字起こし用（scripts/transcribe.py）
-yt-dlp>=2024.8.6
+#
+# yt-dlp は [default] 付きで入れること。
+# YouTubeのJSチャレンジ(EJS)を解くためのスクリプト(yt-dlp-ejs)が同梱される。
+# これが無いと "Requested format is not available" で失敗する。
+# 加えて JSランタイム(Node 20+ または Deno)が PATH に必要。
+yt-dlp[default]>=2026.6.0
 faster-whisper>=1.0.3
 pykakasi>=2.2.1

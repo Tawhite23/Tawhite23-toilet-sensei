@@ -66,9 +66,9 @@ data-transcripts.yml（1日1回 / 手動実行）
 ### ローカルでの実行方法
 
 ```bash
-# 依存（Python 3.11+ / ffmpeg が必要）
-pip install -r scripts/requirements.txt
-sudo apt-get install -y ffmpeg      # macOS: brew install ffmpeg
+# 依存（Python 3.11+ / ffmpeg / Node 20+ が必要）
+pip install -r scripts/requirements.txt   # yt-dlp[default] = EJSスクリプト同梱
+sudo apt-get install -y ffmpeg      # macOS: brew install ffmpeg / Windows: winget install Gyan.FFmpeg
 npm ci                              # minisearch / kuromoji
 
 # 未処理アーカイブを2本まで文字起こし（字幕優先 → 無ければWhisper）
@@ -96,6 +96,17 @@ npm run build:search        # = build-search-index.mjs && build-popular.mjs
 | `whisperModel` | 字幕が無い場合のWhisperモデル（`tiny`/`base`/`small`/`medium`） |
 | `retryFailed` | 連続失敗で後回しにした動画も再挑戦する |
 
+### "Requested format is not available" が出る場合（JSチャレンジ / EJS）
+
+yt-dlp は YouTube の JavaScript チャレンジ（署名・n challenge）を解くために、**外部のJSランタイムと解決スクリプト**を必要とします。これが揃っていないと「利用可能な形式がない」状態になり、`Requested format is not available` で失敗します。必要なものは2つです。
+
+1. **解決スクリプト（yt-dlp-ejs）**: `pip install -U "yt-dlp[default]"` のように `[default]` を付けてインストールすると同梱されます（`scripts/requirements.txt` は対応済み）。
+2. **JSランタイム**: Node 20+ または Deno が PATH にあること。スクリプトは自動で `--js-runtimes node` を付けます（`YTDLP_JS_RUNTIME=deno` で変更可）。Node はこのプロジェクトの開発にもともと必要なので、通常は追加作業は不要です。
+
+なお字幕だけを取る場合は形式の有無と無関係なため、`--ignore-no-formats-error` を付けて字幕取得は成功するようにしています（Whisperにフォールバックする=音声DLが必要な場合のみJSランタイムが必須）。
+
+参考: [yt-dlp Wiki: EJS](https://github.com/yt-dlp/yt-dlp/wiki/EJS)
+
 ### YouTubeのボット判定（"Sign in to confirm you're not a bot"）への対処
 
 GitHub Actions のIPアドレスはデータセンター帯のため、YouTubeからボットとみなされて
@@ -103,9 +114,38 @@ GitHub Actions のIPアドレスはデータセンター帯のため、YouTube�
 
 1. **player_client の切替**（自動・設定不要）: `android_vr` → `tv` → `mweb` → `web_safari` → `default` の順に試行。環境変数 `YTDLP_PLAYER_CLIENTS` で順序を上書きできます（例: `YTDLP_PLAYER_CLIENTS=tv,default`）。
 2. **yt-dlp の自動更新**: 回避策は頻繁に更新されるため、ワークフローは毎回 `pip install -U yt-dlp` を実行します。
-3. **Cookie を渡す**（任意）: GitHub の Secret `YT_COOKIES` に Netscape形式 `cookies.txt` の中身を貼っておくと、Cookie付きで取得を試みます。ローカル実行では `YT_COOKIES_BROWSER=chrome` のように指定するとブラウザから直接読み込みます。
-   - 注意: メインのGoogleアカウントのCookieをデータセンターIPで使うとアカウント制限のリスクがあります。使う場合はサブアカウントを推奨します。
+3. **Cookie を渡す**（任意・CIの成功率を上げたい場合）: GitHub の Secret `YT_COOKIES` に Netscape形式 `cookies.txt` の中身を貼っておくと、Cookie付きで取得を試みます。手順は下記「Cookieの設定手順」を参照してください。
 4. **それでも通らない場合は手元PCで実行**（最も確実）: 家庭用回線からは通常ブロックされません。
+
+### Cookieの設定手順（YT_COOKIES）
+
+**必ずサブ垢（普段使いではない捨ててもいいGoogleアカウント）を新規に作って使ってください。** データセンターのIP(GitHub Actions)からアクセスするとYouTube側にアカウント制限をかけられるリスクがあるためです。メインアカウントは使わないでください。
+
+1. **サブ垢を作る**: [https://accounts.google.com/signup](https://accounts.google.com/signup) から新規にGoogleアカウントを作成します。
+2. **そのアカウントでブラウザにログインする**: ChromeやEdgeで一度ログアウトし、作成したサブ垢でログインし直します（もしくはブラウザのプロファイル機能で別プロファイルとしてログイン）。[https://www.youtube.com](https://www.youtube.com) を開いて、ログインできていることを確認してください。
+3. **手元PCで cookies.txt を書き出す**: `scripts/requirements.txt` の yt-dlp が入った状態で、CMDから以下を実行します（`chrome` の部分は使っているブラウザに合わせて `edge` / `firefox` などに変更可）。ブラウザは一旦閉じてから実行してください（開いたままだとCookieファイルがロックされ失敗することがあります）。
+
+   ```bat
+   cd C:\Users\user\yt-wiki\Tawhite23-toilet-sensei
+   python -m yt_dlp --cookies-from-browser chrome --cookies cookies.txt --skip-download "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+   ```
+
+   成功すると、フォルダ内に `cookies.txt` というファイルができます。
+4. **GitHubにSecretとして登録する**:
+   - ブラウザで `https://github.com/Tawhite23/Tawhite23-toilet-sensei/settings/secrets/actions` を開く
+   - 「New repository secret」をクリック
+   - Name: `YT_COOKIES`
+   - Secret: `cookies.txt` の中身をテキストエディタで開き、**全文をそのままコピペ**
+   - 「Add secret」で保存
+5. **ローカルの cookies.txt を削除する**: ログイン情報を含むファイルなので、Secretに登録したら手元のファイルは削除し、絶対にコミットしないでください（`.gitignore` には含まれていますが念のため）。
+
+   ```bat
+   del cookies.txt
+   ```
+
+6. **動作確認**: GitHubの `Actions` タブ → `update-transcripts` → `Run workflow` を手動実行し、成功するか確認します。
+
+**Cookieはいずれ期限切れになります。** その時はまた `update-transcripts` が失敗（今回の修正で赤い✕が出るようになっています）するので、気づいたら1〜5の手順をやり直してSecretを更新してください。
 
 ```bash
 python scripts/transcribe.py --max 3          # 未処理を3本処理

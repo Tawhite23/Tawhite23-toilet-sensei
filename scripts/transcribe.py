@@ -133,6 +133,22 @@ def cookie_args() -> list:
     return []
 
 
+_help_cache = None
+
+
+def ytdlp_supports(option: str) -> bool:
+    """インストールされている yt-dlp が指定オプションに対応しているか（--help を1回だけ確認）。"""
+    global _help_cache
+    if _help_cache is None:
+        try:
+            proc = subprocess.run([sys.executable, "-m", "yt_dlp", "--help"],
+                                  capture_output=True, text=True, timeout=120)
+            _help_cache = proc.stdout + proc.stderr
+        except Exception:
+            _help_cache = ""
+    return option in _help_cache
+
+
 def ytdlp_base(client: str = "") -> list:
     cmd = [
         sys.executable, "-m", "yt_dlp",
@@ -141,6 +157,18 @@ def ytdlp_base(client: str = "") -> list:
         "--socket-timeout", "30",
         "--sleep-requests", "1",
     ]
+    # 【重要】YouTubeのJSチャレンジ(EJS)対策。
+    # yt-dlp は署名/n-challenge を解くために外部JSランタイムを必要とする。
+    # 解けないと「利用可能な形式が無い」状態になり
+    # "Requested format is not available" で失敗する。
+    # CI/ローカルともNode 20+が入っているため node ランタイムを使う。
+    # 環境変数 YTDLP_JS_RUNTIME で上書き可（例: "deno"）。
+    if ytdlp_supports("--js-runtimes"):
+        cmd += ["--js-runtimes", os.environ.get("YTDLP_JS_RUNTIME", "node")]
+    # 字幕だけ取りたい場合、動画形式が取得できなくてもエラーにしない
+    # （字幕は形式の有無と無関係。JSチャレンジが解けない環境でも字幕は取れる）
+    if ytdlp_supports("--ignore-no-formats-error"):
+        cmd += ["--ignore-no-formats-error"]
     if client and client != "default":
         cmd += ["--extractor-args", f"youtube:player_client={client}"]
     cmd += cookie_args()
@@ -262,9 +290,15 @@ def download_audio(video_id: str, workdir: Path) -> Path:
     ], timeout=5400)
     if out.exists():
         return out
-    cands = sorted(workdir.glob(f"{video_id}.*"))
+    cands = [p for p in sorted(workdir.glob(f"{video_id}.*")) if p.is_file()]
     if not cands:
-        raise RuntimeError("audio download produced no file")
+        # --ignore-no-formats-error のため exit 0 でもファイルが無いことがある。
+        # 多くは JSチャレンジ(EJS)を解けず音声形式が取得できていないケース。
+        raise RuntimeError(
+            "音声形式を取得できませんでした（JSチャレンジ未解決の可能性）。"
+            "yt-dlp を 'pip install -U \"yt-dlp[default]\"' で更新し、"
+            "Node 20+ か Deno がPATHにあるか確認してください"
+        )
     return cands[0]
 
 
@@ -522,11 +556,20 @@ def main() -> int:
             targets.append(vid)
         log(f"batch targets: {targets or 'none (up to date or all deferred)'}")
 
+    attempted = 0
+    succeeded = 0
+    blocked = 0  # 全滅したら「ボット判定が原因」と特定できるようにカウントする
+
     for vid in targets:
+        attempted += 1
         meta = cindex.get(vid)
         if not meta:
             try:
                 meta = ytdlp_meta(vid)
+            except YtDlpBlocked:
+                blocked += 1
+                log(f"{vid}: metadata fetch blocked (bot-check)")
+                continue
             except Exception as e:
                 log(f"{vid}: metadata fetch failed: {e}")
                 continue
@@ -539,6 +582,7 @@ def main() -> int:
                             "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         except YtDlpBlocked as e:
+            blocked += 1
             n = fail_count.get(vid, 0) + 1
             fail_count[vid] = n
             log(f"{vid}: yt-dlp blocked ({n}/{args.max_failures}回目): {e}")
@@ -555,6 +599,7 @@ def main() -> int:
                              "reason": f"{type(e).__name__}: {e}"[:200],
                              "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
+        succeeded += 1
         manifest = [m for m in manifest if m.get("videoId") != vid]
         manifest.append(entry)
         skipped = [s for s in skipped if s.get("videoId") != vid]
@@ -565,9 +610,15 @@ def main() -> int:
     save_json(SKIPPED, skipped)
     save_json(FAILURES, failures)
     log(f"manifest={len(manifest)} videos, skipped={len(skipped)}, failures={len(failures)}")
-    if not manifest:
-        log("HINT: 1本も文字起こしできていません。CIでボット判定に遭う場合は "
-            "(1) Secret YT_COOKIES を設定する か (2) 手元PCで実行してコミットしてください。")
+
+    # 【重要】対象があったのに1本も成功しなかった場合は exit 0 にしない。
+    # CIがボット判定で毎回全滅していても静かに「正常終了」していたのが本来の問題だったため、
+    # ここでジョブを失敗させ、GitHub Actionsの失敗通知(赤いX・既定でメール通知)で気づけるようにする。
+    if attempted > 0 and succeeded == 0:
+        reason = "YouTubeのボット判定(Sign in to confirm you're not a bot)" if blocked == attempted else "取得エラー"
+        log(f"ALERT: {attempted}本すべて失敗しました（{reason}）。"
+            "このワークフローは失敗として終了します。手元PCでの実行、または Secret YT_COOKIES の設定を検討してください。")
+        return 1
     return 0
 
 
