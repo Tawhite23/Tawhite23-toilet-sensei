@@ -1,0 +1,4 @@
+# セリフ文字起こし用（scripts/transcribe.py）
+yt-dlp>=2024.8.6
+faster-whisper>=1.0.3
+pykakasi>=2.2.1

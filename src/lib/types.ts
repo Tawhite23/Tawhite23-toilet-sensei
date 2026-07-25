@@ -31,6 +31,72 @@ export interface MonthlyReport {
 }
 export type Report = Record<string, MonthlyReport>
 
+// ---- セリフ全文検索用データ（public/data/transcripts, search-index, popular） -----
+
+/** transcripts/<videoId>.json の1セリフ */
+export interface TranscriptSegment {
+  id: number
+  start: number // 秒
+  end: number // 秒
+  text: string
+  yomi?: string // ひらがな読み(pykakasi。無い場合もある)
+}
+
+/** transcripts/<videoId>.json */
+export interface Transcript {
+  videoId: string
+  title: string
+  date: string // ISO8601
+  durationSec: number
+  source: "subtitle" | "auto-subtitle" | "whisper" | string
+  generatedAt: string
+  segments: TranscriptSegment[]
+}
+
+/** transcripts/manifest.json の1件 */
+export interface TranscriptManifestItem {
+  videoId: string
+  title: string
+  date: string
+  thumbnail: string | null
+  durationSec: number
+  segmentCount: number
+  source: string
+}
+export type TranscriptManifest = TranscriptManifestItem[]
+
+/** search-index.json: MiniSearch の書き出しインデックス(本文は含まない) */
+export interface SearchIndexShard {
+  year: string
+  file: string
+  segmentCount: number
+}
+export interface SearchIndexFile {
+  version: number
+  generatedAt: string | null
+  segmentCount: number
+  sharded: boolean
+  /** sharded=false のときのみ。MiniSearch.loadJSON に渡す */
+  index?: unknown | null
+  /** sharded=true のときのみ */
+  shards?: SearchIndexShard[]
+  year?: string
+}
+
+/** popular.json: 頻出セリフ/口癖ランキング */
+export interface PopularPhrase {
+  text: string
+  count: number
+  videoCount: number
+  sample: { videoId: string; start: number }
+}
+export interface PopularFile {
+  version: number
+  generatedAt: string | null
+  segmentCount: number
+  items: PopularPhrase[]
+}
+
 // ---- Firestore 保護データ ---------------------------------------------------
 /** /private/discord ドキュメント (allow read: if request.auth != null) */
 export interface DiscordDoc {

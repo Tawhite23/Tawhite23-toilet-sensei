@@ -1,0 +1,88 @@
+# 配信アーカイブのセリフ文字起こし → 検索インデックス生成
+#
+# YouTube Data API は一切呼ばないため追加クォータ消費は 0u。
+# 既存の data-live.yml / data-contents.yml / data-report.yml は変更していない。
+# public/data/** のみをコミットするため deploy.yml は起動しない（データ追加で再デプロイしない設計を維持）。
+name: update-transcripts
+on:
+  schedule:
+    # 1日1回。既存ワークフローと重ならない時刻(UTC 18:37)に実行
+    - cron: "37 18 * * *"
+  workflow_dispatch:
+    inputs:
+      videoId:
+        description: "この1本だけ処理する videoId（空ならcronと同じバッチ処理）"
+        required: false
+        default: ""
+      force:
+        description: "既に処理済みでも再処理する"
+        type: boolean
+        required: false
+        default: false
+      whisperModel:
+        description: "字幕が無い場合のWhisperモデル(tiny/base/small/medium)"
+        required: false
+        default: "small"
+concurrency:
+  group: data-json-transcripts
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  transcripts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330 # 長尺配信のWhisper処理を考慮(GitHubのジョブ上限は6h)
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+
+      - name: Install Python deps
+        run: pip install -r scripts/requirements.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Node deps (minisearch / kuromoji)
+        run: npm ci
+
+      # 1) 文字起こし（cron=バッチ最大2本 / workflow_dispatch=指定1本）
+      - name: Transcribe
+        run: |
+          if [ -n "${{ github.event.inputs.videoId }}" ]; then
+            python scripts/transcribe.py \
+              --video-id "${{ github.event.inputs.videoId }}" \
+              --whisper-model "${{ github.event.inputs.whisperModel || 'small' }}" \
+              ${{ github.event.inputs.force == 'true' && '--force' || '' }}
+          else
+            python scripts/transcribe.py --max 2 --whisper-model small
+          fi
+
+      # 2) 検索インデックスと人気セリフを再生成
+      - name: Build search index / popular
+        run: |
+          node scripts/build-search-index.mjs
+          node scripts/build-popular.mjs
+
+      # 3) public/data のみコミット（deploy.yml は paths-ignore で起動しない）
+      - name: Commit if changed
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add public/data/transcripts public/data/search-index*.json public/data/popular.json
+          git diff --cached --quiet || git commit -m "chore(data): update transcripts/search index [skip ci]"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            echo "push failed, retrying ($i)..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          exit 1

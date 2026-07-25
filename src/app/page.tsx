@@ -1,6 +1,7 @@
 import LiveRing from "@/components/LiveRing"
 import SocialLinks from "@/components/SocialLinks"
 import DiscordGate from "@/components/DiscordGate"
+import QuoteSearchCard from "@/components/QuoteSearchCard"
 import { site } from "@/lib/site.config"
 
 // トップ: 1画面完結(100dvh, スクロール不要)
@@ -27,6 +28,8 @@ export default function Home() {
         </div>
         <SocialLinks />
         <DiscordGate />
+        {/* 発見性導線: セリフ全文検索へ */}
+        <QuoteSearchCard />
       </div>
     </div>
   )

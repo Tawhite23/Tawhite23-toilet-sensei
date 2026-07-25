@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useMemo, useState } from "react"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { fetchContents, fmtDuration } from "@/lib/data"
 import type { ContentItem } from "@/lib/types"
@@ -43,7 +44,7 @@ export default function Calendar() {
   const selectedItems = selected ? byDay.get(selected) ?? [] : []
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-28 pt-8 md:pt-24">
+    <div>
       <div className="mb-4 flex items-center justify-between">
         <button
           onClick={() => { setSelected(null); setCursor(new Date(y, mo - 1, 1)) }}
@@ -162,6 +163,15 @@ export default function Calendar() {
                           <p className="mt-1 line-clamp-2 text-sm leading-snug group-hover:text-accent">{it.title}</p>
                         </div>
                       </a>
+                      {/* 発見性導線: この配信のセリフ検索へ（1ページ+クエリで表現） */}
+                      {!plan && it.type === "live" && (
+                        <Link
+                          href={`/calendar/?tab=quotes&v=${it.videoId}`}
+                          className="mt-1 inline-flex items-center gap-1 px-1 text-[11px] text-ink-dim underline underline-offset-4 hover:text-accent"
+                        >
+                          この配信のセリフを見る →
+                        </Link>
+                      )}
                     </li>
                   )
                 })}

@@ -1,0 +1,5 @@
+# 文字起こしの処理・掲載を行わない videoId を1行ずつ書く（削除依頼対応）
+# ここに追記して data-transcripts.yml を手動実行すると、既存の transcripts/<id>.json と
+# manifest.json のエントリも自動的に取り下げられ、検索インデックスからも消えます。
+# 例:
+# dQw4w9WgXcQ  # 本人から掲載取り下げ依頼(2026-07-25)
