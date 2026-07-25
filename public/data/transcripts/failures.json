@@ -13,14 +13,16 @@
   },
   {
     "videoId": "H2oPIC3uXcU",
-    "count": 1,
+    "count": 2,
+    "kind": "format",
     "reason": "ERROR: [youtube] H2oPIC3uXcU: No video formats found!",
-    "at": "2026-07-25T07:29:06Z"
+    "at": "2026-07-25T07:47:36Z"
   },
   {
     "videoId": "vXVU9zs2uVo",
-    "count": 1,
+    "count": 2,
+    "kind": "format",
     "reason": "ERROR: [youtube] vXVU9zs2uVo: No video formats found!",
-    "at": "2026-07-25T07:30:13Z"
+    "at": "2026-07-25T07:48:50Z"
   }
 ]
