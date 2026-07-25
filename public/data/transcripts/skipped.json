@@ -3,5 +3,10 @@
     "videoId": "UIrqT4Ly3pw",
     "reason": "too long for whisper on CI (7.2h > 4.0h)",
     "at": "2026-07-25T05:36:34Z"
+  },
+  {
+    "videoId": "C6fMMJIla1I",
+    "reason": "too long for whisper on CI (10.5h > 4.0h)",
+    "at": "2026-07-25T09:04:02Z"
   }
 ]
