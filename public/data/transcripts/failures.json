@@ -27,9 +27,16 @@
   },
   {
     "videoId": "5zZepxQdp8k",
-    "count": 1,
+    "count": 2,
     "kind": "format",
     "reason": "ERROR: [youtube] 5zZepxQdp8k: No video formats found!",
-    "at": "2026-07-25T09:03:59Z"
+    "at": "2026-07-25T09:37:30Z"
+  },
+  {
+    "videoId": "CnVU6Qa-hYo",
+    "count": 1,
+    "kind": "format",
+    "reason": "ERROR: [youtube] CnVU6Qa-hYo: No video formats found!",
+    "at": "2026-07-25T09:38:55Z"
   }
 ]
