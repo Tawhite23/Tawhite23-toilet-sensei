@@ -10,17 +10,5 @@
     "count": 2,
     "reason": "ERROR: [youtube] gkOISyaCBSw: Requested format is not available. Use --list-formats for a list of available formats",
     "at": "2026-07-25T07:00:26Z"
-  },
-  {
-    "videoId": "H2oPIC3uXcU",
-    "count": 1,
-    "reason": "ERROR: [youtube] H2oPIC3uXcU: No video formats found!",
-    "at": "2026-07-25T07:29:06Z"
-  },
-  {
-    "videoId": "vXVU9zs2uVo",
-    "count": 1,
-    "reason": "ERROR: [youtube] vXVU9zs2uVo: No video formats found!",
-    "at": "2026-07-25T07:30:13Z"
   }
 ]
