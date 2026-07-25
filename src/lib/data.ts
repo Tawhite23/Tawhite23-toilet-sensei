@@ -8,6 +8,7 @@ import type {
   SearchIndexFile,
   Transcript,
   TranscriptManifest,
+  WikiFile,
 } from "./types"
 
 // 公開JSONの取得。dataBaseUrl 未設定時はサイト同梱 /data を読む。
@@ -27,6 +28,8 @@ async function getJson<T>(name: string, revalidateSec: number): Promise<T | null
 export const fetchLive = () => getJson<LiveStatus>("live.json", 60)
 export const fetchContents = () => getJson<ContentItem[]>("contents.json", 3600)
 export const fetchReport = () => getJson<Report>("report.json", 3600)
+/** WIKI「これまでの歩み」（登録者・再生数のマイルストーンを日次で自動追記） */
+export const fetchWiki = () => getJson<WikiFile>("wiki.json", 3600)
 
 // ---- 発言検索・名言集用（既存の fetch* と同じ作り。dataBaseUrl 経由で取得） ----
 /** 文字起こし済み配信の一覧 */

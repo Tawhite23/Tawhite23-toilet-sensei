@@ -21,14 +21,15 @@ export const site = {
       "https://marshmallow-qa.com/quv8dzdx4k5rcfv?t=0lJa7j&utm_medium=url_text&utm_source=promotion",
   },
 
-  // 【2-5】プロフィール内蔵WIKI「チャンネル開設からの歩み」。
-  // ここに1行追加するだけでプロフィールのWIKIセクションに反映される。
-  // date: 表示用日付(未確定は「今後追記」等でOK) / event: 出来事 / detail: 補足(省略可)
+  // プロフィール内蔵WIKI「これまでの歩み」の**フォールバック**。
+  // 通常は public/data/wiki.json（scripts/build-wiki.mjs が日次生成）を表示し、
+  // それが取得できないときだけこの配列が使われる。
+  // 確定イベント（チャンネル開設日など）を増やしたい場合は
+  // scripts/wiki-fixed.json に追記すること（そちらが本番の入力）。
   wikiHistory: [
-    { date: "今後追記", event: "チャンネル開設", detail: "正確な開設日は確認中" },
-    { date: "今後追記", event: "初配信", detail: "詳細は確認中" },
-    { date: "今後追記", event: "マイクラ参加型サーバー開始", detail: "建国サーバー・ウォシュレッ島発展プロジェクトなど" },
-    { date: "2026年7月時点", event: "チャンネル登録者 339人 / 総再生 約10.7万回", detail: "月次レポートで記録中" },
+    { date: "2014年12月20日", event: "チャンネル開設", detail: "YouTubeチャンネルの開設日" },
+    { date: "2025年8月23日", event: "現存する最も古い配信", detail: "これより前の配信は非公開または削除済み" },
+    { date: "2025年10月11日", event: "現存する最も古い参加型マイクラ配信", detail: "タイトルが#12のため、それ以前は非公開または削除済み" },
   ],
 
   moderators: [

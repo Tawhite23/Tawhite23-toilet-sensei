@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-25T10:40:11.229Z",
+  "current": {
+    "ym": "2026-07",
+    "subscriberCount": 349,
+    "viewCount": 110175
+  },
+  "entries": [
+    {
+      "kind": "fixed",
+      "id": "channel-open",
+      "date": "2014-12-20",
+      "event": "チャンネル開設",
+      "detail": "YouTubeチャンネルの開設日。"
+    },
+    {
+      "id": "first-live",
+      "kind": "auto",
+      "date": "2025-08-23",
+      "event": "現存する最も古い配信",
+      "detail": "「APEX 基本ソロランク プラチナ3行くまで」。これより前の配信は非公開または削除済みのため確認できません。",
+      "videoId": "mJ5tYMdxYoM",
+      "firstSeenAt": "2026-07-25T10:40:11.220Z"
+    },
+    {
+      "id": "first-minecraft-sanka",
+      "kind": "auto",
+      "date": "2025-10-11",
+      "event": "現存する最も古い参加型マイクラ配信",
+      "detail": "「参加型マイクラ#12 エンチャ釣り、ダイヤ集め」。タイトルが#12であることから、#1〜#11は非公開または削除済みと推測されます。",
+      "videoId": "UfzE30iARQk",
+      "firstSeenAt": "2026-07-25T10:40:11.220Z"
+    },
+    {
+      "id": "first-video",
+      "kind": "auto",
+      "date": "2026-01-08",
+      "event": "現存する最も古い動画投稿",
+      "detail": "「#トムの叫び　#トム　#叫び おトイレ先生とトムの叫び比較」",
+      "videoId": "cZidVIamfQc",
+      "firstSeenAt": "2026-07-25T10:40:11.220Z"
+    },
+    {
+      "id": "subs-300",
+      "kind": "milestone",
+      "metric": "subs",
+      "value": 300,
+      "date": "2026-07-01",
+      "approx": true,
+      "event": "チャンネル登録者 300人 達成",
+      "detail": "記録開始(2026-07)時点で既に到達していました。正確な到達日は不明です。",
+      "firstSeenAt": "2026-07-25T10:40:11.228Z"
+    },
+    {
+      "id": "views-100000",
+      "kind": "milestone",
+      "metric": "views",
+      "value": 100000,
+      "date": "2026-07-01",
+      "approx": true,
+      "event": "総再生数 10万回 達成",
+      "detail": "記録開始(2026-07)時点で既に到達していました。正確な到達日は不明です。",
+      "firstSeenAt": "2026-07-25T10:40:11.229Z"
+    }
+  ]
+}

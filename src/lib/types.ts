@@ -121,6 +121,30 @@ export interface PopularFile {
   items: PopularPhrase[]
 }
 
+/** wiki.json: WIKI「これまでの歩み」。scripts/build-wiki.mjs が日次で更新 */
+export interface WikiEntry {
+  id: string
+  /** fixed=手書きの確定イベント / auto=contents.jsonから導出 / milestone=登録者・再生数の桁上がり */
+  kind: "fixed" | "auto" | "milestone"
+  date: string // YYYY-MM-DD (JST)
+  event: string
+  detail?: string
+  videoId?: string
+  /** 登録者/再生数マイルストーンのみ */
+  metric?: "subs" | "views"
+  value?: number
+  /** 日付がおおよそであることを示す（到達日が特定できない場合） */
+  approx?: boolean
+  firstSeenAt?: string
+}
+export interface WikiFile {
+  version: number
+  generatedAt: string | null
+  /** 最下部に固定表示する「現在」の値 */
+  current: { ym: string; subscriberCount: number | null; viewCount: number | null } | null
+  entries: WikiEntry[]
+}
+
 // ---- Firestore 保護データ ---------------------------------------------------
 /** /private/discord ドキュメント (allow read: if request.auth != null) */
 export interface DiscordDoc {

@@ -19,16 +19,27 @@ const tick = { fill: "var(--c-ink-dim)", fontSize: 11 }
 const tickS = { fill: "var(--c-ink-dim)", fontSize: 10 }
 const grid = "var(--c-border)"
 
+type Grain = "month" | "year"
+interface Row {
+  label: string
+  配信回数: number
+  動画本数: number
+  配信時間h: number
+  登録者: number | null
+  再生数: number | null
+}
+
 export default function ReportCharts() {
   const [report, setReport] = useState<Report | null>(null)
+  const [grain, setGrain] = useState<Grain>("month")
   useEffect(() => { fetchReport().then(setReport) }, [])
 
-  const rows = useMemo(() => {
+  const monthly = useMemo<Row[]>(() => {
     if (!report) return []
     return Object.entries(report)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([ym, r]) => ({
-        ym,
+        label: ym,
         配信回数: r.liveCount,
         動画本数: r.videoCount,
         配信時間h: Math.round(r.totalDurationSec / 360) / 10,
@@ -38,15 +49,35 @@ export default function ReportCharts() {
       }))
   }, [report])
 
+  /**
+   * 年別は「回数/本数/時間は合計」「登録者・再生数はその年で最後に記録された値」。
+   * 累積値であるスナップショットを合計してしまわないようにしている。
+   */
+  const yearly = useMemo<Row[]>(() => {
+    const m = new Map<string, Row>()
+    for (const r of monthly) {
+      const y = r.label.slice(0, 4)
+      const cur =
+        m.get(y) ?? { label: `${y}年`, 配信回数: 0, 動画本数: 0, 配信時間h: 0, 登録者: null, 再生数: null }
+      cur.配信回数 += r.配信回数
+      cur.動画本数 += r.動画本数
+      cur.配信時間h = Math.round((cur.配信時間h + r.配信時間h) * 10) / 10
+      if (r.登録者 != null) cur.登録者 = r.登録者
+      if (r.再生数 != null) cur.再生数 = r.再生数
+      m.set(y, cur)
+    }
+    return [...m.values()]
+  }, [monthly])
+
+  const rows = grain === "year" ? yearly : monthly
+
   if (!report) return <p className="p-8 text-center text-ink-dim" role="status">読み込み中…</p>
 
-  const latest = rows[rows.length - 1]
-  const latestSubs = [...rows].reverse().find((r) => r.登録者 != null)?.登録者
-  const totals = rows.reduce(
+  const totals = monthly.reduce(
     (a, r) => ({ live: a.live + r.配信回数, video: a.video + r.動画本数, h: a.h + r.配信時間h }),
     { live: 0, video: 0, h: 0 }
   )
-  const hasGap = rows.some((r) => r.登録者 == null)
+  const hasGap = monthly.some((r) => r.登録者 == null)
 
   const card = "rounded-2xl border border-base-700 bg-base-800 p-4"
   const tooltipStyle = {
@@ -55,18 +86,40 @@ export default function ReportCharts() {
     borderRadius: 8,
     color: "var(--c-ink)",
   }
+  const grainBtn = (g: Grain, label: string) => (
+    <button
+      key={g}
+      onClick={() => setGrain(g)}
+      aria-pressed={grain === g}
+      className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors ${
+        grain === g ? "bg-base-700 text-accent" : "text-ink-dim hover:text-ink"
+      }`}
+    >
+      {label}
+    </button>
+  )
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 pb-28 pt-8 md:pt-24">
-      <h1 className="text-2xl font-black">活動レポート</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-black">活動レポート</h1>
+        {/* 月別 / 年別の切り替え（全グラフに反映） */}
+        <div
+          role="group"
+          aria-label="集計単位"
+          className="flex gap-1 rounded-full border border-base-700 bg-base-800 p-1"
+        >
+          {grainBtn("month", "月別")}
+          {grainBtn("year", "年別")}
+        </div>
+      </div>
 
-      {/* サマリーカード */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {/* サマリーカード（登録者は「登録者推移」グラフとWIKIの「現在」に集約したのでここには出さない） */}
+      <div className="grid grid-cols-3 gap-3">
         {[
           ["累計配信", `${totals.live}回`],
           ["累計動画", `${totals.video}本`],
           ["累計配信時間", `${Math.round(totals.h)}時間`],
-          ["登録者", latestSubs != null ? latestSubs.toLocaleString() : "-"],
         ].map(([k, v]) => (
           <div key={k} className={card}>
             <p className="text-xs text-ink-dim">{k}</p>
@@ -75,13 +128,15 @@ export default function ReportCharts() {
         ))}
       </div>
 
-      <section className={card} aria-label="月別の配信回数・動画本数・配信時間">
-        <h2 className="mb-3 text-sm font-bold text-ink-dim">月別アクティビティ</h2>
+      <section className={card} aria-label={`${grain === "year" ? "年別" : "月別"}の配信回数・動画本数・配信時間`}>
+        <h2 className="mb-3 text-sm font-bold text-ink-dim">
+          {grain === "year" ? "年別" : "月別"}アクティビティ
+        </h2>
         <div className="h-72">
           <ResponsiveContainer>
             <ComposedChart data={rows}>
               <CartesianGrid stroke={grid} strokeDasharray="3 3" />
-              <XAxis dataKey="ym" tick={tick} />
+              <XAxis dataKey="label" tick={tick} />
               <YAxis yAxisId="l" tick={tick} />
               <YAxis yAxisId="r" orientation="right" tick={tick} unit="h" />
               <Tooltip contentStyle={tooltipStyle} />
@@ -101,7 +156,7 @@ export default function ReportCharts() {
             <ResponsiveContainer>
               <AreaChart data={rows}>
                 <CartesianGrid stroke={grid} strokeDasharray="3 3" />
-                <XAxis dataKey="ym" tick={tickS} />
+                <XAxis dataKey="label" tick={tickS} />
                 <YAxis tick={tickS} domain={["auto", "auto"]} />
                 <Tooltip contentStyle={tooltipStyle} />
                 <Area dataKey="登録者" connectNulls={false} stroke={C.subs} fill={C.subs} fillOpacity={0.15} strokeWidth={2} dot={{ r: 3 }} />
@@ -115,7 +170,7 @@ export default function ReportCharts() {
             <ResponsiveContainer>
               <AreaChart data={rows}>
                 <CartesianGrid stroke={grid} strokeDasharray="3 3" />
-                <XAxis dataKey="ym" tick={tickS} />
+                <XAxis dataKey="label" tick={tickS} />
                 <YAxis tick={tickS} domain={["auto", "auto"]} />
                 <Tooltip contentStyle={tooltipStyle} />
                 <Area dataKey="再生数" connectNulls={false} stroke={C.views} fill={C.views} fillOpacity={0.15} strokeWidth={2} dot={{ r: 3 }} />
@@ -125,9 +180,11 @@ export default function ReportCharts() {
         </section>
       </div>
 
-      <p className="text-xs text-ink-dim">
-        ※ 登録者・再生数は実記録に基づくスナップショット値です（GitHub Actionsで月次記録）。
+      <p className="text-xs leading-relaxed text-ink-dim">
+        ※ 登録者・再生数は実記録に基づくスナップショット値です（GitHub Actionsで日次記録）。
+        {grain === "year" && " 年別表示では、登録者・再生数はその年に最後に記録された値を表示しています（累積値のため合計しません）。"}
         {hasGap && " 記録が無い期間は欠損として表示し、推測値で補完していません。"}
+        {" 現在の登録者数・総再生数はプロフィールのWIKI最下部「現在」で確認できます。"}
       </p>
     </div>
   )

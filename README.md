@@ -28,9 +28,40 @@ YouTuber「おトイレ先生」の非公式ファンサイト。Next.js の静�
 | `live.json` | 15分毎 | 配信中かどうか、登録者数/再生数(当月分) | `.github/workflows/data-live.yml` |
 | `contents.json` | 6時間毎 | 動画/配信の一覧（サムネ・種別・日時など） | `.github/workflows/data-contents.yml` |
 | `report.json` | 日次 | 月別の配信回数・動画本数・配信時間・登録者数・再生数の集計 | `.github/workflows/data-report.yml` |
+| `wiki.json` | 日次 | WIKI「これまでの歩み」年表（登録者・再生数の桁上がりを自動追記） | `.github/workflows/data-report.yml` |
 | `transcripts/*.json`, `search-index.json`, `popular.json` | 日次 | セリフ文字起こし・検索インデックス・頻出セリフ | `.github/workflows/data-transcripts.yml` |
 
 いずれも YouTube Data API v3 のクォータ消費を抑えた低コストな実装になっています（詳細は各スクリプト冒頭のコメント参照）。文字起こしワークフローは YouTube Data API を**一切呼びません**（追加クォータ 0u）。
+
+## WIKI「これまでの歩み」の自動更新
+
+プロフィールページのWIKIセクションは `public/data/wiki.json` を読んで描画します。
+このファイルは `scripts/build-wiki.mjs` が **日次で自動生成**します（YouTube Data API は呼ばないので追加クォータ 0u）。
+
+**自動で追記されるもの**
+
+| 種類 | 内容 | 判定方法 |
+| --- | --- | --- |
+| マイルストーン | 「チャンネル登録者 400人 達成」「総再生数 20万回 達成」など | 最上位桁が繰り上がった時点。刻み幅は `10^floor(log10(n))`（339人なら100刻み、11万回なら10万刻み） |
+| 現存最古の記録 | 「現存する最も古い配信」「現存する最も古い参加型マイクラ配信」「現存する最も古い動画投稿」 | `contents.json` の最古エントリ。タイトルの `#N` から「#1〜#(N-1)は非公開または削除済み」と注記 |
+| 現在 | 年表の最下部に常駐。いまの登録者数と総再生数 | `report.json` の最新スナップショット |
+
+**手で書く確定イベント**は `scripts/wiki-fixed.json` に追記します（チャンネル開設日など、データから導けないもの）。
+
+```jsonc
+[
+  { "id": "channel-open", "date": "2014-12-20", "event": "チャンネル開設", "detail": "..." }
+]
+```
+
+一度記録したマイルストーンは日付・文面ごと保持されるため、後から履歴が書き換わることはありません。
+初回実行時に「すでに達成済み」だったぶんは到達日が不明なため、`2026年7月ごろ` のようにおおよその表記になります。
+
+```bash
+npm run build:wiki      # 手元で生成/確認する場合
+```
+
+なお `src/lib/site.config.ts` の `wikiHistory` は `wiki.json` が読めなかった場合のフォールバックです。
 
 ## セリフ全文検索
 
@@ -81,10 +112,27 @@ python scripts/transcribe.py --video-id XXXXXXXXXXX --force
 
 # Whisperのモデル・長さ上限を変える（既定: small / 4時間超はスキップ）
 python scripts/transcribe.py --video-id XXXXXXXXXXX --whisper-model medium --max-audio-hours 0
-
-# 検索インデックスと人気セリフを再生成
-npm run build:search        # = build-search-index.mjs && build-popular.mjs
 ```
+
+**コミットするのは `public/data/transcripts` フォルダだけにする。**
+
+```bash
+git add public/data/transcripts
+git commit -m "chore(data): add transcripts (local whisper)"
+git pull --rebase
+git push
+```
+
+`popular.json` / `search-index.json` / `quotes.json`（集計ファイル）は**手元では生成もコミットもしない**。
+push したら GitHub の `Actions` タブ → `update-transcripts` → `Run workflow`（`videoId` は空でOK）で手動実行すると、
+最新の `transcripts/` から集計ファイルをCI側だけが作り直してコミットしてくれる。
+
+こうする理由: 以前は手元PCでも `npm run build:search` を実行してこの3ファイルをコミットしていたため、
+CIも同じファイルを別タイミングで再生成・コミットしてしまい、`git pull` のたびに毎回コンフリクトが起きていた。
+集計ファイルの書き込みをCI側だけに一本化することで、このコンフリクトはもう起きなくなる。
+
+（手元でプレビューだけしたい場合は `npm run build:search` を実行してもよいが、その場合も
+`git add public/data/transcripts` だけをステージし、集計ファイル側の変更は `git checkout -- public/data/popular.json public/data/search-index*.json public/data/quotes.json` で元に戻してからコミットすること。）
 
 ### GitHub Actions からの手動実行
 

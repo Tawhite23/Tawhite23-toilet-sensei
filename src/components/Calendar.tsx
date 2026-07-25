@@ -6,26 +6,58 @@ import { fetchContents, fmtDuration } from "@/lib/data"
 import type { ContentItem } from "@/lib/types"
 
 const WEEK = ["日", "月", "火", "水", "木", "金", "土"]
-const toKey = (d: Date) =>
-  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+const pad = (n: number) => String(n).padStart(2, "0")
+
+/**
+ * 日時はすべて日本時間(JST)で扱う。
+ * 閲覧者の端末タイムゾーンに依存すると「日付」「時間帯」がズレるため、
+ * UTC+9 に寄せた Date を作り UTC系ゲッターで読む方式に統一している。
+ */
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000
+const toJst = (iso: string) => new Date(new Date(iso).getTime() + JST_OFFSET_MS)
+const jstDayKey = (iso: string) => {
+  const d = toJst(iso)
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`
+}
+const jstHour = (iso: string) => toJst(iso).getUTCHours()
+const jstTimeLabel = (iso: string) => {
+  const d = toJst(iso)
+  return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`
+}
 
 /** 未来の配信予定か（status優先。保険として未来日付のliveも予定扱い） */
 const isUpcoming = (it: ContentItem) =>
-  it.status === "upcoming" || (it.type === "live" && it.durationSec === 0 && new Date(it.date).getTime() > Date.now())
+  it.status === "upcoming" ||
+  (it.type === "live" && it.durationSec === 0 && new Date(it.date).getTime() > Date.now())
+
+type Cursor = { y: number; mo: number } // mo は 0-11
 
 export default function Calendar() {
   const [items, setItems] = useState<ContentItem[]>([])
-  const [cursor, setCursor] = useState(() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1) })
+  /**
+   * 「今月」は端末の時計に依存するため、サーバー側の事前レンダリング結果と
+   * 食い違ってハイドレーションエラー（= client-side exception）になりうる。
+   * そのためマウント後に初めて確定させる。
+   */
+  const [cursor, setCursor] = useState<Cursor | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
 
-  useEffect(() => { fetchContents().then((d) => d && setItems(d)) }, [])
+  useEffect(() => {
+    const now = new Date(Date.now() + JST_OFFSET_MS)
+    setCursor({ y: now.getUTCFullYear(), mo: now.getUTCMonth() })
+  }, [])
 
-  // 日付(ローカル) → その日のコンテンツ
+  useEffect(() => {
+    fetchContents().then((d) => d && setItems(d))
+  }, [])
+
+  // 日付(JST) → その日のコンテンツ
   // 【2-3】予定(upcoming)は date=実際の配信予定日 で登録される
   const byDay = useMemo(() => {
     const m = new Map<string, ContentItem[]>()
     for (const it of items) {
-      const k = toKey(new Date(it.date))
+      if (!it?.date) continue
+      const k = jstDayKey(it.date)
       const arr = m.get(k) ?? []
       arr.push(it)
       m.set(k, arr)
@@ -34,26 +66,50 @@ export default function Calendar() {
     return m
   }, [items])
 
-  const y = cursor.getFullYear(), mo = cursor.getMonth()
-  const firstDow = new Date(y, mo, 1).getDay()
-  const daysInMonth = new Date(y, mo + 1, 0).getDate()
+  // 表示中の月の「配信開始時刻」を0-23時で集計（ゴールデンタイム可視化用）
+  const hourStats = useMemo(() => {
+    const counts = new Array<number>(24).fill(0)
+    if (!cursor) return { counts, max: 0, total: 0, peak: [] as number[] }
+    const ym = `${cursor.y}-${pad(cursor.mo + 1)}`
+    let total = 0
+    for (const it of items) {
+      if (!it?.date || isUpcoming(it) || it.type !== "live") continue
+      if (jstDayKey(it.date).slice(0, 7) !== ym) continue
+      counts[jstHour(it.date)]++
+      total++
+    }
+    const max = Math.max(0, ...counts)
+    const peak = max > 0 ? counts.map((c, h) => (c === max ? h : -1)).filter((h) => h >= 0) : []
+    return { counts, max, total, peak }
+  }, [items, cursor])
+
+  if (!cursor) return <CalendarSkeleton />
+
+  const { y, mo } = cursor
+  const firstDow = new Date(Date.UTC(y, mo, 1)).getUTCDay()
+  const daysInMonth = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate()
   const cells: (number | null)[] = [
     ...Array<null>(firstDow).fill(null),
     ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
   ]
   const selectedItems = selected ? byDay.get(selected) ?? [] : []
+  const move = (delta: number) => {
+    setSelected(null)
+    const d = new Date(Date.UTC(y, mo + delta, 1))
+    setCursor({ y: d.getUTCFullYear(), mo: d.getUTCMonth() })
+  }
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <button
-          onClick={() => { setSelected(null); setCursor(new Date(y, mo - 1, 1)) }}
+          onClick={() => move(-1)}
           aria-label="前の月"
           className="rounded-full border border-base-700 px-4 py-2 text-sm hover:border-accent"
         >←</button>
         <h1 className="text-xl font-bold" aria-live="polite">{y}年{mo + 1}月</h1>
         <button
-          onClick={() => { setSelected(null); setCursor(new Date(y, mo + 1, 1)) }}
+          onClick={() => move(1)}
           aria-label="次の月"
           className="rounded-full border border-base-700 px-4 py-2 text-sm hover:border-accent"
         >→</button>
@@ -74,7 +130,7 @@ export default function Calendar() {
             <tr key={r}>
               {cells.slice(r * 7, r * 7 + 7).concat(Array(7).fill(null)).slice(0, 7).map((day, c) => {
                 if (day === null) return <td key={c} aria-hidden="true" />
-                const key = `${y}-${String(mo + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+                const key = `${y}-${pad(mo + 1)}-${pad(day)}`
                 const dayItems = byDay.get(key) ?? []
                 const upcoming = dayItems.filter(isUpcoming)
                 const done = dayItems.filter((i) => !isUpcoming(i))
@@ -119,6 +175,8 @@ export default function Calendar() {
         <span><span className="mr-1 inline-block h-2 w-2 rounded-full bg-accent" aria-hidden="true" />動画投稿</span>
       </p>
 
+      <HourBars y={y} mo={mo} stats={hourStats} />
+
       <AnimatePresence>
         {selected && (
           <motion.section
@@ -156,8 +214,10 @@ export default function Calendar() {
                             ) : (
                               it.type === "live" ? "配信" : "動画"
                             )}
+                            {/* 開始時刻(JST)を常に表示 → 時間帯グラフと突き合わせられる */}
+                            {` ${jstTimeLabel(it.date)}`}
                             {plan
-                              ? new Date(it.date).toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" }) + " 開始予定"
+                              ? " 開始予定"
                               : it.durationSec > 0 && ` · ${fmtDuration(it.durationSec)}`}
                           </span>
                           <p className="mt-1 line-clamp-2 text-sm leading-snug group-hover:text-accent">{it.title}</p>
@@ -180,6 +240,93 @@ export default function Calendar() {
           </motion.section>
         )}
       </AnimatePresence>
+    </div>
+  )
+}
+
+/**
+ * その月の配信開始時刻を0-23時で並べた棒グラフ。
+ * 最多の時間帯を「ゴールデンタイム」として強調し、
+ * 「だいたい何時に配信が始まる人なのか」を一目で分かるようにする。
+ */
+function HourBars({
+  y,
+  mo,
+  stats,
+}: {
+  y: number
+  mo: number
+  stats: { counts: number[]; max: number; total: number; peak: number[] }
+}) {
+  const { counts, max, total, peak } = stats
+  const fmtRange = (h: number) => `${pad(h)}:00〜${pad((h + 1) % 24)}:00`
+
+  return (
+    <section className="mt-6 rounded-2xl border border-base-700 bg-base-800 p-4" aria-label={`${y}年${mo + 1}月の配信時間帯`}>
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <h2 className="text-sm font-bold text-ink-dim">配信時間帯（開始時刻・日本時間）</h2>
+        <p className="text-[11px] text-ink-dim">
+          {total > 0 ? `この月の配信 ${total}件` : "この月の配信記録はありません"}
+        </p>
+      </div>
+
+      {total === 0 ? (
+        <p className="py-4 text-center text-xs text-ink-dim">データがありません。</p>
+      ) : (
+        <>
+          <ul className="flex h-28 items-end gap-[2px]" role="img" aria-label="時間帯別の配信開始件数">
+            {counts.map((c, h) => {
+              const isPeak = peak.includes(h)
+              const ratio = max > 0 ? c / max : 0
+              return (
+                <li key={h} className="group relative flex h-full flex-1 flex-col justify-end">
+                  <span
+                    title={`${fmtRange(h)} ${c}件`}
+                    className={`w-full rounded-t transition-colors ${
+                      c === 0
+                        ? "bg-base-700/50"
+                        : isPeak
+                          ? "bg-accent"
+                          : "bg-live/70 group-hover:bg-live"
+                    }`}
+                    style={{ height: c === 0 ? 2 : `${Math.max(8, ratio * 100)}%` }}
+                  />
+                </li>
+              )
+            })}
+          </ul>
+          {/* 3時間おきの目盛り */}
+          <ul className="mt-1 flex gap-[2px] text-[9px] text-ink-dim" aria-hidden="true">
+            {counts.map((_, h) => (
+              <li key={h} className="flex-1 text-center">
+                {h % 3 === 0 ? h : ""}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs leading-relaxed text-ink-dim">
+            <span className="mr-1 inline-block h-2 w-2 rounded-sm bg-accent" aria-hidden="true" />
+            ゴールデンタイムは
+            <span className="mx-1 font-bold text-accent">
+              {peak.map(fmtRange).join(" / ")}
+            </span>
+            （{max}件）
+          </p>
+        </>
+      )}
+    </section>
+  )
+}
+
+function CalendarSkeleton() {
+  return (
+    <div aria-busy="true" aria-label="カレンダーを読み込み中">
+      <div className="mb-4 h-10 animate-pulse rounded-full bg-base-800" />
+      <div className="grid grid-cols-7 gap-1">
+        {Array.from({ length: 35 }).map((_, i) => (
+          <div key={i} className="aspect-square animate-pulse rounded-lg bg-base-800" />
+        ))}
+      </div>
+      <div className="mt-6 h-40 animate-pulse rounded-2xl bg-base-800" />
     </div>
   )
 }

@@ -20,12 +20,17 @@ jobs:
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
           YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+
+      # WIKI年表(wiki.json)を更新。APIは呼ばず report.json / contents.json だけを見るので追加クォータ0u。
+      # 登録者・再生数の最上位桁が繰り上がった日に、年表へ1行自動追記される。
+      - run: node scripts/build-wiki.mjs
+
       - name: Commit if changed
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add public/data/report.json
-          git diff --cached --quiet || git commit -m "chore(data): update report.json [skip ci]"
+          git add public/data/report.json public/data/wiki.json
+          git diff --cached --quiet || git commit -m "chore(data): update report.json / wiki.json [skip ci]"
           for i in 1 2 3 4 5; do
             git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
             echo "push failed, retrying ($i)..."

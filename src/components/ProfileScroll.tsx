@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react"
 import Lenis from "lenis"
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion"
 import { site } from "@/lib/site.config"
+import WikiTimeline from "./WikiTimeline"
 
 /** スクロール連動セクション(共通): ビューポート進入でフェード+スライドイン */
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -182,34 +183,10 @@ export default function ProfileScroll() {
           <section aria-labelledby="wiki">
             <h2 id="wiki" className="mb-4 text-xs font-bold tracking-[0.3em] text-accent">WIKI — これまでの歩み</h2>
             <p className="mb-4 text-sm leading-relaxed text-ink-dim">
-              チャンネル開設からの節目を記録していくコーナー。随時更新中。
+              チャンネル開設からの節目を記録していくコーナー。
+              登録者数・総再生数の桁が繰り上がるたびに自動で追記されます。
             </p>
-            <div className="overflow-hidden rounded-2xl border border-base-700 bg-base-800">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-base-700 text-left text-xs text-ink-dim">
-                    <th scope="col" className="px-4 py-3 font-bold">時期</th>
-                    <th scope="col" className="px-4 py-3 font-bold">出来事</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {site.wikiHistory.map((h) => (
-                    <tr key={h.event} className="border-b border-base-700 last:border-b-0">
-                      <td className="whitespace-nowrap px-4 py-3 align-top text-xs text-ink-dim">
-                        {h.date}
-                      </td>
-                      <td className="px-4 py-3">
-                        <p className="font-medium">{h.event}</p>
-                        {h.detail && <p className="mt-0.5 text-xs text-ink-dim">{h.detail}</p>}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-2 text-xs text-ink-dim">
-              ※ 確定情報のみ掲載。「今後追記」の項目は判明し次第更新します。
-            </p>
+            <WikiTimeline />
           </section>
         </Reveal>
 

@@ -11,7 +11,9 @@ const links = [
 ]
 
 export default function Nav() {
-  const path = usePathname()
+  // usePathname は稀に null を返しうる（静的エクスポートの初期化タイミング）。
+  // ここで null のまま startsWith を呼ぶと画面全体が落ちるため空文字に寄せる。
+  const path = usePathname() ?? ""
   return (
     <nav
       aria-label="メインナビゲーション"

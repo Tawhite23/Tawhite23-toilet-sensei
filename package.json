@@ -11,6 +11,7 @@
     "fetch:live": "node scripts/fetch-live.mjs",
     "fetch:contents": "node scripts/fetch-contents.mjs",
     "build:report": "node scripts/build-report.mjs",
+    "build:wiki": "node scripts/build-wiki.mjs",
     "transcribe": "python scripts/transcribe.py",
     "build:search": "node scripts/build-search-index.mjs && node scripts/build-popular.mjs && node scripts/build-quotes.mjs"
   },
