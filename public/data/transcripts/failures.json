@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "videoId": "oeSP30YenAk",
+    "count": 1,
+    "reason": "ERROR: [youtube] oeSP30YenAk: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-",
+    "at": "2026-07-25T06:11:22Z"
+  },
+  {
+    "videoId": "gkOISyaCBSw",
+    "count": 1,
+    "reason": "ERROR: [youtube] gkOISyaCBSw: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-",
+    "at": "2026-07-25T06:11:59Z"
+  }
+]
