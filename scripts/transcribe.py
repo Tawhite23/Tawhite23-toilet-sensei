@@ -46,6 +46,7 @@ TRANSCRIPT_DIR = DATA / "transcripts"
 MANIFEST = TRANSCRIPT_DIR / "manifest.json"
 SKIPPED = TRANSCRIPT_DIR / "skipped.json"
 FAILURES = TRANSCRIPT_DIR / "failures.json"
+NEEDS_WHISPER = TRANSCRIPT_DIR / "needs-whisper.json"
 CONTENTS = DATA / "contents.json"
 EXCLUDE = SCRIPTS / "exclude.txt"
 
@@ -443,12 +444,24 @@ class SkipVideo(Exception):
     """恒久的に処理しない（毎日リトライしないよう skipped.json に記録する）。"""
 
 
+class NoSubtitle(Exception):
+    """
+    字幕が無いので Whisper が必要 = CI(--subs-only)では処理できない。
+    needs-whisper.json に記録して次の候補へ進み、手元PC実行に委ねる。
+    """
+
+
 # ---------------------------------------------------------------- 1本処理
 def process_one(video_id: str, meta: dict, args) -> dict:
     out_path = TRANSCRIPT_DIR / f"{video_id}.json"
     workdir = Path(tempfile.mkdtemp(prefix=f"tr-{video_id}-"))
     try:
         words, source = fetch_subtitle_words(video_id, workdir)
+        if not words and args.subs_only:
+            # CIは音声DLがブロックされるため、字幕が無い時点で見送って次の候補へ進む。
+            # （こうしないと「字幕なしの新しい配信」で毎回枠が埋まり、
+            #   字幕がある配信がいつまでも処理されない）
+            raise NoSubtitle("no subtitle (needs local whisper)")
         if not words:
             hours = (meta.get("durationSec") or 0) / 3600.0
             if args.max_audio_hours > 0 and hours > args.max_audio_hours:
@@ -507,6 +520,8 @@ def main() -> int:
                    help="この回数連続で失敗した動画はバッチ対象から一旦外す(既定3)")
     p.add_argument("--retry-failed", action="store_true",
                    help="失敗回数の上限を無視して再挑戦する")
+    p.add_argument("--subs-only", action="store_true",
+                   help="字幕がある配信のみ処理する(CI用)。字幕なしは needs-whisper.json に記録して次へ進む")
     p.add_argument("--strict", dest="tolerate_format_errors", action="store_false",
                    help="「字幕が無く音声も取得できない」ケースも失敗(exit 1)として扱う")
     p.set_defaults(tolerate_format_errors=True)
@@ -524,6 +539,10 @@ def main() -> int:
     failures = load_json(FAILURES, [])
     if not isinstance(failures, list):
         failures = []
+    needs = load_json(NEEDS_WHISPER, [])
+    if not isinstance(needs, list):
+        needs = []
+    needs_ids = {n["videoId"] for n in needs if isinstance(n, dict) and n.get("videoId")}
     fail_count = {f["videoId"]: int(f.get("count") or 0)
                   for f in failures if isinstance(f, dict) and f.get("videoId")}
 
@@ -571,11 +590,16 @@ def main() -> int:
             # （--retry-failed で再挑戦できる）
             if not args.retry_failed and fail_count.get(vid, 0) >= args.max_failures:
                 continue
+            # CI(--subs-only)では「字幕が無いと判明済み」の配信は飛ばして次へ。
+            # 手元PC実行（--subs-onlyなし）ではこれらが処理対象になる。
+            if args.subs_only and vid in needs_ids:
+                continue
             targets.append(vid)
         log(f"batch targets: {targets or 'none (up to date or all deferred)'}")
 
     attempted = 0
     succeeded = 0
+    deferred = 0      # 字幕なしで手元PC実行に回した本数（失敗ではない）
     fail_kinds: list = []  # 全滅時にどの種類の失敗だったか集計する（bot / format / other）
 
     for vid in targets:
@@ -593,6 +617,18 @@ def main() -> int:
                 continue
         try:
             entry = process_one(vid, meta, args)
+        except NoSubtitle as e:
+            deferred += 1
+            log(f"{vid}: 字幕なし → 手元PCでのWhisper処理に回します（{e}）")
+            needs = [n for n in needs if n.get("videoId") != vid]
+            needs.append({
+                "videoId": vid,
+                "title": meta.get("title") or vid,
+                "date": meta.get("date") or "",
+                "durationSec": int(meta.get("durationSec") or 0),
+                "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            })
+            continue
         except SkipVideo as e:
             log(f"{vid}: skipped ({e})")
             skipped = [s for s in skipped if s.get("videoId") != vid]
@@ -619,6 +655,7 @@ def main() -> int:
             continue
         succeeded += 1
         manifest = [m for m in manifest if m.get("videoId") != vid]
+        needs = [n for n in needs if n.get("videoId") != vid]
         manifest.append(entry)
         skipped = [s for s in skipped if s.get("videoId") != vid]
         failures = [f for f in failures if f.get("videoId") != vid]
@@ -627,12 +664,23 @@ def main() -> int:
     save_json(MANIFEST, manifest)
     save_json(SKIPPED, skipped)
     save_json(FAILURES, failures)
-    log(f"manifest={len(manifest)} videos, skipped={len(skipped)}, failures={len(failures)}")
+    save_json(NEEDS_WHISPER, needs)
+    log(f"manifest={len(manifest)} videos, skipped={len(skipped)}, "
+        f"failures={len(failures)}, needs-whisper={len(needs)}")
+    if succeeded:
+        log(f"OK: {succeeded}本を新規に文字起こししました")
+    if needs and args.subs_only:
+        log(f"NOTE: 字幕が無い{len(needs)}本は手元PCでの実行が必要です"
+            " → python scripts/transcribe.py --max 3")
 
     # 【重要】対象があったのに1本も成功しなかった場合は exit 0 にしない。
     # CIがボット判定で毎回全滅していても静かに「正常終了」していたのが本来の問題だったため、
     # ここでジョブを失敗させ、GitHub Actionsの失敗通知(赤いX・既定でメール通知)で気づけるようにする。
-    if attempted > 0 and succeeded == 0:
+    # 「字幕なしで見送った」だけの回は失敗ではない（CIの正常な動作）
+    real_attempts = attempted - deferred
+    if real_attempts <= 0:
+        return 0
+    if real_attempts > 0 and succeeded == 0:
         bot_n = fail_kinds.count("bot")
         fmt_n = fail_kinds.count("format")
         # 【想定内の失敗】"format"(No video formats found) は
@@ -640,8 +688,8 @@ def main() -> int:
         # これはYouTube側の制約で解消できないと分かっているため、
         # 毎日赤いXを出しても意味がない → 警告ログのみ出して正常終了する。
         # （この場合は手元PCで `python scripts/transcribe.py --max 3` を実行する運用）
-        if fmt_n == attempted and args.tolerate_format_errors:
-            log(f"NOTE: {attempted}本すべて取得できませんでした（字幕が無く、CIからは音声を"
+        if fmt_n == real_attempts and args.tolerate_format_errors:
+            log(f"NOTE: {real_attempts}本すべて取得できませんでした（字幕が無く、CIからは音声を"
                 "ダウンロードできないため）。これは想定内なので正常終了します。"
                 "この配信を文字起こししたい場合は手元PCで実行してください。")
             return 0
@@ -652,7 +700,7 @@ def main() -> int:
             reason = "動画/音声の形式を取得できない(PO Token不足の可能性)"
         else:
             reason = "取得エラー"
-        log(f"ALERT: {attempted}本すべて失敗しました（{reason}）。"
+        log(f"ALERT: {real_attempts}本すべて失敗しました（{reason}）。"
             "このワークフローは失敗として終了します。")
         return 1
     return 0

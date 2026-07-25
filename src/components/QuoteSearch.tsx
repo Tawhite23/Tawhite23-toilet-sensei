@@ -66,8 +66,8 @@ export default function QuoteSearch() {
   const fetching = useRef<Set<string>>(new Set())
 
   // モーダル（再生）
-  const [modal, setModal] = useState<{ videoId: string; segId: number } | null>(
-    urlV && urlT ? { videoId: urlV, segId: -1 } : null
+  const [modal, setModal] = useState<{ videoId: string; segId: number; start: number } | null>(
+    urlV && urlT ? { videoId: urlV, segId: -1, start: Number(urlT) || 0 } : null
   )
 
   // ---- 初回ロード（タブを開いた時点で初めて走る）
@@ -238,7 +238,7 @@ export default function QuoteSearch() {
   )
 
   const openModal = (videoId: string, segId: number, start: number) => {
-    setModal({ videoId, segId })
+    setModal({ videoId, segId, start })
     syncUrl({ v: videoId, t: String(Math.floor(start)) })
   }
   const closeModal = () => {
@@ -456,6 +456,7 @@ export default function QuoteSearch() {
         <QuotePlayerModal
           videoId={modal.videoId}
           segId={modal.segId}
+          startSec={modal.start}
           transcript={texts[modal.videoId]}
           parts={parts}
           flatHits={flatHits}

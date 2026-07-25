@@ -11,6 +11,7 @@ import { fmtTime, splitForHighlight } from "@/lib/quoteSearch"
 export default function QuotePlayerModal({
   videoId,
   segId,
+  startSec,
   transcript,
   parts,
   flatHits,
@@ -19,6 +20,12 @@ export default function QuotePlayerModal({
 }: {
   videoId: string
   segId: number
+  /**
+   * 開始秒。呼び出し側は必ず渡すこと。
+   * transcript は遅延取得なので、本文が届く前は開始秒が分からず
+   * 0秒（動画の先頭）から再生されてしまうため、既知の秒数を直接受け取る。
+   */
+  startSec?: number
   transcript?: Transcript
   parts: string[]
   flatHits: { videoId: string; segId: number }[]
@@ -27,9 +34,10 @@ export default function QuotePlayerModal({
 }) {
   const segments = transcript?.segments ?? []
   const index = segments.findIndex((s) => s.id === segId)
-  const current = index >= 0 ? segments[index] : segments[0]
-  const start = Math.max(0, Math.floor(current?.start ?? 0))
-  const around = index >= 0 ? segments.slice(Math.max(0, index - 3), index + 4) : segments.slice(0, 5)
+  const current = index >= 0 ? segments[index] : undefined
+  // transcript が未取得でも startSec で正しい位置から再生できる
+  const start = Math.max(0, Math.floor(current?.start ?? startSec ?? 0))
+  const around = index >= 0 ? segments.slice(Math.max(0, index - 3), index + 4) : []
 
   const pos = flatHits.findIndex((h) => h.videoId === videoId && h.segId === segId)
   const prev = pos > 0 ? flatHits[pos - 1] : null
@@ -144,8 +152,10 @@ export default function QuotePlayerModal({
               </span>
             </li>
           ))}
-          {!transcript && (
-            <li className="px-2 py-3 text-xs text-ink-dim">発言を読み込み中…</li>
+          {around.length === 0 && (
+            <li className="px-2 py-3 text-xs text-ink-dim">
+              {transcript ? "前後の発言が見つかりませんでした。" : "前後の発言を読み込み中…"}
+            </li>
           )}
         </ul>
       </div>

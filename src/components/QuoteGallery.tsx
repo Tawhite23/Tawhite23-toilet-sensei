@@ -30,7 +30,7 @@ export default function QuoteGallery() {
 
   const [texts, setTexts] = useState<Record<string, Transcript>>({})
   const fetching = useRef<Set<string>>(new Set())
-  const [modal, setModal] = useState<{ videoId: string; segId: number } | null>(null)
+  const [modal, setModal] = useState<{ videoId: string; segId: number; start: number } | null>(null)
 
   useEffect(() => {
     let alive = true
@@ -49,7 +49,7 @@ export default function QuoteGallery() {
   const syncUrl = useCallback(
     (next: { row?: string; v?: string; t?: string }) => {
       const sp = new URLSearchParams(Array.from(params.entries()))
-      sp.set("tab", "quotes")
+      sp.set("tab", "meigen") // 名言集タブ（"quotes"にするとキーワード検索へ飛んでしまう）
       const set = (k: string, val?: string) => {
         if (val === undefined) return
         if (val) sp.set(k, val)
@@ -90,7 +90,7 @@ export default function QuoteGallery() {
   }, [modal?.videoId])
 
   const openModal = (q: QuoteItem) => {
-    setModal({ videoId: q.videoId, segId: q.segmentId })
+    setModal({ videoId: q.videoId, segId: q.segmentId, start: q.start })
     syncUrl({ v: q.videoId, t: String(Math.floor(q.start)) })
   }
   const closeModal = () => {
@@ -218,12 +218,13 @@ export default function QuoteGallery() {
         <QuotePlayerModal
           videoId={modal.videoId}
           segId={modal.segId}
+          startSec={modal.start}
           transcript={texts[modal.videoId]}
           parts={[]}
           flatHits={flatHits}
           onClose={closeModal}
           onJump={(videoId, segId, start) => {
-            setModal({ videoId, segId })
+            setModal({ videoId, segId, start })
             syncUrl({ v: videoId, t: String(Math.floor(start)) })
           }}
         />

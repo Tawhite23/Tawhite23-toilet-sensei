@@ -106,7 +106,11 @@ jobs:
               --whisper-model "${{ github.event.inputs.whisperModel || 'small' }}" \
               ${{ github.event.inputs.force == 'true' && '--force' || '' }}
           else
-            python scripts/transcribe.py --max 2 --whisper-model small \
+            # CIは字幕がある配信のみ処理する(--subs-only)。
+            # 字幕チェックは1本あたり十数秒で終わるため、多めに走査して
+            # 「字幕がある配信」を確実に消化していく。字幕が無い配信は
+            # needs-whisper.json に記録して次の候補へ進む(手元PC実行に委ねる)。
+            python scripts/transcribe.py --subs-only --max 10 \
               ${{ github.event.inputs.retryFailed == 'true' && '--retry-failed' || '' }}
           fi
 

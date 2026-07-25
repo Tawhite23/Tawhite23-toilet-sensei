@@ -60,6 +60,7 @@ data-transcripts.yml（1日1回 / 手動実行）
 | `public/data/transcripts/manifest.json` | 文字起こし済み配信の一覧（`videoId` / `title` / `date` / `thumbnail` / `durationSec` / `segmentCount` / `source`） |
 | `public/data/transcripts/skipped.json` | 長すぎる等の理由で処理を諦めた動画（毎日リトライしないための記録） |
 | `public/data/transcripts/failures.json` | 取得に失敗した動画と連続失敗回数（3回でバッチ対象から一旦外れます） |
+| `public/data/transcripts/needs-whisper.json` | 字幕が無くCIでは処理できない動画（手元PCでの実行待ちリスト） |
 | `public/data/search-index.json` | MiniSearchの書き出しインデックス。セグメント総数が12万を超えると `search-index-<年>.json` に自動分割 |
 | `public/data/popular.json` | 頻出セリフ/口癖ランキング（フロントは上位20件をチップ表示） |
 
@@ -117,9 +118,13 @@ yt-dlp は YouTube の JavaScript チャレンジ（署名・n challenge）を�
 | 字幕が無い（Whisperで音声から起こす） | ❌ 音声DLがブロックされる | ✅ 家庭用回線なら成功する |
 | 4時間を超える長尺 | ❌ 時間の都合でスキップ | ✅ `--max-audio-hours 0` を付ければ可 |
 
+そのためCIは `--subs-only` モードで動きます。**字幕がある配信だけを処理し、字幕が無い配信は `transcripts/needs-whisper.json` に記録して即座に次の候補へ進みます。** 字幕チェックは1本十数秒で終わるので、1回の実行で最大10本を走査します。
+
+この仕組みが無いと、「新しい配信が字幕なし」の場合に毎回その2本で枠が埋まってしまい、**字幕がある配信がいつまでも処理されない**という問題が起きます（実際に発生しました）。
+
 字幕が無い配信の取得失敗は**解消できない制約**と分かっているため、スクリプトはこのケースを想定内として扱い、**ワークフローを失敗させません**（毎日赤い✕が出て通知が埋もれるのを避けるため）。ジョブが失敗するのは、ボット判定・環境不備・コード不具合といった「対処が必要な異常」のときだけです。あえて厳しく扱いたい場合は `--strict` を付けてください。
 
-字幕が無い配信を文字起こししたいときは、手元PCで以下を実行してコミットします。
+`needs-whisper.json` に溜まった配信を文字起こししたいときは、手元PCで以下を実行してコミットします（`--subs-only` を付けないので、字幕なしはWhisperで処理されます）。
 
 ```bat
 python scripts/transcribe.py --max 3
