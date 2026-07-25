@@ -59,6 +59,7 @@ data-transcripts.yml（1日1回 / 手動実行）
 | `public/data/transcripts/<videoId>.json` | `{ videoId, title, date, durationSec, source, generatedAt, segments: [{ id, start, end, text, yomi? }] }` |
 | `public/data/transcripts/manifest.json` | 文字起こし済み配信の一覧（`videoId` / `title` / `date` / `thumbnail` / `durationSec` / `segmentCount` / `source`） |
 | `public/data/transcripts/skipped.json` | 長すぎる等の理由で処理を諦めた動画（毎日リトライしないための記録） |
+| `public/data/transcripts/failures.json` | 取得に失敗した動画と連続失敗回数（3回でバッチ対象から一旦外れます） |
 | `public/data/search-index.json` | MiniSearchの書き出しインデックス。セグメント総数が12万を超えると `search-index-<年>.json` に自動分割 |
 | `public/data/popular.json` | 頻出セリフ/口癖ランキング（フロントは上位20件をチップ表示） |
 
@@ -93,6 +94,26 @@ npm run build:search        # = build-search-index.mjs && build-popular.mjs
 | `videoId` | この1本だけ処理する（空ならcronと同じバッチ処理） |
 | `force` | 既に処理済みでも再処理する |
 | `whisperModel` | 字幕が無い場合のWhisperモデル（`tiny`/`base`/`small`/`medium`） |
+| `retryFailed` | 連続失敗で後回しにした動画も再挑戦する |
+
+### YouTubeのボット判定（"Sign in to confirm you're not a bot"）への対処
+
+GitHub Actions のIPアドレスはデータセンター帯のため、YouTubeからボットとみなされて
+字幕取得・音声ダウンロードがどちらも拒否されることがあります。スクリプトは次の順で回避を試みます。
+
+1. **player_client の切替**（自動・設定不要）: `android_vr` → `tv` → `mweb` → `web_safari` → `default` の順に試行。環境変数 `YTDLP_PLAYER_CLIENTS` で順序を上書きできます（例: `YTDLP_PLAYER_CLIENTS=tv,default`）。
+2. **yt-dlp の自動更新**: 回避策は頻繁に更新されるため、ワークフローは毎回 `pip install -U yt-dlp` を実行します。
+3. **Cookie を渡す**（任意）: GitHub の Secret `YT_COOKIES` に Netscape形式 `cookies.txt` の中身を貼っておくと、Cookie付きで取得を試みます。ローカル実行では `YT_COOKIES_BROWSER=chrome` のように指定するとブラウザから直接読み込みます。
+   - 注意: メインのGoogleアカウントのCookieをデータセンターIPで使うとアカウント制限のリスクがあります。使う場合はサブアカウントを推奨します。
+4. **それでも通らない場合は手元PCで実行**（最も確実）: 家庭用回線からは通常ブロックされません。
+
+```bash
+python scripts/transcribe.py --max 3          # 未処理を3本処理
+npm run build:search                          # インデックス再生成
+git add public/data && git commit -m "chore(data): add transcripts" && git push
+```
+
+連続3回失敗した動画は `failures.json` に記録され、いったんバッチ対象から外れて他の配信の処理が進みます。再挑戦させたい場合は手動実行で `retryFailed` にチェックを入れてください。
 
 ### 運用メモ
 

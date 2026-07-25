@@ -13,6 +13,13 @@
   5) public/data/transcripts/<videoId>.json と manifest.json を更新
   6) 音声ファイルは一時ディレクトリに置き、処理後に必ず破棄する
 
+YouTubeのボット判定について:
+  GitHub Actions のIPは "Sign in to confirm you're not a bot" で弾かれることがある。
+  対策として (a) ボット判定を受けにくい player_client を順に試行、
+  (b) 環境変数 YT_COOKIES_FILE / YT_COOKIES_BROWSER で Cookie を渡せる、
+  (c) 連続失敗した動画は failures.json に記録して毎日の無駄な再試行を避ける。
+  それでもCIで取得できない場合は、手元PCで実行して生成物をコミットするのが確実。
+
 ローカル実行例:
   python scripts/transcribe.py --max 2
   python scripts/transcribe.py --video-id XXXXXXXXXXX --force
@@ -22,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import re
 import shutil
@@ -37,6 +45,7 @@ DATA = ROOT / "public" / "data"
 TRANSCRIPT_DIR = DATA / "transcripts"
 MANIFEST = TRANSCRIPT_DIR / "manifest.json"
 SKIPPED = TRANSCRIPT_DIR / "skipped.json"
+FAILURES = TRANSCRIPT_DIR / "failures.json"
 CONTENTS = DATA / "contents.json"
 EXCLUDE = SCRIPTS / "exclude.txt"
 
@@ -78,7 +87,7 @@ def read_id_list(path: Path) -> set:
 
 
 def run(cmd: list, retries: int = 3, timeout: int = 5400) -> subprocess.CompletedProcess:
-    """GitHub Actions からの yt-dlp 取得は失敗しうるのでリトライする。"""
+    """コマンドをリトライ付きで実行する。"""
     for attempt in range(1, retries + 1):
         try:
             proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
@@ -92,13 +101,84 @@ def run(cmd: list, retries: int = 3, timeout: int = 5400) -> subprocess.Complete
     raise RuntimeError(f"command failed after {retries} attempts: {' '.join(cmd[:5])}")
 
 
-def ytdlp_base() -> list:
-    return [
+# ---------------------------------------------------------------- yt-dlp 実行
+# GitHub Actions のデータセンターIPからのアクセスは YouTube のボット判定
+# （"Sign in to confirm you're not a bot"）で弾かれることがある。
+# 対策として、ボット判定を受けにくい player_client を順に試す。
+# 環境変数 YTDLP_PLAYER_CLIENTS で順序を上書きできる（例: "tv,android_vr,default"）。
+DEFAULT_CLIENTS = ["android_vr", "tv", "mweb", "web_safari", "default"]
+BOT_HINTS = ("not a bot", "sign in to confirm", "confirm you", "cookies")
+
+
+def player_clients() -> list:
+    raw = os.environ.get("YTDLP_PLAYER_CLIENTS", "").strip()
+    if raw:
+        return [c.strip() for c in raw.split(",") if c.strip()]
+    return DEFAULT_CLIENTS
+
+
+def cookie_args() -> list:
+    """
+    Cookie の指定（任意）。
+      YT_COOKIES_FILE   : Netscape形式 cookies.txt のパス（CI: Secretから生成）
+      YT_COOKIES_BROWSER: ローカル実行時のブラウザ名（chrome/firefox/edge等）
+    どちらも未設定なら Cookie なしで動作する。
+    """
+    f = os.environ.get("YT_COOKIES_FILE", "").strip()
+    if f and Path(f).exists():
+        return ["--cookies", f]
+    b = os.environ.get("YT_COOKIES_BROWSER", "").strip()
+    if b:
+        return ["--cookies-from-browser", b]
+    return []
+
+
+def ytdlp_base(client: str = "") -> list:
+    cmd = [
         sys.executable, "-m", "yt_dlp",
         "--no-warnings", "--no-playlist",
         "--retries", "5", "--fragment-retries", "5",
         "--socket-timeout", "30",
+        "--sleep-requests", "1",
     ]
+    if client and client != "default":
+        cmd += ["--extractor-args", f"youtube:player_client={client}"]
+    cmd += cookie_args()
+    return cmd
+
+
+def run_ytdlp(extra: list, timeout: int = 5400, retries_per_client: int = 2,
+              check: Path = None) -> subprocess.CompletedProcess:
+    """
+    player_client を順に切り替えながら yt-dlp を実行する。
+    check にパスを渡すと「そのglobにファイルが出来たか」も成功条件に含める。
+    """
+    last_err = ""
+    for client in player_clients():
+        cmd = ytdlp_base(client) + extra
+        for attempt in range(1, retries_per_client + 1):
+            try:
+                proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+                if proc.returncode == 0:
+                    if client != "default":
+                        log(f"yt-dlp ok (player_client={client})")
+                    return proc
+                last_err = proc.stderr.strip()[:300]
+                bot = any(h in last_err.lower() for h in BOT_HINTS)
+                log(f"yt-dlp failed [client={client} {attempt}/{retries_per_client}]"
+                    f"{' (bot-check)' if bot else ''}: {last_err}")
+                if bot:
+                    break  # このクライアントでは無理なので次のクライアントへ
+            except subprocess.TimeoutExpired:
+                last_err = "timeout"
+                log(f"yt-dlp timeout [client={client} {attempt}/{retries_per_client}]")
+            if attempt < retries_per_client:
+                time.sleep(random.uniform(4, 10) * attempt)
+    raise YtDlpBlocked(last_err or "unknown error")
+
+
+class YtDlpBlocked(Exception):
+    """yt-dlp が全 player_client で失敗した（多くはYouTubeのボット判定）。"""
 
 
 # ---------------------------------------------------------------- 字幕(timedtext)
@@ -113,7 +193,7 @@ def fetch_subtitle_words(video_id: str, workdir: Path) -> tuple:
     for kind, flag in (("subtitle", "--write-subs"), ("auto-subtitle", "--write-auto-subs")):
         out_dir = workdir / kind
         out_dir.mkdir(parents=True, exist_ok=True)
-        cmd = ytdlp_base() + [
+        extra = [
             "--skip-download", flag,
             "--sub-langs", "ja,ja-JP,ja-orig,ja.*",
             "--sub-format", "json3",
@@ -121,8 +201,8 @@ def fetch_subtitle_words(video_id: str, workdir: Path) -> tuple:
             url,
         ]
         try:
-            run(cmd, retries=3, timeout=900)
-        except RuntimeError as e:
+            run_ytdlp(extra, timeout=900)
+        except YtDlpBlocked as e:
             log(f"{kind} fetch failed: {e}")
             continue
         files = sorted(out_dir.glob("*.json3")) + sorted(out_dir.glob("*.json"))
@@ -174,13 +254,12 @@ def parse_json3(path: Path) -> list:
 def download_audio(video_id: str, workdir: Path) -> Path:
     url = f"https://www.youtube.com/watch?v={video_id}"
     out = workdir / f"{video_id}.m4a"
-    cmd = ytdlp_base() + [
+    run_ytdlp([
         "-f", "bestaudio/best",
         "-x", "--audio-format", "m4a", "--audio-quality", "5",
         "-o", str(workdir / f"{video_id}.%(ext)s"),
         url,
-    ]
-    run(cmd, retries=3, timeout=5400)
+    ], timeout=5400)
     if out.exists():
         return out
     cands = sorted(workdir.glob(f"{video_id}.*"))
@@ -297,8 +376,8 @@ def contents_index() -> dict:
 
 def ytdlp_meta(video_id: str) -> dict:
     """contents.json に無い動画のメタ情報を yt-dlp から取る（API不使用）。"""
-    proc = run(ytdlp_base() + ["--skip-download", "--dump-single-json",
-                               f"https://www.youtube.com/watch?v={video_id}"], retries=2, timeout=300)
+    proc = run_ytdlp(["--skip-download", "--dump-single-json",
+                      f"https://www.youtube.com/watch?v={video_id}"], timeout=300)
     info = json.loads(proc.stdout)
     upload = info.get("upload_date")
     date = f"{upload[0:4]}-{upload[4:6]}-{upload[6:8]}T00:00:00Z" if upload else ""
@@ -375,6 +454,10 @@ def main() -> int:
     p.add_argument("--compute-type", default="int8", help="faster-whisper compute_type")
     p.add_argument("--max-audio-hours", type=float, default=4.0,
                    help="Whisper実行を諦める長さ(時間)。0で無制限")
+    p.add_argument("--max-failures", type=int, default=3,
+                   help="この回数連続で失敗した動画はバッチ対象から一旦外す(既定3)")
+    p.add_argument("--retry-failed", action="store_true",
+                   help="失敗回数の上限を無視して再挑戦する")
     p.add_argument("--no-yomi", dest="yomi", action="store_false", help="ひらがな読みを付与しない")
     p.set_defaults(yomi=True)
     args = p.parse_args()
@@ -386,6 +469,11 @@ def main() -> int:
     skipped = load_json(SKIPPED, [])
     if not isinstance(skipped, list):
         skipped = []
+    failures = load_json(FAILURES, [])
+    if not isinstance(failures, list):
+        failures = []
+    fail_count = {f["videoId"]: int(f.get("count") or 0)
+                  for f in failures if isinstance(f, dict) and f.get("videoId")}
 
     excluded = read_id_list(EXCLUDE)
     done = {m["videoId"] for m in manifest if isinstance(m, dict) and m.get("videoId")}
@@ -427,8 +515,12 @@ def main() -> int:
             vid = it.get("videoId")
             if not vid or vid in done or vid in excluded or vid in skipped_ids:
                 continue
+            # 連続失敗が上限に達した動画は一旦飛ばし、他の配信を先に処理する
+            # （--retry-failed で再挑戦できる）
+            if not args.retry_failed and fail_count.get(vid, 0) >= args.max_failures:
+                continue
             targets.append(vid)
-        log(f"batch targets: {targets or 'none (up to date)'}")
+        log(f"batch targets: {targets or 'none (up to date or all deferred)'}")
 
     for vid in targets:
         meta = cindex.get(vid)
@@ -446,17 +538,36 @@ def main() -> int:
             skipped.append({"videoId": vid, "reason": str(e),
                             "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
+        except YtDlpBlocked as e:
+            n = fail_count.get(vid, 0) + 1
+            fail_count[vid] = n
+            log(f"{vid}: yt-dlp blocked ({n}/{args.max_failures}回目): {e}")
+            failures = [f for f in failures if f.get("videoId") != vid]
+            failures.append({"videoId": vid, "count": n, "reason": str(e)[:200],
+                             "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
+            continue
         except Exception as e:
+            n = fail_count.get(vid, 0) + 1
+            fail_count[vid] = n
             log(f"{vid}: FAILED ({type(e).__name__}: {e})")
+            failures = [f for f in failures if f.get("videoId") != vid]
+            failures.append({"videoId": vid, "count": n,
+                             "reason": f"{type(e).__name__}: {e}"[:200],
+                             "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         manifest = [m for m in manifest if m.get("videoId") != vid]
         manifest.append(entry)
         skipped = [s for s in skipped if s.get("videoId") != vid]
+        failures = [f for f in failures if f.get("videoId") != vid]
 
     manifest.sort(key=lambda m: (m.get("date") or ""), reverse=True)
     save_json(MANIFEST, manifest)
     save_json(SKIPPED, skipped)
-    log(f"manifest={len(manifest)} videos, skipped={len(skipped)}")
+    save_json(FAILURES, failures)
+    log(f"manifest={len(manifest)} videos, skipped={len(skipped)}, failures={len(failures)}")
+    if not manifest:
+        log("HINT: 1本も文字起こしできていません。CIでボット判定に遭う場合は "
+            "(1) Secret YT_COOKIES を設定する か (2) 手元PCで実行してコミットしてください。")
     return 0
 
 

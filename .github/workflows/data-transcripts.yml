@@ -23,6 +23,11 @@ on:
         description: "字幕が無い場合のWhisperモデル(tiny/base/small/medium)"
         required: false
         default: "small"
+      retryFailed:
+        description: "連続失敗で後回しにした動画も再挑戦する"
+        type: boolean
+        required: false
+        default: false
 concurrency:
   group: data-json-transcripts
   cancel-in-progress: false
@@ -45,7 +50,25 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
 
       - name: Install Python deps
-        run: pip install -r scripts/requirements.txt
+        run: |
+          pip install -r scripts/requirements.txt
+          # YouTubeのボット判定回避策は頻繁に更新されるため yt-dlp は常に最新へ
+          pip install -U yt-dlp
+
+      # YouTubeのボット判定対策(任意): Secret YT_COOKIES に Netscape形式の
+      # cookies.txt の中身を入れておくと Cookie 付きで取得を試みる。
+      # 未設定でも動作する（player_client の切り替えのみで試行）。
+      - name: Prepare cookies (optional)
+        env:
+          YT_COOKIES: ${{ secrets.YT_COOKIES }}
+        run: |
+          if [ -n "$YT_COOKIES" ]; then
+            printf '%s' "$YT_COOKIES" > "$RUNNER_TEMP/cookies.txt"
+            echo "YT_COOKIES_FILE=$RUNNER_TEMP/cookies.txt" >> "$GITHUB_ENV"
+            echo "cookies: enabled"
+          else
+            echo "cookies: not set (player_client fallback only)"
+          fi
 
       - uses: actions/setup-node@v4
         with:
@@ -64,7 +87,8 @@ jobs:
               --whisper-model "${{ github.event.inputs.whisperModel || 'small' }}" \
               ${{ github.event.inputs.force == 'true' && '--force' || '' }}
           else
-            python scripts/transcribe.py --max 2 --whisper-model small
+            python scripts/transcribe.py --max 2 --whisper-model small \
+              ${{ github.event.inputs.retryFailed == 'true' && '--retry-failed' || '' }}
           fi
 
       # 2) 検索インデックスと人気セリフを再生成
