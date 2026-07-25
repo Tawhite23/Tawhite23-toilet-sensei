@@ -1,8 +1,13 @@
+import type { Metadata } from "next"
 import LiveRing from "@/components/LiveRing"
 import SocialLinks from "@/components/SocialLinks"
 import DiscordGate from "@/components/DiscordGate"
 import QuoteSearchCard from "@/components/QuoteSearchCard"
 import { site } from "@/lib/site.config"
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+}
 
 // トップ: 1画面完結(100dvh, スクロール不要)
 // 【2-2】スマホ(<768px): 従来どおり縦積み中央寄せ(アイコン→名前→紹介→SNS)

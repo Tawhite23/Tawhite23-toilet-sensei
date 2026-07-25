@@ -1,6 +1,9 @@
 // サイト全体の設定。URL系はここだけ書き換えれば反映される。
 export const site = {
   name: "おトイレ先生.JP",
+  // SEO/OGP・sitemap.xml・robots.txt で使う本番URL(末尾スラッシュなし)。
+  // Firebase Hosting (Spark/無料枠) のデフォルトドメイン。.firebaserc の projects.default と一致させること。
+  siteUrl: "https://otoiresensei-pj.web.app",
   channelId: "UCmxpPhu7kAWWnoQ_cY0clTQ",
   channelIcon:
     "https://yt3.ggpht.com/n29hqwHkqy3wykQYCjrJiyZTFT9MRwh2_VvKWdZWR3PSjcOMO-9eBD_GToCr2Xc0bRjZItMHZQ=s800-c-k-c0x00ffffff-no-rj",

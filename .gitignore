@@ -44,6 +44,11 @@ bower_components
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
+# Next.js ビルド生成物(ビルドの度に変わる中間ファイル。コミット不要)
+.next/
+out/
+next-env.d.ts
+
 # Dependency directories
 node_modules/
 
