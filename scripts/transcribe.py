@@ -507,6 +507,9 @@ def main() -> int:
                    help="この回数連続で失敗した動画はバッチ対象から一旦外す(既定3)")
     p.add_argument("--retry-failed", action="store_true",
                    help="失敗回数の上限を無視して再挑戦する")
+    p.add_argument("--strict", dest="tolerate_format_errors", action="store_false",
+                   help="「字幕が無く音声も取得できない」ケースも失敗(exit 1)として扱う")
+    p.set_defaults(tolerate_format_errors=True)
     p.add_argument("--no-yomi", dest="yomi", action="store_false", help="ひらがな読みを付与しない")
     p.set_defaults(yomi=True)
     args = p.parse_args()
@@ -632,12 +635,21 @@ def main() -> int:
     if attempted > 0 and succeeded == 0:
         bot_n = fail_kinds.count("bot")
         fmt_n = fail_kinds.count("format")
+        # 【想定内の失敗】"format"(No video formats found) は
+        # 「字幕が無く、CIのデータセンターIPからは音声を取得できない」ケース。
+        # これはYouTube側の制約で解消できないと分かっているため、
+        # 毎日赤いXを出しても意味がない → 警告ログのみ出して正常終了する。
+        # （この場合は手元PCで `python scripts/transcribe.py --max 3` を実行する運用）
+        if fmt_n == attempted and args.tolerate_format_errors:
+            log(f"NOTE: {attempted}本すべて取得できませんでした（字幕が無く、CIからは音声を"
+                "ダウンロードできないため）。これは想定内なので正常終了します。"
+                "この配信を文字起こししたい場合は手元PCで実行してください。")
+            return 0
+        # 【本当の異常】ボット判定・コード不具合・環境不備などは失敗として通知する。
         if bot_n and bot_n >= fmt_n:
             reason = "YouTubeのボット判定(Sign in to confirm you're not a bot)。Secret YT_COOKIES を設定/更新してください"
         elif fmt_n:
-            reason = ("動画/音声の形式を取得できない(PO Token不足の可能性)。"
-                      "字幕がある配信は取れるはずなので、字幕の無い配信のみが対象なら"
-                      "手元PCでの実行が確実です")
+            reason = "動画/音声の形式を取得できない(PO Token不足の可能性)"
         else:
             reason = "取得エラー"
         log(f"ALERT: {attempted}本すべて失敗しました（{reason}）。"

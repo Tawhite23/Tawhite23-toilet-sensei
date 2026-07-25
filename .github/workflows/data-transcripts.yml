@@ -136,9 +136,12 @@ jobs:
           exit 1
 
       # 4) 失敗を目立たせる（Transcribeが失敗していた場合、ここでジョブを再度失敗させる）
+      #    なお「字幕が無くCIから音声を取得できない」ケースは想定内としてスクリプト側が
+      #    正常終了(exit 0)するため、ここには到達しない = 毎日の無意味な失敗通知は出ない。
+      #    ここに来るのはボット判定・環境不備・コード不具合など「対処が必要な異常」のみ。
       - name: Fail job if transcribe failed
         if: always() && steps.transcribe.outcome == 'failure'
         run: |
-          echo "::error::文字起こしが1本も成功しませんでした。多くはYouTubeのボット判定です。"
-          echo "::error::対処: 手元PCで 'python scripts/transcribe.py --max 3' を実行してpushする、または Secret YT_COOKIES を設定してください。"
+          echo "::error::文字起こしが異常終了しました。上のTranscribeステップのログを確認してください。"
+          echo "::error::ボット判定の場合は Secret YT_COOKIES を更新、それ以外は手元PCで 'python scripts/transcribe.py --max 3' を実行してpushしてください。"
           exit 1
