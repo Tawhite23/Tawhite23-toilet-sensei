@@ -85,8 +85,10 @@ export default function CalendarTabs() {
       const segment = barWidth / TABS.length
       const move = (dragX ?? 0) / (segment || 1)
       let nextIndex = activeIndex
-      if (move <= -SWIPE_COMMIT_RATIO) nextIndex = Math.min(TABS.length - 1, activeIndex + 1)
-      else if (move >= SWIPE_COMMIT_RATIO) nextIndex = Math.max(0, activeIndex - 1)
+      // 水（インジケータ）は指の動きにそのまま追従して描画しているため、
+      // 左へドラッグ(move<0)した先＝1つ左のタブ、右へドラッグ(move>0)した先＝1つ右のタブに決着させる。
+      if (move <= -SWIPE_COMMIT_RATIO) nextIndex = Math.max(0, activeIndex - 1)
+      else if (move >= SWIPE_COMMIT_RATIO) nextIndex = Math.min(TABS.length - 1, activeIndex + 1)
       if (nextIndex !== activeIndex) switchTab(TABS[nextIndex].key)
       justSwiped.current = true
       // 直後に発火しうるタップのclickイベントと競合しないよう、1フレーム遅らせて解除する
@@ -120,9 +122,10 @@ export default function CalendarTabs() {
       e.currentTarget.setPointerCapture?.(e.pointerId)
     }
     e.preventDefault()
-    // 端のタブでこれ以上進めない方向は控えめに追従させ、引っ張っている感触を出す
-    const atStart = activeIndex === 0 && dx > 0
-    const atEnd = activeIndex === TABS.length - 1 && dx < 0
+    // 端のタブでこれ以上進めない方向（先頭タブをさらに左へ／末尾タブをさらに右へ）は
+    // 控えめにしか追従させず、引っ張っている感触を出す
+    const atStart = activeIndex === 0 && dx < 0
+    const atEnd = activeIndex === TABS.length - 1 && dx > 0
     setDragX(atStart || atEnd ? dx * 0.3 : dx)
   }
   const handlePointerUp = (e: React.PointerEvent) => {
