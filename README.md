@@ -305,19 +305,32 @@ bot が定期的に取得・生成して直接 `main` にコミットしてい�
 使うと、無関係な変更のついでにこの古いデータもコミット＆pushしてしまい、
 本番データが古い内容で上書きされることがあります。
 
-これを防ぐため、クローン後に一度だけ以下を実行してください（このクローンだけに効く設定です）。
+これを防ぐため、`npm install`（`npm ci`含む）を実行すると自動で git の pre-commit フックが
+入り、`public/data` 配下の変更は commit のたびに自動でステージから外れるようになります
+（`scripts/hooks/pre-commit`）。手動で入れ直したい場合は次を実行してください
+（このクローンだけに効くローカル設定です）。
 
 ```bash
 npm run protect-data
 ```
 
-これで `public/data` 配下は `git status` / GitHub Desktop の変更一覧に出てこなくなり、
-誤コミットできなくなります。手元でこのデータを意図的に更新してコミットしたいときだけ、
+> ⚠️ 以前は `git update-index --skip-worktree` で保護していましたが、それだと
+> **bot の新しいコミットを pull するたびに「ローカルの変更が上書きされます」と
+> pull 自体がブロックされる**副作用がありました。今の pre-commit フック方式は
+> commit 時にだけ効くため、pull は普段どおり通ります。もし過去に
+> `skip-worktree` を設定していて pull がブロックされる場合は、次を実行してから
+> 改めて pull してください。
+>
+> ```bash
+> git update-index --no-skip-worktree $(git ls-files public/data)
+> ```
+
+`public/data` を手元で意図的に更新してコミットしたいときだけ、フックを一時的に外せます。
 
 ```bash
-npm run unprotect-data   # 保護解除
+npm run unprotect-data   # フックを外す
 # ...編集・コミット...
-npm run protect-data     # 保護し直す
+npm run protect-data     # フックを入れ直す
 ```
 
 ## GitHub Actions に設定が必要な値

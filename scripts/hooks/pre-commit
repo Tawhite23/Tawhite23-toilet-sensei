@@ -1,0 +1,17 @@
+#!/bin/sh
+# public/data 配下は GitHub Actions の bot が管理する「生きたデータ」で、
+# ローカルの内容は常に古くなりうる（フェッチ/ビルドを手元で試した残り、または
+# 単に bot の最新コミットをまだ pull していないだけ）。
+#
+# これを他の変更と一緒にコミットしてしまうと、bot が更新した最新データを
+# 古い内容で上書きしてしまう恐れがあるため、コミット直前に自動でステージから外す。
+# （ワーキングツリーのファイル自体は変更しない。git checkout/merge/pull の動作は妨げない
+#   ＝ skip-worktree のように pull がブロックされることはない）
+staged=$(git diff --cached --name-only -- public/data)
+if [ -n "$staged" ]; then
+  echo "[pre-commit] public/data 配下は bot 管理のため、このコミットから自動的に除外しました:"
+  echo "$staged" | sed 's/^/  /'
+  echo "  （意図的にコミットしたい場合は commit 後に個別で 'git add <file>' して再コミットしてください）"
+  git reset -q HEAD -- public/data
+fi
+exit 0
