@@ -18,12 +18,21 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-07-28T10:00:00Z",
+    "type": "live",
+    "title": "#マイクラ  ドラゴンズ1.6 調査 【アドオンハンターズ】",
+    "videoId": "bb3oVA2YlLQ",
+    "thumbnail": "https://i.ytimg.com/vi/bb3oVA2YlLQ/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-07-26T12:17:20Z",
     "type": "live",
     "title": "#マリオカート8dx みそピー",
     "videoId": "B5baDDxeIsc",
-    "thumbnail": "https://i.ytimg.com/vi/B5baDDxeIsc/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/B5baDDxeIsc/maxresdefault.jpg",
+    "durationSec": 8338
   },
   {
     "date": "2026-07-26T09:39:25Z",
