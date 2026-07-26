@@ -72,34 +72,15 @@ export default function CalendarTabs() {
   }, [])
 
   // ---- スワイプ状態
-  const touchStart = useRef<{ x: number; y: number } | null>(null)
+  // Touch Events ではなく Pointer Events を使う（マウス/トラックパッド/ペン/タッチを一本化するため。
+  // Touch Events だけだとデスクトップのマウス操作では一切反応しない）。
+  const dragStart = useRef<{ x: number; y: number } | null>(null)
   const isHorizontalSwipe = useRef(false)
   const justSwiped = useRef(false)
+  const activePointerId = useRef<number | null>(null)
   const [dragX, setDragX] = useState<number | null>(null) // ドラッグ中の水オフセット(px)。null=非ドラッグ
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0]
-    touchStart.current = { x: t.clientX, y: t.clientY }
-    isHorizontalSwipe.current = false
-  }
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const start = touchStart.current
-    if (!start) return
-    const t = e.touches[0]
-    const dx = t.clientX - start.x
-    const dy = t.clientY - start.y
-    if (!isHorizontalSwipe.current) {
-      // 横方向の動きが縦より明確に大きい場合だけスワイプとして扱う（縦スクロールを邪魔しない）
-      if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) return
-      isHorizontalSwipe.current = true
-    }
-    e.preventDefault()
-    // 端のタブでこれ以上進めない方向は控えめに追従させ、引っ張っている感触を出す
-    const atStart = activeIndex === 0 && dx > 0
-    const atEnd = activeIndex === TABS.length - 1 && dx < 0
-    setDragX(atStart || atEnd ? dx * 0.3 : dx)
-  }
-  const handleTouchEnd = () => {
+  const commitAndReset = () => {
     if (isHorizontalSwipe.current) {
       const segment = barWidth / TABS.length
       const move = (dragX ?? 0) / (segment || 1)
@@ -113,9 +94,44 @@ export default function CalendarTabs() {
         justSwiped.current = false
       })
     }
-    touchStart.current = null
+    dragStart.current = null
     isHorizontalSwipe.current = false
+    activePointerId.current = null
     setDragX(null)
+  }
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return // 左クリック以外は無視
+    dragStart.current = { x: e.clientX, y: e.clientY }
+    isHorizontalSwipe.current = false
+    activePointerId.current = e.pointerId
+  }
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (activePointerId.current !== e.pointerId) return
+    const start = dragStart.current
+    if (!start) return
+    const dx = e.clientX - start.x
+    const dy = e.clientY - start.y
+    if (!isHorizontalSwipe.current) {
+      // 横方向の動きが縦より明確に大きい場合だけスワイプとして扱う（縦スクロールを邪魔しない）
+      if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) return
+      isHorizontalSwipe.current = true
+      // ドラッグ確定後は要素外に指/マウスが出てもイベントを追い続ける
+      e.currentTarget.setPointerCapture?.(e.pointerId)
+    }
+    e.preventDefault()
+    // 端のタブでこれ以上進めない方向は控えめに追従させ、引っ張っている感触を出す
+    const atStart = activeIndex === 0 && dx > 0
+    const atEnd = activeIndex === TABS.length - 1 && dx < 0
+    setDragX(atStart || atEnd ? dx * 0.3 : dx)
+  }
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (activePointerId.current !== e.pointerId) return
+    commitAndReset()
+  }
+  const handlePointerCancel = (e: React.PointerEvent) => {
+    if (activePointerId.current !== e.pointerId) return
+    commitAndReset()
   }
 
   const segmentWidth = barWidth / TABS.length
@@ -126,9 +142,10 @@ export default function CalendarTabs() {
         ref={barRef}
         role="tablist"
         aria-label="アーカイブの探し方（左右スワイプでも切替可）"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
         className="relative mb-6 flex touch-pan-y gap-1 overflow-hidden rounded-full border border-base-700 bg-base-800 p-1"
       >
         {/* 「水」インジケータ: 選択中タブの位置に水が溜まっているイメージ。スワイプ中は指に追従する */}
