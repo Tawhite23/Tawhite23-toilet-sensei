@@ -291,6 +291,35 @@ export NEXT_PUBLIC_FB_APP_ID=xxxxx
 npm run build   # out/ に静的サイトを出力
 ```
 
+### GitHub Desktopで public/data を誤って上書きコミットしないために
+
+`public/data/**/*.json`（live.json / contents.json / report.json / wiki.json /
+search-index*.json / popular.json / quotes.json / transcripts/*）は、GitHub Actions の
+bot が定期的に取得・生成して直接 `main` にコミットしています。本番サイトも
+`raw.githubusercontent.com/.../main/public/data/...` を直接読みに行くため
+（`site.config.ts` の `dataBaseUrl`）、これらのファイルは「常に bot が持っている最新版が正」です。
+
+手元で `fetch:live` / `fetch:contents` / `build:report` / `build:search` などを試したり、
+単に bot の最新コミットを pull し忘れていたりすると、ローカルの `public/data` が
+古い/ズレた状態になります。この状態で GitHub Desktop の「変更をすべて選択してコミット」を
+使うと、無関係な変更のついでにこの古いデータもコミット＆pushしてしまい、
+本番データが古い内容で上書きされることがあります。
+
+これを防ぐため、クローン後に一度だけ以下を実行してください（このクローンだけに効く設定です）。
+
+```bash
+npm run protect-data
+```
+
+これで `public/data` 配下は `git status` / GitHub Desktop の変更一覧に出てこなくなり、
+誤コミットできなくなります。手元でこのデータを意図的に更新してコミットしたいときだけ、
+
+```bash
+npm run unprotect-data   # 保護解除
+# ...編集・コミット...
+npm run protect-data     # 保護し直す
+```
+
 ## GitHub Actions に設定が必要な値
 
 | 種別 | 名前 | 用途 |
