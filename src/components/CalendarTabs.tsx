@@ -1,9 +1,19 @@
 "use client"
 import { useCallback } from "react"
+import dynamic from "next/dynamic"
 import { useRouter, useSearchParams } from "next/navigation"
 import Calendar from "./Calendar"
-import QuoteSearch from "./QuoteSearch"
-import QuoteGallery from "./QuoteGallery"
+
+// キーワード検索(MiniSearchを内包)と名言集は、そのタブを開くまで
+// JS自体を読み込ませない（コード分割）。カレンダーだけ見る人の初期表示を軽くする。
+const QuoteSearch = dynamic(() => import("./QuoteSearch"), {
+  ssr: false,
+  loading: () => <TabSkeleton />,
+})
+const QuoteGallery = dynamic(() => import("./QuoteGallery"), {
+  ssr: false,
+  loading: () => <TabSkeleton />,
+})
 
 /**
  * /calendar を3タブに切り替える。
@@ -74,6 +84,19 @@ export default function CalendarTabs() {
       </div>
 
       {tab === "date" ? <Calendar /> : tab === "quotes" ? <QuoteSearch /> : <QuoteGallery />}
+    </div>
+  )
+}
+
+function TabSkeleton() {
+  return (
+    <div className="space-y-5" aria-busy="true">
+      <div className="h-12 animate-pulse rounded-2xl bg-base-800" />
+      <div className="space-y-3">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div key={i} className="h-28 animate-pulse rounded-2xl bg-base-800" />
+        ))}
+      </div>
     </div>
   )
 }

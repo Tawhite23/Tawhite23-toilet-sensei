@@ -12,12 +12,13 @@ import type {
 } from "./types"
 
 // 公開JSONの取得。dataBaseUrl 未設定時はサイト同梱 /data を読む。
+// URLに revalidateSec 単位のバケット値(?t=)を積むことでキャッシュキーを世代管理しているため、
+// fetch 自体は cache: "no-store" にしない（同一URLならブラウザ/HTTPキャッシュを使わせて
+// search-index.json など大きいファイルの再ダウンロードを避ける）。
 async function getJson<T>(name: string, revalidateSec: number): Promise<T | null> {
   const base = site.dataBaseUrl || "/data"
   try {
-    const res = await fetch(`${base}/${name}?t=${Math.floor(Date.now() / (revalidateSec * 1000))}`, {
-      cache: "no-store",
-    })
+    const res = await fetch(`${base}/${name}?t=${Math.floor(Date.now() / (revalidateSec * 1000))}`)
     if (!res.ok) return null
     return (await res.json()) as T
   } catch {

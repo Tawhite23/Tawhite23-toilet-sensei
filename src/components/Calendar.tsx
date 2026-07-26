@@ -153,7 +153,7 @@ export default function Calendar() {
         <thead>
           <tr>
             {WEEK.map((w, i) => (
-              <th key={w} scope="col" className={`pb-1 text-xs font-medium ${i === 0 ? "text-live" : i === 6 ? "text-accent" : "text-ink-dim"}`}>
+              <th key={w} scope="col" className={`pb-1 text-xs font-medium ${i === 0 ? "text-live" : i === 6 ? "text-saturday" : "text-ink-dim"}`}>
                 {w}
               </th>
             ))}
@@ -332,6 +332,15 @@ function DayHours({
         {days.map((d) => {
           const key = `${y}-${pad(mo + 1)}-${pad(d)}`
           const items = byDay.get(key) ?? []
+          // 前日の配信が24時をまたいで続く分は、この日の帯の先頭(0時〜)にも描画する
+          const prevDate = new Date(Date.UTC(y, mo, d - 1))
+          const prevKey = `${prevDate.getUTCFullYear()}-${pad(prevDate.getUTCMonth() + 1)}-${pad(prevDate.getUTCDate())}`
+          const carryOver = (byDay.get(prevKey) ?? []).filter((it) => {
+            if (isUpcoming(it) || it.type !== "live") return false
+            const jst = toJst(it.date)
+            const startH = jst.getUTCHours() + jst.getUTCMinutes() / 60
+            return startH + it.durationSec / 3600 > 24
+          })
           const dow = new Date(Date.UTC(y, mo, d)).getUTCDay()
           const isSel = selected === key
           return (
@@ -346,7 +355,7 @@ function DayHours({
               >
                 <span
                   className={`w-14 shrink-0 pl-1 text-[11px] tabular-nums ${
-                    dow === 0 ? "text-live" : dow === 6 ? "text-accent" : "text-ink-dim"
+                    dow === 0 ? "text-live" : dow === 6 ? "text-saturday" : "text-ink-dim"
                   }`}
                 >
                   {d}日({WEEK[dow]})
@@ -372,6 +381,22 @@ function DayHours({
                       style={{ left: `${(h / 24) * 100}%` }}
                     />
                   ))}
+
+                  {/* 前日から日をまたいで続いた配信の残り時間 */}
+                  {carryOver.map((it) => {
+                    const jst = toJst(it.date)
+                    const startH = jst.getUTCHours() + jst.getUTCMinutes() / 60
+                    const overflow = startH + it.durationSec / 3600 - 24
+                    const w = Math.min(overflow / 24, 1) * 100
+                    return (
+                      <span
+                        key={`${it.videoId}-carry`}
+                        title={`${jstTimeLabel(it.date)}〜 ${it.title}（前日から日をまたいで継続）`}
+                        className="absolute inset-y-[3px] left-0 rounded-sm bg-live"
+                        style={{ width: `${Math.max(w, 1.2)}%` }}
+                      />
+                    )
+                  })}
 
                   {items.map((it) => {
                     const plan = isUpcoming(it)

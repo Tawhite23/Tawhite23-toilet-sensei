@@ -16,6 +16,7 @@ export default {
         accent: { DEFAULT: "var(--c-accent)", warm: "var(--c-warm)" },
         live: "var(--c-live)",
         plan: "var(--c-plan)", // 配信予定バッジ
+        saturday: "var(--c-saturday)", // 土曜（青系。日本のカレンダー慣例）
         paper: "var(--c-paper)", // トイレットペーパー(演出用)
       },
       fontFamily: {

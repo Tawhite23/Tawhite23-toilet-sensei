@@ -9,11 +9,20 @@
     "cleanUrls": false,
     "headers": [
       {
-        "source": "/data/**",
+        "source": "/data/live.json",
         "headers": [
           {
             "key": "Cache-Control",
             "value": "public, max-age=60"
+          }
+        ]
+      },
+      {
+        "source": "/data/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
           }
         ]
       }

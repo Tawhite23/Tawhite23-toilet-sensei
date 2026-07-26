@@ -22,6 +22,7 @@
   --c-warm: #f078a0;
   --c-live: #ff5a5a;
   --c-plan: #7fd1ae;
+  --c-saturday: #5b9ee8;  /* 土曜=青（日本のカレンダー慣例。日曜=赤はc-liveを流用） */
   --c-paper: #1e1d1b;     /* 演出用"黒紙" */
   --c-paper-edge: #34322e;
   --c-paper-shadow: rgba(0, 0, 0, 0.55);
@@ -37,6 +38,7 @@
   --c-accent: #c25a10;    /* オレンジ(ライトで沈まない濃いめ) */
   --c-warm: #d0447a;
   --c-live: #d92d4a;
+  --c-saturday: #1f6fd6;  /* 土曜=青（日本のカレンダー慣例。日曜=赤はc-liveを流用） */
   --c-paper: #fffdf9;
   --c-paper-edge: #ece5d8;
   --c-plan: #1d8a63;
