@@ -18,22 +18,28 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-07-26T12:00:00Z",
+    "date": "2026-07-26T12:17:20Z",
     "type": "live",
     "title": "#マリオカート8dx みそピー",
     "videoId": "B5baDDxeIsc",
     "thumbnail": "https://i.ytimg.com/vi/B5baDDxeIsc/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
   },
   {
-    "date": "2026-07-26T09:00:00Z",
+    "date": "2026-07-26T09:39:25Z",
+    "type": "video",
+    "title": "#ドレミの歌 おトイレ先生のドレミの歌① #マリオカート8dx",
+    "videoId": "qJgQrZse_8s",
+    "thumbnail": "https://i.ytimg.com/vi/qJgQrZse_8s/maxresdefault.jpg",
+    "durationSec": 52
+  },
+  {
+    "date": "2026-07-26T09:35:15Z",
     "type": "live",
     "title": "#マイクラ  ドラゴンズ1.6 【アドオンハンターズ】",
     "videoId": "n3n9DLkKke8",
-    "thumbnail": "https://i.ytimg.com/vi/n3n9DLkKke8/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/n3n9DLkKke8/maxresdefault.jpg",
+    "durationSec": 9573
   },
   {
     "date": "2026-07-25T10:18:55Z",
