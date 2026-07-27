@@ -305,16 +305,24 @@ bot が定期的に取得・生成して直接 `main` にコミットしてい�
 使うと、無関係な変更のついでにこの古いデータもコミット＆pushしてしまい、
 本番データが古い内容で上書きされることがあります。
 
-これを防ぐため、`npm install`（`npm ci`含む）を実行すると自動で git の pre-commit フックが
-入り、`public/data` 配下の変更は commit のたびに自動でステージから外れるようになります
-（`scripts/hooks/pre-commit`）。手動で入れ直したい場合は次を実行してください
-（このクローンだけに効くローカル設定です）。
+これを防ぐため、git の pre-commit フック（`scripts/hooks/pre-commit`）を使います。
+`public/data` 配下の変更は commit のたびに自動でステージから外れるようになります。
+クローン後、開発者本人のローカル環境で一度だけ次を実行してください
+（`.git/hooks` はクローンごとのローカル設定で git 管理外のため、手動でのインストールが必要です）。
 
 ```bash
 npm run protect-data
 ```
 
-> ⚠️ 以前は `git update-index --skip-worktree` で保護していましたが、それだと
+> ⚠️ **`npm install`/`npm ci` に自動連動させてはいけません。** GitHub Actions の
+> ワークフローも `npm ci` を実行するため、そこでこのフックまで入ってしまうと、
+> bot 自身が `public/data` を更新するコミットまでこのフックが誤ってステージから
+> 外してしまい、bot のコミットが空になって以降の `pull --rebase` が
+> 「unstaged changes」で失敗し続ける、という障害が実際に一度発生しました。
+> （フック自身にも `CI`/`GITHUB_ACTIONS` 環境変数を見て CI では即 no-op にする
+> 保険を入れてありますが、そもそも CI では走らせない構成にしています。）
+>
+> 以前は `git update-index --skip-worktree` で保護していましたが、それだと
 > **bot の新しいコミットを pull するたびに「ローカルの変更が上書きされます」と
 > pull 自体がブロックされる**副作用がありました。今の pre-commit フック方式は
 > commit 時にだけ効くため、pull は普段どおり通ります。もし過去に
