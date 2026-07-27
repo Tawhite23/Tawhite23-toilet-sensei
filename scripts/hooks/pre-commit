@@ -17,6 +17,15 @@ if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
   exit 0
 fi
 
+# ★重要: merge/rebase の完了コミット（例: origin の bot 更新を pull で取り込む場合）でも
+#   pre-commit は発火する。ここで public/data を理由に弾いてしまうと、
+#   bot の最新データを取り込む pull/merge そのものが完了できなくなってしまうため、
+#   merge/rebase 進行中は常に許可する（このガードが無いと「Continue merge」がブロックされる）。
+GIT_DIR=$(git rev-parse --git-dir 2>/dev/null)
+if [ -f "$GIT_DIR/MERGE_HEAD" ] || [ -d "$GIT_DIR/rebase-merge" ] || [ -d "$GIT_DIR/rebase-apply" ]; then
+  exit 0
+fi
+
 staged=$(git diff --cached --name-only -- public/data)
 if [ -n "$staged" ]; then
   echo "public/data 配下のファイルがコミットに含まれているため、コミットを中止しました:"
