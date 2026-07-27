@@ -1,12 +1,14 @@
 #!/bin/sh
 # public/data 配下は GitHub Actions の bot が管理する「生きたデータ」で、
 # ローカルの内容は常に古くなりうる（フェッチ/ビルドを手元で試した残り、または
-# 単に bot の最新コミットをまだ pull していないだけ）。
+# 単に bot の最新コミットをまだ pull していないだけ）。これを他の変更と一緒に
+# コミットしてしまうと、bot が更新した最新データを古い内容で上書きしてしまう。
 #
-# これを他の変更と一緒にコミットしてしまうと、bot が更新した最新データを
-# 古い内容で上書きしてしまう恐れがあるため、コミット直前に自動でステージから外す。
-# （ワーキングツリーのファイル自体は変更しない。git checkout/merge/pull の動作は妨げない
-#   ＝ skip-worktree のように pull がブロックされることはない）
+# ★以前はここで自動的に git reset してコミットから静かに除外していたが、
+#   GitHub Desktop のようなGUIだと「なぜかコミットしてもファイルが消えない」と
+#   分かりにくく混乱を招いた。そのため、含まれている場合はコミット自体を拒否して
+#   理由を表示する方式にした（GitHub Desktopはフック失敗時にこのメッセージを
+#   エラーダイアログで表示する）。
 #
 # ★重要: これは「開発者がローカルで誤って古いデータをコミットしてしまう」事故を防ぐための
 #   フックであり、bot(GitHub Actions)自身が public/data を更新するコミットまで妨げてはいけない。
@@ -17,9 +19,13 @@ fi
 
 staged=$(git diff --cached --name-only -- public/data)
 if [ -n "$staged" ]; then
-  echo "[pre-commit] public/data 配下は bot 管理のため、このコミットから自動的に除外しました:"
+  echo "public/data 配下のファイルがコミットに含まれているため、コミットを中止しました:"
   echo "$staged" | sed 's/^/  /'
-  echo "  （意図的にコミットしたい場合は commit 後に個別で 'git add <file>' して再コミットしてください）"
-  git reset -q HEAD -- public/data
+  echo ""
+  echo "public/data は GitHub Actions の bot が自動更新するデータです。通常は手元でコミットする必要はありません。"
+  echo ""
+  echo "・含めたくない場合: GitHub Desktopの変更一覧でこれらのファイルのチェックを外してから、再度コミットしてください。"
+  echo "・意図的にこのデータをコミットしたい場合: ターミナルで 'npm run unprotect-data' を実行してから、もう一度コミットしてください。"
+  exit 1
 fi
 exit 0

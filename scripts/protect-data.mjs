@@ -8,10 +8,13 @@
 // 上書きしてしまう。
 //
 // git の pre-commit フック（scripts/hooks/pre-commit）を .git/hooks にインストールし、
-// commit 直前に public/data 配下を自動でステージから外すことでこれを防ぐ。
+// public/data 配下が含まれた状態での commit を理由付きで拒否することでこれを防ぐ。
 // ※ 以前は skip-worktree で保護していたが、それだと bot の新しいコミットを pull するたびに
 //   「ローカルの変更が上書きされます」と pull 自体がブロックされてしまう副作用があったため、
 //   commit 時にだけ効く pre-commit フック方式に切り替えた。
+// ※ さらに以前のフックは対象ファイルを自動でステージから外す(黙って除外する)方式だったが、
+//   GitHub DesktopなどGUIだと「コミットしてもファイルが消えない」と分かりにくかったため、
+//   今はコミット自体を失敗させて理由を表示する方式にしている。
 //
 // ★重要: このスクリプトを package.json の postinstall に繋いではいけない。
 //   GitHub Actions のワークフローも `npm ci` を実行するため、postinstall で自動実行すると
@@ -52,4 +55,4 @@ try {
 }
 
 console.log(`pre-commit フックを設置しました: ${dest}`)
-console.log("これで public/data 配下の変更は commit 時に自動でステージから外れます。")
+console.log("これで public/data 配下が含まれた状態での commit は理由付きで失敗するようになります。")
