@@ -1,10 +1,28 @@
 [
   {
-    "date": "2026-07-29T10:00:00Z",
+    "date": "2026-08-02T12:00:00Z",
     "type": "live",
-    "title": "#マイクラ  Aether Legends 【アドオンハンターズ】",
-    "videoId": "OW-CMS7ZGNE",
-    "thumbnail": "https://i.ytimg.com/vi/OW-CMS7ZGNE/maxresdefault_live.jpg",
+    "title": "#マリオカート8dx パンイチアームカバー",
+    "videoId": "VpbUyzfh_sQ",
+    "thumbnail": "https://i.ytimg.com/vi/VpbUyzfh_sQ/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-01T10:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第1回ハードコアチャレンジLV7",
+    "videoId": "9gwOFeUv_Xs",
+    "thumbnail": "https://i.ytimg.com/vi/9gwOFeUv_Xs/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-07-30T12:15:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx キウイの皮食べますか？",
+    "videoId": "K3ylbU3Omac",
+    "thumbnail": "https://i.ytimg.com/vi/K3ylbU3Omac/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -19,6 +37,15 @@
   },
   {
     "date": "2026-07-28T10:00:00Z",
+    "type": "live",
+    "title": "#マイクラ  Aether Legends 【アドオンハンターズ】",
+    "videoId": "OW-CMS7ZGNE",
+    "thumbnail": "https://i.ytimg.com/vi/OW-CMS7ZGNE/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-07-27T10:30:00Z",
     "type": "live",
     "title": "#マイクラ  ドラゴンズ1.6 調査 【アドオンハンターズ】",
     "videoId": "bb3oVA2YlLQ",
