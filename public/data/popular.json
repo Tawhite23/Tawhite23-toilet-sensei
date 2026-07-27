@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-25T11:48:41.422Z",
-  "segmentCount": 31744,
+  "generatedAt": "2026-07-27T11:57:29.223Z",
+  "segmentCount": 35901,
   "items": [
     {
       "text": "マジで",
-      "count": 1554,
-      "videoCount": 26,
+      "count": 1650,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 204.48
@@ -14,8 +14,8 @@
     },
     {
       "text": "お前ら",
-      "count": 1096,
-      "videoCount": 26,
+      "count": 1184,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 415.24
@@ -23,8 +23,8 @@
     },
     {
       "text": "やって",
-      "count": 801,
-      "videoCount": 26,
+      "count": 902,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 354.04
@@ -32,8 +32,8 @@
     },
     {
       "text": "いいよ",
-      "count": 761,
-      "videoCount": 26,
+      "count": 815,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 843.36
@@ -41,35 +41,35 @@
     },
     {
       "text": "ここで",
-      "count": 666,
-      "videoCount": 26,
+      "count": 712,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 327.4
       }
     },
     {
-      "text": "それは",
-      "count": 463,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 224.56
-      }
-    },
-    {
       "text": "これで",
-      "count": 423,
-      "videoCount": 26,
+      "count": 512,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 96.68
       }
     },
     {
+      "text": "それは",
+      "count": 498,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 224.56
+      }
+    },
+    {
       "text": "そうだ",
-      "count": 413,
-      "videoCount": 26,
+      "count": 463,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 131.72
@@ -77,164 +77,182 @@
     },
     {
       "text": "してる",
-      "count": 404,
-      "videoCount": 26,
+      "count": 444,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 2256.08
       }
     },
     {
-      "text": "まあまあ",
-      "count": 366,
-      "videoCount": 25,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 3286.8
-      }
-    },
-    {
-      "text": "あった",
-      "count": 366,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1249.92
-      }
-    },
-    {
-      "text": "します",
-      "count": 362,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 127.4
-      }
-    },
-    {
       "text": "えっと",
-      "count": 355,
-      "videoCount": 25,
+      "count": 428,
+      "videoCount": 27,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 306.48
       }
     },
     {
+      "text": "あった",
+      "count": 425,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1249.92
+      }
+    },
+    {
       "text": "普通に",
-      "count": 351,
-      "videoCount": 25,
+      "count": 413,
+      "videoCount": 27,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 354.04
       }
     },
     {
-      "text": "行こう",
-      "count": 336,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1936.44
-      }
-    },
-    {
-      "text": "なんだ",
-      "count": 278,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 3394
-      }
-    },
-    {
-      "text": "こいつら",
-      "count": 261,
-      "videoCount": 23,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1469.96
-      }
-    },
-    {
-      "text": "ありがとうござい",
-      "count": 251,
-      "videoCount": 25,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1402.92
-      }
-    },
-    {
-      "text": "あれだ",
-      "count": 237,
-      "videoCount": 25,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1105.08
-      }
-    },
-    {
-      "text": "しない",
-      "count": 232,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 221.16
-      }
-    },
-    {
-      "text": "やばいやばい",
-      "count": 213,
-      "videoCount": 23,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 5834.88
-      }
-    },
-    {
-      "text": "しよう",
-      "count": 210,
-      "videoCount": 26,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 907.08
-      }
-    },
-    {
-      "text": "お願いし",
-      "count": 209,
-      "videoCount": 25,
+      "text": "します",
+      "count": 395,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 127.4
       }
     },
     {
+      "text": "まあまあ",
+      "count": 394,
+      "videoCount": 27,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 3286.8
+      }
+    },
+    {
+      "text": "行こう",
+      "count": 378,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1936.44
+      }
+    },
+    {
+      "text": "こいつら",
+      "count": 305,
+      "videoCount": 25,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1469.96
+      }
+    },
+    {
+      "text": "なんだ",
+      "count": 305,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 3394
+      }
+    },
+    {
+      "text": "あれだ",
+      "count": 291,
+      "videoCount": 27,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1105.08
+      }
+    },
+    {
+      "text": "ありがとうござい",
+      "count": 286,
+      "videoCount": 27,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1402.92
+      }
+    },
+    {
+      "text": "しない",
+      "count": 260,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 221.16
+      }
+    },
+    {
+      "text": "しよう",
+      "count": 248,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 907.08
+      }
+    },
+    {
+      "text": "やばいやばい",
+      "count": 227,
+      "videoCount": 25,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 5834.88
+      }
+    },
+    {
+      "text": "もう1",
+      "count": 227,
+      "videoCount": 27,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 604.96
+      }
+    },
+    {
       "text": "あんの",
-      "count": 193,
-      "videoCount": 26,
+      "count": 225,
+      "videoCount": 28,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 204.48
       }
     },
     {
+      "text": "お願いし",
+      "count": 224,
+      "videoCount": 27,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 127.4
+      }
+    },
+    {
       "text": "したら",
-      "count": 190,
-      "videoCount": 25,
+      "count": 217,
+      "videoCount": 27,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 1079.68
       }
     },
     {
-      "text": "もう1",
-      "count": 189,
-      "videoCount": 25,
+      "text": "教えて",
+      "count": 202,
+      "videoCount": 27,
       "sample": {
         "videoId": "-qRaRQN26X0",
-        "start": 604.96
+        "start": 2496.23
+      }
+    },
+    {
+      "text": "どうし",
+      "count": 180,
+      "videoCount": 26,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1983.76
       }
     },
     {
@@ -247,120 +265,138 @@
       }
     },
     {
-      "text": "教えて",
-      "count": 175,
-      "videoCount": 25,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 2496.23
-      }
-    },
-    {
-      "text": "どうし",
-      "count": 163,
-      "videoCount": 24,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1983.76
-      }
-    },
-    {
       "text": "言われ",
-      "count": 161,
-      "videoCount": 24,
+      "count": 174,
+      "videoCount": 26,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 595
       }
     },
     {
-      "text": "行くか",
-      "count": 139,
-      "videoCount": 23,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 364.2
-      }
-    },
-    {
-      "text": "さすがに",
-      "count": 136,
-      "videoCount": 22,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 8917.48
-      }
-    },
-    {
-      "text": "こっから",
-      "count": 135,
-      "videoCount": 23,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 8109.24
-      }
-    },
-    {
       "text": "やつは",
-      "count": 135,
-      "videoCount": 23,
+      "count": 162,
+      "videoCount": 25,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 233.28
       }
     },
     {
-      "text": "今日は",
-      "count": 134,
-      "videoCount": 24,
+      "text": "行くか",
+      "count": 161,
+      "videoCount": 25,
       "sample": {
         "videoId": "-qRaRQN26X0",
-        "start": 76.36
-      }
-    },
-    {
-      "text": "ガチで",
-      "count": 133,
-      "videoCount": 23,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 409.8
+        "start": 364.2
       }
     },
     {
       "text": "やりたい",
-      "count": 125,
-      "videoCount": 23,
+      "count": 159,
+      "videoCount": 25,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 1448.64
       }
     },
     {
-      "text": "あるよ",
-      "count": 121,
+      "text": "さすがに",
+      "count": 159,
       "videoCount": 24,
       "sample": {
         "videoId": "-qRaRQN26X0",
-        "start": 1706.92
+        "start": 8917.48
+      }
+    },
+    {
+      "text": "今日は",
+      "count": 148,
+      "videoCount": 26,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 76.36
+      }
+    },
+    {
+      "text": "こっから",
+      "count": 141,
+      "videoCount": 25,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 8109.24
+      }
+    },
+    {
+      "text": "あるん",
+      "count": 139,
+      "videoCount": 26,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 6737.36
+      }
+    },
+    {
+      "text": "ガチで",
+      "count": 138,
+      "videoCount": 25,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 409.8
+      }
+    },
+    {
+      "text": "入れて",
+      "count": 132,
+      "videoCount": 20,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 1292
+      }
+    },
+    {
+      "text": "あかん",
+      "count": 128,
+      "videoCount": 28,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 4897.64
       }
     },
     {
       "text": "来た来",
-      "count": 119,
-      "videoCount": 11,
+      "count": 128,
+      "videoCount": 13,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 5547.28
       }
     },
     {
-      "text": "あかん",
-      "count": 118,
+      "text": "やろう",
+      "count": 125,
       "videoCount": 26,
       "sample": {
         "videoId": "-qRaRQN26X0",
-        "start": 4897.64
+        "start": 945.96
+      }
+    },
+    {
+      "text": "書いて",
+      "count": 122,
+      "videoCount": 22,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 674.24
+      }
+    },
+    {
+      "text": "どこだ",
+      "count": 122,
+      "videoCount": 22,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 9053.52
       }
     },
     {
@@ -374,8 +410,8 @@
     },
     {
       "text": "あそこに",
-      "count": 112,
-      "videoCount": 17,
+      "count": 113,
+      "videoCount": 18,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 191.68
@@ -383,164 +419,128 @@
     },
     {
       "text": "早すぎ",
-      "count": 110,
-      "videoCount": 15,
+      "count": 112,
+      "videoCount": 17,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 8968.64
       }
     },
     {
-      "text": "書いて",
-      "count": 106,
-      "videoCount": 20,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 674.24
-      }
-    },
-    {
       "text": "確かに",
-      "count": 102,
-      "videoCount": 24,
+      "count": 111,
+      "videoCount": 26,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 8926.84
       }
     },
     {
-      "text": "どこだ",
-      "count": 100,
-      "videoCount": 20,
+      "text": "アドン",
+      "count": 107,
+      "videoCount": 8,
       "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 9053.52
-      }
-    },
-    {
-      "text": "やろう",
-      "count": 98,
-      "videoCount": 24,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 945.96
-      }
-    },
-    {
-      "text": "入れて",
-      "count": 95,
-      "videoCount": 18,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1292
-      }
-    },
-    {
-      "text": "えぐいな",
-      "count": 91,
-      "videoCount": 15,
-      "sample": {
-        "videoId": "5zZepxQdp8k",
-        "start": 1555.24
-      }
-    },
-    {
-      "text": "危ねえ",
-      "count": 90,
-      "videoCount": 22,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 5923.44
-      }
-    },
-    {
-      "text": "つけて",
-      "count": 86,
-      "videoCount": 25,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 418.52
-      }
-    },
-    {
-      "text": "するわ",
-      "count": 86,
-      "videoCount": 23,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 858.88
-      }
-    },
-    {
-      "text": "参加し",
-      "count": 82,
-      "videoCount": 21,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 184.72
-      }
-    },
-    {
-      "text": "なるほどね",
-      "count": 81,
-      "videoCount": 22,
-      "sample": {
-        "videoId": "-qRaRQN26X0",
-        "start": 1649.88
+        "videoId": "CnVU6Qa-hYo",
+        "start": 213.16
       }
     },
     {
       "text": "された",
-      "count": 81,
-      "videoCount": 25,
+      "count": 99,
+      "videoCount": 27,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 6840.72
       }
     },
     {
+      "text": "するわ",
+      "count": 97,
+      "videoCount": 25,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 858.88
+      }
+    },
+    {
+      "text": "危ねえ",
+      "count": 96,
+      "videoCount": 24,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 5923.44
+      }
+    },
+    {
+      "text": "えぐいな",
+      "count": 95,
+      "videoCount": 17,
+      "sample": {
+        "videoId": "5zZepxQdp8k",
+        "start": 1555.24
+      }
+    },
+    {
+      "text": "つけて",
+      "count": 95,
+      "videoCount": 27,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 418.52
+      }
+    },
+    {
       "text": "みんなが",
-      "count": 80,
-      "videoCount": 19,
+      "count": 93,
+      "videoCount": 21,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 7107.6
       }
     },
     {
-      "text": "行きたい",
-      "count": 79,
-      "videoCount": 19,
+      "text": "思うん",
+      "count": 93,
+      "videoCount": 22,
       "sample": {
         "videoId": "-qRaRQN26X0",
-        "start": 3192.52
+        "start": 1016.76
       }
     },
     {
       "text": "おらん",
-      "count": 79,
-      "videoCount": 22,
+      "count": 92,
+      "videoCount": 24,
       "sample": {
         "videoId": "-qRaRQN26X0",
         "start": 1515.88
       }
     },
     {
-      "text": "最悪や",
-      "count": 79,
-      "videoCount": 12,
+      "text": "感じで",
+      "count": 91,
+      "videoCount": 24,
       "sample": {
-        "videoId": "0GuMkZ65qrk",
-        "start": 5673.6
+        "videoId": "-qRaRQN26X0",
+        "start": 4865.2
       }
     },
     {
-      "text": "思うん",
-      "count": 75,
-      "videoCount": 20,
+      "text": "なるほどね",
+      "count": 90,
+      "videoCount": 24,
       "sample": {
         "videoId": "-qRaRQN26X0",
-        "start": 1016.76
+        "start": 1649.88
+      }
+    },
+    {
+      "text": "自分の",
+      "count": 89,
+      "videoCount": 23,
+      "sample": {
+        "videoId": "-qRaRQN26X0",
+        "start": 2256.08
       }
     }
   ]
