@@ -27,12 +27,21 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-07-29T10:30:00Z",
+    "type": "live",
+    "title": "#マイクラ  Aether Legends 【アドオンハンターズ】",
+    "videoId": "1S4pQEtn3-Q",
+    "thumbnail": "https://i.ytimg.com/vi/1S4pQEtn3-Q/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-07-28T12:48:32Z",
     "type": "live",
     "title": "#マリオカート8dx ドラゴンクラッシュ！",
     "videoId": "aRrQ-Z9unW8",
     "thumbnail": "https://i.ytimg.com/vi/aRrQ-Z9unW8/maxresdefault_live.jpg",
-    "durationSec": 0
+    "durationSec": 6756
   },
   {
     "date": "2026-07-28T10:29:05Z",
@@ -1760,7 +1769,7 @@
     "title": "第1回ガチ建築王決定戦結果発表【選抜】詳細は概要欄",
     "videoId": "RGSlYv57VMU",
     "thumbnail": "https://i.ytimg.com/vi/RGSlYv57VMU/maxresdefault.jpg",
-    "durationSec": 19119
+    "durationSec": 19120
   },
   {
     "date": "2026-03-28T13:36:43Z",
@@ -1992,7 +2001,7 @@
     "title": "月末恒例の報告会2026/2",
     "videoId": "ruEOrJJilLM",
     "thumbnail": "https://i.ytimg.com/vi/ruEOrJJilLM/maxresdefault.jpg",
-    "durationSec": 2806
+    "durationSec": 2807
   },
   {
     "date": "2026-02-27T14:37:23Z",
