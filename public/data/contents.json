@@ -18,15 +18,6 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-12T09:30:00Z",
-    "type": "live",
-    "title": "#ワンワンバトル 声量で勝負するゲームらしい",
-    "videoId": "f-rFgfqq0Vg",
-    "thumbnail": "https://i.ytimg.com/vi/f-rFgfqq0Vg/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
-  },
-  {
     "date": "2026-08-11T10:00:00Z",
     "type": "live",
     "title": "#マイクラ  SKY DIMENSION ➁ 【アドオンハンターズ】",
@@ -95,6 +86,15 @@
     "title": "#スマブラsp  お前らに敗北を味わってもらう",
     "videoId": "IY-sPi_G_lc",
     "thumbnail": "https://i.ytimg.com/vi/IY-sPi_G_lc/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-02T02:00:00Z",
+    "type": "live",
+    "title": "#太鼓の達人 復帰勢による陰キャおうち太鼓",
+    "videoId": "xaWcwCruUvk",
+    "thumbnail": "https://i.ytimg.com/vi/xaWcwCruUvk/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
