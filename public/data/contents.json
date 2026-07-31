@@ -99,7 +99,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-01T10:00:00Z",
+    "date": "2026-08-01T12:30:00Z",
     "type": "live",
     "title": "#マイクラ  EXPANSE DIMENSION ➀【アドオンハンターズ】",
     "videoId": "F1Ck4fIrdf4",
@@ -108,22 +108,29 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-07-31T12:30:00Z",
+    "date": "2026-08-01T10:30:00Z",
     "type": "live",
-    "title": "#マイクラ参加型 第1回ハードコアチャレンジLV7",
-    "videoId": "9gwOFeUv_Xs",
-    "thumbnail": "https://i.ytimg.com/vi/9gwOFeUv_Xs/maxresdefault_live.jpg",
+    "title": "#マイクラ  Aether Legends ④【アドオンハンターズ】",
+    "videoId": "NOeOO_0GW9I",
+    "thumbnail": "https://i.ytimg.com/vi/NOeOO_0GW9I/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
   {
-    "date": "2026-07-31T11:00:00Z",
+    "date": "2026-07-31T13:45:34Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第1回ハードコアチャレンジLV7",
+    "videoId": "9gwOFeUv_Xs",
+    "thumbnail": "https://i.ytimg.com/vi/9gwOFeUv_Xs/maxresdefault_live.jpg",
+    "durationSec": 0
+  },
+  {
+    "date": "2026-07-31T12:12:53Z",
     "type": "live",
     "title": "#マイクラ  Aether Legends ④【アドオンハンターズ】",
     "videoId": "XsjQahztcE0",
     "thumbnail": "https://i.ytimg.com/vi/XsjQahztcE0/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 5469
   },
   {
     "date": "2026-07-30T12:27:26Z",
