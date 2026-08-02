@@ -1,5 +1,59 @@
 [
   {
+    "date": "2026-08-21T10:30:00Z",
+    "type": "live",
+    "title": "#マイクラ  SKY DIMENSION ➀ 【アドオンハンターズ】",
+    "videoId": "AAf-B5ZpuNo",
+    "thumbnail": "https://i.ytimg.com/vi/AAf-B5ZpuNo/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-14T10:30:00Z",
+    "type": "live",
+    "title": "#マイクラ  ALIEN DIMENSION ➀【アドオンハンターズ】",
+    "videoId": "e4OgqTxfR84",
+    "thumbnail": "https://i.ytimg.com/vi/e4OgqTxfR84/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-08T12:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第4回ハードコアチャレンジLV7",
+    "videoId": "_xQa0Geu51Y",
+    "thumbnail": "https://i.ytimg.com/vi/_xQa0Geu51Y/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-08T10:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第1回真クラサバイバル鬼ごっこ",
+    "videoId": "BpMsxY4csl8",
+    "thumbnail": "https://i.ytimg.com/vi/BpMsxY4csl8/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-07T10:30:00Z",
+    "type": "live",
+    "title": "#マイクラ  EXPANSE DIMENSION ➀【アドオンハンターズ】",
+    "videoId": "F1Ck4fIrdf4",
+    "thumbnail": "https://i.ytimg.com/vi/F1Ck4fIrdf4/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-05T11:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第3回ハードコアチャレンジLV7",
+    "videoId": "G7BqrKxdcPY",
+    "thumbnail": "https://i.ytimg.com/vi/G7BqrKxdcPY/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-04T12:15:00Z",
     "type": "live",
     "title": "#マリオカート8dx キンチョール",
@@ -45,7 +99,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-02T04:00:00Z",
+    "date": "2026-08-02T04:30:00Z",
     "type": "live",
     "title": "#太鼓の達人 復帰勢による陰キャおうち太鼓",
     "videoId": "xaWcwCruUvk",
@@ -58,8 +112,8 @@
     "type": "live",
     "title": "#マイクラ参加型 第2回ハードコアチャレンジLV7",
     "videoId": "k9zX_OrKSHw",
-    "thumbnail": "https://i.ytimg.com/vi/k9zX_OrKSHw/maxresdefault_live.jpg",
-    "durationSec": 6051
+    "thumbnail": "https://i.ytimg.com/vi/k9zX_OrKSHw/maxresdefault.jpg",
+    "durationSec": 6053
   },
   {
     "date": "2026-08-01T10:43:50Z",
