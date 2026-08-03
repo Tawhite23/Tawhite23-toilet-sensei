@@ -45,11 +45,38 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-05T11:00:00Z",
+    "date": "2026-08-06T12:15:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx ラミレス監督",
+    "videoId": "VoHzveHmUww",
+    "thumbnail": "https://i.ytimg.com/vi/VoHzveHmUww/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-06T10:45:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型  PVP初心者がベッドウォーズで10連勝出来るまで何日かかるのか？day3",
+    "videoId": "0lx9_7Nf7QU",
+    "thumbnail": "https://i.ytimg.com/vi/0lx9_7Nf7QU/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-05T11:30:00Z",
     "type": "live",
     "title": "#マイクラ参加型 第3回ハードコアチャレンジLV7",
     "videoId": "G7BqrKxdcPY",
     "thumbnail": "https://i.ytimg.com/vi/G7BqrKxdcPY/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-05T10:00:00Z",
+    "type": "live",
+    "title": "#太鼓の達人 太鼓フォースでドンフェス➁ #shorts",
+    "videoId": "EilOZIfDfOc",
+    "thumbnail": "https://i.ytimg.com/vi/EilOZIfDfOc/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -72,13 +99,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-03T11:30:00Z",
+    "date": "2026-08-03T12:57:55Z",
     "type": "live",
     "title": "#マイクラ参加型  PVP初心者がベッドウォーズで10連勝出来るまで何日かかるのか？day3",
     "videoId": "EZ4T_RQPLQw",
     "thumbnail": "https://i.ytimg.com/vi/EZ4T_RQPLQw/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 3290
   },
   {
     "date": "2026-08-02T12:31:28Z",
