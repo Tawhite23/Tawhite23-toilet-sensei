@@ -63,6 +63,15 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-08-10T11:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第4回ハードコアチャレンジLV7",
+    "videoId": "LaYtz4rPnSs",
+    "thumbnail": "https://i.ytimg.com/vi/LaYtz4rPnSs/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-09T12:15:00Z",
     "type": "live",
     "title": "#マリオカート8dx アイシールド21",
@@ -81,13 +90,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-08T13:30:00Z",
+    "date": "2026-08-08T14:53:58Z",
     "type": "live",
     "title": "#マイクラ参加型 第4回ハードコアチャレンジLV7",
     "videoId": "_xQa0Geu51Y",
     "thumbnail": "https://i.ytimg.com/vi/_xQa0Geu51Y/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 3821
   },
   {
     "date": "2026-08-07T11:32:21Z",
