@@ -27,6 +27,24 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-08-13T10:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 モドリ玉 day5　#Mtuber",
+    "videoId": "3nqb7X6BTHg",
+    "thumbnail": "https://i.ytimg.com/vi/3nqb7X6BTHg/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-13T09:00:00Z",
+    "type": "live",
+    "title": "#雑談 ナスの素焼き",
+    "videoId": "QqRVwiNM_T0",
+    "thumbnail": "https://i.ytimg.com/vi/QqRVwiNM_T0/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-13T07:00:00Z",
     "type": "live",
     "title": "#太鼓の達人 太鼓フォースでドンフェス➁ #shorts",
@@ -40,8 +58,8 @@
     "type": "live",
     "title": "#マイクラ 反省してます",
     "videoId": "2q4KsdjZkD8",
-    "thumbnail": "https://i.ytimg.com/vi/2q4KsdjZkD8/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/2q4KsdjZkD8/maxresdefault.jpg",
+    "durationSec": 15997
   },
   {
     "date": "2026-08-12T07:13:23Z",
