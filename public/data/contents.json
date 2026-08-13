@@ -9,7 +9,16 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-14T11:00:00Z",
+    "date": "2026-08-16T10:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 辛味チキン day6　#Mtuber",
+    "videoId": "t12g74RLAEk",
+    "thumbnail": "https://i.ytimg.com/vi/t12g74RLAEk/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-14T11:30:00Z",
     "type": "live",
     "title": "#マイクラ  レモンかけるか？？",
     "videoId": "e4OgqTxfR84",
@@ -18,12 +27,21 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-08-14T09:30:00Z",
+    "type": "live",
+    "title": "#めっちゃカメレオン 俺はトカゲ",
+    "videoId": "iFM43sXKHJU",
+    "thumbnail": "https://i.ytimg.com/vi/iFM43sXKHJU/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-13T12:08:33Z",
     "type": "live",
     "title": "#マリオカート8dx 直座体前屈5㎝",
     "videoId": "hhC3vlcQAXc",
-    "thumbnail": "https://i.ytimg.com/vi/hhC3vlcQAXc/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/hhC3vlcQAXc/maxresdefault.jpg",
+    "durationSec": 12224
   },
   {
     "date": "2026-08-13T10:23:49Z",
