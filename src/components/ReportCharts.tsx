@@ -27,7 +27,6 @@ interface Row {
   配信時間h: number
   登録者: number | null
   再生数: number | null
-  月間再生数: number | null
 }
 
 export default function ReportCharts() {
@@ -47,14 +46,12 @@ export default function ReportCharts() {
         // 【2-4】未記録の月は null のまま = グラフに線を引かない(欠損)
         登録者: r.subscriberCount ?? null,
         再生数: r.viewCount ?? null,
-        月間再生数: r.monthlyViews ?? null,
       }))
   }, [report])
 
   /**
-   * 年別は「回数/本数/時間/月間再生数は合計」「登録者・再生数はその年で最後に記録された値」。
-   * 累積値であるスナップショット(登録者/総再生数)を合計してしまわないようにしている。
-   * 逆に月間再生数はフロー値なので、その年の合計＝年間再生数になる。
+   * 年別は「回数/本数/時間は合計」「登録者・再生数はその年で最後に記録された値」。
+   * 累積値であるスナップショットを合計してしまわないようにしている。
    */
   const yearly = useMemo<Row[]>(() => {
     const m = new Map<string, Row>()
@@ -62,13 +59,12 @@ export default function ReportCharts() {
       const y = r.label.slice(0, 4)
       const cur =
         m.get(y) ??
-        { label: `${y}年`, 配信回数: 0, 動画本数: 0, 配信時間h: 0, 登録者: null, 再生数: null, 月間再生数: null }
+        { label: `${y}年`, 配信回数: 0, 動画本数: 0, 配信時間h: 0, 登録者: null, 再生数: null }
       cur.配信回数 += r.配信回数
       cur.動画本数 += r.動画本数
       cur.配信時間h = Math.round((cur.配信時間h + r.配信時間h) * 10) / 10
       if (r.登録者 != null) cur.登録者 = r.登録者
       if (r.再生数 != null) cur.再生数 = r.再生数
-      if (r.月間再生数 != null) cur.月間再生数 = (cur.月間再生数 ?? 0) + r.月間再生数
       m.set(y, cur)
     }
     return [...m.values()]
@@ -84,7 +80,6 @@ export default function ReportCharts() {
   if (!report) return <p className="p-8 text-center text-ink-dim" role="status">読み込み中…</p>
 
   const hasGap = monthly.some((r) => r.登録者 == null)
-  const hasMonthlyViews = monthly.some((r) => r.月間再生数 != null)
 
   const card = "rounded-2xl border border-base-700 bg-base-800 p-4"
   const tooltipStyle = {
@@ -141,12 +136,11 @@ export default function ReportCharts() {
         </select>
         <span className="text-xs text-ink-dim">の集計</span>
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-3 gap-3">
         {[
           ["配信回数", `${active?.配信回数 ?? 0}回`],
           ["動画本数", `${active?.動画本数 ?? 0}本`],
           ["配信時間", `${Math.round(active?.配信時間h ?? 0)}時間`],
-          ["視聴回数", active?.月間再生数 != null ? `${active.月間再生数.toLocaleString()}回` : "—"],
         ].map(([k, v]) => (
           <div key={k} className={card}>
             <p className="text-xs text-ink-dim">{k}</p>
@@ -207,33 +201,13 @@ export default function ReportCharts() {
         </section>
       </div>
 
-      {/* 月ごとにどれだけ見られたか（累計ではないフロー値なので棒グラフ） */}
-      {hasMonthlyViews && (
-        <section className={card} aria-label={`${grain === "year" ? "年間" : "月間"}の視聴回数`}>
-          <h2 className="mb-3 text-sm font-bold text-ink-dim">
-            {grain === "year" ? "年間視聴回数" : "月間視聴回数"}
-          </h2>
-          <div className="h-64">
-            <ResponsiveContainer>
-              <ComposedChart data={rows}>
-                <CartesianGrid stroke={grid} strokeDasharray="3 3" />
-                <XAxis dataKey="label" tick={tick} />
-                <YAxis tick={tick} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Bar dataKey="月間再生数" fill={C.views} radius={[4, 4, 0, 0]} name="視聴回数" />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </div>
-        </section>
-      )}
 
       <p className="text-xs leading-relaxed text-ink-dim">
         ※ 登録者・再生数は実記録に基づくスナップショット値です（GitHub Actionsで日次記録）。
         {grain === "year" && " 年別表示では、登録者・再生数はその年に最後に記録された値を表示しています（累積値のため合計しません）。"}
         {hasGap && " 記録が無い期間は欠損として表示し、推測値で補完していません。"}
-        {hasMonthlyViews &&
-          " 日次記録の開始前（2026年6月以前）の登録者数と、月間視聴回数はチャンネル公式のアナリティクス実績に基づいています。" +
-            "月間視聴回数は「総再生数推移」とは集計対象が異なるため（非公開・削除済みの配信も含みます）、別のグラフとして表示しています。"}
+        {" 日次記録の開始前（2026年6月以前）はチャンネル公式のアナリティクス実績から補完しています。"}
+        {" 総再生数には、現在は非公開・削除済みの配信の再生数も含まれます。"}
         {" 現在の登録者数・総再生数はプロフィールのWIKI最下部「現在」で確認できます。"}
       </p>
     </div>
