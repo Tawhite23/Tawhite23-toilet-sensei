@@ -166,7 +166,7 @@ export default function WikiTimeline() {
         {/* 中央の縦レール（ミシン目）。lg未満では左端に寄せる */}
         <div
           aria-hidden="true"
-          className="roadmap-rail absolute bottom-0 top-0 w-0.5 left-[7px] lg:left-1/2 lg:-translate-x-1/2"
+          className="roadmap-rail absolute bottom-0 top-0 w-0.5 left-[7px] lg:left-1/2 lg:-ml-px"
         >
           {/* スクロール連動で伸びるインク。先端に進行方向の矢尻を置く */}
           <motion.div
@@ -191,7 +191,7 @@ export default function WikiTimeline() {
                     デスクトップでドットがレールから右に7pxズレる。 */}
                 <span
                   aria-hidden="true"
-                  className="absolute top-6 z-10 block h-3.5 w-3.5 left-[1px] lg:left-1/2 lg:-translate-x-1/2"
+                  className="absolute top-6 z-10 block h-3.5 w-3.5 left-[1px] lg:left-1/2 lg:-ml-[7px]"
                 >
                   <motion.span
                     initial={{ scale: 0 }}
@@ -219,7 +219,7 @@ export default function WikiTimeline() {
             <li className="relative">
               <span
                 aria-hidden="true"
-                className="absolute top-6 z-10 block h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-accent/25 left-[1px] lg:left-1/2 lg:-translate-x-1/2"
+                className="absolute top-6 z-10 block h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-accent/25 left-[1px] lg:left-1/2 lg:-ml-[7px]"
               />
               <div className="pl-8 lg:mx-auto lg:max-w-md lg:pl-0">
                 <div className="rounded-xl border-2 border-accent bg-base-800 p-4 text-center sm:p-5">
