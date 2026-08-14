@@ -20,9 +20,22 @@
  *     全体の12%程度に収まる。アクセスが無い時間帯は0u(オンデマンド更新のため)。
  *
  * ■ エンドポイント
- *   GET /api/live   ... 配信状態のスナップショット
- *   GET /api/config ... クライアントのポーリング間隔と緊急停止フラグ
- *   GET /health     ... 死活確認
+ *   GET /api/live     ... 配信状態のスナップショット
+ *   GET /api/contents ... 動画/配信一覧（直近分だけ差分パッチ。下記参照）
+ *   GET /api/config   ... クライアントのポーリング間隔と緊急停止フラグ
+ *   GET /health       ... 死活確認
+ *
+ * ■ /api/contents の設計: 「全件取得」ではなく「差分パッチ」
+ *   contents.json は数百本ぶんの一覧で、全件を毎回取り直すとページング
+ *   (playlistItems.list を50件ずつ)だけでクォータもWorkerのサブリクエスト数
+ *   (無料枠は1呼び出しあたり50件まで)も膨らみ、チャンネルが育つほど重くなる。
+ *
+ *   そこで既存の6時間毎ワークフロー(data-contents.yml)が生成する完全な一覧を
+ *   「ベース」として GitHub の raw URL からそのまま読み、そこに YouTube API から
+ *   取った「直近数十件」だけを videoId で上書き・先頭追加してパッチする。
+ *   新着動画・配信開始/終了・予定→配信中への遷移は直近側に必ず含まれるため、
+ *   これで実用上「今の状態」に追いつく。古い動画の並び替えや削除の検出はしない
+ *   (その2つは頻度も重要度も低く、6時間毎の再生成で十分追従できる)。
  */
 
 export interface Env {
@@ -46,6 +59,24 @@ export interface Env {
   CLIENT_IDLE_POLL_MS?: string
   /** "1" にするとクライアントのポーリングを止める緊急ブレーキ */
   DISABLED?: string
+
+  /** contents.json のベース(完全な一覧)を取得する raw URL。data-contents.yml が更新する */
+  CONTENTS_BASE_URL?: string
+  /** /api/contents のTTL(秒)。既定 300 */
+  CONTENTS_TTL_SEC?: string
+  /** 差分パッチで確認する直近件数。既定 30 */
+  CONTENTS_PATCH_SIZE?: string
+}
+
+/** src/lib/types.ts の ContentItem と同じ形にすること */
+interface ContentItem {
+  date: string
+  type: "live" | "video"
+  title: string
+  videoId: string
+  thumbnail: string | null
+  durationSec: number
+  status?: "upcoming"
 }
 
 /** /api/live のレスポンス。src/lib/types.ts の LiveNow と同じ形にすること */
@@ -118,6 +149,40 @@ function bestThumb(t: any): string | null {
 
 /** チャンネルの uploads プレイリストIDは "UC..." → "UU..." で導出できる(channels.list 1u を節約) */
 const uploadsPlaylistId = (channelId: string) => `UU${channelId.replace(/^UC/, "")}`
+
+/** scripts/lib.mjs の parseDurationSec と同じロジック(ISO8601 duration → 秒) */
+function parseDurationSec(iso: string | undefined): number {
+  if (!iso) return 0
+  const m = iso.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
+  if (!m) return 0
+  const [d, h, min, s] = [m[1], m[2], m[3], m[4]].map((x) => (x ? Number(x) : 0))
+  return d * 86400 + h * 3600 + min * 60 + s
+}
+
+/** scripts/fetch-contents.mjs と同じロジック */
+function detectType(v: any): "live" | "video" {
+  const l = v.liveStreamingDetails
+  return l && (l.actualStartTime || l.actualEndTime || l.scheduledStartTime) ? "live" : "video"
+}
+
+/** scripts/fetch-contents.mjs と同じロジックで1本の videos.list 結果を ContentItem に変換する */
+function toContentItem(v: any): ContentItem | null {
+  const live = v.liveStreamingDetails
+  const isUpcoming = !!live?.scheduledStartTime && !live?.actualStartTime && !live?.actualEndTime
+  const date: string | undefined = isUpcoming
+    ? live.scheduledStartTime
+    : live?.actualStartTime ?? v.snippet?.publishedAt
+  if (!date) return null
+  return {
+    date,
+    type: detectType(v),
+    title: v.snippet?.title ?? "",
+    videoId: v.id,
+    thumbnail: bestThumb(v.snippet?.thumbnails),
+    durationSec: parseDurationSec(v.contentDetails?.duration),
+    ...(isUpcoming ? { status: "upcoming" as const } : {}),
+  }
+}
 
 // --- Cache API ヘルパ ------------------------------------------------------
 
@@ -296,6 +361,92 @@ async function getSnapshot(env: Env, ctx: ExecutionContext): Promise<LiveSnapsho
   }
 }
 
+// --- contents.json の差分パッチ ---------------------------------------------
+
+const CACHE_CONTENTS = "https://otoile.cache/contents-patched"
+let contentsInflight: Promise<ContentItem[]> | null = null
+
+/** GitHub Actions が6時間毎に更新する完全な一覧。Workerの外側で生成されたものをベースに使う */
+async function fetchContentsBase(env: Env): Promise<ContentItem[]> {
+  if (!env.CONTENTS_BASE_URL) return []
+  try {
+    const res = await fetch(env.CONTENTS_BASE_URL, {
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      cf: { cacheTtl: 0, cacheEverything: false },
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return Array.isArray(data) ? (data as ContentItem[]) : []
+  } catch {
+    return []
+  }
+}
+
+/** 直近の動画/配信をYouTube APIから取得し、ベースの一覧に上書き・先頭追加でパッチする */
+async function fetchContentsUpstream(env: Env, ctx: ExecutionContext): Promise<ContentItem[]> {
+  const patchSize = Math.min(50, num(env.CONTENTS_PATCH_SIZE, 30))
+
+  const [base, pl] = await Promise.all([
+    fetchContentsBase(env),
+    ytGet(env, "playlistItems", {
+      part: "contentDetails",
+      playlistId: uploadsPlaylistId(env.YT_CHANNEL_ID),
+      maxResults: patchSize,
+    }),
+  ])
+
+  const ids: string[] = (pl.items ?? []).map((i: any) => i.contentDetails.videoId)
+  const recent: ContentItem[] = []
+  if (ids.length) {
+    const vs = await ytGet(env, "videos", {
+      part: "snippet,contentDetails,liveStreamingDetails",
+      id: ids.join(","),
+    })
+    for (const v of vs.items ?? []) {
+      const item = toContentItem(v)
+      if (item) recent.push(item)
+    }
+  }
+
+  // videoId をキーに、直近取得分(recent)でベースを上書き・先頭追加する
+  const byId = new Map(base.map((c) => [c.videoId, c]))
+  for (const item of recent) byId.set(item.videoId, item)
+  const merged = [...byId.values()].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))
+
+  const ttl = num(env.CONTENTS_TTL_SEC, 300)
+  ctx.waitUntil(cacheWrite(CACHE_CONTENTS, merged, ttl + SWR_WINDOW_SEC))
+  return merged
+}
+
+function refreshContents(env: Env, ctx: ExecutionContext): Promise<ContentItem[]> {
+  if (!contentsInflight) {
+    contentsInflight = fetchContentsUpstream(env, ctx).finally(() => {
+      contentsInflight = null
+    })
+  }
+  return contentsInflight
+}
+
+async function getContents(env: Env, ctx: ExecutionContext): Promise<ContentItem[]> {
+  const ttl = num(env.CONTENTS_TTL_SEC, 300)
+  const cached = await cacheRead<ContentItem[]>(CACHE_CONTENTS)
+
+  if (cached) {
+    if (cached.ageSec < ttl) return cached.value
+    if (cached.ageSec < ttl + SWR_WINDOW_SEC) {
+      ctx.waitUntil(refreshContents(env, ctx).catch(() => {}))
+      return cached.value
+    }
+  }
+
+  try {
+    return await refreshContents(env, ctx)
+  } catch (e) {
+    if (cached) return cached.value // 上流が落ちていても古い一覧で凌ぐ
+    throw e
+  }
+}
+
 // --- HTTP --------------------------------------------------------------------
 
 function corsHeaders(env: Env, req: Request): Record<string, string> {
@@ -357,6 +508,25 @@ export default {
           ...cors,
           // ブラウザ側は短めに。エッジのキャッシュは Cache API 側で管理している
           "cache-control": `public, max-age=${Math.min(30, ttl)}, stale-while-revalidate=120`,
+        })
+      } catch {
+        return json({ error: "upstream_unavailable" }, 503, {
+          ...cors,
+          "cache-control": "no-store",
+        })
+      }
+    }
+
+    if (pathname === "/api/contents") {
+      if (!env.YT_API_KEY || !env.YT_CHANNEL_ID) {
+        return json({ error: "not_configured" }, 500, cors)
+      }
+      try {
+        const contents = await getContents(env, ctx)
+        const ttl = num(env.CONTENTS_TTL_SEC, 300)
+        return json(contents, 200, {
+          ...cors,
+          "cache-control": `public, max-age=${Math.min(60, ttl)}, stale-while-revalidate=300`,
         })
       } catch {
         return json({ error: "upstream_unavailable" }, 503, {

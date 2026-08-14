@@ -27,7 +27,32 @@ async function getJson<T>(name: string, revalidateSec: number): Promise<T | null
 }
 
 export const fetchLive = () => getJson<LiveStatus>("live.json", 60)
-export const fetchContents = () => getJson<ContentItem[]>("contents.json", 3600)
+
+/**
+ * 動画/配信一覧。Cloudflare Worker の /api/contents を優先する。
+ * こちらは直近分をYouTube APIで差分パッチ済みなので、6時間毎cronの contents.json
+ * (worker/README.md 参照) より新着・配信中/予定の反映が速い。
+ * liveApiBaseUrl 未設定、または Worker が失敗した場合は contents.json にフォールバックする。
+ */
+export async function fetchContents(): Promise<ContentItem[] | null> {
+  const base = site.liveApiBaseUrl?.replace(/\/$/, "")
+  if (base) {
+    try {
+      const res = await fetch(`${base}/api/contents`, {
+        signal: AbortSignal.timeout(8000),
+        cache: "no-store",
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (Array.isArray(data)) return data as ContentItem[]
+      }
+    } catch {
+      // フォールバックへ
+    }
+  }
+  return getJson<ContentItem[]>("contents.json", 3600)
+}
+
 export const fetchReport = () => getJson<Report>("report.json", 3600)
 /** WIKI「これまでの歩み」（登録者・再生数のマイルストーンを日次で自動追記） */
 export const fetchWiki = () => getJson<WikiFile>("wiki.json", 3600)
