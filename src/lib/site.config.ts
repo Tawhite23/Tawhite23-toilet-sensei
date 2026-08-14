@@ -11,11 +11,28 @@ export const site = {
   intro:
     "27歳・高身長・高イケメン・高優男。マイクラ参加型を中心に、APEX・ポケモン・マリカと毎日全力配信。お前らを笑顔に。",
 
+  /** 配信者本人の呼称。SEOの「表記ゆれ」対策で構造化データの alternateName に入れる */
+  personName: "おトイレ先生",
+  /**
+   * 表記ゆれの一覧。ローマ字表記でしかヒットしない状態を避けるため、
+   * 構造化データ(JSON-LD)の alternateName としてまとめて申告する。
+   */
+  aliases: ["おトイレ先生", "otoiresensei", "オトイレ先生", "お手洗い先生", "おトイレせんせい"],
+  /**
+   * <meta name="description"> の既定値。
+   * ★重要: 必ず「おトイレ先生」を含めること。
+   *   以前は intro をそのまま使っていたが、intro には配信者名が一度も出てこないため、
+   *   「おトイレ先生」で検索したときに手掛かりが無かった（ローマ字はURLに含まれるので拾われていた）。
+   */
+  description:
+    "おトイレ先生（otoiresensei）の非公式ファンサイト。配信アーカイブのセリフ全文検索、配信カレンダー、名言集、活動レポート、プロフィールWIKIをまとめています。",
+
   // 公開データJSONの取得元。
   // GitHub Actions がコミットするリポジトリの raw URL を指定（デプロイを待たず15分毎の live.json が反映される）。
   // 空文字にするとサイト同梱の /data/*.json を読む。
   dataBaseUrl: "https://raw.githubusercontent.com/Tawhite23/Tawhite23-toilet-sensei/main/public/data",
 // 例: "https://raw.githubusercontent.com/<owner>/<repo>/main/public/data"
+
 
   sns: {
     youtube: "https://www.youtube.com/channel/UCmxpPhu7kAWWnoQ_cY0clTQ",
