@@ -1,0 +1,29 @@
+name = "otoile-live"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+# AbortSignal.timeout / caches.default を素直に使うために有効化
+compatibility_flags = ["nodejs_compat"]
+
+# 無料プランのまま運用する。使用量が跳ねたら Cloudflare ダッシュボードで
+# これらの数値を上げれば、再デプロイ無しで上流の呼び出し頻度を落とせる。
+[vars]
+YT_CHANNEL_ID = "UCmxpPhu7kAWWnoQ_cY0clTQ"
+ALLOW_ORIGINS = "https://otoiresensei-pj.web.app,http://localhost:3000"
+
+# --- サーバ側TTL(秒): 上流の YouTube API を叩く間隔 ---
+LIVE_TTL_SEC = "60"
+IDLE_TTL_SEC = "300"
+STATS_TTL_SEC = "600"
+
+# --- クライアント側のポーリング間隔(ミリ秒) ---
+CLIENT_LIVE_POLL_MS = "60000"
+CLIENT_IDLE_POLL_MS = "300000"
+
+# 緊急ブレーキ。"1" にするとサイト側のポーリングが止まる(初回1回だけ取得する)
+DISABLED = "0"
+
+# YT_API_KEY は [vars] に書かず、必ず secret として登録すること:
+#   npx wrangler secret put YT_API_KEY
+
+[observability]
+enabled = true

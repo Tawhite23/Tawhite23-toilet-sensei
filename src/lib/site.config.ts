@@ -33,6 +33,19 @@ export const site = {
   dataBaseUrl: "https://raw.githubusercontent.com/Tawhite23/Tawhite23-toilet-sensei/main/public/data",
 // 例: "https://raw.githubusercontent.com/<owner>/<repo>/main/public/data"
 
+  /**
+   * リアルタイム配信ステータス API (Cloudflare Worker) のベースURL。末尾スラッシュなし。
+   *
+   * ★ここが空文字の間は、従来どおり live.json（15分毎のcron生成）にフォールバックする。
+   *   つまり未設定でもサイトは壊れない。Worker をデプロイしたら URL を入れること。
+   *
+   * なぜ必要か: 本体は静的エクスポートで YouTube API キーを置けないため、
+   *   cron でJSONを作るしかなく、更新が15分（実際は遅延して35〜40分）遅れていた。
+   *   Worker を挟むと60秒更新になり、同接数も表示できる。
+   *   デプロイ手順は worker/README.md を参照。
+   * 例: "https://otoile-live.<subdomain>.workers.dev"
+   */
+  liveApiBaseUrl: "https://otoile-live.otoiresensei.workers.dev",
 
   sns: {
     youtube: "https://www.youtube.com/channel/UCmxpPhu7kAWWnoQ_cY0clTQ",

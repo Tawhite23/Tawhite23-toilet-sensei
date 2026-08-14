@@ -123,6 +123,113 @@ body::after {
   opacity: 0.6;
 }
 
+/* ============================================================
+   メインタイトル(h1): 「版ズレ」アニメーション
+   ------------------------------------------------------------
+   kickers.tokyo の .wordmark を参考にした構造をそのまま借りつつ、
+   表現を本サイトのテーマ(紙・印刷)に翻訳している。
+   向こうはネオングリーンのRGB分離グリッチだが、こちらは
+   オレンジとピンクの版が一瞬ズレる「多色刷りの見当ズレ」にした。
+
+   借りている要点は3つ:
+     1. data-text を ::before/::after で複製し clip-path で横帯に切る
+     2. 96%前後の一瞬だけ動かす = ほとんどの時間は静止していて、たまに走る
+     3. steps() でアナログに滑らせずデジタルにカクつかせる
+   ============================================================ */
+.ink-title {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.ink-title__base {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  /* 初回だけ、左から刷られるように現れる */
+  animation: ink-print 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ink-title__ghost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.ink-title__ghost::before,
+.ink-title__ghost::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+}
+/* オレンジの版: 上寄りの帯がズレる */
+.ink-title__ghost::before {
+  color: var(--c-accent);
+  z-index: -1;
+  clip-path: inset(10% 0 58%);
+  animation: ink-slip-a 3.7s steps(2, jump-none) infinite;
+}
+/* ピンクの版: 下寄りの帯が、別の周期でズレる */
+.ink-title__ghost::after {
+  color: var(--c-warm);
+  z-index: -2;
+  clip-path: inset(60% 0 8%);
+  animation: ink-slip-b 2.9s steps(2, jump-none) infinite;
+}
+
+@keyframes ink-print {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+@keyframes ink-slip-a {
+  0%, 87%, 100% { opacity: 0; transform: none; }
+  88% { opacity: 0.9; clip-path: inset(10% 0 58%); transform: translate(-0.055em, 0.012em); }
+  91% { opacity: 0.9; clip-path: inset(40% 0 36%); transform: translate(0.045em, -0.012em); }
+  94% { opacity: 0.7; clip-path: inset(66% 0 6%); transform: translate(-0.03em, 0.008em); }
+  96% { opacity: 0; transform: none; }
+}
+@keyframes ink-slip-b {
+  0%, 79%, 100% { opacity: 0; transform: none; }
+  81% { opacity: 0.65; clip-path: inset(52% 0 26%); transform: translate(0.05em, 0.014em); }
+  85% { opacity: 0.65; clip-path: inset(6% 0 78%); transform: translate(-0.04em, -0.01em); }
+  88% { opacity: 0; transform: none; }
+}
+
+/* 見出し脇の罫線: 中央から引かれる(kickersのタグライン両脇と同じ手) */
+.rule-line {
+  height: 1px;
+  background: color-mix(in srgb, var(--c-ink) 30%, transparent);
+  transform: scaleX(0);
+  animation: rule-draw 0.8s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes rule-draw {
+  to { transform: scaleX(1); }
+}
+
+/* ============================================================
+   ロードマップ年表(WikiTimeline)
+   kickers.tokyo /history の構造を借用:
+     中央の縦レール + スクロール連動の進捗バー + 左右交互のカード。
+   表現はテーマに合わせ、レールをミシン目、進捗をオレンジのインクにしている。
+   ============================================================ */
+.roadmap-rail {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--c-border) 0 6px,
+    transparent 6px 12px
+  );
+}
+/* カードは巻物が下りるように開く(origin-top の scaleY) */
+.roadmap-card {
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
 /* 配信中リング: グラデーションを回転させる */
 @keyframes ring-rotate {
   to { transform: rotate(360deg); }
@@ -148,5 +255,11 @@ body::after {
 }
 @media (prefers-reduced-motion: reduce) {
   .live-ring::before { animation: none; }
+  /* 版ズレは無限ループなので、時間を詰めるのではなく完全に消す
+     (0.01ms の無限ループは再描画が走り続けてかえって負荷になる) */
+  .ink-title__ghost { display: none; }
+  .ink-title__base { animation: none; }
+  .rule-line { transform: scaleX(1); animation: none; }
+  .roadmap-card { transition: none; }
   *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { useRouter, useSearchParams } from "next/navigation"
 import Calendar from "./Calendar"
+import LiveStatusCard from "./LiveStatusCard"
 
 // キーワード検索(MiniSearchを内包)と名言集は、そのタブを開くまで
 // JS自体を読み込ませない（コード分割）。カレンダーだけ見る人の初期表示を軽くする。
@@ -141,6 +142,12 @@ export default function CalendarTabs() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-28 pt-8 md:pt-24">
+      {/* いま配信中か（リアルタイム）→ いつ配信するか（カレンダー）の順で並べる。
+          追跡の仕組みは src/lib/liveClient.ts / worker/ を参照。
+          このサイトは「新規ページを作らない」方針なので、配信ステータスは
+          既存のカレンダーページの先頭に置いている。 */}
+      <LiveStatusCard className="mb-6" />
+
       <div
         ref={barRef}
         role="tablist"

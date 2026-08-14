@@ -1,26 +1,19 @@
 "use client"
-import { useEffect, useState } from "react"
-import { fetchLive } from "@/lib/data"
-import type { LiveStatus } from "@/lib/types"
 import { site } from "@/lib/site.config"
+import { useLiveNow } from "@/lib/useLiveNow"
 
 /**
  * チャンネルアイコン + 配信中リング。
- * live.json を1分毎にポーリングし、配信中なら回転グラデーションリングと
- * 「LIVE」バッジ(配信ページへのリンク)を表示する。
+ *
+ * データ源は useLiveNow（Cloudflare Worker の /api/live、未設定なら live.json）。
+ * 以前はこのコンポーネント自身が live.json を60秒ポーリングしていたが、
+ * 参照先の live.json が15分に1回しか更新されないため実質的に無意味だった。
+ * ポーリングの制御は src/lib/liveClient.ts に一本化してある。
  */
 export default function LiveRing() {
-  const [live, setLive] = useState<LiveStatus | null>(null)
-
-  useEffect(() => {
-    let alive = true
-    const load = () => fetchLive().then((d) => alive && setLive(d))
-    load()
-    const t = setInterval(load, 60_000)
-    return () => { alive = false; clearInterval(t) }
-  }, [])
-
+  const { live } = useLiveNow()
   const isLive = !!live?.isLive
+
   const icon = (
     <span className={`relative inline-block ${isLive ? "live-ring" : ""}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}

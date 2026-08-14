@@ -186,7 +186,13 @@ export default function ProfileScroll() {
               チャンネル開設からの節目を記録していくコーナー。
               登録者数・総再生数の桁が繰り上がるたびに自動で追記されます。
             </p>
-            <WikiTimeline />
+            {/* 年表だけは中央レールの左右にカードを振り分けるため、
+                max-w-2xl の本文カラムから画面幅いっぱいに"はみ出させる"。
+                親が mx-auto で中央にあるので、left-1/2 + -translate-x-1/2 で
+                画面中央に対して中央揃えになる。 */}
+            <div className="lg:relative lg:left-1/2 lg:w-[min(92vw,1100px)] lg:-translate-x-1/2">
+              <WikiTimeline />
+            </div>
           </section>
         </Reveal>
 

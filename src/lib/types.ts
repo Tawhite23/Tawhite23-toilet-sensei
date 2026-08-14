@@ -9,6 +9,33 @@ export interface LiveStatus {
   checkedAt: string // ISO8601
 }
 
+/**
+ * Cloudflare Worker (/api/live) が返すリアルタイムのスナップショット。
+ * LiveStatus の上位互換で、同接数・サムネ・登録者数まで含む。
+ * worker/src/index.ts の LiveSnapshot と同じ形にすること。
+ */
+export interface LiveNow {
+  isLive: boolean
+  videoId: string | null
+  title: string | null
+  /** 同時接続数。配信者が非公開にしている場合は null */
+  viewerCount: number | null
+  startedAt: string | null // ISO8601
+  thumbnail: string | null
+  subscriberCount: number | null
+  viewCount: number | null
+  checkedAt: string // ISO8601
+  /** live=上流取得直後 / cache=TTL内 / stale=上流障害時の生き残り / fallback=live.json 経由 */
+  source: "live" | "cache" | "stale" | "fallback"
+}
+
+/** Worker (/api/config) のポーリング設定。再デプロイ無しでサーバから間隔を変えられる */
+export interface LiveRuntimeConfig {
+  disabled: boolean
+  livePollMs: number
+  idlePollMs: number
+}
+
 /** contents.json: 動画/配信一覧（配列） */
 export interface ContentItem {
   date: string // ISO8601。アーカイブ=actualStartTime、予定=scheduledStartTime(実際の配信予定日)

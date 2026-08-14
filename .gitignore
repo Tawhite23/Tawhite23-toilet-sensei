@@ -76,3 +76,9 @@ node_modules/
 # Python (scripts/transcribe.py)
 __pycache__/
 *.pyc
+
+# Cloudflare Wrangler (worker/)
+.wrangler/
+
+# APIキーの一時受け渡し用（絶対にコミットしない）
+*.secret.tmp
