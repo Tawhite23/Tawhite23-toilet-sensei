@@ -27,7 +27,12 @@ export interface MonthlyReport {
   videoCount: number
   totalDurationSec: number
   subscriberCount: number | null // 月末時点スナップショット。null=データ欠損(補完しない)
-  viewCount: number | null // 同上
+  viewCount: number | null // 同上（累計）
+  /**
+   * その月の視聴回数（累計ではない）。YouTube Studio 由来 = scripts/report-backfill.json。
+   * 累計の viewCount とは集計対象が異なる（Studioは非公開/削除済み動画も含む）ため別枠で持つ。
+   */
+  monthlyViews?: number | null
 }
 export type Report = Record<string, MonthlyReport>
 

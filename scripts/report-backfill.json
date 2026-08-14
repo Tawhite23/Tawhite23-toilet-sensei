@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "YouTube Studio アナリティクス(全期間・月別)から取り込んだ過去の実績。",
+    "公開APIの channels.list では『現在の累計』しか取れず、過去month分の登録者/再生数は",
+    "日次スナップショットを取り始めた2026-07以降しか記録が無い(=それ以前は欠損)。",
+    "そこで Studio の月別データから過去分を復元し、build-report.mjs がこれを取り込む。",
+    "",
+    "取得元: Studio > アナリティクス > 詳細モード > 全期間 / 内訳=日付 / 月別",
+    "取得日: 2026-08-14  (全期間合計: 視聴回数 146,968 / チャンネル登録者 +356)",
+    "",
+    "subscriberCount = その月末時点の累計登録者数。",
+    "  Studio の月別『チャンネル登録者(純増)』を古い月から積み上げて算出。",
+    "  検算: 2026-07末の算出値=349 に対し、APIスナップショットの実測値=350 (誤差1、記録タイミング差)。",
+    "  ※ 当月は build-report.mjs が API 実測値で上書きするため、ここには過去月のみ置く。",
+    "",
+    "monthlyViews = その月の視聴回数(累計ではない)。",
+    "  ※ 累計の viewCount には入れないこと。Studio の累計(2026-07末で138,874)は",
+    "    公開APIの viewCount(同時点で111,260)と一致しない。Studio は非公開/削除済み動画の",
+    "    再生数も含むのに対し、APIのチャンネル統計は現存する公開動画のみを数えるため。",
+    "    両者を1本の系列に混ぜると増減が不自然になるので、月別視聴回数として別に持つ。"
+  ],
+  "months": {
+    "2025-08": { "subscriberCount": 2, "monthlyViews": 72 },
+    "2025-09": { "subscriberCount": 12, "monthlyViews": 612 },
+    "2025-10": { "subscriberCount": 59, "monthlyViews": 6565 },
+    "2025-11": { "subscriberCount": 65, "monthlyViews": 3648 },
+    "2025-12": { "subscriberCount": 128, "monthlyViews": 5249 },
+    "2026-01": { "subscriberCount": 175, "monthlyViews": 25112 },
+    "2026-02": { "subscriberCount": 220, "monthlyViews": 31177 },
+    "2026-03": { "subscriberCount": 241, "monthlyViews": 7580 },
+    "2026-04": { "subscriberCount": 274, "monthlyViews": 14356 },
+    "2026-05": { "subscriberCount": 289, "monthlyViews": 11597 },
+    "2026-06": { "subscriberCount": 322, "monthlyViews": 16126 },
+    "2026-07": { "monthlyViews": 16780 }
+  }
+}
