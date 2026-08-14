@@ -1,57 +1,311 @@
 [
   {
-    "date": "2026-08-02T12:00:00Z",
+    "date": "2026-08-21T11:00:00Z",
+    "type": "live",
+    "title": "#マイクラ  SKY DIMENSION ➀ 【アドオンハンターズ】",
+    "videoId": "AAf-B5ZpuNo",
+    "thumbnail": "https://i.ytimg.com/vi/AAf-B5ZpuNo/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-16T10:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 辛味チキン day6　#Mtuber",
+    "videoId": "t12g74RLAEk",
+    "thumbnail": "https://i.ytimg.com/vi/t12g74RLAEk/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-14T11:30:00Z",
+    "type": "live",
+    "title": "#マイクラ  レモンかけるか？？",
+    "videoId": "e4OgqTxfR84",
+    "thumbnail": "https://i.ytimg.com/vi/e4OgqTxfR84/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-14T09:30:00Z",
+    "type": "live",
+    "title": "#めっちゃカメレオン 俺はトカゲ",
+    "videoId": "iFM43sXKHJU",
+    "thumbnail": "https://i.ytimg.com/vi/iFM43sXKHJU/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-13T12:08:33Z",
+    "type": "live",
+    "title": "#マリオカート8dx 直座体前屈5㎝",
+    "videoId": "hhC3vlcQAXc",
+    "thumbnail": "https://i.ytimg.com/vi/hhC3vlcQAXc/maxresdefault.jpg",
+    "durationSec": 12224
+  },
+  {
+    "date": "2026-08-13T10:23:49Z",
+    "type": "live",
+    "title": "#マイクラ参加型 モドリ玉 day5　#Mtuber",
+    "videoId": "3nqb7X6BTHg",
+    "thumbnail": "https://i.ytimg.com/vi/3nqb7X6BTHg/maxresdefault.jpg",
+    "durationSec": 6059
+  },
+  {
+    "date": "2026-08-13T09:01:06Z",
+    "type": "live",
+    "title": "#雑談 ナスの素焼き",
+    "videoId": "QqRVwiNM_T0",
+    "thumbnail": "https://i.ytimg.com/vi/QqRVwiNM_T0/maxresdefault.jpg",
+    "durationSec": 4788
+  },
+  {
+    "date": "2026-08-12T11:19:54Z",
+    "type": "live",
+    "title": "#マイクラ 反省してます",
+    "videoId": "2q4KsdjZkD8",
+    "thumbnail": "https://i.ytimg.com/vi/2q4KsdjZkD8/maxresdefault.jpg",
+    "durationSec": 15997
+  },
+  {
+    "date": "2026-08-12T07:13:23Z",
+    "type": "video",
+    "title": "#shorts 台パンの数だけ増える配信者 #マリオカート8dx #Mtuber",
+    "videoId": "aGrf_wexYss",
+    "thumbnail": "https://i.ytimg.com/vi/aGrf_wexYss/maxresdefault.jpg",
+    "durationSec": 61
+  },
+  {
+    "date": "2026-08-12T03:58:27Z",
+    "type": "video",
+    "title": "#マリオカート8dx 台パンの数だけ増える配信者 #shorts #Mtuber",
+    "videoId": "7vT8FWiuLzo",
+    "thumbnail": "https://i.ytimg.com/vi/7vT8FWiuLzo/maxresdefault.jpg",
+    "durationSec": 59
+  },
+  {
+    "date": "2026-08-11T12:21:38Z",
+    "type": "live",
+    "title": "#マリオカート8dx Youtube様Google様任天堂様へ反省してます。 ​#MTuber",
+    "videoId": "WlKmQuORpJA",
+    "thumbnail": "https://i.ytimg.com/vi/WlKmQuORpJA/maxresdefault.jpg",
+    "durationSec": 11456
+  },
+  {
+    "date": "2026-08-11T09:58:40Z",
+    "type": "live",
+    "title": "#マイクラ参加型 50m 6.9 day4　#Mtuber",
+    "videoId": "mDiQgiEXmP4",
+    "thumbnail": "https://i.ytimg.com/vi/mDiQgiEXmP4/maxresdefault.jpg",
+    "durationSec": 8419
+  },
+  {
+    "date": "2026-08-10T11:22:33Z",
+    "type": "live",
+    "title": "#マイクラ参加型 ぜんまいざむらい",
+    "videoId": "LaYtz4rPnSs",
+    "thumbnail": "https://i.ytimg.com/vi/LaYtz4rPnSs/maxresdefault.jpg",
+    "durationSec": 16215
+  },
+  {
+    "date": "2026-08-10T09:50:01Z",
+    "type": "video",
+    "title": "#マリオカート8dx 猛者達を退け1位を！#Mtuber",
+    "videoId": "ZythSJf1QLs",
+    "thumbnail": "https://i.ytimg.com/vi/ZythSJf1QLs/maxresdefault.jpg",
+    "durationSec": 78
+  },
+  {
+    "date": "2026-08-10T09:13:31Z",
+    "type": "video",
+    "title": "#shorts 爆誕Mtuber  #Mtuber",
+    "videoId": "Psky29vB500",
+    "thumbnail": "https://i.ytimg.com/vi/Psky29vB500/maxresdefault.jpg",
+    "durationSec": 62
+  },
+  {
+    "date": "2026-08-09T12:19:38Z",
+    "type": "live",
+    "title": "#マリオカート8dx アイシールド21 #Mtuber",
+    "videoId": "-KlRv16gKJE",
+    "thumbnail": "https://i.ytimg.com/vi/-KlRv16gKJE/maxresdefault.jpg",
+    "durationSec": 8329
+  },
+  {
+    "date": "2026-08-09T11:15:56Z",
+    "type": "live",
+    "title": "#雑談 ホトトギス",
+    "videoId": "PD9DICuQvgQ",
+    "thumbnail": "https://i.ytimg.com/vi/PD9DICuQvgQ/maxresdefault.jpg",
+    "durationSec": 3501
+  },
+  {
+    "date": "2026-08-08T14:53:58Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第4回ハードコアチャレンジLV7",
+    "videoId": "_xQa0Geu51Y",
+    "thumbnail": "https://i.ytimg.com/vi/_xQa0Geu51Y/maxresdefault.jpg",
+    "durationSec": 3823
+  },
+  {
+    "date": "2026-08-07T11:32:21Z",
+    "type": "live",
+    "title": "#マイクラ  EXPANSE DIMENSION ➀【アドオンハンターズ】",
+    "videoId": "F1Ck4fIrdf4",
+    "thumbnail": "https://i.ytimg.com/vi/F1Ck4fIrdf4/maxresdefault.jpg",
+    "durationSec": 12990
+  },
+  {
+    "date": "2026-08-06T12:21:53Z",
+    "type": "live",
+    "title": "#マリオカート8dx ラミレス監督",
+    "videoId": "VoHzveHmUww",
+    "thumbnail": "https://i.ytimg.com/vi/VoHzveHmUww/maxresdefault.jpg",
+    "durationSec": 7424
+  },
+  {
+    "date": "2026-08-06T11:00:13Z",
+    "type": "live",
+    "title": "#マイクラ参加型  PVP初心者がベッドウォーズで10連勝出来るまで何日かかるのか？day3",
+    "videoId": "0lx9_7Nf7QU",
+    "thumbnail": "https://i.ytimg.com/vi/0lx9_7Nf7QU/maxresdefault.jpg",
+    "durationSec": 4768
+  },
+  {
+    "date": "2026-08-06T05:58:38Z",
+    "type": "video",
+    "title": "#shorts 配信回史上1番意味不明なシーン　#マリオカート8dx",
+    "videoId": "b8rhoJqDGPo",
+    "thumbnail": "https://i.ytimg.com/vi/b8rhoJqDGPo/maxresdefault.jpg",
+    "durationSec": 9
+  },
+  {
+    "date": "2026-08-06T01:40:16Z",
+    "type": "video",
+    "title": "#マイクラ 台パン発狂椅子パン詰め合わせパック① #shorts",
+    "videoId": "Cfh0M4T5zQ0",
+    "thumbnail": "https://i.ytimg.com/vi/Cfh0M4T5zQ0/maxresdefault.jpg",
+    "durationSec": 31
+  },
+  {
+    "date": "2026-08-05T11:18:08Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第3回ハードコアチャレンジLV7",
+    "videoId": "G7BqrKxdcPY",
+    "thumbnail": "https://i.ytimg.com/vi/G7BqrKxdcPY/maxresdefault.jpg",
+    "durationSec": 8542
+  },
+  {
+    "date": "2026-08-04T12:30:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx キンチョール",
+    "videoId": "guVjoK6Nn8M",
+    "thumbnail": "https://i.ytimg.com/vi/guVjoK6Nn8M/maxresdefault.jpg",
+    "durationSec": 7118
+  },
+  {
+    "date": "2026-08-04T10:32:23Z",
+    "type": "live",
+    "title": "#apex参加型    ゑ",
+    "videoId": "9sKlEyN6sy8",
+    "thumbnail": "https://i.ytimg.com/vi/9sKlEyN6sy8/maxresdefault.jpg",
+    "durationSec": 6881
+  },
+  {
+    "date": "2026-08-03T12:57:55Z",
+    "type": "live",
+    "title": "#マイクラ参加型  PVP初心者がベッドウォーズで10連勝出来るまで何日かかるのか？day3",
+    "videoId": "EZ4T_RQPLQw",
+    "thumbnail": "https://i.ytimg.com/vi/EZ4T_RQPLQw/maxresdefault.jpg",
+    "durationSec": 3289
+  },
+  {
+    "date": "2026-08-02T12:31:28Z",
     "type": "live",
     "title": "#マリオカート8dx パンイチアームカバー",
     "videoId": "VpbUyzfh_sQ",
-    "thumbnail": "https://i.ytimg.com/vi/VpbUyzfh_sQ/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/VpbUyzfh_sQ/maxresdefault.jpg",
+    "durationSec": 7622
   },
   {
-    "date": "2026-08-01T10:30:00Z",
+    "date": "2026-08-01T13:02:50Z",
+    "type": "live",
+    "title": "#マイクラ参加型 第2回ハードコアチャレンジLV7",
+    "videoId": "k9zX_OrKSHw",
+    "thumbnail": "https://i.ytimg.com/vi/k9zX_OrKSHw/maxresdefault.jpg",
+    "durationSec": 6053
+  },
+  {
+    "date": "2026-08-01T10:43:50Z",
+    "type": "live",
+    "title": "#マイクラ  Aether Legends ④【アドオンハンターズ】",
+    "videoId": "NOeOO_0GW9I",
+    "thumbnail": "https://i.ytimg.com/vi/NOeOO_0GW9I/maxresdefault.jpg",
+    "durationSec": 8227
+  },
+  {
+    "date": "2026-07-31T13:45:34Z",
     "type": "live",
     "title": "#マイクラ参加型 第1回ハードコアチャレンジLV7",
     "videoId": "9gwOFeUv_Xs",
-    "thumbnail": "https://i.ytimg.com/vi/9gwOFeUv_Xs/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/9gwOFeUv_Xs/maxresdefault.jpg",
+    "durationSec": 6039
   },
   {
-    "date": "2026-07-30T12:15:00Z",
+    "date": "2026-07-31T12:12:53Z",
+    "type": "live",
+    "title": "#マイクラ  Aether Legends ④【アドオンハンターズ】",
+    "videoId": "XsjQahztcE0",
+    "thumbnail": "https://i.ytimg.com/vi/XsjQahztcE0/maxresdefault.jpg",
+    "durationSec": 5468
+  },
+  {
+    "date": "2026-07-30T12:27:26Z",
     "type": "live",
     "title": "#マリオカート8dx キウイの皮食べますか？",
     "videoId": "K3ylbU3Omac",
-    "thumbnail": "https://i.ytimg.com/vi/K3ylbU3Omac/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/K3ylbU3Omac/maxresdefault.jpg",
+    "durationSec": 9502
   },
   {
-    "date": "2026-07-28T12:15:00Z",
+    "date": "2026-07-30T10:02:03Z",
+    "type": "live",
+    "title": "#マイクラ  Aether Legends ③【アドオンハンターズ】",
+    "videoId": "N8HlP3ovitk",
+    "thumbnail": "https://i.ytimg.com/vi/N8HlP3ovitk/maxresdefault.jpg",
+    "durationSec": 7414
+  },
+  {
+    "date": "2026-07-29T11:26:44Z",
+    "type": "live",
+    "title": "#マイクラ  Aether Legends ➁【アドオンハンターズ】",
+    "videoId": "1S4pQEtn3-Q",
+    "thumbnail": "https://i.ytimg.com/vi/1S4pQEtn3-Q/maxresdefault.jpg",
+    "durationSec": 6085
+  },
+  {
+    "date": "2026-07-28T12:48:32Z",
     "type": "live",
     "title": "#マリオカート8dx ドラゴンクラッシュ！",
     "videoId": "aRrQ-Z9unW8",
-    "thumbnail": "https://i.ytimg.com/vi/aRrQ-Z9unW8/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/aRrQ-Z9unW8/maxresdefault.jpg",
+    "durationSec": 6763
   },
   {
-    "date": "2026-07-28T10:00:00Z",
+    "date": "2026-07-28T10:29:05Z",
     "type": "live",
     "title": "#マイクラ  Aether Legends 【アドオンハンターズ】",
     "videoId": "OW-CMS7ZGNE",
-    "thumbnail": "https://i.ytimg.com/vi/OW-CMS7ZGNE/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/OW-CMS7ZGNE/maxresdefault.jpg",
+    "durationSec": 6693
   },
   {
-    "date": "2026-07-27T10:30:00Z",
+    "date": "2026-07-27T11:21:11Z",
     "type": "live",
     "title": "#マイクラ  ドラゴンズ1.6 調査 【アドオンハンターズ】",
     "videoId": "bb3oVA2YlLQ",
-    "thumbnail": "https://i.ytimg.com/vi/bb3oVA2YlLQ/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/bb3oVA2YlLQ/maxresdefault.jpg",
+    "durationSec": 7570
   },
   {
     "date": "2026-07-26T12:17:20Z",
@@ -1499,7 +1753,7 @@
     "title": "#原神 完全初見プレイ①",
     "videoId": "I_TMaShJxjY",
     "thumbnail": "https://i.ytimg.com/vi/I_TMaShJxjY/maxresdefault.jpg",
-    "durationSec": 4552
+    "durationSec": 4553
   },
   {
     "date": "2026-04-13T12:45:53Z",
@@ -1523,7 +1777,7 @@
     "title": "#ピクミン2  ノーデスチャレンジ➁",
     "videoId": "1grr0H5D-eE",
     "thumbnail": "https://i.ytimg.com/vi/1grr0H5D-eE/maxresdefault.jpg",
-    "durationSec": 6587
+    "durationSec": 6588
   },
   {
     "date": "2026-04-12T01:26:14Z",
@@ -1763,7 +2017,7 @@
     "title": "第1回ガチ建築王決定戦結果発表【選抜】詳細は概要欄",
     "videoId": "RGSlYv57VMU",
     "thumbnail": "https://i.ytimg.com/vi/RGSlYv57VMU/maxresdefault.jpg",
-    "durationSec": 19119
+    "durationSec": 19120
   },
   {
     "date": "2026-03-28T13:36:43Z",
@@ -1995,7 +2249,7 @@
     "title": "月末恒例の報告会2026/2",
     "videoId": "ruEOrJJilLM",
     "thumbnail": "https://i.ytimg.com/vi/ruEOrJJilLM/maxresdefault.jpg",
-    "durationSec": 2806
+    "durationSec": 2807
   },
   {
     "date": "2026-02-27T14:37:23Z",
