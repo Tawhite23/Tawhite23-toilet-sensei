@@ -214,12 +214,29 @@ export default function WikiTimeline() {
             )
           })}
 
-          {/* 最下部に常駐する「現在」。ロードマップの現在地マーカーとして置く */}
+          {/*
+            最下部に常駐する「現在」。ロードマップの現在地マーカーとして置く。
+            この箱だけ lg:mx-auto でレール中央に置いているため、通常のカードと違って
+            「ドット→箱」が同じ横位置に重なる。通常カードはレールから左右にオフセット
+            されるのでドットと箱が重ならないが、ここは意図的に箱をレール上に載せている。
+            そのため箱には mt-14 の余白を取ってドットの真下まで空け、
+            その間を縦線でつなぐことで「レールがそのままこの箱に着地する」ように見せている。
+            (この余白が無いと、ドットが箱の上端の枠線に重なって表示され、
+             丸だけが宙に浮いた見た目になる。
+             ★余白は div の margin-top ではなく li の padding-top で作ること。
+               margin-top は、間に padding/border/インライン内容が無い先頭の子要素だと
+               親(li)の外側へ相殺(collapse)されてしまい、liごと下にずれるだけで
+               ドットと箱の間の隙間にはならない。padding は相殺されないので確実。)
+          */}
           {wiki?.current && (
-            <li className="relative">
+            <li className="relative pt-14">
               <span
                 aria-hidden="true"
                 className="absolute top-6 z-10 block h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-accent/25 left-[1px] lg:left-1/2 lg:-ml-[7px]"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute top-[38px] h-[18px] w-px bg-accent left-[7px] lg:left-1/2 lg:-ml-px"
               />
               <div className="pl-8 lg:mx-auto lg:max-w-md lg:pl-0">
                 <div className="rounded-xl border-2 border-accent bg-base-800 p-4 text-center sm:p-5">
