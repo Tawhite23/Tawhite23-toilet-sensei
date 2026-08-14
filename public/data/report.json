@@ -1,93 +1,106 @@
 {
   "2026-08": {
-    "liveCount": 20,
+    "liveCount": 21,
     "videoCount": 6,
-    "totalDurationSec": 151802,
+    "totalDurationSec": 164025,
     "subscriberCount": 356,
-    "viewCount": 121676
+    "viewCount": 121676,
+    "monthlyViews": null
   },
   "2026-07": {
     "liveCount": 43,
     "videoCount": 8,
     "totalDurationSec": 433492,
     "subscriberCount": 349,
-    "viewCount": 113459
+    "viewCount": 113459,
+    "monthlyViews": 16780
   },
   "2026-06": {
     "liveCount": 43,
     "videoCount": 2,
     "totalDurationSec": 397954,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 322,
+    "viewCount": null,
+    "monthlyViews": 16126
   },
   "2026-05": {
     "liveCount": 39,
     "videoCount": 4,
     "totalDurationSec": 443308,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 289,
+    "viewCount": null,
+    "monthlyViews": 11597
   },
   "2026-04": {
     "liveCount": 78,
     "videoCount": 2,
     "totalDurationSec": 870870,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 274,
+    "viewCount": null,
+    "monthlyViews": 14356
   },
   "2026-03": {
     "liveCount": 29,
     "videoCount": 1,
     "totalDurationSec": 443545,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 241,
+    "viewCount": null,
+    "monthlyViews": 7580
   },
   "2026-02": {
     "liveCount": 45,
     "videoCount": 6,
     "totalDurationSec": 566696,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 220,
+    "viewCount": null,
+    "monthlyViews": 31177
   },
   "2026-01": {
     "liveCount": 33,
     "videoCount": 3,
     "totalDurationSec": 439047,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 175,
+    "viewCount": null,
+    "monthlyViews": 25112
   },
   "2025-12": {
     "liveCount": 32,
     "videoCount": 0,
     "totalDurationSec": 517296,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 128,
+    "viewCount": null,
+    "monthlyViews": 5249
   },
   "2025-11": {
     "liveCount": 32,
     "videoCount": 0,
     "totalDurationSec": 672894,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 65,
+    "viewCount": null,
+    "monthlyViews": 3648
   },
   "2025-10": {
     "liveCount": 37,
     "videoCount": 0,
     "totalDurationSec": 522547,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 59,
+    "viewCount": null,
+    "monthlyViews": 6565
   },
   "2025-09": {
     "liveCount": 30,
     "videoCount": 0,
     "totalDurationSec": 528231,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 12,
+    "viewCount": null,
+    "monthlyViews": 612
   },
   "2025-08": {
     "liveCount": 12,
     "videoCount": 0,
     "totalDurationSec": 290484,
-    "subscriberCount": null,
-    "viewCount": null
+    "subscriberCount": 2,
+    "viewCount": null,
+    "monthlyViews": 72
   }
 }
