@@ -24,5 +24,12 @@
     "kind": "format",
     "reason": "ERROR: [youtube] vXVU9zs2uVo: No video formats found!",
     "at": "2026-07-25T07:48:50Z"
+  },
+  {
+    "videoId": "noOrRU6_h3I",
+    "count": 1,
+    "kind": "format",
+    "reason": "ERROR: [youtube] noOrRU6_h3I: No video formats found!",
+    "at": "2026-08-15T13:42:14Z"
   }
 ]
