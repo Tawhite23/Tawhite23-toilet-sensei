@@ -524,24 +524,49 @@ const clampInt = (v: string | null, def: number, min: number, max: number) => {
 
 async function handleSearch(env: Env, url: URL, cors: Record<string, string>) {
   const q = (url.searchParams.get("q") ?? "").trim()
-  const limit = clampInt(url.searchParams.get("limit"), 50, 1, 200)
+  // 既定を大きめ(300)にしているのは、画面側が「配信ごとにまとめて表示」する
+  // ためにある程度まとまった件数を必要とするため。300件でも数十KBに収まる。
+  const limit = clampInt(url.searchParams.get("limit"), 300, 1, 500)
   const offset = clampInt(url.searchParams.get("offset"), 0, 0, 5000)
+  const video = (url.searchParams.get("video") ?? "").trim()
+  const month = (url.searchParams.get("month") ?? "").trim() // YYYY-MM
+  const sort = url.searchParams.get("sort") === "newest" ? "newest" : "relevance"
 
   const match = toMatchExpr(q)
   if (!match) return json({ query: q, total: 0, items: [] }, 200, cors)
 
+  // 絞り込みは画面側ではなくSQL側で行う。
+  // クライアント側で絞ると「取得した範囲の中だけ」が対象になってしまい、
+  // 該当が範囲外にあると見つからないため。
+  const conds: string[] = ["segments MATCH ?"]
+  const filterBinds: (string | number)[] = [match]
+  if (video && /^[\w-]{5,20}$/.test(video)) {
+    conds.push("vid = ?")
+    filterBinds.push(video)
+  }
+  if (month && /^\d{4}-\d{2}$/.test(month)) {
+    conds.push("ymd LIKE ?")
+    filterBinds.push(`${month}%`)
+  }
+  const where = conds.join(" AND ")
   // bm25 の昇順が関連度の高い順（FTS5のスコアは負値で小さいほど良い）
+  const order = sort === "newest" ? "ymd DESC, st ASC" : "rank"
+
   const sql = `
     SELECT vid, sid, st, txt, ymd, bm25(segments) AS rank
     FROM segments
-    WHERE segments MATCH ?
-    ORDER BY rank
+    WHERE ${where}
+    ORDER BY ${order}
     LIMIT ? OFFSET ?`
-  const countSql = `SELECT count(*) AS n FROM segments WHERE segments MATCH ?`
+  const countSql = `SELECT count(*) AS n FROM segments WHERE ${where}`
 
   const [rows, cnt] = await Promise.all([
-    env.DB.prepare(sql).bind(match, limit, offset).all(),
-    env.DB.prepare(countSql).bind(match).first<{ n: number }>(),
+    env.DB.prepare(sql)
+      .bind(...filterBinds, limit, offset)
+      .all(),
+    env.DB.prepare(countSql)
+      .bind(...filterBinds)
+      .first<{ n: number }>(),
   ])
 
   const items = (rows.results ?? []).map((r: any) => ({
@@ -569,12 +594,21 @@ async function handleQuotes(env: Env, url: URL, cors: Record<string, string>) {
   const counts: Record<string, number> = {}
   for (const r of (rowsAgg.results ?? []) as any[]) counts[r.row] = r.n
 
+  // 並び順。画面側で並べ替えると「取得済みの範囲の中だけ」が対象になるためサーバで行う。
+  const sortKey = url.searchParams.get("sort")
+  const order =
+    sortKey === "newest"
+      ? "ymd DESC, score DESC"
+      : sortKey === "long"
+        ? "length(txt) DESC, score DESC"
+        : "score DESC"
+
   const where = row ? "WHERE row = ?" : ""
   const binds = row ? [row, limit, offset] : [limit, offset]
   const list = await env.DB.prepare(
     `SELECT id, vid, sid, st, txt, ymd, row, score, picked
      FROM quotes ${where}
-     ORDER BY picked DESC, score DESC
+     ORDER BY picked DESC, ${order}
      LIMIT ? OFFSET ?`
   )
     .bind(...binds)

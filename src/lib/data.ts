@@ -3,9 +3,7 @@ import type {
   ContentItem,
   LiveStatus,
   PopularFile,
-  QuotesFile,
   Report,
-  SearchIndexFile,
   Transcript,
   TranscriptManifest,
   WikiFile,
@@ -61,14 +59,11 @@ export const fetchWiki = () => getJson<WikiFile>("wiki.json", 3600)
 /** 文字起こし済み配信の一覧 */
 export const fetchTranscriptManifest = () =>
   getJson<TranscriptManifest>("transcripts/manifest.json", 3600)
-/** MiniSearch 書き出しインデックス（本文は含まない） */
-export const fetchSearchIndex = () => getJson<SearchIndexFile>("search-index.json", 3600)
-/** 年別シャード（search-index.json が sharded=true のとき） */
-export const fetchSearchIndexShard = (file: string) => getJson<SearchIndexFile>(file, 3600)
+// 検索インデックスと名言集は Cloudflare Worker + D1 へ移行済み。
+// src/lib/quoteSearch.ts の searchQuotes / fetchQuoteGallery を使うこと。
+// （search-index.json は最大97MBまで肥大する見込みだったため廃止した）
 /** よく出るキーワード/口癖ランキング */
 export const fetchPopular = () => getJson<PopularFile>("popular.json", 3600)
-/** 自動抽出した名言候補（五十音索引つき）*/
-export const fetchQuotes = () => getJson<QuotesFile>("quotes.json", 3600)
 /** 1配信ぶんの発言本文（検索ヒット表示時に遅延取得する） */
 export const fetchTranscript = (videoId: string) =>
   getJson<Transcript>(`transcripts/${encodeURIComponent(videoId)}.json`, 3600)

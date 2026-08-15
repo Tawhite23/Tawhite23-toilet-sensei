@@ -1,7 +1,6 @@
 "use client"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import type MiniSearch from "minisearch"
 import {
   fetchPopular,
   fetchTranscript,
@@ -16,21 +15,24 @@ import QuotePlayerModal from "./QuotePlayerModal"
 import {
   fmtTime,
   highlightParts,
-  loadSearchIndexes,
-  searchAll,
+  searchQuotes,
   splitForHighlight,
-  type IndexedHit,
+  type SearchHit,
 } from "@/lib/quoteSearch"
 
 /**
  * 配信アーカイブのキーワード全文検索。
- * - 完全にクライアント側で検索（サーバなし / MiniSearch）
- * - manifest / search-index / popular はこのコンポーネントのマウント時に初めて取得する
+ * - 検索は Cloudflare Worker + D1(FTS5) に問い合わせる。
+ *   以前は search-index.json を丸ごと落としてクライアント側で検索していたが、
+ *   配信本数の増加で肥大し(13.6MB→全件で約97MB見込み)、開くだけで重かった。
+ *   いまは必要な数十件ぶん(数十KB)しか受け取らない。
+ * - 絞り込み(年月/配信)と並び順もサーバ側で処理する。
+ *   クライアントで絞ると「取得済みの範囲の中だけ」が対象になり取りこぼすため。
+ * - 本文は検索結果に含まれる。transcripts/<id>.json の取得は
+ *   モーダルで「前後の発言」を出すときだけ必要。
+ * - manifest / popular はこのコンポーネントのマウント時に初めて取得する
  *   （= 「キーワードから探す」タブを開くまで読み込まない）
- * - 本文は search-index に含まれないため、ヒットした配信の transcripts/<id>.json を遅延取得
  * - 検索語・選択動画・秒数は URLクエリ(?q= / ?v= / ?t=)と双方向同期（シェア用）
- *
- * 将来 /quotes へ切り出せるよう、ページ側からは差し込むだけで動く独立実装にしている。
  */
 
 type SortMode = "relevance" | "newest"
@@ -56,10 +58,13 @@ export default function QuoteSearch() {
 
   const [manifest, setManifest] = useState<TranscriptManifestItem[] | null>(null)
   const [popular, setPopular] = useState<PopularPhrase[]>([])
-  const [engines, setEngines] = useState<MiniSearch[] | null>(null)
-  const [segmentCount, setSegmentCount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
+
+  // 検索結果（サーバから受け取る）
+  const [hits, setHits] = useState<SearchHit[]>([])
+  const [total, setTotal] = useState(0)
+  const [searching, setSearching] = useState(false)
 
   /** videoId -> 本文（遅延取得のキャッシュ） */
   const [texts, setTexts] = useState<Record<string, Transcript>>({})
@@ -75,16 +80,10 @@ export default function QuoteSearch() {
     let alive = true
     ;(async () => {
       try {
-        const [m, p, idx] = await Promise.all([
-          fetchTranscriptManifest(),
-          fetchPopular(),
-          loadSearchIndexes(),
-        ])
+        const [m, p] = await Promise.all([fetchTranscriptManifest(), fetchPopular()])
         if (!alive) return
         setManifest(m ?? [])
         setPopular(p?.items ?? [])
-        setEngines(idx.engines)
-        setSegmentCount(idx.segmentCount)
       } catch {
         if (alive) setLoadError("検索データの読み込みに失敗しました")
       } finally {
@@ -154,64 +153,56 @@ export default function QuoteSearch() {
     return [...set].sort((a, b) => b.localeCompare(a))
   }, [manifest])
 
-  // ---- 検索実行
-  const hits = useMemo<IndexedHit[]>(() => {
-    if (!engines || !query) return []
-    return searchAll(engines, query)
-  }, [engines, query])
-
-  // ---- 絞り込み＋配信ごとのグルーピング
-  const groups = useMemo(() => {
-    const filtered = hits.filter((h) => {
-      if (videoFilter && h.v !== videoFilter) return false
-      if (monthFilter) {
-        const d = manifestById.get(h.v)?.date ?? ""
-        if (d.slice(0, 7) !== monthFilter) return false
-      }
-      return true
-    })
-    const byVideo = new Map<string, IndexedHit[]>()
-    for (const h of filtered) {
-      const arr = byVideo.get(h.v) ?? []
-      arr.push(h)
-      byVideo.set(h.v, arr)
-    }
-    let list = [...byVideo.entries()].map(([videoId, items]) => ({
-      videoId,
-      meta: manifestById.get(videoId),
-      items: items.sort((a, b) => a.s - b.s).slice(0, MAX_HITS_PER_VIDEO),
-      topScore: Math.max(...items.map((i) => i.score)),
-      total: items.length,
-    }))
-    list =
-      sort === "newest"
-        ? list.sort((a, b) => (b.meta?.date ?? "").localeCompare(a.meta?.date ?? ""))
-        : list.sort((a, b) => b.topScore - a.topScore)
-    return list.slice(0, MAX_VIDEO_GROUPS)
-  }, [hits, videoFilter, monthFilter, manifestById, sort])
-
-  // ---- 表示に必要な配信の本文だけ遅延取得
+  // ---- 検索実行（サーバ側。絞り込み・並び順もサーバに渡す）
   useEffect(() => {
-    const need = groups.map((g) => g.videoId).filter((v) => !texts[v] && !fetching.current.has(v))
-    if (!need.length) return
-    for (const v of need) fetching.current.add(v)
-    let alive = true
-    ;(async () => {
-      const loaded = await Promise.all(need.map((v) => fetchTranscript(v).catch(() => null)))
-      if (!alive) return
-      setTexts((prev) => {
-        const next = { ...prev }
-        loaded.forEach((doc, i) => {
-          if (doc) next[need[i]] = doc
-        })
-        return next
-      })
-    })()
-    return () => {
-      alive = false
+    if (!query) {
+      setHits([])
+      setTotal(0)
+      setSearching(false)
+      return
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [groups])
+    const ac = new AbortController()
+    setSearching(true)
+    searchQuotes(query, {
+      video: videoFilter || undefined,
+      month: monthFilter || undefined,
+      sort,
+      signal: ac.signal,
+    })
+      .then((r) => {
+        setHits(r.items)
+        setTotal(r.total)
+      })
+      .finally(() => setSearching(false))
+    return () => ac.abort()
+  }, [query, videoFilter, monthFilter, sort])
+
+  // ---- 配信ごとのグルーピング（絞り込みは済んでいるのでまとめるだけ）
+  const groups = useMemo(() => {
+    const byVideo = new Map<string, SearchHit[]>()
+    for (const h of hits) {
+      const arr = byVideo.get(h.videoId) ?? []
+      arr.push(h)
+      byVideo.set(h.videoId, arr)
+    }
+    // サーバが関連度/新着順で並べて返すので、その並びを配信単位でも保つ
+    const orderSeen = [...byVideo.keys()]
+    const list = orderSeen.map((videoId) => {
+      const items = byVideo.get(videoId)!
+      return {
+        videoId,
+        meta: manifestById.get(videoId),
+        items: [...items].sort((a, b) => a.start - b.start).slice(0, MAX_HITS_PER_VIDEO),
+        total: items.length,
+      }
+    })
+    return list.slice(0, MAX_VIDEO_GROUPS)
+  }, [hits, manifestById])
+
+  // ※ 以前はここで「表示中の配信すべて」の transcripts/<id>.json を先読みしていた。
+  //   検索結果に本文が含まれるようになったため不要（最大12本ぶんの全文を
+  //   毎回落としていたので、そのまま残すと数MBの無駄になる）。
+  //   本文が要るのはモーダルの「前後の発言」だけなので、下の1本だけ取得する。
 
   // モーダル対象の本文も確保
   useEffect(() => {
@@ -226,14 +217,9 @@ export default function QuoteSearch() {
 
   const parts = useMemo(() => highlightParts(query), [query])
 
-  const segText = (videoId: string, segId: number) =>
-    texts[videoId]?.segments.find((s) => s.id === segId)?.text ?? ""
-
-  const idToSegId = (id: string) => Number(id.split("#")[1] ?? -1)
-
   // モーダルの前後移動用に、現在の絞り込み後ヒットをフラットに並べる
   const flatHits = useMemo(
-    () => groups.flatMap((g) => g.items.map((h) => ({ videoId: g.videoId, segId: idToSegId(h.id) }))),
+    () => groups.flatMap((g) => g.items.map((h) => ({ videoId: g.videoId, segId: h.segmentId }))),
     [groups]
   )
 
@@ -254,7 +240,7 @@ export default function QuoteSearch() {
   // ---- 初回ロード中: スケルトン
   if (loading) return <Skeleton />
 
-  const hasData = (manifest?.length ?? 0) > 0 && segmentCount > 0
+  const hasData = (manifest?.length ?? 0) > 0
 
   return (
     <div className="space-y-5">
@@ -356,13 +342,20 @@ export default function QuoteSearch() {
 
       {hasData && query && (
         <p className="text-xs text-ink-dim" aria-live="polite">
-          「{query}」の検索結果 {hits.length.toLocaleString()} 件
-          {groups.length > 0 && ` / ${groups.length} 配信`}
+          {searching ? (
+            "検索中…"
+          ) : (
+            <>
+              「{query}」の検索結果 {total.toLocaleString()} 件
+              {groups.length > 0 && ` / ${groups.length} 配信`}
+              {total > hits.length && `（上位 ${hits.length.toLocaleString()} 件を表示）`}
+            </>
+          )}
         </p>
       )}
 
       {/* 結果（配信ごとにグルーピング） */}
-      {hasData && query && groups.length === 0 && (
+      {hasData && query && !searching && groups.length === 0 && (
         <div className="rounded-2xl border border-dashed border-base-700 p-6 text-center">
           <p className="text-sm text-ink-dim">
             「{query}」に一致する発言は見つかりませんでした。
@@ -409,16 +402,19 @@ export default function QuoteSearch() {
             </div>
             <ul>
               {g.items.map((h) => {
-                const segId = idToSegId(h.id)
-                const text = segText(g.videoId, segId)
+                // 本文は検索APIが一緒に返すので、ここで transcripts を引く必要はない
+                const text = h.text
                 return (
-                  <li key={h.id} className="border-b border-base-700 last:border-b-0">
+                  <li
+                    key={`${h.videoId}#${h.segmentId}`}
+                    className="border-b border-base-700 last:border-b-0"
+                  >
                     <button
-                      onClick={() => openModal(g.videoId, segId, h.s)}
+                      onClick={() => openModal(g.videoId, h.segmentId, h.start)}
                       className="flex w-full items-start gap-3 px-3 py-2.5 text-left transition-colors hover:bg-base-700/50"
                     >
                       <span className="mt-0.5 shrink-0 rounded border border-base-700 px-1.5 py-0.5 font-mono text-[11px] text-accent">
-                        {fmtTime(h.s)}
+                        {fmtTime(h.start)}
                       </span>
                       <span className="text-sm leading-relaxed">
                         {text ? (
@@ -448,7 +444,7 @@ export default function QuoteSearch() {
       <p className="border-t border-base-700 pt-4 text-[11px] leading-relaxed text-ink-dim">
         ※ 本サイトは非公式のファンサイトです。文字起こしはAIによる自動生成のため、
         誤認識・聞き取り誤りを含みます。正確な内容は元の配信アーカイブをご確認ください。
-        {segmentCount > 0 && ` （収録発言 ${segmentCount.toLocaleString()} 件）`}
+        {total > 0 && ` （この検索のヒット ${total.toLocaleString()} 件）`}
       </p>
 
       {/* 再生モーダル */}

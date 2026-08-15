@@ -1,112 +1,107 @@
-import MiniSearch from "minisearch"
-import type { SearchIndexFile } from "./types"
-import { fetchSearchIndex, fetchSearchIndexShard } from "./data"
+import { site } from "./site.config"
 
 /**
- * 日本語向けトークナイザ（MiniSearch用）
- * ★重要: バッチ側 scripts/ja-tokenize.mjs の tokenizeJa と完全に同じロジックにすること。
- *   ここを変更したら必ず両方を更新し、search-index.json を再生成する。
+ * セリフ全文検索のクライアント。
  *
- * 方式: 日本語(漢字/かな)は文字bigram、英数字は単語単位。
- *       bigramは辞書不要・部分一致に強く、インデックスサイズも予測しやすい。
+ * 以前は search-index.json（MiniSearchの書き出し）をブラウザが丸ごと落として
+ * 端末側で検索していた。配信本数が増えるほどこのファイルが肥大し、
+ * 現在13.6MB・全件消化後は約97MBに達する見込みだった
+ * （年別シャードはあるが全シャードを一括取得する作りで、分割しても軽くならない）。
+ *
+ * いまは Cloudflare Worker + D1(エッジのSQLite/FTS5) に問い合わせ、
+ * 必要な数十件ぶんだけを受け取る。初回ダウンロードはゼロになる。
+ *
+ * トークナイズ(日本語のbigram分解)はサーバ側が行うため、ここには持たない。
+ * ★サーバ側の実装は worker/src/index.ts の tokenizeJa。
  */
-const JA = /[぀-ヿ㐀-䶿一-鿿豈-﫿]/
-const ALNUM = /[0-9A-Za-zー]/
 
-export function tokenizeJa(text: string): string[] {
-  if (!text) return []
-  const s = String(text).toLowerCase()
-  const tokens: string[] = []
-  let buf = ""
-  const ja: string[] = []
-  const flushAlnum = () => {
-    if (buf) {
-      tokens.push(buf)
-      buf = ""
-    }
-  }
-  const pushJa = () => {
-    if (ja.length === 1) {
-      tokens.push(ja[0])
-    } else {
-      for (let i = 0; i < ja.length - 1; i++) tokens.push(ja[i] + ja[i + 1])
-    }
-    ja.length = 0
-  }
-  for (const ch of s) {
-    if (JA.test(ch)) {
-      flushAlnum()
-      ja.push(ch)
-    } else if (ALNUM.test(ch)) {
-      buf += ch
-      if (ja.length) pushJa()
-    } else {
-      flushAlnum()
-      if (ja.length) pushJa()
-    }
-  }
-  flushAlnum()
-  if (ja.length) pushJa()
-  return tokens
+/** 検索1件ぶん。D1から本文も一緒に返るので、別途 transcripts を引く必要がない */
+export interface SearchHit {
+  videoId: string
+  segmentId: number
+  start: number
+  text: string
+  date: string
 }
 
-/** インデックスに入っているドキュメント（本文は持たない） */
-export interface IndexedHit {
-  id: string // `${videoId}#${segmentId}`
-  v: string // videoId
-  s: number // 開始秒
-  score: number
+export interface SearchResult {
+  total: number
+  items: SearchHit[]
 }
 
-const MS_OPTIONS = {
-  fields: ["t"],
-  storeFields: ["v", "s"],
-  tokenize: tokenizeJa,
-  processTerm: (term: string) => term,
+export interface SearchOptions {
+  video?: string
+  /** YYYY-MM */
+  month?: string
+  sort?: "relevance" | "newest"
+  limit?: number
+  signal?: AbortSignal
 }
 
-/** search-index.json（必要なら年別シャード）を読み込んで MiniSearch を返す */
-export async function loadSearchIndexes(): Promise<{
-  engines: MiniSearch[]
-  segmentCount: number
-  generatedAt: string | null
-}> {
-  const meta = await fetchSearchIndex()
-  if (!meta) return { engines: [], segmentCount: 0, generatedAt: null }
+const EMPTY: SearchResult = { total: 0, items: [] }
 
-  const load = (raw: unknown) =>
-    MiniSearch.loadJSON(typeof raw === "string" ? raw : JSON.stringify(raw), MS_OPTIONS)
-
-  if (meta.sharded && meta.shards?.length) {
-    const shards = await Promise.all(
-      meta.shards.map((s) => fetchSearchIndexShard(s.file).catch(() => null))
-    )
-    const engines = shards
-      .filter((s): s is SearchIndexFile => !!s?.index)
-      .map((s) => load(s.index))
-    return { engines, segmentCount: meta.segmentCount, generatedAt: meta.generatedAt }
-  }
-  if (!meta.index) return { engines: [], segmentCount: meta.segmentCount ?? 0, generatedAt: meta.generatedAt }
-  return { engines: [load(meta.index)], segmentCount: meta.segmentCount, generatedAt: meta.generatedAt }
-}
-
-/** 複数エンジン（年別シャード）をまとめて検索し、スコア降順で返す */
-export function searchAll(engines: MiniSearch[], query: string, limit = 400): IndexedHit[] {
+/** 検索APIを叩く。未設定・失敗時は空結果を返す（画面は「見つかりません」表示になる） */
+export async function searchQuotes(
+  query: string,
+  opts: SearchOptions = {}
+): Promise<SearchResult> {
   const q = query.trim()
-  if (!q || engines.length === 0) return []
-  const hits: IndexedHit[] = []
-  for (const engine of engines) {
-    const raw = engine.search(q, {
-      prefix: true,
-      fuzzy: 0.2, // 軽いfuzzy（誤認識・言い回しのズレを吸収）
-      combineWith: "AND",
-    })
-    for (const r of raw) {
-      hits.push({ id: String(r.id), v: String(r.v), s: Number(r.s), score: r.score })
-    }
+  const base = site.liveApiBaseUrl?.replace(/\/$/, "")
+  if (!q || !base) return EMPTY
+
+  const sp = new URLSearchParams({ q, limit: String(opts.limit ?? 300) })
+  if (opts.video) sp.set("video", opts.video)
+  if (opts.month) sp.set("month", opts.month)
+  if (opts.sort) sp.set("sort", opts.sort)
+
+  try {
+    const res = await fetch(`${base}/api/search?${sp.toString()}`, { signal: opts.signal })
+    if (!res.ok) return EMPTY
+    const data = (await res.json()) as SearchResult
+    return { total: Number(data.total) || 0, items: Array.isArray(data.items) ? data.items : [] }
+  } catch {
+    return EMPTY
   }
-  hits.sort((a, b) => b.score - a.score)
-  return hits.slice(0, limit)
+}
+
+/** 名言集1件ぶん */
+export interface QuoteHit extends SearchHit {
+  row: string
+  score: number
+  picked: boolean
+}
+
+export interface QuotesResult {
+  rows: Record<string, number>
+  items: QuoteHit[]
+}
+
+/** 名言集APIを叩く */
+export async function fetchQuoteGallery(
+  opts: {
+    row?: string
+    sort?: "score" | "newest" | "long"
+    limit?: number
+    signal?: AbortSignal
+  } = {}
+): Promise<QuotesResult> {
+  const base = site.liveApiBaseUrl?.replace(/\/$/, "")
+  if (!base) return { rows: {}, items: [] }
+  // 1行あたりの最大が400件なので、既定400なら行を選んだ状態では全件が入る
+  const sp = new URLSearchParams({ limit: String(opts.limit ?? 400) })
+  if (opts.row) sp.set("row", opts.row)
+  if (opts.sort) sp.set("sort", opts.sort)
+  try {
+    const res = await fetch(`${base}/api/quotes?${sp.toString()}`, { signal: opts.signal })
+    if (!res.ok) return { rows: {}, items: [] }
+    const data = (await res.json()) as QuotesResult
+    return {
+      rows: data.rows ?? {},
+      items: Array.isArray(data.items) ? data.items : [],
+    }
+  } catch {
+    return { rows: {}, items: [] }
+  }
 }
 
 /** mm:ss / h:mm:ss */

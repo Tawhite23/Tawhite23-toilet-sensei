@@ -1,14 +1,16 @@
 "use client"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { fetchQuotes, fetchTranscript, fetchTranscriptManifest } from "@/lib/data"
-import type { QuoteItem, Transcript } from "@/lib/types"
-import { fmtTime } from "@/lib/quoteSearch"
+import { fetchTranscript, fetchTranscriptManifest } from "@/lib/data"
+import type { Transcript } from "@/lib/types"
+import { fetchQuoteGallery, fmtTime, type QuoteHit } from "@/lib/quoteSearch"
 import QuotePlayerModal from "./QuotePlayerModal"
 
 /**
  * 名言集（五十音索引つき）。
- * - quotes.json（自動抽出した名言候補）を読み、発言の読みの頭文字で「あ行〜わ行」に分類して表示
+ * - 名言候補は Cloudflare Worker + D1 から取得する（以前は quotes.json を丸ごと読んでいた）。
+ *   行の絞り込みと並び順はサーバ側で処理する。画面側で並べ替えると
+ *   「取得済みの範囲の中だけ」が対象になり、取りこぼすため。
  * - キーワード検索と違い、こちらは「頻度が低くても印象的な、長さのある言い切り」を集めたもの
  * - 行の選択は ?row= と双方向同期（シェア用）。再生モーダルは ?v= / ?t=
  * - 名言集タブを開いたときに初めて quotes.json を取得する
@@ -25,7 +27,7 @@ export default function QuoteGallery() {
   const params = useSearchParams()
   const urlRow = params.get("row") ?? ""
 
-  const [items, setItems] = useState<QuoteItem[] | null>(null)
+  const [items, setItems] = useState<QuoteHit[] | null>(null)
   const [rows, setRows] = useState<Record<string, number>>({})
   const [row, setRow] = useState(urlRow)
   const [sort, setSort] = useState<SortMode>("score")
@@ -38,22 +40,33 @@ export default function QuoteGallery() {
   const fetching = useRef<Set<string>>(new Set())
   const [modal, setModal] = useState<{ videoId: string; segId: number; start: number } | null>(null)
 
+  // タイトルは manifest から引く（名言データ側は転送量削減のため持たない）
   useEffect(() => {
     let alive = true
-    Promise.all([fetchQuotes(), fetchTranscriptManifest()])
-      .then(([q, m]) => {
-        if (!alive) return
-        setItems(q?.items ?? [])
-        setRows(q?.rows ?? {})
-        const t: Record<string, string> = {}
-        for (const it of m ?? []) t[it.videoId] = it.title
-        setTitles(t)
-      })
-      .finally(() => alive && setLoading(false))
+    fetchTranscriptManifest().then((m) => {
+      if (!alive) return
+      const t: Record<string, string> = {}
+      for (const it of m ?? []) t[it.videoId] = it.title
+      setTitles(t)
+    })
     return () => {
       alive = false
     }
   }, [])
+
+  // 行・並び順が変わるたびにサーバから取り直す
+  useEffect(() => {
+    const ac = new AbortController()
+    setLoading(true)
+    fetchQuoteGallery({ row: row || undefined, sort, signal: ac.signal })
+      .then((q) => {
+        setItems(q.items)
+        // 行ごとの件数は索引UIで使う。絞り込んでも全体の件数が返る
+        if (Object.keys(q.rows).length) setRows(q.rows)
+      })
+      .finally(() => setLoading(false))
+    return () => ac.abort()
+  }, [row, sort])
 
   const syncUrl = useCallback(
     (next: { row?: string; v?: string; t?: string }) => {
@@ -79,14 +92,8 @@ export default function QuoteGallery() {
     syncUrl({ row: next })
   }
 
-  const shown = useMemo(() => {
-    let list = [...(items ?? [])]
-    if (row) list = list.filter((q) => q.row === row)
-    if (sort === "newest") list.sort((a, b) => (b.date || "").localeCompare(a.date || ""))
-    else if (sort === "long") list.sort((a, b) => b.text.length - a.text.length)
-    else list.sort((a, b) => b.score - a.score)
-    return list
-  }, [items, row, sort])
+  // 絞り込みと並び替えはサーバ側で済んでいるので、ここでは何もしない
+  const shown = useMemo(() => items ?? [], [items])
 
   /** 実際に描画するぶん（ページ読み込みを軽く保つため小分けにする） */
   const visible = useMemo(() => shown.slice(0, limit), [shown, limit])
@@ -102,7 +109,7 @@ export default function QuoteGallery() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modal?.videoId])
 
-  const openModal = (q: QuoteItem) => {
+  const openModal = (q: QuoteHit) => {
     setModal({ videoId: q.videoId, segId: q.segmentId, start: q.start })
     syncUrl({ v: q.videoId, t: String(Math.floor(q.start)) })
   }
@@ -215,7 +222,7 @@ export default function QuoteGallery() {
                 <span className="rounded border border-base-700 px-1.5 py-0.5 font-mono text-accent">
                   {fmtTime(q.start)}
                 </span>
-                <span className="truncate">{q.title ?? titles[q.videoId] ?? q.videoId}</span>
+                <span className="truncate">{titles[q.videoId] ?? q.videoId}</span>
                 <span>{(q.date || "").slice(0, 10)}</span>
                 {q.picked && (
                   <span className="rounded-full border border-accent px-1.5 py-0.5 text-accent">推し</span>

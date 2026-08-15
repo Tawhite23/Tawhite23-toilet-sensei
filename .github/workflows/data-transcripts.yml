@@ -205,6 +205,49 @@ jobs:
           node scripts/build-popular.mjs
           node scripts/build-quotes.mjs
 
+      # 2.5) 新しく文字起こしできた配信を D1(検索データベース)へ反映する。
+      #      これが無いと、文字起こしはできても検索に出てこない。
+      #      ingested テーブルで投入済みを判定し、差分だけ入れる
+      #      （D1無料枠は書き込み10万行/日。全件入れ直すと上限に当たる）。
+      #      CLOUDFLARE_API_TOKEN が未設定なら黙ってスキップする（任意の機能）。
+      - name: Sync to D1 (search database)
+        if: always() && github.event.inputs.diagnose != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "CLOUDFLARE_API_TOKEN 未設定のため D1 同期はスキップします"
+            exit 0
+          fi
+          cd worker && npm ci --silent && cd ..
+
+          # 投入済みの配信一覧を取り出す
+          cd worker
+          npx wrangler d1 execute otoile-search --remote --json \
+            --command "SELECT vid FROM ingested" > /tmp/ingested.json || echo '[]' > /tmp/ingested.json
+          cd ..
+          node -e "
+            const fs=require('fs');
+            let rows=[];
+            try{
+              const j=JSON.parse(fs.readFileSync('/tmp/ingested.json','utf8'));
+              rows=(Array.isArray(j)?j:[j]).flatMap(x=>x.results||[]);
+            }catch{}
+            fs.writeFileSync('/tmp/ingested-list.json', JSON.stringify(rows));
+            console.log('already in D1:', rows.length, 'videos');
+          "
+
+          node scripts/build-d1-sql.mjs --ingested /tmp/ingested-list.json
+
+          # 生成されたSQLを順に流し込む
+          cd worker
+          for f in ../out/d1/*.sql; do
+            [ -e "$f" ] || continue
+            echo "--- $f ---"
+            npx wrangler d1 execute otoile-search --remote -y --file="$f"
+          done
+
       # 3) public/data のみコミット（deploy.yml は paths-ignore で起動しない）
       - name: Commit if changed
         if: always() && github.event.inputs.diagnose != 'true'
