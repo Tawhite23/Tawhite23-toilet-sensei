@@ -32,5 +32,14 @@ DISABLED = "0"
 # YT_API_KEY は [vars] に書かず、必ず secret として登録すること:
 #   npx wrangler secret put YT_API_KEY
 
+# セリフ全文検索・名言集のデータベース（エッジのSQLite）。
+# 以前は search-index.json(13.6MB→将来97MB見込み)をブラウザが丸ごと
+# ダウンロードしていたため、配信本数が増えるほど検索ページが重くなっていた。
+# D1に載せてクエリ毎に数KBだけ返す方式へ移行している。
+[[d1_databases]]
+binding = "DB"
+database_name = "otoile-search"
+database_id = "2b745cf3-da6c-41b4-93f0-f778346f32d8"
+
 [observability]
 enabled = true

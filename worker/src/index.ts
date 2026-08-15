@@ -39,6 +39,8 @@
  */
 
 export interface Env {
+  /** セリフ全文検索・名言集のD1データベース（wrangler.toml の d1_databases） */
+  DB: D1Database
   /** YouTube Data API v3 のキー。`wrangler secret put YT_API_KEY` で登録する */
   YT_API_KEY: string
   /** 監視対象チャンネルID (UC...) */
@@ -447,6 +449,153 @@ async function getContents(env: Env, ctx: ExecutionContext): Promise<ContentItem
   }
 }
 
+// --- セリフ全文検索 / 名言集 (D1) --------------------------------------------
+//
+// 従来はブラウザが search-index.json を丸ごと落として MiniSearch で検索していた。
+// 配信本数の増加でこのファイルが肥大するため(13.6MB→全件で97MB見込み)、
+// D1(エッジのSQLite)へ移し、クエリ毎に数KBだけ返す方式にしている。
+
+/**
+ * 日本語向けトークナイザ。
+ * ★重要: scripts/ja-tokenize.mjs / src/lib/quoteSearch.ts と完全に同じロジックにすること。
+ *   投入時と検索時で分解が食い違うと、何も引っかからなくなる。
+ *
+ * 方式: 日本語(漢字/かな)は文字bigram、英数字は単語単位。
+ *   FTS5標準の trigram を使わないのは、3文字以上でないとヒットせず
+ *   「今日」のような2文字の検索語が引けないため（実測で確認済み）。
+ */
+const JA_RE = /[぀-ヿ㐀-䶿一-鿿豈-﫿]/
+const ALNUM_RE = /[0-9A-Za-zー]/
+
+function tokenizeJa(text: string): string[] {
+  if (!text) return []
+  const s = String(text).toLowerCase()
+  const tokens: string[] = []
+  let buf = ""
+  const ja: string[] = []
+  const flushAlnum = () => {
+    if (buf) {
+      tokens.push(buf)
+      buf = ""
+    }
+  }
+  const pushJa = () => {
+    if (ja.length === 1) tokens.push(ja[0])
+    else for (let i = 0; i < ja.length - 1; i++) tokens.push(ja[i] + ja[i + 1])
+    ja.length = 0
+  }
+  for (const ch of s) {
+    if (JA_RE.test(ch)) {
+      flushAlnum()
+      ja.push(ch)
+    } else if (ALNUM_RE.test(ch)) {
+      buf += ch
+      if (ja.length) pushJa()
+    } else {
+      flushAlnum()
+      if (ja.length) pushJa()
+    }
+  }
+  flushAlnum()
+  if (ja.length) pushJa()
+  return tokens
+}
+
+/**
+ * 検索語を FTS5 の MATCH 式へ変換する。
+ * 各トークンを二重引用符で囲んで AND 連結する。
+ * トークンから " を除去しているため、利用者の入力が FTS5 の構文
+ * (OR / NEAR / * など)として解釈されることはない。
+ */
+function toMatchExpr(query: string): string | null {
+  const tokens = tokenizeJa(query)
+    .map((t) => t.replace(/"/g, "").trim())
+    .filter(Boolean)
+  if (!tokens.length) return null
+  // トークンが多すぎるクエリは重いので上限を設ける
+  return tokens.slice(0, 32).map((t) => `"${t}"`).join(" AND ")
+}
+
+const clampInt = (v: string | null, def: number, min: number, max: number) => {
+  const x = Number(v)
+  if (!Number.isFinite(x)) return def
+  return Math.min(max, Math.max(min, Math.trunc(x)))
+}
+
+async function handleSearch(env: Env, url: URL, cors: Record<string, string>) {
+  const q = (url.searchParams.get("q") ?? "").trim()
+  const limit = clampInt(url.searchParams.get("limit"), 50, 1, 200)
+  const offset = clampInt(url.searchParams.get("offset"), 0, 0, 5000)
+
+  const match = toMatchExpr(q)
+  if (!match) return json({ query: q, total: 0, items: [] }, 200, cors)
+
+  // bm25 の昇順が関連度の高い順（FTS5のスコアは負値で小さいほど良い）
+  const sql = `
+    SELECT vid, sid, st, txt, ymd, bm25(segments) AS rank
+    FROM segments
+    WHERE segments MATCH ?
+    ORDER BY rank
+    LIMIT ? OFFSET ?`
+  const countSql = `SELECT count(*) AS n FROM segments WHERE segments MATCH ?`
+
+  const [rows, cnt] = await Promise.all([
+    env.DB.prepare(sql).bind(match, limit, offset).all(),
+    env.DB.prepare(countSql).bind(match).first<{ n: number }>(),
+  ])
+
+  const items = (rows.results ?? []).map((r: any) => ({
+    videoId: r.vid,
+    segmentId: r.sid,
+    start: r.st,
+    text: r.txt,
+    date: r.ymd,
+  }))
+  return json({ query: q, total: cnt?.n ?? items.length, offset, items }, 200, {
+    ...cors,
+    "cache-control": "public, max-age=300",
+  })
+}
+
+async function handleQuotes(env: Env, url: URL, cors: Record<string, string>) {
+  const row = (url.searchParams.get("row") ?? "").trim()
+  const limit = clampInt(url.searchParams.get("limit"), 60, 1, 200)
+  const offset = clampInt(url.searchParams.get("offset"), 0, 0, 5000)
+
+  // 行ごとの件数（五十音索引のUIで使う）
+  const rowsAgg = await env.DB.prepare(
+    "SELECT row, count(*) AS n FROM quotes GROUP BY row"
+  ).all()
+  const counts: Record<string, number> = {}
+  for (const r of (rowsAgg.results ?? []) as any[]) counts[r.row] = r.n
+
+  const where = row ? "WHERE row = ?" : ""
+  const binds = row ? [row, limit, offset] : [limit, offset]
+  const list = await env.DB.prepare(
+    `SELECT id, vid, sid, st, txt, ymd, row, score, picked
+     FROM quotes ${where}
+     ORDER BY picked DESC, score DESC
+     LIMIT ? OFFSET ?`
+  )
+    .bind(...binds)
+    .all()
+
+  const items = (list.results ?? []).map((r: any) => ({
+    videoId: r.vid,
+    segmentId: r.sid,
+    start: r.st,
+    text: r.txt,
+    date: r.ymd,
+    row: r.row,
+    score: r.score,
+    picked: !!r.picked,
+  }))
+  return json({ rows: counts, offset, items }, 200, {
+    ...cors,
+    "cache-control": "public, max-age=3600",
+  })
+}
+
 // --- HTTP --------------------------------------------------------------------
 
 function corsHeaders(env: Env, req: Request): Record<string, string> {
@@ -530,6 +679,21 @@ export default {
         })
       } catch {
         return json({ error: "upstream_unavailable" }, 503, {
+          ...cors,
+          "cache-control": "no-store",
+        })
+      }
+    }
+
+    if (pathname === "/api/search" || pathname === "/api/quotes") {
+      if (!env.DB) return json({ error: "db_not_configured" }, 500, cors)
+      try {
+        const url = new URL(req.url)
+        return pathname === "/api/search"
+          ? await handleSearch(env, url, cors)
+          : await handleQuotes(env, url, cors)
+      } catch (e) {
+        return json({ error: "query_failed", detail: String(e).slice(0, 200) }, 500, {
           ...cors,
           "cache-control": "no-store",
         })
