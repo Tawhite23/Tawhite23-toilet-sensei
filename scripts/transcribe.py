@@ -150,7 +150,7 @@ def ytdlp_supports(option: str) -> bool:
     return option in _help_cache
 
 
-def ytdlp_base(client: str = "") -> list:
+def ytdlp_base(client: str = "", ignore_no_formats: bool = False) -> list:
     cmd = [
         sys.executable, "-m", "yt_dlp",
         "--no-warnings", "--no-playlist",
@@ -166,9 +166,15 @@ def ytdlp_base(client: str = "") -> list:
     # 環境変数 YTDLP_JS_RUNTIME で上書き可（例: "deno"）。
     if ytdlp_supports("--js-runtimes"):
         cmd += ["--js-runtimes", os.environ.get("YTDLP_JS_RUNTIME", "node")]
-    # 字幕だけ取りたい場合、動画形式が取得できなくてもエラーにしない
-    # （字幕は形式の有無と無関係。JSチャレンジが解けない環境でも字幕は取れる）
-    if ytdlp_supports("--ignore-no-formats-error"):
+    # 字幕/メタデータだけ取りたい場合は、動画形式が取得できなくてもエラーにしない
+    # （字幕は形式の有無と無関係。JSチャレンジが解けない環境でも字幕は取れる）。
+    #
+    # 【重要】音声ダウンロードでは絶対に付けないこと。
+    # このフラグはyt-dlpが本来出す失敗理由（例: "Sign in to confirm you're not a bot"）を
+    # 握り潰し、代わりに一般的な "No video formats found!" だけを表示させてしまう。
+    # 実際これが原因で、ボット判定によるLOGIN_REQUIREDを
+    # 「PO Token不足で形式が取れない」と長期間誤診していた。
+    if ignore_no_formats and ytdlp_supports("--ignore-no-formats-error"):
         cmd += ["--ignore-no-formats-error"]
     if client and client != "default":
         cmd += ["--extractor-args", f"youtube:player_client={client}"]
@@ -177,14 +183,15 @@ def ytdlp_base(client: str = "") -> list:
 
 
 def run_ytdlp(extra: list, timeout: int = 5400, retries_per_client: int = 2,
-              check: Path = None) -> subprocess.CompletedProcess:
+              check: Path = None,
+              ignore_no_formats: bool = False) -> subprocess.CompletedProcess:
     """
     player_client を順に切り替えながら yt-dlp を実行する。
     check にパスを渡すと「そのglobにファイルが出来たか」も成功条件に含める。
     """
     last_err = ""
     for client in player_clients():
-        cmd = ytdlp_base(client) + extra
+        cmd = ytdlp_base(client, ignore_no_formats=ignore_no_formats) + extra
         for attempt in range(1, retries_per_client + 1):
             try:
                 proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
@@ -245,7 +252,7 @@ def fetch_subtitle_words(video_id: str, workdir: Path) -> tuple:
             url,
         ]
         try:
-            run_ytdlp(extra, timeout=900)
+            run_ytdlp(extra, timeout=900, ignore_no_formats=True)
         except YtDlpBlocked as e:
             log(f"{kind} fetch failed: {e}")
             continue
@@ -426,8 +433,10 @@ def contents_index() -> dict:
 
 def ytdlp_meta(video_id: str) -> dict:
     """contents.json に無い動画のメタ情報を yt-dlp から取る（API不使用）。"""
+    # メタ情報だけが目的なので、形式が取れなくてもエラーにしない
     proc = run_ytdlp(["--skip-download", "--dump-single-json",
-                      f"https://www.youtube.com/watch?v={video_id}"], timeout=300)
+                      f"https://www.youtube.com/watch?v={video_id}"], timeout=300,
+                     ignore_no_formats=True)
     info = json.loads(proc.stdout)
     upload = info.get("upload_date")
     date = f"{upload[0:4]}-{upload[4:6]}-{upload[6:8]}T00:00:00Z" if upload else ""

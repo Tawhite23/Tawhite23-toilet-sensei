@@ -131,6 +131,30 @@ jobs:
           python -m yt_dlp -v --list-formats \
             "https://www.youtube.com/watch?v=$VID" 2>&1 | tail -60 || true
 
+          # 上の4/5は Cookie 無しなので必ずボット判定に当たる。
+          # 実際の transcribe.py は Cookie を渡しているため、
+          # 「設定済みの Cookie がまだ有効か」をここで切り分ける。
+          echo "===== 6. Cookie の状態 ====="
+          if [ -n "${YT_COOKIES_FILE:-}" ] && [ -f "$YT_COOKIES_FILE" ]; then
+            echo "cookie file: present ($(wc -l < "$YT_COOKIES_FILE") 行)"
+            # 値そのものは出さない。ドメインと有効期限だけ確認する
+            awk '!/^#/ && NF {print $1, $5}' "$YT_COOKIES_FILE" \
+              | sort -u | head -10
+            echo "--- 現在のUNIX時刻: $(date +%s) （上の第2列がこれより小さいものは期限切れ）"
+          else
+            echo "cookie file: NOT SET （シークレット YT_COOKIES が未設定）"
+          fi
+
+          echo "===== 7. Cookie 付きで formats を取得できるか（本命） ====="
+          if [ -n "${YT_COOKIES_FILE:-}" ] && [ -f "$YT_COOKIES_FILE" ]; then
+            python -m yt_dlp -v --list-formats \
+              --js-runtimes node \
+              --cookies "$YT_COOKIES_FILE" \
+              "https://www.youtube.com/watch?v=$VID" 2>&1 | tail -40 || true
+          else
+            echo "(Cookie 未設定のためスキップ)"
+          fi
+
       # 1) 文字起こし（cron=バッチ最大2本 / workflow_dispatch=指定1本）
       #    対象があったのに1本も成功しなかった場合（多くはYouTubeのボット判定）は
       #    exit 1 でこのステップを失敗させ、ジョブ全体を失敗として終了する。
