@@ -185,8 +185,13 @@ jobs:
             # CIは字幕がある配信のみ処理する(--subs-only)。
             # 字幕チェックは1本あたり十数秒で終わるため、多めに走査して
             # 「字幕がある配信」を確実に消化していく。字幕が無い配信は
-            # needs-whisper.json に記録して次の候補へ進む(手元PC実行に委ねる)。
-            python scripts/transcribe.py --subs-only --max 10 \
+            # needs-whisper.json に記録し、--recheck-days 経過後に再確認する
+            # （YouTubeの自動字幕は後から生成されることがあるため）。
+            #
+            # 20本に増やしているのは、滞留していた約190本を消化するため。
+            # 字幕経由は1本あたり十数秒なので20本でも数分で終わる。
+            # 消化しきったら通常は1日数本しか対象が無いので実質的な負荷は増えない。
+            python scripts/transcribe.py --subs-only --max 20 \
               ${{ github.event.inputs.retryFailed == 'true' && '--retry-failed' || '' }}
           fi
 

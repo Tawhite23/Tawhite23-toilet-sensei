@@ -531,6 +531,8 @@ def main() -> int:
                    help="失敗回数の上限を無視して再挑戦する")
     p.add_argument("--subs-only", action="store_true",
                    help="字幕がある配信のみ処理する(CI用)。字幕なしは needs-whisper.json に記録して次へ進む")
+    p.add_argument("--recheck-days", type=float, default=7.0,
+                   help="needs-whisper 入りの配信を再度字幕確認するまでの日数(既定7 / 0で再確認しない)")
     p.add_argument("--strict", dest="tolerate_format_errors", action="store_false",
                    help="「字幕が無く音声も取得できない」ケースも失敗(exit 1)として扱う")
     p.set_defaults(tolerate_format_errors=True)
@@ -551,7 +553,34 @@ def main() -> int:
     needs = load_json(NEEDS_WHISPER, [])
     if not isinstance(needs, list):
         needs = []
-    needs_ids = {n["videoId"] for n in needs if isinstance(n, dict) and n.get("videoId")}
+    # 【重要】needs-whisper 入りでも「一定期間が過ぎたものは字幕を再確認する」。
+    #
+    # YouTubeの自動字幕は配信直後には無く、後から生成されることがある。
+    # needs-whisper.json は「記録した時点では字幕が無かった」という履歴でしかないのに、
+    # 以前は一度入ったら CI(--subs-only) が二度と見に行かない作りだった。
+    # そのため後から字幕が付いても永久に拾われず、189本(533時間)が
+    # 「手元PCでWhisperを回すしかない」状態のまま滞留していた。
+    # （実測では滞留分の35本を抜き取り調査して35本すべてに字幕が付いていた）
+    #
+    # 再確認しても字幕が無ければ at が現在時刻で更新されるので、
+    # 次の再確認はさらに --recheck-days 後になる（毎回全部を舐め直しはしない）。
+    def _needs_is_fresh(n: dict) -> bool:
+        if args.recheck_days <= 0:
+            return True  # 0以下なら従来どおり「一度入ったら再確認しない」
+        at = n.get("at") or ""
+        try:
+            rec = time.mktime(time.strptime(at, "%Y-%m-%dT%H:%M:%SZ"))
+        except Exception:
+            return False  # 日時が壊れている＝再確認する
+        return (time.time() - rec) < args.recheck_days * 86400
+
+    needs_ids = {
+        n["videoId"] for n in needs
+        if isinstance(n, dict) and n.get("videoId") and _needs_is_fresh(n)
+    }
+    n_recheck = len(needs) - len(needs_ids)
+    if n_recheck and args.subs_only:
+        log(f"needs-whisper のうち{n_recheck}本は{args.recheck_days}日以上経過 → 字幕を再確認します")
     fail_count = {f["videoId"]: int(f.get("count") or 0)
                   for f in failures if isinstance(f, dict) and f.get("videoId")}
 
