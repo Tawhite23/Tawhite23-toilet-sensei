@@ -13,7 +13,7 @@
     "build:report": "node scripts/build-report.mjs",
     "build:wiki": "node scripts/build-wiki.mjs",
     "transcribe": "python scripts/transcribe.py",
-    "build:search": "node scripts/build-search-index.mjs && node scripts/build-popular.mjs && node scripts/build-quotes.mjs",
+    "build:search": "node scripts/build-popular.mjs && node scripts/build-quotes.mjs",
     "sync-d1": "node scripts/sync-d1.mjs",
     "protect-data": "node scripts/protect-data.mjs",
     "unprotect-data": "node scripts/unprotect-data.mjs"

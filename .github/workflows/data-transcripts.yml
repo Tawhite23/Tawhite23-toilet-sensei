@@ -201,7 +201,6 @@ jobs:
       - name: Build search index / popular / quotes
         if: always() && github.event.inputs.diagnose != 'true'
         run: |
-          node scripts/build-search-index.mjs
           node scripts/build-popular.mjs
           node scripts/build-quotes.mjs
 
@@ -254,7 +253,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add public/data/transcripts public/data/search-index*.json public/data/popular.json public/data/quotes.json
+          git add public/data/transcripts public/data/popular.json public/data/quotes.json
           git diff --cached --quiet || git commit -m "chore(data): update transcripts/search index [skip ci]"
           for i in 1 2 3 4 5; do
             git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0

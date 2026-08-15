@@ -3,7 +3,8 @@
 #
 # ねらい:
 #   手元PCでWhisper文字起こしをして push したあと、Actionsを手で叩かなくても
-#   本番データ(search-index.json / popular.json / quotes.json)が最新化される。
+#   本番データ(popular.json / quotes.json)が最新化される。
+#   ※ 全文検索は D1 へ移行済み（search-index.json は廃止）。
 #
 # コンフリクト対策:
 #   集計3ファイルを書き込むのは「このワークフロー」と data-transcripts.yml だけ。
@@ -23,7 +24,6 @@ on:
     branches: [main]
     paths:
       - "public/data/transcripts/**"
-      - "scripts/build-search-index.mjs"
       - "scripts/build-popular.mjs"
       - "scripts/build-quotes.mjs"
       - "scripts/stopwords.txt"
@@ -49,7 +49,6 @@ jobs:
 
       - name: Build search index / popular / quotes
         run: |
-          node scripts/build-search-index.mjs
           node scripts/build-popular.mjs
           node scripts/build-quotes.mjs
 
@@ -57,7 +56,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add public/data/search-index*.json public/data/popular.json public/data/quotes.json
+          git add public/data/popular.json public/data/quotes.json
           if git diff --cached --quiet; then
             echo "変更なし（再生成結果が同一）"
             exit 0
