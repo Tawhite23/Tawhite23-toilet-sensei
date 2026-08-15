@@ -32,4 +32,45 @@ cd "$DEST/server"
 npm ci
 npx tsc
 
-echo "[setup-pot] done: $DEST/server (built)"
+# --------------------------------------------------------------------------
+# サーバーを起動する（ここまでのビルドだけでは PO Token は取得できない）
+#
+# 【重要】bgutil のプラグインは http://127.0.0.1:4416 で待ち受けるこのサーバーに
+# 問い合わせてトークンを得る。サーバーが起動していないとトークンが空のままとなり、
+# yt-dlp は "No video formats found!" で失敗する。
+# 厄介なのは「メタデータ(タイトル・字幕一覧)は取れてしまう」点で、
+# 一見ネットワークもボット判定も問題なく見えるため原因を見誤りやすい。
+# 実際このリポジトリでは、ビルドだけして起動を忘れていたため
+# 「CIからは音声を取得できない」と誤って結論づけていた。
+#
+# GitHub Actions ではステップをまたいでバックグラウンドプロセスが生き残るので、
+# ここで起動しておけば後続の Transcribe ステップから利用できる。
+# --------------------------------------------------------------------------
+POT_BASE="http://127.0.0.1:4416"
+POT_LOG="${RUNNER_TEMP:-/tmp}/bgutil-pot.log"
+
+if curl -sf --max-time 2 "$POT_BASE/ping" >/dev/null 2>&1; then
+  echo "[setup-pot] provider already running at $POT_BASE"
+else
+  echo "[setup-pot] starting provider server..."
+  nohup node build/main.js >"$POT_LOG" 2>&1 &
+  disown || true
+
+  for i in $(seq 1 30); do
+    if curl -sf --max-time 2 "$POT_BASE/ping" >/dev/null 2>&1; then
+      echo "[setup-pot] provider ready at $POT_BASE (${i}s)"
+      break
+    fi
+    if [ "$i" -eq 30 ]; then
+      echo "[setup-pot] ERROR: provider did not become ready within 30s" >&2
+      echo "--- $POT_LOG ---" >&2
+      cat "$POT_LOG" >&2 || true
+      # ここで失敗させる。黙って進むと後段が "No video formats found!" で
+      # 失敗し、原因がPO Tokenだと分からなくなるため。
+      exit 1
+    fi
+    sleep 1
+  done
+fi
+
+echo "[setup-pot] done: $DEST/server (built & running)"

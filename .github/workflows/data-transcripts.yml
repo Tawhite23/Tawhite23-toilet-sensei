@@ -100,6 +100,18 @@ jobs:
       - name: Transcribe
         id: transcribe
         run: |
+          # PO Token プロバイダの生存確認。
+          # ここが落ちていると yt-dlp は "No video formats found!" で失敗するが、
+          # メタデータだけは取れるためネットワーク障害と見分けが付きにくい。
+          # 先に明示的に確認して、原因を取り違えないようにする。
+          if curl -sf --max-time 3 http://127.0.0.1:4416/ping >/dev/null; then
+            echo "PO Token provider: alive"
+          else
+            echo "::error::PO Token provider (127.0.0.1:4416) が応答しません。字幕なし配信の音声取得は失敗します。"
+            cat "$RUNNER_TEMP/bgutil-pot.log" || true
+            exit 1
+          fi
+
           if [ -n "${{ github.event.inputs.videoId }}" ]; then
             python scripts/transcribe.py \
               --video-id "${{ github.event.inputs.videoId }}" \

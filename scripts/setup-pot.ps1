@@ -37,4 +37,49 @@ npm ci
 npx tsc
 Pop-Location
 
-Write-Host "[setup-pot] done: $dest\server (built)"
+# --------------------------------------------------------------------------
+# サーバーを起動する（ここまでのビルドだけでは PO Token は取得できない）
+#
+# 【重要】bgutil のプラグインは http://127.0.0.1:4416 で待ち受けるこのサーバーに
+# 問い合わせてトークンを得る。起動していないと yt-dlp は
+# "No video formats found!" で失敗する。
+# メタデータ(タイトル・字幕一覧)だけは取れてしまうため原因を見誤りやすい。
+# --------------------------------------------------------------------------
+$potBase = "http://127.0.0.1:4416"
+$serverDir = Join-Path $dest "server"
+
+function Test-Pot {
+    try {
+        Invoke-WebRequest -Uri "$potBase/ping" -TimeoutSec 2 -UseBasicParsing | Out-Null
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+if (Test-Pot) {
+    Write-Host "[setup-pot] provider already running at $potBase"
+} else {
+    Write-Host "[setup-pot] starting provider server..."
+    # 別ウィンドウを出さずにバックグラウンド起動する。
+    # 文字起こしが終わっても起動したままなので、止めたい場合は
+    # そのプロセス(node build\main.js)を終了すること。
+    Start-Process -FilePath "node" -ArgumentList "build\main.js" `
+        -WorkingDirectory $serverDir -WindowStyle Hidden | Out-Null
+
+    $ready = $false
+    for ($i = 1; $i -le 30; $i++) {
+        if (Test-Pot) {
+            Write-Host "[setup-pot] provider ready at $potBase (${i}s)"
+            $ready = $true
+            break
+        }
+        Start-Sleep -Seconds 1
+    }
+    if (-not $ready) {
+        Write-Error "[setup-pot] provider did not become ready within 30s"
+        exit 1
+    }
+}
+
+Write-Host "[setup-pot] done: $dest\server (built & running)"
