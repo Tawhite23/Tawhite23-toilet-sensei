@@ -137,8 +137,15 @@ await flush()
 
 // ---- 名言集 -------------------------------------------------------------
 // quotes.json は毎回まるごと作り直される性質なので、差分ではなく総入れ替えにする。
-// 行数が数千程度と小さく、書き込み上限には影響しない。
-const quotes = await readJson(path.join(DATA, "quotes.json"), null)
+//
+// ただし「新しく投入する配信が1本も無い」ときは名言も変わらないため、
+// 総入れ替えを行わない。毎日走るワークフローから呼ばれるので、
+// ここで無条件に出すと変化が無い日でも3千行以上を書き込み続けることになり、
+// D1無料枠(10万行/日)を無駄に消費してしまう。
+const quotes = videoCount > 0 ? await readJson(path.join(DATA, "quotes.json"), null) : null
+if (!videoCount) {
+  console.log("新規配信が無いため名言集の再投入はスキップします")
+}
 if (quotes?.items?.length) {
   const lines = ["DELETE FROM quotes;"]
   for (const it of quotes.items) {
