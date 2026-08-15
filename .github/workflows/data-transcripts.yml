@@ -28,6 +28,11 @@ on:
         type: boolean
         required: false
         default: false
+      diagnose:
+        description: "PO Token/プラグインの診断ログを出す（文字起こしは行わない）"
+        type: boolean
+        required: false
+        default: false
 concurrency:
   group: data-json-transcripts
   cancel-in-progress: false
@@ -92,12 +97,47 @@ jobs:
       - name: Install Node deps (minisearch / kuromoji)
         run: npm ci
 
+      # 診断専用ステップ（diagnose=true のときだけ動く）。
+      # 「サーバーは起きているのに formats が取れない」原因を切り分けるため、
+      # yt-dlp 自身に何が起きているかを verbose で吐かせる。
+      # 特に見たいのは -v ヘッダの "Extractor Plugins:" 行で、
+      # ここに bgutil が出ていなければ、プラグインがロードされていない
+      # （= サーバーを起動しても永久に PO Token は使われない）と確定できる。
+      - name: Diagnose PO Token / plugin
+        if: github.event.inputs.diagnose == 'true'
+        run: |
+          VID="${{ github.event.inputs.videoId || 'noOrRU6_h3I' }}"
+
+          echo "===== 1. バージョン ====="
+          python -m yt_dlp --version
+          pip show bgutil-ytdlp-pot-provider | grep -E "^(Name|Version|Location)" || true
+
+          echo "===== 2. プラグインとして認識されているか ====="
+          # -v のヘッダに Extractor Plugins / Post-Processor Plugins が出る
+          python -m yt_dlp -v --simulate --skip-download \
+            "https://www.youtube.com/watch?v=$VID" 2>&1 \
+            | grep -iE "plugin|python|yt-dlp version" | head -30 || true
+
+          echo "===== 3. PO Token サーバーの応答 ====="
+          curl -sS --max-time 5 http://127.0.0.1:4416/ping || true
+          echo
+
+          echo "===== 4. formats 取得の詳細（web_safari） ====="
+          python -m yt_dlp -v --list-formats \
+            --extractor-args "youtube:player_client=web_safari" \
+            "https://www.youtube.com/watch?v=$VID" 2>&1 | tail -60 || true
+
+          echo "===== 5. formats 取得の詳細（既定クライアント） ====="
+          python -m yt_dlp -v --list-formats \
+            "https://www.youtube.com/watch?v=$VID" 2>&1 | tail -60 || true
+
       # 1) 文字起こし（cron=バッチ最大2本 / workflow_dispatch=指定1本）
       #    対象があったのに1本も成功しなかった場合（多くはYouTubeのボット判定）は
       #    exit 1 でこのステップを失敗させ、ジョブ全体を失敗として終了する。
       #    → GitHub Actionsの実行一覧に赤いXが付き、既定の通知設定なら失敗メールが届く。
       #    「自動実行が実は毎回失敗していたのに気づけない」を防ぐための仕組み。
       - name: Transcribe
+        if: github.event.inputs.diagnose != 'true'
         id: transcribe
         run: |
           # PO Token プロバイダの生存確認。
@@ -130,7 +170,7 @@ jobs:
       #    Transcribeが失敗していても、skipped.json/failures.json の記録は
       #    残したいので if: always() で必ず実行する（ジョブ自体は失敗のまま）。
       - name: Build search index / popular / quotes
-        if: always()
+        if: always() && github.event.inputs.diagnose != 'true'
         run: |
           node scripts/build-search-index.mjs
           node scripts/build-popular.mjs
@@ -138,7 +178,7 @@ jobs:
 
       # 3) public/data のみコミット（deploy.yml は paths-ignore で起動しない）
       - name: Commit if changed
-        if: always()
+        if: always() && github.event.inputs.diagnose != 'true'
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
