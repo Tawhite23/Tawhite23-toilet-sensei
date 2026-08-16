@@ -59,7 +59,9 @@ jobs:
       # Node を先に用意してから yt-dlp を実行する構成にしている。
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # wrangler 4 は Node 22 以上を要求する（D1同期ステップで使う）。
+          # 20 のままだと "Wrangler requires at least Node.js v22.0.0" で失敗する。
+          node-version: 22
           cache: npm
 
       - name: Install Python deps
@@ -220,32 +222,12 @@ jobs:
             exit 0
           fi
           cd worker && npm ci --silent && cd ..
-
-          # 投入済みの配信一覧を取り出す
-          cd worker
-          npx wrangler d1 execute otoile-search --remote --json \
-            --command "SELECT vid FROM ingested" > /tmp/ingested.json || echo '[]' > /tmp/ingested.json
-          cd ..
-          node -e "
-            const fs=require('fs');
-            let rows=[];
-            try{
-              const j=JSON.parse(fs.readFileSync('/tmp/ingested.json','utf8'));
-              rows=(Array.isArray(j)?j:[j]).flatMap(x=>x.results||[]);
-            }catch{}
-            fs.writeFileSync('/tmp/ingested-list.json', JSON.stringify(rows));
-            console.log('already in D1:', rows.length, 'videos');
-          "
-
-          node scripts/build-d1-sql.mjs --ingested /tmp/ingested-list.json
-
-          # 生成されたSQLを順に流し込む
-          cd worker
-          for f in ../out/d1/*.sql; do
-            [ -e "$f" ] || continue
-            echo "--- $f ---"
-            npx wrangler d1 execute otoile-search --remote -y --file="$f"
-          done
+          # 手元と同じ scripts/sync-d1.mjs を使う。
+          # 以前はここに同じ処理をシェルで書いていたが、投入済み一覧の取得に
+          # 失敗したとき「0本」とみなして全件を投入してしまう作りになっていた
+          # （既存分が重複登録され、検索結果に同じ発言が並ぶ）。
+          # sync-d1.mjs は取得に失敗したら中断する。日次上限の分割も行う。
+          npm run sync-d1
 
       # 3) public/data のみコミット（deploy.yml は paths-ignore で起動しない）
       - name: Commit if changed

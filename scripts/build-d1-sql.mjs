@@ -112,6 +112,16 @@ for (const file of files) {
   const ymd = (doc.date || "").slice(0, 10)
   videoCount += 1
 
+  // 【重要】投入前に同じ配信の既存行を消す。
+  // segments は FTS5 の仮想テーブルで一意制約を張れないため、
+  // 同じ配信を二度投入すると素直に重複行が増え、検索結果に同じ発言が並ぶ。
+  // ingested テーブルによる差分判定が何らかの理由で外れた場合
+  // （問い合わせ失敗、テーブル作り直しなど）の安全網として、
+  // 「消してから入れる」= 何度実行しても同じ状態になるようにしておく。
+  buf.push(`DELETE FROM segments WHERE vid = ${q(videoId)};`)
+  rowsInFile += 1
+  totalRows += 1
+
   for (const seg of doc.segments) {
     // 検索対象は「本文＋読み」をbigram分解したもの。
     // 読みも入れるのは、漢字表記が違っても音で拾えるようにするため。
