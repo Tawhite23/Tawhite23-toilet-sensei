@@ -9,7 +9,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-17T11:30:00Z",
+    "date": "2026-08-19T11:30:00Z",
     "type": "live",
     "title": "#マイクラ参加型 もももももももももももも",
     "videoId": "4pENLZWbfG0",
@@ -18,7 +18,25 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-17T09:30:00Z",
+    "date": "2026-08-18T12:15:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx  反省の舞",
+    "videoId": "njh-bOlLa6U",
+    "thumbnail": "https://i.ytimg.com/vi/njh-bOlLa6U/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-18T10:00:00Z",
+    "type": "live",
+    "title": "#めっちゃカメレオン  めっちゃオレンジ",
+    "videoId": "quPDFvjRWBI",
+    "thumbnail": "https://i.ytimg.com/vi/quPDFvjRWBI/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-17T11:30:00Z",
     "type": "live",
     "title": "#マイクラ参加型 辛味チキン day6　#Mtuber",
     "videoId": "t12g74RLAEk",
@@ -27,12 +45,21 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-08-17T10:30:00Z",
+    "type": "live",
+    "title": "#雑談 どしたん話キコカ？？",
+    "videoId": "GoJTdi72XxY",
+    "thumbnail": "https://i.ytimg.com/vi/GoJTdi72XxY/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-16T12:06:06Z",
     "type": "live",
     "title": "#マリオカート8dx からあげ食べたい",
     "videoId": "taFYr5zYCjI",
-    "thumbnail": "https://i.ytimg.com/vi/taFYr5zYCjI/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/taFYr5zYCjI/maxresdefault.jpg",
+    "durationSec": 12048
   },
   {
     "date": "2026-08-16T10:54:47Z",
