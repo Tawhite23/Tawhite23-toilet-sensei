@@ -9,11 +9,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-17T11:00:00Z",
+    "date": "2026-08-17T11:30:00Z",
     "type": "live",
     "title": "#マイクラ参加型 もももももももももももも",
     "videoId": "4pENLZWbfG0",
     "thumbnail": "https://i.ytimg.com/vi/4pENLZWbfG0/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-17T09:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 辛味チキン day6　#Mtuber",
+    "videoId": "t12g74RLAEk",
+    "thumbnail": "https://i.ytimg.com/vi/t12g74RLAEk/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -27,7 +36,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-16T10:00:00Z",
+    "date": "2026-08-16T09:30:00Z",
     "type": "live",
     "title": "#めっちゃカメレオン  とたけけけ",
     "videoId": "VeV_hcvTPa0",
@@ -36,13 +45,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-16T08:00:00Z",
-    "type": "live",
-    "title": "#マイクラ参加型 辛味チキン day6　#Mtuber",
-    "videoId": "t12g74RLAEk",
-    "thumbnail": "https://i.ytimg.com/vi/t12g74RLAEk/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "date": "2026-08-16T03:43:49Z",
+    "type": "video",
+    "title": "#shorts おトイレ先生と学ぶ信長",
+    "videoId": "JGx2T0_5p_k",
+    "thumbnail": "https://i.ytimg.com/vi/JGx2T0_5p_k/maxresdefault.jpg",
+    "durationSec": 93
   },
   {
     "date": "2026-08-15T14:53:43Z",
