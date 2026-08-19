@@ -34,7 +34,22 @@ export default function HomeHero() {
   const [ready, setReady] = useState(false)
   const [chatting, setChatting] = useState(false)
   const { live } = useLiveNow()
-  const isLive = !!live?.isLive
+
+  /**
+   * 配信中は会話モードに入れない仕様だが、それだと配信中に手元で
+   * 動作確認ができなくなる（実際に配信が始まって検証が止まった）。
+   * 開発サーバーでだけ、URLに ?forceIdle=1 を付けると抑制を外せるようにする。
+   *
+   * 本番ビルドでは NODE_ENV が production になるためこの分岐は常に無効。
+   * 見せかけの回避策が本番に残らないようにしている。
+   */
+  const [devForceIdle, setDevForceIdle] = useState(false)
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "development") return
+    setDevForceIdle(new URLSearchParams(location.search).get("forceIdle") === "1")
+  }, [])
+
+  const isLive = !!live?.isLive && !devForceIdle
 
   useEffect(() => onAuthStateChanged(auth, (u) => { setUser(u); setReady(true) }), [])
 
@@ -87,6 +102,7 @@ export default function HomeHero() {
         <LiveRing
           onIdleClick={chatting ? undefined : enterChat}
           idleLabel={user ? "AIおトイレ先生と話す" : "ログインして話す"}
+          forceIdle={devForceIdle}
         />
         <LivePill hideLabel className="max-w-[15rem] lg:max-w-[17rem]" />
       </div>

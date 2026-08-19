@@ -15,12 +15,15 @@ import { useLiveNow } from "@/lib/useLiveNow"
 export default function LiveRing({
   onIdleClick,
   idleLabel = "AIおトイレ先生と話す",
+  forceIdle = false,
 }: {
   onIdleClick?: () => void
   idleLabel?: string
+  /** 配信中でも「非配信中」として扱う。開発時の動作確認用（呼び出し側が制御する） */
+  forceIdle?: boolean
 }) {
   const { live } = useLiveNow()
-  const isLive = !!live?.isLive
+  const isLive = !!live?.isLive && !forceIdle
 
   const icon = (
     <span className={`relative inline-block ${isLive ? "live-ring" : ""}`}>
