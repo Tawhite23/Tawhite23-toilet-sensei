@@ -16,10 +16,27 @@ import { site } from "@/lib/site.config"
  * ★これは本人ではなくAIによる再現です。UI上でも必ず明示すること。
  */
 
+interface Source {
+  text: string
+  date: string
+  videoId?: string
+  /** 発言の開始秒。YouTubeの該当箇所へ飛ぶのに使う */
+  start?: number
+}
+
 interface Msg {
   role: "user" | "assistant"
   content: string
-  sources?: { text: string; date: string }[]
+  sources?: Source[]
+}
+
+/** mm:ss 表記 */
+const fmtTime = (sec: number) => {
+  const s = Math.max(0, Math.floor(sec))
+  const h = Math.floor(s / 3600)
+  const m = Math.floor((s % 3600) / 60)
+  const ss = String(s % 60).padStart(2, "0")
+  return h > 0 ? `${h}:${String(m).padStart(2, "0")}:${ss}` : `${m}:${ss}`
 }
 
 const api = (path: string) => `${site.liveApiBaseUrl?.replace(/\/$/, "")}${path}`
@@ -33,6 +50,9 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
   const [error, setError] = useState<string | null>(null)
   const [remaining, setRemaining] = useState<number | null>(null)
 
+  const [greeting, setGreeting] = useState<string | null>(null)
+  const [suggestions, setSuggestions] = useState<string[]>([])
+
   const [nickname, setNickname] = useState("")
   const [nickSaved, setNickSaved] = useState<string>("")
   const [editingNick, setEditingNick] = useState(false)
@@ -41,17 +61,23 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
 
   useEffect(() => onAuthStateChanged(auth, (u) => { setUser(u); setReady(true) }), [])
 
-  // 保存済みの呼び名を読む
+  // 会話の入口をまとめて取る（挨拶・おすすめ質問・呼び名・残り回数）。
+  // 空の入力欄をいきなり見せると「何を聞けばいいか分からない」で終わるため、
+  // 先方から話しかけ、質問の候補も出す。この取得にLLMは使わないので費用は0。
   useEffect(() => {
     if (!user) return
     user.getIdToken().then((t) =>
-      fetch(api("/api/chat/profile"), { headers: { Authorization: `Bearer ${t}` } })
+      fetch(api("/api/chat/intro"), { headers: { Authorization: `Bearer ${t}` } })
         .then((r) => (r.ok ? r.json() : null))
         .then((d) => {
-          if (d?.nickname) {
+          if (!d) return
+          if (d.nickname) {
             setNickname(d.nickname)
             setNickSaved(d.nickname)
           }
+          if (d.greeting) setGreeting(d.greeting)
+          if (Array.isArray(d.suggestions)) setSuggestions(d.suggestions)
+          if (typeof d.remaining === "number") setRemaining(d.remaining)
         })
         .catch(() => {})
     )
@@ -77,10 +103,11 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
     }
   }, [user, nickname])
 
-  const send = useCallback(async () => {
-    const text = input.trim()
+  const send = useCallback(async (preset?: string) => {
+    const text = (preset ?? input).trim()
     if (!text || !user || sending) return
     setInput("")
+    setSuggestions([])
     setError(null)
     setSending(true)
     setMessages((m) => [...m, { role: "user", content: text }])
@@ -178,32 +205,89 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
 
       {/* 会話 */}
       <div ref={listRef} className="max-h-[26rem] space-y-3 overflow-y-auto px-4 py-4">
+        {/* 会話の入口。先生から話しかけ、質問の候補も出す */}
         {messages.length === 0 && (
-          <p className="py-6 text-center text-xs leading-relaxed text-ink-dim">
-            なんでも聞いてみてくれ。過去の配信で話したことなら答えられる。
-          </p>
+          <div className="space-y-3">
+            <div className="flex items-start gap-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={site.channelIcon}
+                alt=""
+                className="mt-0.5 h-8 w-8 shrink-0 rounded-full border border-base-700"
+              />
+              <div className="inline-block max-w-[85%] rounded-2xl border border-base-700 bg-base-900 px-3.5 py-2 text-sm leading-relaxed">
+                {greeting ?? "お、来たか。何の話する？"}
+              </div>
+            </div>
+            {suggestions.length > 0 && (
+              <div className="pl-10">
+                <p className="mb-1.5 text-[11px] text-ink-dim">こんなことが聞けるぞ</p>
+                <ul className="flex flex-wrap gap-2">
+                  {suggestions.map((q) => (
+                    <li key={q}>
+                      <button
+                        onClick={() => send(q)}
+                        className="rounded-full border border-base-700 bg-base-900 px-3 py-1.5 text-left text-xs text-ink-dim transition-colors hover:border-accent hover:text-accent"
+                      >
+                        {q}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         )}
         {messages.map((m, i) => (
           <div key={i} className={m.role === "user" ? "text-right" : ""}>
-            <div
-              className={`inline-block max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
-                m.role === "user"
-                  ? "bg-accent/15 text-ink"
-                  : "border border-base-700 bg-base-900"
-              }`}
-            >
-              {m.content}
+            <div className={m.role === "user" ? "" : "flex items-start gap-2"}>
+              {m.role === "assistant" && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={site.channelIcon}
+                  alt=""
+                  className="mt-0.5 h-8 w-8 shrink-0 rounded-full border border-base-700"
+                />
+              )}
+              <div
+                className={`inline-block max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
+                  m.role === "user"
+                    ? "bg-accent/15 text-ink"
+                    : "border border-base-700 bg-base-900"
+                }`}
+              >
+                {m.content}
+              </div>
             </div>
             {/* 何を根拠に答えたかを出す。作り話と実際の発言を区別できるようにするため */}
             {m.sources && m.sources.length > 0 && (
-              <details className="mt-1 text-left">
+              <details className="mt-1 pl-10 text-left">
                 <summary className="cursor-pointer text-[11px] text-ink-dim hover:text-accent">
-                  参考にした過去の発言 ({m.sources.length})
+                  この発言のもとになった配信 ({m.sources.length})
                 </summary>
-                <ul className="mt-1 space-y-1">
-                  {m.sources.map((s, j) => (
+                <ul className="mt-1 space-y-1.5">
+                  {m.sources.map((src, j) => (
                     <li key={j} className="text-[11px] leading-relaxed text-ink-dim">
-                      ({s.date}) {s.text}
+                      {src.videoId ? (
+                        // 実際の配信の該当秒数へ直接飛べるようにする。
+                        // 「本当にそう言っていた」を利用者自身が確かめられる。
+                        <a
+                          href={`https://www.youtube.com/watch?v=${src.videoId}&t=${Math.max(0, (src.start ?? 0) - 3)}s`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-accent"
+                        >
+                          <span className="mr-1.5 font-mono text-accent">
+                            {fmtTime(src.start ?? 0)}
+                          </span>
+                          {src.text}
+                          <span className="ml-1 opacity-60">↗</span>
+                        </a>
+                      ) : (
+                        <>
+                          ({src.date}) {src.text}
+                        </>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -227,7 +311,7 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
           className="flex-1 rounded-full border border-base-700 bg-base-900 px-4 py-2 text-sm focus:border-accent disabled:opacity-60"
         />
         <button
-          onClick={send}
+          onClick={() => send()}
           disabled={sending || !input.trim()}
           className="rounded-full bg-accent px-4 py-2 text-sm font-bold text-base-900 disabled:opacity-40"
         >

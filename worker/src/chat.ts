@@ -54,7 +54,7 @@ function buildSystemPrompt(opts: {
   nickname?: string
   phrases: string[]
   quotes: string[]
-  context: { text: string; date: string }[]
+  context: { text: string; date: string; videoId: string; start: number }[]
 }) {
   const { nickname, phrases, quotes, context } = opts
   return [
@@ -69,6 +69,9 @@ function buildSystemPrompt(opts: {
     "【話し方】",
     "・視聴者を「お前ら」と呼ぶ、フランクでテンションの高い口調です。",
     "・短め（2〜4文）でテンポよく返します。長い説明は好みません。",
+    "・敬語は使いません。タメ口で、語尾に「〜わ」「〜だろ」「〜じゃん」などを混ぜます。",
+    "・箇条書きや見出しは使いません。話し言葉のまま書いてください。",
+    "・一番大事: 説明ではなく「会話」にしてください。相手に質問を投げ返すのも歓迎です。",
     phrases.length ? `・よく使う言い回し: ${phrases.join(" / ")}` : "",
     nickname
       ? `・いま話している相手のことは「${nickname}」と呼んでください。配信での呼び名です。`
@@ -109,7 +112,7 @@ async function callOpenAI(
       body: JSON.stringify({
         model,
         max_tokens: MAX_OUTPUT_TOKENS,
-        temperature: 0.9,
+        temperature: 0.8,
         messages: [
           { role: "system", content: system },
           ...history,
@@ -216,25 +219,56 @@ export async function handleChat(
   const nickname = (prof?.nickname ?? "").slice(0, 24) || undefined
 
   // ---- 4) RAG: 質問に関係する実際のセリフを集める --------------------------
+  //
+  // 2段構えにしている。
+  //   1段目: AND で「質問語をすべて含む」発言を探す（精度重視）
+  //   2段目: それが少なければ OR で広く拾う（再現率重視）
+  // OR だけだと「今日」「です」のような頻出bigramが大量に釣れ、
+  // 質問と無関係な発言で文脈が埋まってしまう。まず絞ってから緩める。
   const terms = tokenizeJa(question)
     .map((t) => t.replace(/"/g, "").trim())
     .filter(Boolean)
     .slice(0, 24)
-  let context: { text: string; date: string }[] = []
-  if (terms.length) {
-    // AND では絞られすぎるので OR で広めに拾い、関連度順に上位だけ使う
-    const match = terms.map((t) => `"${t}"`).join(" OR ")
+
+  const search = async (expr: string, limit: number) => {
     try {
       const rows = await env.DB.prepare(
-        `SELECT txt, ymd FROM segments WHERE segments MATCH ? ORDER BY rank LIMIT ?`
+        `SELECT vid, sid, st, txt, ymd FROM segments WHERE segments MATCH ? ORDER BY rank LIMIT ?`
       )
-        .bind(match, RAG_LIMIT)
+        .bind(expr, limit)
         .all()
-      context = (rows.results ?? []).map((r: any) => ({ text: r.txt, date: r.ymd }))
+      return (rows.results ?? []) as any[]
     } catch {
       // 検索に失敗しても雑談としては成立するので続行する
+      return []
     }
   }
+
+  let rows: any[] = []
+  if (terms.length) {
+    const quoted = terms.map((t) => `"${t}"`)
+    rows = await search(quoted.join(" AND "), RAG_LIMIT)
+    if (rows.length < 4) {
+      const loose = await search(quoted.join(" OR "), RAG_LIMIT)
+      // AND の結果を優先しつつ、足りない分を OR で補う
+      const seen = new Set(rows.map((r) => `${r.vid}#${r.sid}`))
+      for (const r of loose) {
+        if (rows.length >= RAG_LIMIT) break
+        const k = `${r.vid}#${r.sid}`
+        if (!seen.has(k)) {
+          seen.add(k)
+          rows.push(r)
+        }
+      }
+    }
+  }
+
+  const context = rows.map((r) => ({
+    text: String(r.txt),
+    date: String(r.ymd ?? ""),
+    videoId: String(r.vid),
+    start: Math.max(0, Math.floor(Number(r.st) || 0)),
+  }))
 
   // 口調の材料（毎回同じにならないよう、名言はランダムに数件選ぶ）
   const quoteRows = await env.DB.prepare(
@@ -281,8 +315,88 @@ export async function handleChat(
       reply: out.text,
       model: out.model,
       remaining: Math.max(0, perUser - used - 1),
-      sources: context.slice(0, 5).map((c) => ({ text: c.text, date: c.date })),
+      sources: context.slice(0, 5).map((c) => ({
+        text: c.text,
+        date: c.date,
+        videoId: c.videoId,
+        start: c.start,
+      })),
     },
+    200,
+    { ...cors, "cache-control": "no-store" }
+  )
+}
+
+/**
+ * 会話の入口（最初の挨拶＋おすすめ質問）。
+ *
+ * 空の入力欄をいきなり見せると「何を聞けばいいか分からない」で終わってしまう。
+ * キャラクターから先に話しかけ、質問の候補も出して会話を始めやすくする。
+ *
+ * ★ここではLLMを呼ばない。挨拶は呼び名を差し込んだ定型、質問候補は
+ *   実際によく話している配信のタイトルから作る。費用ゼロで毎回変化する。
+ */
+export async function handleChatIntro(
+  req: Request,
+  env: Env,
+  cors: Record<string, string>
+): Promise<Response> {
+  if (!env.DB || !env.FIREBASE_PROJECT_ID) {
+    return jsonRes({ error: "not_configured" }, 500, cors)
+  }
+  const authz = req.headers.get("Authorization") ?? ""
+  const user = await verifyIdToken(
+    authz.startsWith("Bearer ") ? authz.slice(7) : "",
+    env.FIREBASE_PROJECT_ID
+  )
+  if (!user) return jsonRes({ error: "unauthorized" }, 401, cors)
+
+  const prof = await env.DB.prepare("SELECT nickname FROM chat_profile WHERE uid = ?")
+    .bind(user.uid)
+    .first<{ nickname: string }>()
+  const nick = (prof?.nickname ?? "").trim().slice(0, 24)
+
+  const day = today()
+  const mine = await env.DB.prepare("SELECT count FROM chat_usage WHERE uid = ? AND day = ?")
+    .bind(user.uid, day)
+    .first<{ count: number }>()
+  const perUser = numEnv(env.CHAT_DAILY_PER_USER, 20)
+  const used = mine?.count ?? 0
+
+  // 挨拶。呼び名が登録されていれば必ず使う（キャラぷの「呼び方」に相当）
+  const greetings = nick
+    ? [
+        `お、${nick}じゃん。今日は何の話する？`,
+        `${nick}きたか。なんか聞きたいことある？`,
+        `よー${nick}。暇なら喋ってくわ。`,
+      ]
+    : [
+        "お、来たか。何の話する？",
+        "よー。なんか聞きたいことあるか？",
+        "暇なら喋ってくわ。何でも聞いてくれ。",
+      ]
+  const greeting = greetings[Math.floor(Math.random() * greetings.length)]
+
+  // おすすめ質問。
+  // 定番の3つに加え、実際の名言から1つ話題を作る。
+  // 実発言が元なので必ずRAGで拾える＝「知らない」と返される空振りが起きにくい。
+  const suggestions = [
+    "最近の配信どうだった？",
+    "マイクラで一番やばかったことは？",
+    "お前らに一言くれ",
+  ]
+  try {
+    const q = await env.DB.prepare(
+      // 短すぎ・長すぎは話題として扱いにくいので、ほどよい長さのものを選ぶ
+      `SELECT txt FROM quotes WHERE length(txt) BETWEEN 10 AND 28 ORDER BY RANDOM() LIMIT 1`
+    ).first<{ txt: string }>()
+    if (q?.txt) suggestions.push(`「${q.txt}」ってどういうこと？`)
+  } catch {
+    // 取れなくても定番の3つで成立する
+  }
+
+  return jsonRes(
+    { greeting, suggestions, nickname: nick, remaining: Math.max(0, perUser - used) },
     200,
     { ...cors, "cache-control": "no-store" }
   )

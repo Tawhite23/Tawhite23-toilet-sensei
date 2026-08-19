@@ -38,7 +38,7 @@
  *   (その2つは頻度も重要度も低く、6時間毎の再生成で十分追従できる)。
  */
 
-import { handleChat, handleChatProfile } from "./chat"
+import { handleChat, handleChatIntro, handleChatProfile } from "./chat"
 
 export interface Env {
   /** セリフ全文検索・名言集のD1データベース（wrangler.toml の d1_databases） */
@@ -687,6 +687,10 @@ export default {
     }
     if (pathname === "/api/chat/profile" && (req.method === "GET" || req.method === "POST")) {
       return handleChatProfile(req, env, cors)
+    }
+    // 会話の入口（最初の挨拶＋おすすめ質問）。LLMは使わないので費用はかからない。
+    if (pathname === "/api/chat/intro" && req.method === "GET") {
+      return handleChatIntro(req, env, cors)
     }
 
     if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405, cors)
