@@ -40,7 +40,15 @@ const jsonRes = (body: unknown, status: number, headers: Record<string, string>)
     headers: { "content-type": "application/json; charset=utf-8", ...headers },
   })
 
-const today = () => new Date().toISOString().slice(0, 10)
+/**
+ * 利用回数を数える単位となる「今日」。日本時間で判定する。
+ *
+ * UTCで判定すると日本時間の午前9時にリセットされてしまい、
+ * 画面の「また明日来いよ」という案内と噛み合わない
+ * （深夜0時に戻ると思って待っても戻らない）。
+ * 視聴者は日本時間で生活しているので、そちらに合わせる。
+ */
+const today = () => new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
 const numEnv = (v: string | undefined, d: number) => {
   const n = Number(v)
   return Number.isFinite(n) && n >= 0 ? n : d

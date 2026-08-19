@@ -128,7 +128,7 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
         const d = await res.json().catch(() => ({}))
         setError(
           d?.scope === "user"
-            ? `今日はここまで。1日${d?.limit ?? 20}回までな。また明日来いよ。`
+            ? `今日はここまで。1日${d?.limit ?? 20}回までな。日付が変わったらまた来いよ。`
             : "今ちょっと混み合ってる。しばらくしてからな。"
         )
         return
@@ -190,7 +190,12 @@ export default function SenseiChat({ onClose }: { onClose?: () => void }) {
           </>
         )}
         {remaining != null && (
-          <span className="ml-auto text-ink-dim">残り {remaining} 回</span>
+          <span
+            className={`ml-auto ${remaining <= 3 ? "font-bold text-live" : "text-ink-dim"}`}
+            title="1日に話せる回数。日付が変わると戻ります"
+          >
+            残り {remaining} 回
+          </span>
         )}
         {onClose && (
           <button
