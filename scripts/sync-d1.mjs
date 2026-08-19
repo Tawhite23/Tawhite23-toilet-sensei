@@ -62,16 +62,30 @@ const q = wrangler(
 )
 let ingested = []
 try {
+  if (q.error) throw q.error
   // wrangler の出力には JSON 以外の行(警告など)が混ざることがあるため、
   // 最初の '[' から最後の ']' までを切り出してから解析する。
   const out = q.stdout ?? ""
   const s = out.indexOf("[")
   const e = out.lastIndexOf("]")
+  if (s < 0 || e < 0) throw new Error("出力にJSONが含まれていません")
   const parsed = JSON.parse(out.slice(s, e + 1))
   ingested = (Array.isArray(parsed) ? parsed : [parsed]).flatMap((x) => x.results ?? [])
 } catch (err) {
-  console.error("投入済み一覧の取得に失敗しました。")
-  console.error((q.stderr ?? "").slice(0, 800))
+  // ここで中断するのは意図的。取得できないまま進むと「投入済み0本」とみなして
+  // 全件を再投入し、D1に重複行を作ってしまう。
+  //
+  // 原因を必ず追えるよう、出力を丸ごと出す。
+  // 以前は stderr を800文字だけ出していたが、それが空のときに
+  // 何も分からず手詰まりになった（実際にCIで起きた）。
+  console.error("投入済み一覧の取得に失敗しました。中断します。")
+  console.error(`  理由     : ${err?.message ?? err}`)
+  console.error(`  終了コード: ${q.status}`)
+  console.error(`  認証     : CLOUDFLARE_API_TOKEN=${process.env.CLOUDFLARE_API_TOKEN ? "あり" : "なし"} / CLOUDFLARE_ACCOUNT_ID=${process.env.CLOUDFLARE_ACCOUNT_ID || "(未設定)"}`)
+  console.error("--- wrangler stdout ---")
+  console.error(q.stdout || "(空)")
+  console.error("--- wrangler stderr ---")
+  console.error(q.stderr || "(空)")
   process.exit(1)
 }
 console.log(`  投入済み: ${ingested.length} 本`)
