@@ -33,25 +33,31 @@ const DRY = has("--dry-run")
 // D1無料枠は 100,000 行/日。取りこぼしを避けて少し余裕を持たせる。
 const BUDGET = Number(val("--budget", "95000"))
 
-/**
- * shell:true のときは引数がそのまま1行に連結されるため、
- * スペースを含むもの（SQL文やWindowsのパス）は自分で引用符を付ける必要がある。
- * これを怠ると "SELECT vid FROM ingested" が3つの引数として解釈され、
- * wrangler が Unknown arguments で落ちる。
- */
-const qArg = (a) => (/[\s]/.test(String(a)) ? `"${a}"` : String(a))
+// wrangler の実体(JS)を直接叩く。
+//
+// npx 経由にしないのは、Windowsだと npx.cmd になり
+//   - shell:false → Node 22以降はセキュリティ対策で .cmd を起動できず EINVAL
+//   - shell:true  → 引数が1行に連結されるので自前で引用符が必要になり、
+//                   Nodeからも危険だと警告される(DEP0190)
+// という板挟みになるため。node で .js を直接実行すればどちらも回避できる。
+const WRANGLER_BIN = path.join(WORKER, "node_modules", "wrangler", "bin", "wrangler.js")
 
 /** wrangler を worker ディレクトリで実行する（wrangler.toml がそこにあるため） */
 function wrangler(args, { capture = false } = {}) {
-  const r = spawnSync("npx", ["wrangler", ...args].map(qArg), {
+  const r = spawnSync(process.execPath, [WRANGLER_BIN, ...args], {
     cwd: WORKER,
     encoding: "utf8",
-    shell: true, // Windowsで npx(.cmd) を解決させるために必要
     stdio: capture ? ["ignore", "pipe", "pipe"] : "inherit",
   })
   if (capture) return r
   if (r.status !== 0) process.exit(r.status ?? 1)
   return r
+}
+
+if (!existsSync(WRANGLER_BIN)) {
+  console.error("wrangler が見つかりません。先に worker の依存を入れてください:")
+  console.error("  cd worker && npm ci")
+  process.exit(1)
 }
 
 // ---- 1) D1 に投入済みの配信を取得 ------------------------------------------

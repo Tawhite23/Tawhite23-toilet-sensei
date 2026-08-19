@@ -112,16 +112,6 @@ for (const file of files) {
   const ymd = (doc.date || "").slice(0, 10)
   videoCount += 1
 
-  // 【重要】投入前に同じ配信の既存行を消す。
-  // segments は FTS5 の仮想テーブルで一意制約を張れないため、
-  // 同じ配信を二度投入すると素直に重複行が増え、検索結果に同じ発言が並ぶ。
-  // ingested テーブルによる差分判定が何らかの理由で外れた場合
-  // （問い合わせ失敗、テーブル作り直しなど）の安全網として、
-  // 「消してから入れる」= 何度実行しても同じ状態になるようにしておく。
-  buf.push(`DELETE FROM segments WHERE vid = ${q(videoId)};`)
-  rowsInFile += 1
-  totalRows += 1
-
   for (const seg of doc.segments) {
     // 検索対象は「本文＋読み」をbigram分解したもの。
     // 読みも入れるのは、漢字表記が違っても音で拾えるようにするため。
@@ -132,7 +122,6 @@ for (const file of files) {
     )
     rowsInFile += 1
     totalRows += 1
-    if (rowsInFile >= MAX_ROWS) await flush()
   }
 
   // この配信を投入済みとして記録（次回の差分判定に使う）
@@ -141,6 +130,19 @@ for (const file of files) {
   )
   rowsInFile += 1
   totalRows += 1
+
+  // 【重要】分割は必ず配信の切れ目で行う（1本を2ファイルに割らない）。
+  //
+  // wrangler の --file は1ファイルを不可分に適用する（途中で失敗したら
+  // 元の状態に戻る）。したがって1ファイル=完結した配信の集合にしておけば、
+  // 「セグメントだけ入って ingested の記録が入らない」中途半端な状態が
+  // 原理的に発生せず、再実行しても重複しない。
+  //
+  // 以前は行数で機械的に割り、代わりに各配信の先頭で
+  // DELETE FROM segments WHERE vid=... を出して重複を防いでいたが、
+  // FTS5 の UNINDEXED 列には索引が張れずテーブル全走査になるため、
+  // 98本の投入で読み取り543万行に達した（無料枠は500万行/日）。
+  // 分割位置を工夫するだけで DELETE は不要になる。
   if (rowsInFile >= MAX_ROWS) await flush()
 }
 await flush()
