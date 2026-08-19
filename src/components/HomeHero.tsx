@@ -43,11 +43,33 @@ export default function HomeHero() {
     if (!user || isLive) setChatting(false)
   }, [user, isLive])
 
-  const login = useCallback(() => {
+  const [authError, setAuthError] = useState<string | null>(null)
+
+  /**
+   * アイコンを押したときの入口。
+   * 未ログインならログイン→そのまま会話モードへ。ログイン済みなら即入る。
+   *
+   * 失敗を握り潰さないこと。以前 catch(()=>{}) にしていたため、
+   * Firebaseの設定不備でログインできない状態が画面上で何も分からなかった。
+   */
+  const enterChat = useCallback(() => {
+    setAuthError(null)
+    if (user) {
+      setChatting(true)
+      return
+    }
     signInWithPopup(auth, googleProvider)
       .then(() => setChatting(true))
-      .catch(() => {})
-  }, [])
+      .catch((e) => {
+        const code = String(e?.code ?? "")
+        if (code.includes("popup-closed") || code.includes("cancelled-popup")) return
+        setAuthError(
+          code.includes("unauthorized-domain")
+            ? "このドメインはFirebaseで許可されていません（承認済みドメインに追加が必要です）"
+            : `ログインに失敗しました（${code || "不明なエラー"}）`
+        )
+      })
+  }, [user])
 
   // 会話モード中だけ、紹介まわりを非アクティブにする
   const dim = chatting
@@ -62,7 +84,10 @@ export default function HomeHero() {
 
       {/* アイコンは会話中もそのまま（話し相手の顔として残す） */}
       <div className="flex flex-col items-center gap-3 md:order-2 md:justify-self-end">
-        <LiveRing />
+        <LiveRing
+          onIdleClick={chatting ? undefined : enterChat}
+          idleLabel={user ? "AIおトイレ先生と話す" : "ログインして話す"}
+        />
         <LivePill hideLabel className="max-w-[15rem] lg:max-w-[17rem]" />
       </div>
 
@@ -108,35 +133,29 @@ export default function HomeHero() {
         </AnimatePresence>
       </div>
 
-      {/* 会話への導線。会話中は出さない */}
+      {/* 入口はアイコンなので、ここは短い案内だけにする */}
       {ready && !chatting && (
         <div className="md:order-3 md:col-span-2 md:justify-self-center">
           {isLive ? (
             // 配信中はAIより本物へ誘導する
             <p className="text-xs text-ink-dim">
-              いま配信中です。AIとの会話は配信が終わってからどうぞ。
+              いま配信中です。アイコンから配信を見に行けます。
             </p>
-          ) : !user ? (
-            <button
-              onClick={login}
-              className="rounded-full border border-base-700 bg-base-800 px-5 py-2.5 text-sm font-medium hover:border-accent"
-            >
-              Googleでログインして AIおトイレ先生と話す
-            </button>
           ) : (
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setChatting(true)}
-                className="rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-base-900"
-              >
-                AIおトイレ先生と話す
-              </button>
-              <button
-                onClick={() => signOut(auth).catch(() => {})}
-                className="text-xs text-ink-dim underline underline-offset-4 hover:text-accent"
-              >
-                ログアウト
-              </button>
+            <div className="flex flex-col items-center gap-1.5">
+              <p className="text-xs text-ink-dim">
+                アイコンを押すと AIおトイレ先生と話せます
+                {!user && "（Googleログインが必要です）"}
+              </p>
+              {user && (
+                <button
+                  onClick={() => signOut(auth).catch(() => {})}
+                  className="text-[11px] text-ink-dim underline underline-offset-4 hover:text-accent"
+                >
+                  ログアウト
+                </button>
+              )}
+              {authError && <p className="text-xs text-live">{authError}</p>}
             </div>
           )}
         </div>
