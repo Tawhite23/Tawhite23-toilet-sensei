@@ -1,7 +1,7 @@
 "use client"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { onAuthStateChanged, signInWithPopup, type User } from "firebase/auth"
-import { auth, googleProvider } from "@/lib/firebase"
+import { onAuthStateChanged, type User } from "firebase/auth"
+import { auth } from "@/lib/firebase"
 import { site } from "@/lib/site.config"
 
 /**
@@ -24,7 +24,7 @@ interface Msg {
 
 const api = (path: string) => `${site.liveApiBaseUrl?.replace(/\/$/, "")}${path}`
 
-export default function SenseiChat() {
+export default function SenseiChat({ onClose }: { onClose?: () => void }) {
   const [user, setUser] = useState<User | null>(null)
   const [ready, setReady] = useState(false)
   const [messages, setMessages] = useState<Msg[]>([])
@@ -125,27 +125,8 @@ export default function SenseiChat() {
 
   if (!ready) return <div className="h-64" aria-hidden="true" />
 
-  // ---- 未ログイン ---------------------------------------------------------
-  if (!user) {
-    return (
-      <div className="rounded-2xl border border-base-700 bg-base-800 p-6 text-center">
-        <p className="text-sm font-bold">AIおトイレ先生と話す</p>
-        <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-ink-dim">
-          過去の配信での実際の発言をもとに、AIが先生っぽく返します。
-          荒らし対策と費用の管理のためログインをお願いしています。
-        </p>
-        <button
-          onClick={() => signInWithPopup(auth, googleProvider).catch(() => {})}
-          className="mt-4 rounded-full border border-base-700 bg-base-900 px-5 py-2.5 text-sm font-medium hover:border-accent"
-        >
-          Googleでログインして話す
-        </button>
-        <p className="mt-4 text-[11px] leading-relaxed text-ink-dim">
-          ※ ご本人ではありません。AIによる非公式の再現です。
-        </p>
-      </div>
-    )
-  }
+  // 未ログインのときの入口はトップページ側(HomeHero)が出すので、ここでは描かない
+  if (!user) return null
 
   // ---- ログイン済み -------------------------------------------------------
   return (
@@ -183,6 +164,15 @@ export default function SenseiChat() {
         )}
         {remaining != null && (
           <span className="ml-auto text-ink-dim">残り {remaining} 回</span>
+        )}
+        {onClose && (
+          <button
+            onClick={onClose}
+            aria-label="会話を閉じてトップへ戻る"
+            className={`${remaining != null ? "" : "ml-auto "}rounded-full border border-base-700 px-3 py-1 text-ink-dim hover:border-accent hover:text-accent`}
+          >
+            閉じる
+          </button>
         )}
       </div>
 

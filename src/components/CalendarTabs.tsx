@@ -16,11 +16,6 @@ const QuoteGallery = dynamic(() => import("./QuoteGallery"), {
   ssr: false,
   loading: () => <TabSkeleton />,
 })
-// チャットは Firebase Auth を伴うので、タブを開くまで読み込ませない
-const SenseiChat = dynamic(() => import("./SenseiChat"), {
-  ssr: false,
-  loading: () => <TabSkeleton />,
-})
 
 /**
  * /calendar を3タブに切り替える。
@@ -35,12 +30,11 @@ const SenseiChat = dynamic(() => import("./SenseiChat"), {
  *   スワイプ中は指の動きにその場で追従し、離すと隣のタブへ吸い込まれるように決着する。
  *   タップでの切替挙動そのものは変更しない。
  */
-type Tab = "date" | "quotes" | "meigen" | "ai"
+type Tab = "date" | "quotes" | "meigen"
 const TABS: { key: Tab; label: string }[] = [
   { key: "date", label: "日付から探す" },
   { key: "quotes", label: "キーワードから探す" },
   { key: "meigen", label: "名言集" },
-  { key: "ai", label: "AI先生と話す" },
 ]
 // タブ幅に対してこの割合を超えて指を動かしたら、隣のタブへ切り替える
 const SWIPE_COMMIT_RATIO = 0.18
@@ -49,8 +43,7 @@ export default function CalendarTabs() {
   const router = useRouter()
   const params = useSearchParams()
   const raw = params.get("tab")
-  const tab: Tab =
-    raw === "quotes" ? "quotes" : raw === "meigen" ? "meigen" : raw === "ai" ? "ai" : "date"
+  const tab: Tab = raw === "quotes" ? "quotes" : raw === "meigen" ? "meigen" : "date"
   const activeIndex = TABS.findIndex((t) => t.key === tab)
 
   const switchTab = useCallback(
@@ -197,15 +190,7 @@ export default function CalendarTabs() {
         ))}
       </div>
 
-      {tab === "date" ? (
-        <Calendar />
-      ) : tab === "quotes" ? (
-        <QuoteSearch />
-      ) : tab === "meigen" ? (
-        <QuoteGallery />
-      ) : (
-        <SenseiChat />
-      )}
+      {tab === "date" ? <Calendar /> : tab === "quotes" ? <QuoteSearch /> : <QuoteGallery />}
     </div>
   )
 }
