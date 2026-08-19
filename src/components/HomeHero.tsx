@@ -1,6 +1,13 @@
 "use client"
 import { useCallback, useEffect, useState } from "react"
-import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth"
+import {
+  getRedirectResult,
+  onAuthStateChanged,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+  type User,
+} from "firebase/auth"
 import { motion, AnimatePresence } from "framer-motion"
 import { auth, googleProvider } from "@/lib/firebase"
 import { site } from "@/lib/site.config"
@@ -53,6 +60,16 @@ export default function HomeHero() {
 
   useEffect(() => onAuthStateChanged(auth, (u) => { setUser(u); setReady(true) }), [])
 
+  // ポップアップが塞がれてリダイレクト方式に切り替わった場合、
+  // 戻ってきた直後にそのまま会話モードへ入れる（もう一度押させない）。
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((res) => {
+        if (res?.user) setChatting(true)
+      })
+      .catch(() => {})
+  }, [])
+
   // ログアウト、または配信開始で通常画面へ戻す
   useEffect(() => {
     if (!user || isLive) setChatting(false)
@@ -77,7 +94,16 @@ export default function HomeHero() {
       .then(() => setChatting(true))
       .catch((e) => {
         const code = String(e?.code ?? "")
+        // 利用者が自分でポップアップを閉じただけならエラー扱いしない
         if (code.includes("popup-closed") || code.includes("cancelled-popup")) return
+        // ブラウザや拡張機能にポップアップを塞がれた場合は、
+        // 同じタブでの遷移(リダイレクト)に切り替える。ここで諦めさせない。
+        if (code.includes("popup-blocked")) {
+          signInWithRedirect(auth, googleProvider).catch(() =>
+            setAuthError("ログインできませんでした。ポップアップの許可を確認してください。")
+          )
+          return
+        }
         setAuthError(
           code.includes("unauthorized-domain")
             ? "このドメインはFirebaseで許可されていません（承認済みドメインに追加が必要です）"
