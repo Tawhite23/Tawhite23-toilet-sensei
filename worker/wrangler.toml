@@ -29,6 +29,19 @@ CONTENTS_PATCH_SIZE = "30"
 # 緊急ブレーキ。"1" にするとサイト側のポーリングが止まる(初回1回だけ取得する)
 DISABLED = "0"
 
+# --- AIおトイレ先生（チャット） ---
+# IDトークンの検証に使う。Firebaseコンソールのプロジェクト設定と同じ値。
+FIREBASE_PROJECT_ID = "otoiresensei-pj"
+OPENAI_MODEL = "gpt-4o-mini"
+WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+# 1人あたりの1日の往復上限
+CHAT_DAILY_PER_USER = "20"
+# サイト全体の1日の往復上限。これを超えると課金の出るOpenAIは使わず、
+# 無料の Workers AI に切り替わる = 月額の最大値がここで決まる。
+# 0 にすれば常に無料側だけで動く。
+CHAT_DAILY_TOTAL = "500"
+CHAT_PHRASES = "お前ら / マジで / やばい / お前らを笑顔に / いや待って"
+
 # YT_API_KEY は [vars] に書かず、必ず secret として登録すること:
 #   npx wrangler secret put YT_API_KEY
 
@@ -36,6 +49,11 @@ DISABLED = "0"
 # 以前は search-index.json(13.6MB→将来97MB見込み)をブラウザが丸ごと
 # ダウンロードしていたため、配信本数が増えるほど検索ページが重くなっていた。
 # D1に載せてクエリ毎に数KBだけ返す方式へ移行している。
+# AIおトイレ先生の受け皿。無料枠に含まれ、サイト全体の1日上限を超えたときや
+# OpenAI が落ちているときに自動で切り替わる。
+[ai]
+binding = "AI"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "otoile-search"

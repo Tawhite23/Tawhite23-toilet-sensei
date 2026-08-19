@@ -38,6 +38,8 @@
  *   (その2つは頻度も重要度も低く、6時間毎の再生成で十分追従できる)。
  */
 
+import { handleChat, handleChatProfile } from "./chat"
+
 export interface Env {
   /** セリフ全文検索・名言集のD1データベース（wrangler.toml の d1_databases） */
   DB: D1Database
@@ -61,6 +63,24 @@ export interface Env {
   CLIENT_IDLE_POLL_MS?: string
   /** "1" にするとクライアントのポーリングを止める緊急ブレーキ */
   DISABLED?: string
+
+  // --- AIおトイレ先生（チャット） ---
+  /** Workers AI のバインディング。上限超過時とOpenAI障害時の受け皿として使う */
+  AI?: Ai
+  /** OpenAI のキー。`wrangler secret put OPENAI_API_KEY` で登録する */
+  OPENAI_API_KEY?: string
+  /** 既定 gpt-4o-mini */
+  OPENAI_MODEL?: string
+  /** 既定 @cf/meta/llama-3.1-8b-instruct */
+  WORKERS_AI_MODEL?: string
+  /** IDトークンの aud/iss 照合に使う Firebase プロジェクトID */
+  FIREBASE_PROJECT_ID?: string
+  /** 1人あたりの1日の往復上限。既定 20 */
+  CHAT_DAILY_PER_USER?: string
+  /** サイト全体の1日の往復上限。超えたら無料のWorkers AIへ切り替える。既定 500 */
+  CHAT_DAILY_TOTAL?: string
+  /** 口調の参考にする言い回し（"/"区切り） */
+  CHAT_PHRASES?: string
 
   /** contents.json のベース(完全な一覧)を取得する raw URL。data-contents.yml が更新する */
   CONTENTS_BASE_URL?: string
@@ -467,7 +487,7 @@ async function getContents(env: Env, ctx: ExecutionContext): Promise<ContentItem
 const JA_RE = /[぀-ヿ㐀-䶿一-鿿豈-﫿]/
 const ALNUM_RE = /[0-9A-Za-zー]/
 
-function tokenizeJa(text: string): string[] {
+export function tokenizeJa(text: string): string[] {
   if (!text) return []
   const s = String(text).toLowerCase()
   const tokens: string[] = []
@@ -642,7 +662,8 @@ function corsHeaders(env: Env, req: Request): Record<string, string> {
   const value = allow.length === 0 ? "*" : origin && allow.includes(origin) ? origin : allow[0]
   return {
     "access-control-allow-origin": value,
-    "access-control-allow-methods": "GET, OPTIONS",
+    "access-control-allow-methods": "GET, POST, OPTIONS",
+    "access-control-allow-headers": "Content-Type, Authorization",
     ...(allow.length ? { vary: "Origin" } : {}),
   }
 }
@@ -659,6 +680,15 @@ export default {
     const cors = corsHeaders(env, req)
 
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors })
+
+    // チャットは POST。認証と課金を伴うのでここだけ別扱いにする。
+    if (pathname === "/api/chat" && req.method === "POST") {
+      return handleChat(req, env, ctx, cors, tokenizeJa)
+    }
+    if (pathname === "/api/chat/profile" && (req.method === "GET" || req.method === "POST")) {
+      return handleChatProfile(req, env, cors)
+    }
+
     if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405, cors)
 
     if (pathname === "/health") return json({ ok: true }, 200, cors)
