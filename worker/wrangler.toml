@@ -1,5 +1,15 @@
 name = "otoile-live"
 main = "src/index.ts"
+
+# 【必須】APIトークンで動かす場合(GitHub Actions)はこれが無いと動かない。
+# トークン単体ではアカウントを特定できず、wrangler が
+#   "Failed to automatically retrieve account IDs for the logged in user"
+# で停止する（実際にCIの毎晩の実行が失敗し続けていた）。
+# ここに書いておけばアカウント照会そのものが不要になる。
+#
+# なおアカウントIDは秘密情報ではない（ダッシュボードのURLにそのまま現れる識別子で、
+# これ単体では何もできない。操作にはAPIトークンが別途必要）。
+account_id = "73b805662911fb9dbdbf7fea3b8e9ecb"
 compatibility_date = "2025-01-01"
 # AbortSignal.timeout / caches.default を素直に使うために有効化
 compatibility_flags = ["nodejs_compat"]

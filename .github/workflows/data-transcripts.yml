@@ -218,12 +218,9 @@ jobs:
           # 初回実行時のテレメトリ確認でCIが止まらないようにする
           WRANGLER_SEND_METRICS: "false"
         run: |
-          # アカウントIDは値があるときだけ渡す。
-          # 空文字のまま渡すと wrangler が「指定されている」と解釈して
-          # かえって解決に失敗することがあるため。
-          if [ -n "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
-            export CLOUDFLARE_ACCOUNT_ID="${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
-          fi
+          # アカウントIDは worker/wrangler.toml の account_id で指定済み。
+          # APIトークン単体ではアカウントを特定できず wrangler が停止するため、
+          # 設定ファイル側に持たせている（シークレットの追加登録は不要）。
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
             echo "CLOUDFLARE_API_TOKEN 未設定のため D1 同期はスキップします"
             exit 0
