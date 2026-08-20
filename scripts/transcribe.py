@@ -531,8 +531,8 @@ def main() -> int:
                    help="失敗回数の上限を無視して再挑戦する")
     p.add_argument("--subs-only", action="store_true",
                    help="字幕がある配信のみ処理する(CI用)。字幕なしは needs-whisper.json に記録して次へ進む")
-    p.add_argument("--recheck-days", type=float, default=7.0,
-                   help="needs-whisper 入りの配信を再度字幕確認するまでの日数(既定7 / 0で再確認しない)")
+    p.add_argument("--recheck-days", type=float, default=0.5,
+                   help="needs-whisper 入りの配信を再確認するまでの基準日数(既定0.5)。確認回数に応じて倍々に伸び、上限30日。0で再確認しない")
     p.add_argument("--strict", dest="tolerate_format_errors", action="store_false",
                    help="「字幕が無く音声も取得できない」ケースも失敗(exit 1)として扱う")
     p.set_defaults(tolerate_format_errors=True)
@@ -564,6 +564,20 @@ def main() -> int:
     #
     # 再確認しても字幕が無ければ at が現在時刻で更新されるので、
     # 次の再確認はさらに --recheck-days 後になる（毎回全部を舐め直しはしない）。
+    def _recheck_wait_days(checks: int) -> float:
+        """
+        再確認までの待ち時間。確認した回数が増えるほど間隔を倍にしていく。
+        （--recheck-days を基準に 1倍, 2倍, 4倍, 8倍… / 上限30日）
+
+        配信直後はYouTubeの自動字幕がまだ生成されておらず必ず空振りする。
+        一方で数時間〜1日ほどで付くことが多い。固定の待ち時間にすると
+          短くする → 望みの薄い古い配信を毎晩調べ続けて枠を食う
+          長くする → 新しい配信が延々と取り込まれない（実際にこうなっていた。
+                     直近15本すべてが「配信当日に1度調べたきり」で滞留していた）
+        ため、回数に応じて伸ばす。新しいものは頻繁に、諦めの近いものは稀に。
+        """
+        return min(args.recheck_days * (2 ** max(0, checks - 1)), 30.0)
+
     def _needs_is_fresh(n: dict) -> bool:
         if args.recheck_days <= 0:
             return True  # 0以下なら従来どおり「一度入ったら再確認しない」
@@ -572,7 +586,8 @@ def main() -> int:
             rec = time.mktime(time.strptime(at, "%Y-%m-%dT%H:%M:%SZ"))
         except Exception:
             return False  # 日時が壊れている＝再確認する
-        return (time.time() - rec) < args.recheck_days * 86400
+        wait = _recheck_wait_days(int(n.get("checks") or 1))
+        return (time.time() - rec) < wait * 86400
 
     needs_ids = {
         n["videoId"] for n in needs
@@ -580,7 +595,7 @@ def main() -> int:
     }
     n_recheck = len(needs) - len(needs_ids)
     if n_recheck and args.subs_only:
-        log(f"needs-whisper のうち{n_recheck}本は{args.recheck_days}日以上経過 → 字幕を再確認します")
+        log(f"needs-whisper のうち{n_recheck}本が再確認の時期 → 字幕を調べ直します")
     fail_count = {f["videoId"]: int(f.get("count") or 0)
                   for f in failures if isinstance(f, dict) and f.get("videoId")}
 
@@ -658,6 +673,9 @@ def main() -> int:
         except NoSubtitle as e:
             deferred += 1
             log(f"{vid}: 字幕なし → 手元PCでのWhisper処理に回します（{e}）")
+            prev_checks = next(
+                (int(n.get("checks") or 1) for n in needs if n.get("videoId") == vid), 0
+            )
             needs = [n for n in needs if n.get("videoId") != vid]
             needs.append({
                 "videoId": vid,
@@ -665,6 +683,8 @@ def main() -> int:
                 "date": meta.get("date") or "",
                 "durationSec": int(meta.get("durationSec") or 0),
                 "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                # 何回空振りしたか。次の再確認までの待ち時間を決めるのに使う
+                "checks": prev_checks + 1,
             })
             continue
         except SkipVideo as e:
