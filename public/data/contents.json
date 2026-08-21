@@ -45,13 +45,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-21T11:00:00Z",
+    "date": "2026-08-21T11:34:17Z",
     "type": "live",
     "title": "#マイクラ参加型 クリアしよ",
     "videoId": "5VxCoGQmaA8",
     "thumbnail": "https://i.ytimg.com/vi/5VxCoGQmaA8/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-08-21T10:32:15Z",
+    "type": "video",
+    "title": "#shorts 騒がしい音ハメ #音mad #マイクラ #マリオカート8dx #台パン #asmr",
+    "videoId": "MgiSII_pH3U",
+    "thumbnail": "https://i.ytimg.com/vi/MgiSII_pH3U/maxresdefault.jpg",
+    "durationSec": 49
   },
   {
     "date": "2026-08-21T02:39:06Z",
