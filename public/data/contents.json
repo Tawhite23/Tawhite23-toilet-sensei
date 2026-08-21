@@ -36,6 +36,15 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-08-22T11:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 音量注意！！！！",
+    "videoId": "-aKGeu-0qMs",
+    "thumbnail": "https://i.ytimg.com/vi/-aKGeu-0qMs/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-22T03:00:00Z",
     "type": "live",
     "title": "#マリオカート8dx 野良レート耐久やる",
@@ -49,8 +58,8 @@
     "type": "live",
     "title": "#マイクラ参加型 クリアしよ",
     "videoId": "5VxCoGQmaA8",
-    "thumbnail": "https://i.ytimg.com/vi/5VxCoGQmaA8/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/5VxCoGQmaA8/maxresdefault.jpg",
+    "durationSec": 10845
   },
   {
     "date": "2026-08-21T10:32:15Z",
