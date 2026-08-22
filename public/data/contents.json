@@ -45,13 +45,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-22T03:00:00Z",
+    "date": "2026-08-22T03:45:59Z",
+    "type": "video",
+    "title": "#shorts おトイレタイム #バジリスクタイム #マイクラ",
+    "videoId": "uPcdIKZJcjI",
+    "thumbnail": "https://i.ytimg.com/vi/uPcdIKZJcjI/maxresdefault.jpg",
+    "durationSec": 39
+  },
+  {
+    "date": "2026-08-22T03:40:22Z",
     "type": "live",
     "title": "#マリオカート8dx 野良レート耐久やる",
     "videoId": "jBxG2xw6Wzk",
     "thumbnail": "https://i.ytimg.com/vi/jBxG2xw6Wzk/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
   },
   {
     "date": "2026-08-21T11:34:17Z",
