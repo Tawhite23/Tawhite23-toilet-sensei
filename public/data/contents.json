@@ -36,13 +36,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-22T11:30:00Z",
+    "date": "2026-08-22T12:25:25Z",
     "type": "live",
     "title": "#マイクラ参加型 音量注意！！！！",
     "videoId": "-aKGeu-0qMs",
     "thumbnail": "https://i.ytimg.com/vi/-aKGeu-0qMs/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-08-22T12:15:40Z",
+    "type": "video",
+    "title": "#shorts 薬物乱用防止の為のドレミの歌　#ドレミの歌 #asmr #マリオカート8dx",
+    "videoId": "e57zbOoVNv0",
+    "thumbnail": "https://i.ytimg.com/vi/e57zbOoVNv0/maxresdefault.jpg",
+    "durationSec": 68
   },
   {
     "date": "2026-08-22T03:45:59Z",
@@ -57,8 +64,8 @@
     "type": "live",
     "title": "#マリオカート8dx 野良レート耐久やる",
     "videoId": "jBxG2xw6Wzk",
-    "thumbnail": "https://i.ytimg.com/vi/jBxG2xw6Wzk/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/jBxG2xw6Wzk/maxresdefault.jpg",
+    "durationSec": 18674
   },
   {
     "date": "2026-08-21T11:34:17Z",
