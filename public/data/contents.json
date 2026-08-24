@@ -1,6 +1,6 @@
 [
   {
-    "date": "2026-08-24T11:30:00Z",
+    "date": "2026-08-26T11:30:00Z",
     "type": "live",
     "title": "#マイクラ参加型 基本メガ day7　#Mtuber",
     "videoId": "VBqZDMzh674",
@@ -9,13 +9,30 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-24T10:00:00Z",
+    "date": "2026-08-25T12:00:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx パンツ減った",
+    "videoId": "bCm7UMUkM10",
+    "thumbnail": "https://i.ytimg.com/vi/bCm7UMUkM10/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-25T11:00:00Z",
     "type": "live",
     "title": "#雑談 祭り屋台Tier表作ろ",
     "videoId": "VZDWOpTfdFw",
     "thumbnail": "https://i.ytimg.com/vi/VZDWOpTfdFw/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-08-24T11:39:12Z",
+    "type": "live",
+    "title": "#マイクラ参加型 下の階の人とバトル始まりそう",
+    "videoId": "ASIhS_gOmmE",
+    "thumbnail": "https://i.ytimg.com/vi/ASIhS_gOmmE/maxresdefault_live.jpg",
+    "durationSec": 0
   },
   {
     "date": "2026-08-24T02:01:46Z",
