@@ -1,30 +1,46 @@
 [
   {
+    "date": "2026-08-27T12:00:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx  世界一大荒れなマリオカートはこちら",
+    "videoId": "mwP7ByQlUkk",
+    "thumbnail": "https://i.ytimg.com/vi/mwP7ByQlUkk/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-26T11:30:00Z",
     "type": "live",
-    "title": "#マイクラ参加型 基本メガ day7　#Mtuber",
-    "videoId": "VBqZDMzh674",
-    "thumbnail": "https://i.ytimg.com/vi/VBqZDMzh674/maxresdefault_live.jpg",
+    "title": "#マイクラ参加型 一時停戦",
+    "videoId": "diL2DfcyGEE",
+    "thumbnail": "https://i.ytimg.com/vi/diL2DfcyGEE/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
   {
-    "date": "2026-08-25T12:00:00Z",
-    "type": "live",
-    "title": "#マリオカート8dx パンツ減った",
-    "videoId": "bCm7UMUkM10",
-    "thumbnail": "https://i.ytimg.com/vi/bCm7UMUkM10/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
-  },
-  {
-    "date": "2026-08-25T11:00:00Z",
+    "date": "2026-08-26T10:30:00Z",
     "type": "live",
     "title": "#雑談 祭り屋台Tier表作ろ",
     "videoId": "VZDWOpTfdFw",
     "thumbnail": "https://i.ytimg.com/vi/VZDWOpTfdFw/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-08-25T12:04:48Z",
+    "type": "live",
+    "title": "#マリオカート8dx 新らなる歴史が誕生か？！",
+    "videoId": "bCm7UMUkM10",
+    "thumbnail": "https://i.ytimg.com/vi/bCm7UMUkM10/maxresdefault_live.jpg",
+    "durationSec": 0
+  },
+  {
+    "date": "2026-08-25T07:27:40Z",
+    "type": "video",
+    "title": "#shorts おトイレ先生に関する雑学① #雑学",
+    "videoId": "bTiCglwMLk0",
+    "thumbnail": "https://i.ytimg.com/vi/bTiCglwMLk0/maxresdefault.jpg",
+    "durationSec": 67
   },
   {
     "date": "2026-08-25T03:40:18Z",
