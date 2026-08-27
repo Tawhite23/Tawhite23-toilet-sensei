@@ -1,5 +1,32 @@
 [
   {
+    "date": "2026-08-30T12:00:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx 今日も荒れるで",
+    "videoId": "DN0C5rRjzgA",
+    "thumbnail": "https://i.ytimg.com/vi/DN0C5rRjzgA/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-30T10:30:00Z",
+    "type": "live",
+    "title": "#雑談 知育菓子攻略参加型",
+    "videoId": "VZDWOpTfdFw",
+    "thumbnail": "https://i.ytimg.com/vi/VZDWOpTfdFw/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-08-29T11:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 ガチ攻略しよ",
+    "videoId": "T49AME9v-Sk",
+    "thumbnail": "https://i.ytimg.com/vi/T49AME9v-Sk/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-08-28T11:30:00Z",
     "type": "live",
     "title": "#マイクラ参加型 基本メガ day7　#Mtuber",
@@ -9,13 +36,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-27T12:00:00Z",
+    "date": "2026-08-27T12:02:31Z",
     "type": "live",
     "title": "#マリオカート8dx  世界一大荒れなマリオカートはこちら",
     "videoId": "mwP7ByQlUkk",
-    "thumbnail": "https://i.ytimg.com/vi/mwP7ByQlUkk/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/mwP7ByQlUkk/maxresdefault.jpg",
+    "durationSec": 8392
   },
   {
     "date": "2026-08-27T02:17:32Z",
