@@ -168,13 +168,6 @@
     "at": "2026-08-14T19:33:02Z"
   },
   {
-    "videoId": "bwhxmL7hmPY",
-    "title": "#ポケモンsv 完全初見縛りプレイ ルールは概要欄縦型",
-    "date": "2026-04-21T09:13:32Z",
-    "durationSec": 6356,
-    "at": "2026-08-16T18:59:47Z"
-  },
-  {
     "videoId": "8WXoltmGL_A",
     "title": "【耐久配信】5大ボス討伐するまで終われませんハードコア編【作業用BGM】",
     "date": "2026-04-03T11:45:40Z",
@@ -222,62 +215,6 @@
     "date": "2026-03-29T11:02:43Z",
     "durationSec": 19120,
     "at": "2026-08-16T19:00:06Z"
-  },
-  {
-    "videoId": "noOrRU6_h3I",
-    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
-    "date": "2026-04-21T09:09:33Z",
-    "durationSec": 95,
-    "at": "2026-08-17T19:10:53Z"
-  },
-  {
-    "videoId": "4VMUTyOi_p8",
-    "title": "#マイクラ 雑談しながら1000days 59～65day",
-    "date": "2026-04-21T09:09:08Z",
-    "durationSec": 123,
-    "at": "2026-08-17T19:10:56Z"
-  },
-  {
-    "videoId": "jJxvGKCc_I4",
-    "title": "#ポケモンsv 完全初見縛りプレイ② ルールは概要欄",
-    "date": "2026-04-20T10:58:24Z",
-    "durationSec": 9316,
-    "at": "2026-08-17T19:10:58Z"
-  },
-  {
-    "videoId": "hgCGDZgyCVA",
-    "title": "#ポケモンsv 完全初見縛りプレイ② ルールは概要欄縦型",
-    "date": "2026-04-20T10:58:16Z",
-    "durationSec": 9328,
-    "at": "2026-08-17T19:11:01Z"
-  },
-  {
-    "videoId": "TTVBL5JPpRQ",
-    "title": "#原神 完全初見プレイ③",
-    "date": "2026-04-19T13:07:31Z",
-    "durationSec": 9110,
-    "at": "2026-08-17T19:11:04Z"
-  },
-  {
-    "videoId": "Z1XwXQ2up6Q",
-    "title": "#原神 完全初見プレイ③縦型",
-    "date": "2026-04-19T13:07:19Z",
-    "durationSec": 129,
-    "at": "2026-08-17T19:11:07Z"
-  },
-  {
-    "videoId": "jRJ4oB2XWqg",
-    "title": "#ポケモンsv 完全初見縛りプレイ➀ ルールは概要欄",
-    "date": "2026-04-19T10:02:26Z",
-    "durationSec": 10746,
-    "at": "2026-08-17T19:11:09Z"
-  },
-  {
-    "videoId": "GYEWPaF4PDs",
-    "title": "#ポケモンsv  完全初見縛りプレイ➀ ルールは概要欄縦型",
-    "date": "2026-04-19T10:02:06Z",
-    "durationSec": 10767,
-    "at": "2026-08-17T19:11:12Z"
   },
   {
     "videoId": "nCprXd9o_u4",
@@ -334,13 +271,6 @@
     "date": "2026-03-20T11:00:34Z",
     "durationSec": 11774,
     "at": "2026-08-17T19:11:36Z"
-  },
-  {
-    "videoId": "3xt2dOzEuRY",
-    "title": "#マイクラ参加型 ゲリラハードコア縛り無しで気軽にやりましょう",
-    "date": "2026-04-19T08:13:27Z",
-    "durationSec": 5874,
-    "at": "2026-08-18T19:13:45Z"
   },
   {
     "videoId": "OYXXSFTRHUk",
@@ -838,22 +768,6 @@
     "checks": 4
   },
   {
-    "videoId": "diL2DfcyGEE",
-    "title": "#マイクラ参加型 一時停戦",
-    "date": "2026-08-26T11:34:17Z",
-    "durationSec": 12558,
-    "at": "2026-08-26T21:00:37Z",
-    "checks": 1
-  },
-  {
-    "videoId": "bCm7UMUkM10",
-    "title": "#マリオカート8dx 新らなる歴史が誕生か？！",
-    "date": "2026-08-25T12:04:48Z",
-    "durationSec": 10803,
-    "at": "2026-08-26T21:00:40Z",
-    "checks": 2
-  },
-  {
     "videoId": "ASIhS_gOmmE",
     "title": "#マイクラ参加型 下の階の人とバトル始まりそう",
     "date": "2026-08-24T11:39:12Z",
@@ -942,59 +856,163 @@
     "checks": 3
   },
   {
+    "videoId": "mwP7ByQlUkk",
+    "title": "#マリオカート8dx  世界一大荒れなマリオカートはこちら",
+    "date": "2026-08-27T12:02:31Z",
+    "durationSec": 8392,
+    "at": "2026-08-28T02:19:02Z",
+    "checks": 1
+  },
+  {
+    "videoId": "diL2DfcyGEE",
+    "title": "#マイクラ参加型 一時停戦",
+    "date": "2026-08-26T11:34:17Z",
+    "durationSec": 12558,
+    "at": "2026-08-28T02:19:05Z",
+    "checks": 2
+  },
+  {
+    "videoId": "bCm7UMUkM10",
+    "title": "#マリオカート8dx 新らなる歴史が誕生か？！",
+    "date": "2026-08-25T12:04:48Z",
+    "durationSec": 10803,
+    "at": "2026-08-28T02:19:09Z",
+    "checks": 3
+  },
+  {
     "videoId": "9UstWmK77bc",
     "title": "#マイクラ 雑談しながら1000days 59～65day",
     "date": "2026-04-22T11:31:00Z",
     "durationSec": 10248,
-    "at": "2026-08-26T21:01:17Z",
-    "checks": 2
+    "at": "2026-08-28T02:19:12Z",
+    "checks": 3
   },
   {
     "videoId": "G9Yy1It4SHQ",
     "title": "#ポケモンsv 完全初見縛りプレイ➄ ルールは概要欄",
     "date": "2026-04-22T09:22:42Z",
     "durationSec": 7325,
-    "at": "2026-08-26T21:01:20Z",
-    "checks": 2
+    "at": "2026-08-28T02:19:15Z",
+    "checks": 3
   },
   {
     "videoId": "vDp8zKtsqdQ",
     "title": "#ポケモンsv 完全初見縛りプレイ ルールは概要欄縦型",
     "date": "2026-04-22T09:22:25Z",
     "durationSec": 7343,
-    "at": "2026-08-26T21:01:23Z",
-    "checks": 2
+    "at": "2026-08-28T02:19:18Z",
+    "checks": 3
   },
   {
     "videoId": "zqIxdI5doq4",
     "title": "#ポケモンsv 完全初見縛りプレイ④ ルールは概要欄",
     "date": "2026-04-21T14:30:38Z",
     "durationSec": 10103,
-    "at": "2026-08-26T21:01:26Z",
-    "checks": 2
+    "at": "2026-08-28T02:19:21Z",
+    "checks": 3
   },
   {
     "videoId": "Db5Cv4379b4",
     "title": "#ポケモンsv 完全初見縛りプレイ ルールは概要欄縦型",
     "date": "2026-04-21T14:30:07Z",
     "durationSec": 10141,
-    "at": "2026-08-26T21:01:29Z",
-    "checks": 2
+    "at": "2026-08-28T02:19:24Z",
+    "checks": 3
   },
   {
     "videoId": "8i-dH3DkWqI",
     "title": "#マイクラ 建国PVPイベント開催します 参加者募集中！",
     "date": "2026-04-21T11:02:59Z",
     "durationSec": 12031,
-    "at": "2026-08-26T21:01:32Z",
-    "checks": 2
+    "at": "2026-08-28T02:19:28Z",
+    "checks": 3
   },
   {
     "videoId": "ldSTmPK3X0I",
     "title": "#ポケモンsv 完全初見縛りプレイ➂ ルールは概要欄",
     "date": "2026-04-21T09:13:36Z",
     "durationSec": 6353,
-    "at": "2026-08-26T21:01:35Z",
+    "at": "2026-08-28T02:19:30Z",
+    "checks": 3
+  },
+  {
+    "videoId": "bwhxmL7hmPY",
+    "title": "#ポケモンsv 完全初見縛りプレイ ルールは概要欄縦型",
+    "date": "2026-04-21T09:13:32Z",
+    "durationSec": 6356,
+    "at": "2026-08-28T02:19:33Z",
+    "checks": 2
+  },
+  {
+    "videoId": "noOrRU6_h3I",
+    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
+    "date": "2026-04-21T09:09:33Z",
+    "durationSec": 96,
+    "at": "2026-08-28T02:19:36Z",
+    "checks": 2
+  },
+  {
+    "videoId": "4VMUTyOi_p8",
+    "title": "#マイクラ 雑談しながら1000days 59～65day",
+    "date": "2026-04-21T09:09:08Z",
+    "durationSec": 123,
+    "at": "2026-08-28T02:19:39Z",
+    "checks": 2
+  },
+  {
+    "videoId": "jJxvGKCc_I4",
+    "title": "#ポケモンsv 完全初見縛りプレイ② ルールは概要欄",
+    "date": "2026-04-20T10:58:24Z",
+    "durationSec": 9316,
+    "at": "2026-08-28T02:19:42Z",
+    "checks": 2
+  },
+  {
+    "videoId": "hgCGDZgyCVA",
+    "title": "#ポケモンsv 完全初見縛りプレイ② ルールは概要欄縦型",
+    "date": "2026-04-20T10:58:16Z",
+    "durationSec": 9328,
+    "at": "2026-08-28T02:19:45Z",
+    "checks": 2
+  },
+  {
+    "videoId": "TTVBL5JPpRQ",
+    "title": "#原神 完全初見プレイ③",
+    "date": "2026-04-19T13:07:31Z",
+    "durationSec": 9110,
+    "at": "2026-08-28T02:19:48Z",
+    "checks": 2
+  },
+  {
+    "videoId": "Z1XwXQ2up6Q",
+    "title": "#原神 完全初見プレイ③縦型",
+    "date": "2026-04-19T13:07:19Z",
+    "durationSec": 129,
+    "at": "2026-08-28T02:19:51Z",
+    "checks": 2
+  },
+  {
+    "videoId": "jRJ4oB2XWqg",
+    "title": "#ポケモンsv 完全初見縛りプレイ➀ ルールは概要欄",
+    "date": "2026-04-19T10:02:26Z",
+    "durationSec": 10746,
+    "at": "2026-08-28T02:19:54Z",
+    "checks": 2
+  },
+  {
+    "videoId": "GYEWPaF4PDs",
+    "title": "#ポケモンsv  完全初見縛りプレイ➀ ルールは概要欄縦型",
+    "date": "2026-04-19T10:02:06Z",
+    "durationSec": 10767,
+    "at": "2026-08-28T02:19:56Z",
+    "checks": 2
+  },
+  {
+    "videoId": "3xt2dOzEuRY",
+    "title": "#マイクラ参加型 ゲリラハードコア縛り無しで気軽にやりましょう",
+    "date": "2026-04-19T08:13:27Z",
+    "durationSec": 5874,
+    "at": "2026-08-28T02:20:00Z",
     "checks": 2
   }
 ]
