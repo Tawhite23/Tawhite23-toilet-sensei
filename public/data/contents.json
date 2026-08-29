@@ -18,13 +18,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-29T10:00:00Z",
+    "date": "2026-08-29T14:30:27Z",
+    "type": "video",
+    "title": "1週間の感じ方 #MTuber",
+    "videoId": "TPZeMwGVNQU",
+    "thumbnail": "https://i.ytimg.com/vi/TPZeMwGVNQU/maxresdefault.jpg",
+    "durationSec": 39
+  },
+  {
+    "date": "2026-08-29T10:35:46Z",
     "type": "live",
     "title": "#マイクラ参加型  とりあえず5大ボス討伐",
     "videoId": "JcDFWTXQQeM",
-    "thumbnail": "https://i.ytimg.com/vi/JcDFWTXQQeM/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/JcDFWTXQQeM/maxresdefault.jpg",
+    "durationSec": 14700
   },
   {
     "date": "2026-08-29T07:00:22Z",
