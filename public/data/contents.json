@@ -18,16 +18,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-29T12:30:00Z",
-    "type": "live",
-    "title": "#マイクラ参加型 ガチ攻略しよ",
-    "videoId": "T49AME9v-Sk",
-    "thumbnail": "https://i.ytimg.com/vi/T49AME9v-Sk/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
-  },
-  {
-    "date": "2026-08-29T09:00:00Z",
+    "date": "2026-08-29T10:00:00Z",
     "type": "live",
     "title": "#マイクラ参加型  とりあえず5大ボス討伐",
     "videoId": "JcDFWTXQQeM",
@@ -36,21 +27,28 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-29T03:00:00Z",
+    "date": "2026-08-29T07:00:22Z",
+    "type": "video",
+    "title": "#shorts 【超無料級】ゴルフを楽しむ方法 #マイクラ",
+    "videoId": "cHRrcSc4wl8",
+    "thumbnail": "https://i.ytimg.com/vi/cHRrcSc4wl8/maxresdefault.jpg",
+    "durationSec": 64
+  },
+  {
+    "date": "2026-08-29T03:03:00Z",
     "type": "live",
     "title": "#雑談 みそきんNo1決めるわ",
     "videoId": "RTXCgkS3JhY",
-    "thumbnail": "https://i.ytimg.com/vi/RTXCgkS3JhY/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/RTXCgkS3JhY/maxresdefault.jpg",
+    "durationSec": 11188
   },
   {
     "date": "2026-08-28T13:53:37Z",
     "type": "live",
     "title": "#雑談 休むと思ったか！！",
     "videoId": "hpshKZ1FRzM",
-    "thumbnail": "https://i.ytimg.com/vi/hpshKZ1FRzM/maxresdefault_live.jpg",
-    "durationSec": 7287
+    "thumbnail": "https://i.ytimg.com/vi/hpshKZ1FRzM/maxresdefault.jpg",
+    "durationSec": 3170
   },
   {
     "date": "2026-08-28T09:34:11Z",
