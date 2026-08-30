@@ -9,13 +9,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-08-30T10:30:00Z",
+    "date": "2026-08-30T10:32:02Z",
     "type": "live",
     "title": "#雑談 知育菓子攻略参加型",
     "videoId": "VZDWOpTfdFw",
     "thumbnail": "https://i.ytimg.com/vi/VZDWOpTfdFw/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-08-30T08:00:27Z",
+    "type": "video",
+    "title": "#shorts 神･高評価の舞 #イナズマイレブン",
+    "videoId": "gYN7FIrIHsY",
+    "thumbnail": "https://i.ytimg.com/vi/gYN7FIrIHsY/maxresdefault.jpg",
+    "durationSec": 62
   },
   {
     "date": "2026-08-30T00:30:36Z",
