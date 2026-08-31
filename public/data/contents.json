@@ -27,6 +27,15 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-02T11:00:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 目標は一旦クリア",
+    "videoId": "rvOeGYtfuEY",
+    "thumbnail": "https://i.ytimg.com/vi/rvOeGYtfuEY/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-01T11:30:00Z",
     "type": "live",
     "title": "#マリオカート8dx え？？",
@@ -34,6 +43,22 @@
     "thumbnail": "https://i.ytimg.com/vi/mcn0ax7vR-8/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-08-31T13:14:48Z",
+    "type": "live",
+    "title": "#雑談 ちょこっと雑談",
+    "videoId": "b3zzoPfXeJs",
+    "thumbnail": "https://i.ytimg.com/vi/b3zzoPfXeJs/maxresdefault_live.jpg",
+    "durationSec": 0
+  },
+  {
+    "date": "2026-08-31T06:05:15Z",
+    "type": "video",
+    "title": "#shorts 視聴者参加型で知育菓子を作った結果① #参加型 #雑談 #知育菓子",
+    "videoId": "5t8wuKGQjmg",
+    "thumbnail": "https://i.ytimg.com/vi/5t8wuKGQjmg/maxresdefault.jpg",
+    "durationSec": 56
   },
   {
     "date": "2026-08-31T00:30:36Z",
