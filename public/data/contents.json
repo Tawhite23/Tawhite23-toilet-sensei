@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-09-21T10:00:00Z",
+    "type": "live",
+    "title": "#雑談 第1回レゴブロック参加型  お前ら信じてる",
+    "videoId": "o6ALVFpohV4",
+    "thumbnail": "https://i.ytimg.com/vi/o6ALVFpohV4/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-06T07:00:00Z",
     "type": "live",
     "title": "#マリオカート8dx 全コース耐久やります",
@@ -50,7 +59,7 @@
     "title": "#雑談 ちょこっと雑談",
     "videoId": "b3zzoPfXeJs",
     "thumbnail": "https://i.ytimg.com/vi/b3zzoPfXeJs/maxresdefault_live.jpg",
-    "durationSec": 0
+    "durationSec": 5000
   },
   {
     "date": "2026-08-31T06:05:15Z",
