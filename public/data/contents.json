@@ -36,6 +36,14 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-08-31T00:30:36Z",
+    "type": "video",
+    "title": "#shorts だから俺は服を着るの辞めた #雑談 #マイクラ",
+    "videoId": "6MseAuRLZ0A",
+    "thumbnail": "https://i.ytimg.com/vi/6MseAuRLZ0A/maxresdefault.jpg",
+    "durationSec": 60
+  },
+  {
     "date": "2026-08-30T12:34:41Z",
     "type": "live",
     "title": "#マリオカート8dx 今日も荒れるで",
@@ -48,8 +56,8 @@
     "type": "live",
     "title": "#雑談 知育菓子攻略参加型",
     "videoId": "VZDWOpTfdFw",
-    "thumbnail": "https://i.ytimg.com/vi/VZDWOpTfdFw/maxresdefault_live.jpg",
-    "durationSec": 7170
+    "thumbnail": "https://i.ytimg.com/vi/VZDWOpTfdFw/maxresdefault.jpg",
+    "durationSec": 7175
   },
   {
     "date": "2026-08-30T08:00:27Z",
