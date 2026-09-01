@@ -1,8 +1,15 @@
 {
+  "2026-09": {
+    "liveCount": 1,
+    "videoCount": 1,
+    "totalDurationSec": 8873,
+    "subscriberCount": 367,
+    "viewCount": 147016
+  },
   "2026-08": {
     "liveCount": 45,
     "videoCount": 33,
-    "totalDurationSec": 419016,
+    "totalDurationSec": 424022,
     "subscriberCount": 367,
     "viewCount": 146968
   },
@@ -89,12 +96,5 @@
     "totalDurationSec": 290484,
     "subscriberCount": 2,
     "viewCount": 72
-  },
-  "2026-09": {
-    "liveCount": 0,
-    "videoCount": 0,
-    "totalDurationSec": 0,
-    "subscriberCount": 367,
-    "viewCount": 147016
   }
 }
