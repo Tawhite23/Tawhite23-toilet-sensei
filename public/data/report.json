@@ -89,5 +89,12 @@
     "totalDurationSec": 290484,
     "subscriberCount": 2,
     "viewCount": 72
+  },
+  "2026-09": {
+    "liveCount": 0,
+    "videoCount": 0,
+    "totalDurationSec": 0,
+    "subscriberCount": 367,
+    "viewCount": null
   }
 }
