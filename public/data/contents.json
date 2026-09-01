@@ -54,12 +54,20 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-01T02:34:27Z",
+    "type": "video",
+    "title": "#shorts かき氷の作り方について #知育菓子 #参加型",
+    "videoId": "pH0ou6Opozg",
+    "thumbnail": "https://i.ytimg.com/vi/pH0ou6Opozg/maxresdefault.jpg",
+    "durationSec": 64
+  },
+  {
     "date": "2026-08-31T13:14:48Z",
     "type": "live",
     "title": "#雑談 ちょこっと雑談",
     "videoId": "b3zzoPfXeJs",
-    "thumbnail": "https://i.ytimg.com/vi/b3zzoPfXeJs/maxresdefault_live.jpg",
-    "durationSec": 5000
+    "thumbnail": "https://i.ytimg.com/vi/b3zzoPfXeJs/maxresdefault.jpg",
+    "durationSec": 5006
   },
   {
     "date": "2026-08-31T06:05:15Z",
