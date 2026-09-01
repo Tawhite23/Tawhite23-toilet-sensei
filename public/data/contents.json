@@ -36,6 +36,15 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-03T11:30:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx お前らいつもありがとう",
+    "videoId": "Xqdf4cyAW60",
+    "thumbnail": "https://i.ytimg.com/vi/Xqdf4cyAW60/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-02T11:00:00Z",
     "type": "live",
     "title": "#マイクラ参加型 目標は一旦クリア",
@@ -45,13 +54,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-01T11:45:00Z",
+    "date": "2026-09-01T12:08:03Z",
     "type": "live",
     "title": "#マリオカート8dx 挑戦待ってる",
     "videoId": "mcn0ax7vR-8",
-    "thumbnail": "https://i.ytimg.com/vi/mcn0ax7vR-8/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/mcn0ax7vR-8/maxresdefault.jpg",
+    "durationSec": 8809
   },
   {
     "date": "2026-09-01T02:34:27Z",
