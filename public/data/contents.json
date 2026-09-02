@@ -2,7 +2,7 @@
   {
     "date": "2026-09-21T10:00:00Z",
     "type": "live",
-    "title": "#雑談 第1回レゴブロック参加型  お前ら信じてる",
+    "title": "#参加型  第1回レゴブロック参加型  お前ら信じてる",
     "videoId": "o6ALVFpohV4",
     "thumbnail": "https://i.ytimg.com/vi/o6ALVFpohV4/maxresdefault_live.jpg",
     "durationSec": 0,
@@ -20,7 +20,7 @@
   {
     "date": "2026-09-05T10:00:00Z",
     "type": "live",
-    "title": "#雑談 第2回知育菓子攻略参加型",
+    "title": "#参加型  第2回知育菓子攻略参加型",
     "videoId": "ZPJtteXDJkY",
     "thumbnail": "https://i.ytimg.com/vi/ZPJtteXDJkY/maxresdefault_live.jpg",
     "durationSec": 0,
@@ -45,13 +45,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-02T11:30:00Z",
+    "date": "2026-09-02T11:58:04Z",
     "type": "live",
     "title": "#マイクラ参加型 目標は一旦クリア",
     "videoId": "rvOeGYtfuEY",
-    "thumbnail": "https://i.ytimg.com/vi/rvOeGYtfuEY/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/rvOeGYtfuEY/maxresdefault.jpg",
+    "durationSec": 9409
   },
   {
     "date": "2026-09-02T02:47:16Z",
