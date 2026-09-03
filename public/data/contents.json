@@ -18,6 +18,15 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-05T12:00:00Z",
+    "type": "live",
+    "title": "#参加型 第1回ルービックキューブ攻略参加型",
+    "videoId": "tBdRF0oKFC8",
+    "thumbnail": "https://i.ytimg.com/vi/tBdRF0oKFC8/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-05T10:00:00Z",
     "type": "live",
     "title": "#参加型  第2回知育菓子攻略参加型",
@@ -43,6 +52,14 @@
     "thumbnail": "https://i.ytimg.com/vi/Xqdf4cyAW60/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-09-03T07:40:56Z",
+    "type": "video",
+    "title": "#shorts Switchのソフト試食会 #マリオカート8dx #料理",
+    "videoId": "Rm7QOwERqWI",
+    "thumbnail": "https://i.ytimg.com/vi/Rm7QOwERqWI/maxresdefault.jpg",
+    "durationSec": 23
   },
   {
     "date": "2026-09-02T11:58:04Z",
