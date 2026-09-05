@@ -63,13 +63,12 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-05T11:30:00Z",
+    "date": "2026-09-05T11:37:06Z",
     "type": "live",
     "title": "#参加型 第1回ルービックキューブ攻略参加型",
     "videoId": "tBdRF0oKFC8",
-    "thumbnail": "https://i.ytimg.com/vi/tBdRF0oKFC8/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/tBdRF0oKFC8/maxresdefault.jpg",
+    "durationSec": 7375
   },
   {
     "date": "2026-09-05T10:20:30Z",
@@ -77,7 +76,7 @@
     "title": "#参加型  第2回知育菓子攻略参加型",
     "videoId": "ZPJtteXDJkY",
     "thumbnail": "https://i.ytimg.com/vi/ZPJtteXDJkY/maxresdefault_live.jpg",
-    "durationSec": 0
+    "durationSec": 4394
   },
   {
     "date": "2026-09-05T08:09:08Z",
