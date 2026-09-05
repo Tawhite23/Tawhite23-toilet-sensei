@@ -9,11 +9,47 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-11T11:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 ブルームアドオン",
+    "videoId": "rJRITAw1sOs",
+    "thumbnail": "https://i.ytimg.com/vi/rJRITAw1sOs/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-09T12:00:00Z",
+    "type": "live",
+    "title": "#ポケモンsv ポケモンシール縛りで人生縛りパート1",
+    "videoId": "pZIk3ROGWVM",
+    "thumbnail": "https://i.ytimg.com/vi/pZIk3ROGWVM/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-09T10:00:00Z",
+    "type": "live",
+    "title": "#apex参加型    めっちゃ久しぶり",
+    "videoId": "fGseVmzHqpI",
+    "thumbnail": "https://i.ytimg.com/vi/fGseVmzHqpI/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-08T11:30:00Z",
     "type": "live",
     "title": "#マリオカート8dx 被弾の度に嫁にシバかれる",
     "videoId": "MFdEsmI_S08",
     "thumbnail": "https://i.ytimg.com/vi/MFdEsmI_S08/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-07T11:30:00Z",
+    "type": "live",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "videoId": "srQ-ykH7DEo",
+    "thumbnail": "https://i.ytimg.com/vi/srQ-ykH7DEo/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -27,7 +63,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-05T12:00:00Z",
+    "date": "2026-09-05T11:30:00Z",
     "type": "live",
     "title": "#参加型 第1回ルービックキューブ攻略参加型",
     "videoId": "tBdRF0oKFC8",
@@ -36,13 +72,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-05T10:00:00Z",
+    "date": "2026-09-05T10:20:30Z",
     "type": "live",
     "title": "#参加型  第2回知育菓子攻略参加型",
     "videoId": "ZPJtteXDJkY",
     "thumbnail": "https://i.ytimg.com/vi/ZPJtteXDJkY/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-09-05T08:09:08Z",
+    "type": "video",
+    "title": "#shorts ムーディ勝山知ってる？ #マイクラ",
+    "videoId": "gGZ_4vNibko",
+    "thumbnail": "https://i.ytimg.com/vi/gGZ_4vNibko/maxresdefault.jpg",
+    "durationSec": 82
   },
   {
     "date": "2026-09-04T11:19:26Z",
