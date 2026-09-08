@@ -1,53 +1,5 @@
 [
   {
-    "videoId": "I1R34VPAv7A",
-    "title": "#原神 完全初見プレイ➈",
-    "date": "2026-06-24T12:48:05Z",
-    "durationSec": 7725,
-    "at": "2026-08-31T00:26:09Z",
-    "checks": 5
-  },
-  {
-    "videoId": "FuDjhRUw0ug",
-    "title": "#マイクラ参加型 第13回サバイバル鬼ごっこシーズン3",
-    "date": "2026-05-23T11:01:21Z",
-    "durationSec": 9581,
-    "at": "2026-08-31T00:26:15Z",
-    "checks": 5
-  },
-  {
-    "videoId": "noOrRU6_h3I",
-    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
-    "date": "2026-04-21T09:09:33Z",
-    "durationSec": 96,
-    "at": "2026-08-31T00:26:20Z",
-    "checks": 5
-  },
-  {
-    "videoId": "4VMUTyOi_p8",
-    "title": "#マイクラ 雑談しながら1000days 59～65day",
-    "date": "2026-04-21T09:09:08Z",
-    "durationSec": 123,
-    "at": "2026-08-31T00:26:25Z",
-    "checks": 5
-  },
-  {
-    "videoId": "Vw1AMDdK4r4",
-    "title": "#マイクラ参加型 #asmr ダイヤ3000ゲットするまで終われません！2【睡眠導入】",
-    "date": "2026-02-11T01:09:10Z",
-    "durationSec": 37689,
-    "at": "2026-09-04T20:59:56Z",
-    "checks": 4
-  },
-  {
-    "videoId": "6yIdGiBpDMw",
-    "title": "APEX雑談しながら参加型ランク初見さんいらっしゃい",
-    "date": "2025-12-05T09:45:17Z",
-    "durationSec": 4758,
-    "at": "2026-09-04T21:00:02Z",
-    "checks": 4
-  },
-  {
     "videoId": "z1FuQLMaMZ0",
     "title": "参加型 マイクラ #13 みんなで野球場作りたい！［睡眠導入］［作業用BGM］",
     "date": "2025-11-19T13:33:07Z",
@@ -94,22 +46,6 @@
     "durationSec": 4591,
     "at": "2026-09-05T20:41:26Z",
     "checks": 4
-  },
-  {
-    "videoId": "q4i7xNHrISY",
-    "title": "#マイクラ参加型  とりあえず鉄1万",
-    "date": "2026-09-04T11:19:26Z",
-    "durationSec": 21006,
-    "at": "2026-09-06T20:46:05Z",
-    "checks": 3
-  },
-  {
-    "videoId": "Xqdf4cyAW60",
-    "title": "#マリオカート8dx お前らいつもありがとう",
-    "date": "2026-09-03T11:55:14Z",
-    "durationSec": 10771,
-    "at": "2026-09-06T20:46:12Z",
-    "checks": 3
   },
   {
     "videoId": "mcn0ax7vR-8",
@@ -350,5 +286,77 @@
     "durationSec": 42897,
     "at": "2026-09-07T21:48:04Z",
     "checks": 4
+  },
+  {
+    "videoId": "MFdEsmI_S08",
+    "title": "#マリオカート8dx 【神回】被弾の度に嫁にシバかれる　下の階の人コラボ",
+    "date": "2026-09-08T11:33:14Z",
+    "durationSec": 11661,
+    "at": "2026-09-08T21:23:02Z",
+    "checks": 1
+  },
+  {
+    "videoId": "q4i7xNHrISY",
+    "title": "#マイクラ参加型  とりあえず鉄1万",
+    "date": "2026-09-04T11:19:26Z",
+    "durationSec": 21006,
+    "at": "2026-09-08T21:23:08Z",
+    "checks": 4
+  },
+  {
+    "videoId": "Xqdf4cyAW60",
+    "title": "#マリオカート8dx お前らいつもありがとう",
+    "date": "2026-09-03T11:55:14Z",
+    "durationSec": 10771,
+    "at": "2026-09-08T21:23:14Z",
+    "checks": 4
+  },
+  {
+    "videoId": "I1R34VPAv7A",
+    "title": "#原神 完全初見プレイ➈",
+    "date": "2026-06-24T12:48:05Z",
+    "durationSec": 7725,
+    "at": "2026-09-08T21:23:19Z",
+    "checks": 6
+  },
+  {
+    "videoId": "FuDjhRUw0ug",
+    "title": "#マイクラ参加型 第13回サバイバル鬼ごっこシーズン3",
+    "date": "2026-05-23T11:01:21Z",
+    "durationSec": 9582,
+    "at": "2026-09-08T21:23:25Z",
+    "checks": 6
+  },
+  {
+    "videoId": "noOrRU6_h3I",
+    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
+    "date": "2026-04-21T09:09:33Z",
+    "durationSec": 96,
+    "at": "2026-09-08T21:23:31Z",
+    "checks": 6
+  },
+  {
+    "videoId": "4VMUTyOi_p8",
+    "title": "#マイクラ 雑談しながら1000days 59～65day",
+    "date": "2026-04-21T09:09:08Z",
+    "durationSec": 123,
+    "at": "2026-09-08T21:23:37Z",
+    "checks": 6
+  },
+  {
+    "videoId": "Vw1AMDdK4r4",
+    "title": "#マイクラ参加型 #asmr ダイヤ3000ゲットするまで終われません！2【睡眠導入】",
+    "date": "2026-02-11T01:09:10Z",
+    "durationSec": 37689,
+    "at": "2026-09-08T21:23:43Z",
+    "checks": 5
+  },
+  {
+    "videoId": "6yIdGiBpDMw",
+    "title": "APEX雑談しながら参加型ランク初見さんいらっしゃい",
+    "date": "2025-12-05T09:45:17Z",
+    "durationSec": 4758,
+    "at": "2026-09-08T21:23:49Z",
+    "checks": 5
   }
 ]
