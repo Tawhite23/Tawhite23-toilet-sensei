@@ -45,22 +45,30 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-09T12:00:00Z",
+    "date": "2026-09-10T11:30:00Z",
     "type": "live",
-    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
-    "videoId": "srQ-ykH7DEo",
-    "thumbnail": "https://i.ytimg.com/vi/srQ-ykH7DEo/maxresdefault_live.jpg",
+    "title": "#マリオカート8dx 反省会",
+    "videoId": "yt0ZdCQWohE",
+    "thumbnail": "https://i.ytimg.com/vi/yt0ZdCQWohE/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
   {
-    "date": "2026-09-09T10:00:00Z",
+    "date": "2026-09-10T10:00:00Z",
     "type": "live",
     "title": "#apex参加型    めっちゃ久しぶり",
     "videoId": "fGseVmzHqpI",
     "thumbnail": "https://i.ytimg.com/vi/fGseVmzHqpI/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-09-09T12:16:12Z",
+    "type": "live",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "videoId": "srQ-ykH7DEo",
+    "thumbnail": "https://i.ytimg.com/vi/srQ-ykH7DEo/maxresdefault.jpg",
+    "durationSec": 9944
   },
   {
     "date": "2026-09-08T11:33:14Z",
