@@ -160,14 +160,6 @@
     "checks": 5
   },
   {
-    "videoId": "EhTxnQr7lqg",
-    "title": "#マリオカート8dx 全コース耐久やります",
-    "date": "2026-09-06T08:35:33Z",
-    "durationSec": 18666,
-    "at": "2026-09-09T21:08:48Z",
-    "checks": 3
-  },
-  {
     "videoId": "z1FuQLMaMZ0",
     "title": "参加型 マイクラ #13 みんなで野球場作りたい！［睡眠導入］［作業用BGM］",
     "date": "2025-11-19T13:33:07Z",
@@ -214,22 +206,6 @@
     "durationSec": 4591,
     "at": "2026-09-09T21:09:29Z",
     "checks": 5
-  },
-  {
-    "videoId": "yt0ZdCQWohE",
-    "title": "#マリオカート8dx 反省会",
-    "date": "2026-09-10T11:46:16Z",
-    "durationSec": 9243,
-    "at": "2026-09-10T21:09:11Z",
-    "checks": 1
-  },
-  {
-    "videoId": "srQ-ykH7DEo",
-    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
-    "date": "2026-09-09T12:16:12Z",
-    "durationSec": 9944,
-    "at": "2026-09-10T21:09:18Z",
-    "checks": 2
   },
   {
     "videoId": "MFdEsmI_S08",
@@ -374,5 +350,29 @@
     "durationSec": 10845,
     "at": "2026-09-10T21:11:19Z",
     "checks": 5
+  },
+  {
+    "videoId": "yt0ZdCQWohE",
+    "title": "#マリオカート8dx 反省会",
+    "date": "2026-09-10T11:46:16Z",
+    "durationSec": 9243,
+    "at": "2026-09-11T21:13:43Z",
+    "checks": 2
+  },
+  {
+    "videoId": "srQ-ykH7DEo",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "date": "2026-09-09T12:16:12Z",
+    "durationSec": 9944,
+    "at": "2026-09-11T21:13:50Z",
+    "checks": 3
+  },
+  {
+    "videoId": "EhTxnQr7lqg",
+    "title": "#マリオカート8dx 全コース耐久やります",
+    "date": "2026-09-06T08:35:33Z",
+    "durationSec": 18666,
+    "at": "2026-09-11T21:13:57Z",
+    "checks": 4
   }
 ]
