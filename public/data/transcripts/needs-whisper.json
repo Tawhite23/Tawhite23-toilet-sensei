@@ -1,101 +1,5 @@
 [
   {
-    "videoId": "rvOeGYtfuEY",
-    "title": "#マイクラ参加型 目標は一旦クリア",
-    "date": "2026-09-02T11:58:04Z",
-    "durationSec": 9409,
-    "at": "2026-09-07T21:46:49Z",
-    "checks": 4
-  },
-  {
-    "videoId": "UfzE30iARQk",
-    "title": "参加型マイクラ#12 エンチャ釣り、ダイヤ集め",
-    "date": "2025-10-10T17:41:25Z",
-    "durationSec": 30713,
-    "at": "2026-09-07T21:46:56Z",
-    "checks": 4
-  },
-  {
-    "videoId": "oKT9-uqv5lE",
-    "title": "APEX 朝までひたすらランク",
-    "date": "2025-09-19T09:00:10Z",
-    "durationSec": 37874,
-    "at": "2026-09-07T21:47:02Z",
-    "checks": 4
-  },
-  {
-    "videoId": "Ih-lTDqWa8Y",
-    "title": "APEX ランクスパロー使う",
-    "date": "2025-09-18T07:49:16Z",
-    "durationSec": 2990,
-    "at": "2026-09-07T21:47:09Z",
-    "checks": 4
-  },
-  {
-    "videoId": "7q0T1lKUaMU",
-    "title": "APEX ランク初見さんいらっしゃい",
-    "date": "2025-09-15T08:03:05Z",
-    "durationSec": 17405,
-    "at": "2026-09-07T21:47:16Z",
-    "checks": 4
-  },
-  {
-    "videoId": "prlFiRZFgqg",
-    "title": "APEX ランク初見さんいらっしゃい",
-    "date": "2025-09-04T13:22:26Z",
-    "durationSec": 10742,
-    "at": "2026-09-07T21:47:23Z",
-    "checks": 4
-  },
-  {
-    "videoId": "iqsGfF6n6zU",
-    "title": "APEX ランク初見さんいらっしゃい 参加おｋ！",
-    "date": "2025-09-03T13:18:53Z",
-    "durationSec": 11213,
-    "at": "2026-09-07T21:47:30Z",
-    "checks": 4
-  },
-  {
-    "videoId": "kXfTqCS924Q",
-    "title": "APEX ランク初見さんいらっしゃい",
-    "date": "2025-09-03T07:52:37Z",
-    "durationSec": 2507,
-    "at": "2026-09-07T21:47:37Z",
-    "checks": 4
-  },
-  {
-    "videoId": "6N7-JXAwGSQ",
-    "title": "APEX ランクプラチナ2まで頑張る",
-    "date": "2025-08-24T03:17:18Z",
-    "durationSec": 42896,
-    "at": "2026-09-07T21:47:44Z",
-    "checks": 4
-  },
-  {
-    "videoId": "lRTNYI0964o",
-    "title": "APEX ランクプラチナ2まで頑張るボイスあり",
-    "date": "2025-08-23T13:26:00Z",
-    "durationSec": 3622,
-    "at": "2026-09-07T21:47:51Z",
-    "checks": 4
-  },
-  {
-    "videoId": "mks2mq8di1M",
-    "title": "APEX ランクプラチナ2まで頑張る",
-    "date": "2025-08-23T05:38:04Z",
-    "durationSec": 7553,
-    "at": "2026-09-07T21:47:58Z",
-    "checks": 4
-  },
-  {
-    "videoId": "mJ5tYMdxYoM",
-    "title": "APEX 基本ソロランク プラチナ3行くまで",
-    "date": "2025-08-22T15:40:00Z",
-    "durationSec": 42897,
-    "at": "2026-09-07T21:48:04Z",
-    "checks": 4
-  },
-  {
     "videoId": "q4i7xNHrISY",
     "title": "#マイクラ参加型  とりあえず鉄1万",
     "date": "2026-09-04T11:19:26Z",
@@ -374,5 +278,101 @@
     "durationSec": 18666,
     "at": "2026-09-11T21:13:57Z",
     "checks": 4
+  },
+  {
+    "videoId": "rvOeGYtfuEY",
+    "title": "#マイクラ参加型 目標は一旦クリア",
+    "date": "2026-09-02T11:58:04Z",
+    "durationSec": 9409,
+    "at": "2026-09-12T20:53:46Z",
+    "checks": 5
+  },
+  {
+    "videoId": "UfzE30iARQk",
+    "title": "参加型マイクラ#12 エンチャ釣り、ダイヤ集め",
+    "date": "2025-10-10T17:41:25Z",
+    "durationSec": 30713,
+    "at": "2026-09-12T20:53:53Z",
+    "checks": 5
+  },
+  {
+    "videoId": "oKT9-uqv5lE",
+    "title": "APEX 朝までひたすらランク",
+    "date": "2025-09-19T09:00:10Z",
+    "durationSec": 37874,
+    "at": "2026-09-12T20:54:00Z",
+    "checks": 5
+  },
+  {
+    "videoId": "Ih-lTDqWa8Y",
+    "title": "APEX ランクスパロー使う",
+    "date": "2025-09-18T07:49:16Z",
+    "durationSec": 2990,
+    "at": "2026-09-12T20:54:06Z",
+    "checks": 5
+  },
+  {
+    "videoId": "7q0T1lKUaMU",
+    "title": "APEX ランク初見さんいらっしゃい",
+    "date": "2025-09-15T08:03:05Z",
+    "durationSec": 17405,
+    "at": "2026-09-12T20:54:13Z",
+    "checks": 5
+  },
+  {
+    "videoId": "prlFiRZFgqg",
+    "title": "APEX ランク初見さんいらっしゃい",
+    "date": "2025-09-04T13:22:26Z",
+    "durationSec": 10742,
+    "at": "2026-09-12T20:54:20Z",
+    "checks": 5
+  },
+  {
+    "videoId": "iqsGfF6n6zU",
+    "title": "APEX ランク初見さんいらっしゃい 参加おｋ！",
+    "date": "2025-09-03T13:18:53Z",
+    "durationSec": 11213,
+    "at": "2026-09-12T20:54:27Z",
+    "checks": 5
+  },
+  {
+    "videoId": "kXfTqCS924Q",
+    "title": "APEX ランク初見さんいらっしゃい",
+    "date": "2025-09-03T07:52:37Z",
+    "durationSec": 2507,
+    "at": "2026-09-12T20:54:34Z",
+    "checks": 5
+  },
+  {
+    "videoId": "6N7-JXAwGSQ",
+    "title": "APEX ランクプラチナ2まで頑張る",
+    "date": "2025-08-24T03:17:18Z",
+    "durationSec": 42896,
+    "at": "2026-09-12T20:54:41Z",
+    "checks": 5
+  },
+  {
+    "videoId": "lRTNYI0964o",
+    "title": "APEX ランクプラチナ2まで頑張るボイスあり",
+    "date": "2025-08-23T13:26:00Z",
+    "durationSec": 3622,
+    "at": "2026-09-12T20:54:48Z",
+    "checks": 5
+  },
+  {
+    "videoId": "mks2mq8di1M",
+    "title": "APEX ランクプラチナ2まで頑張る",
+    "date": "2025-08-23T05:38:04Z",
+    "durationSec": 7553,
+    "at": "2026-09-12T20:54:54Z",
+    "checks": 5
+  },
+  {
+    "videoId": "mJ5tYMdxYoM",
+    "title": "APEX 基本ソロランク プラチナ3行くまで",
+    "date": "2025-08-22T15:40:00Z",
+    "durationSec": 42897,
+    "at": "2026-09-12T20:55:01Z",
+    "checks": 5
   }
 ]
