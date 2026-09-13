@@ -9,6 +9,24 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-22T12:00:00Z",
+    "type": "live",
+    "title": "【世界初】第3回知育菓子攻略参加型",
+    "videoId": "Yw81p9jBGHE",
+    "thumbnail": "https://i.ytimg.com/vi/Yw81p9jBGHE/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-22T10:00:00Z",
+    "type": "live",
+    "title": "【世界初】 第2回ルービックキューブ参加型攻略を目指す",
+    "videoId": "iAWrU7uhxgA",
+    "thumbnail": "https://i.ytimg.com/vi/iAWrU7uhxgA/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-21T10:00:00Z",
     "type": "live",
     "title": "【世界初】 第1回レゴブロック参加型  お前ら信じてる",
@@ -18,20 +36,38 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-19T12:00:00Z",
+    "date": "2026-09-20T10:00:00Z",
     "type": "live",
-    "title": "【世界初】第3回知育菓子攻略参加型",
-    "videoId": "Yw81p9jBGHE",
-    "thumbnail": "https://i.ytimg.com/vi/Yw81p9jBGHE/maxresdefault_live.jpg",
+    "title": "【睡眠チャレンジ】逆張り23時間30分睡眠チャレンジ④",
+    "videoId": "sCBari3cL9U",
+    "thumbnail": "https://i.ytimg.com/vi/sCBari3cL9U/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-19T22:00:00Z",
+    "type": "live",
+    "title": "【睡眠チャレンジ】逆張り23時間30分睡眠チャレンジ③",
+    "videoId": "yzXGFy4gYOg",
+    "thumbnail": "https://i.ytimg.com/vi/yzXGFy4gYOg/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
   {
     "date": "2026-09-19T10:00:00Z",
     "type": "live",
-    "title": "【世界初】 第2回ルービックキューブ参加型攻略を目指す",
-    "videoId": "iAWrU7uhxgA",
-    "thumbnail": "https://i.ytimg.com/vi/iAWrU7uhxgA/maxresdefault_live.jpg",
+    "title": "【睡眠チャレンジ】逆張り23時間30分睡眠チャレンジ②",
+    "videoId": "ZUKdInzo7PE",
+    "thumbnail": "https://i.ytimg.com/vi/ZUKdInzo7PE/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-18T22:00:00Z",
+    "type": "live",
+    "title": "【睡眠チャレンジ】逆張り23時間30分睡眠チャレンジ①",
+    "videoId": "UPgkWMescuU",
+    "thumbnail": "https://i.ytimg.com/vi/UPgkWMescuU/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
