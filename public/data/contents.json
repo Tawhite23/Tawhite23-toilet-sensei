@@ -9,20 +9,11 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-22T12:00:00Z",
+    "date": "2026-09-22T06:00:00Z",
     "type": "live",
-    "title": "【世界初】第3回知育菓子攻略参加型",
-    "videoId": "Yw81p9jBGHE",
-    "thumbnail": "https://i.ytimg.com/vi/Yw81p9jBGHE/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
-  },
-  {
-    "date": "2026-09-22T10:00:00Z",
-    "type": "live",
-    "title": "【世界初】 第2回ルービックキューブ参加型攻略を目指す",
-    "videoId": "iAWrU7uhxgA",
-    "thumbnail": "https://i.ytimg.com/vi/iAWrU7uhxgA/maxresdefault_live.jpg",
+    "title": "#マリオカート8dx 50cc全コース耐久やります",
+    "videoId": "mpU68pytw7s",
+    "thumbnail": "https://i.ytimg.com/vi/mpU68pytw7s/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -68,6 +59,24 @@
     "title": "【睡眠チャレンジ】逆張り23時間30分睡眠チャレンジ①",
     "videoId": "UPgkWMescuU",
     "thumbnail": "https://i.ytimg.com/vi/UPgkWMescuU/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-18T12:00:00Z",
+    "type": "live",
+    "title": "【世界初】第3回知育菓子攻略参加型",
+    "videoId": "Yw81p9jBGHE",
+    "thumbnail": "https://i.ytimg.com/vi/Yw81p9jBGHE/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-18T10:00:00Z",
+    "type": "live",
+    "title": "【世界初】 第2回ルービックキューブ参加型攻略を目指す",
+    "videoId": "iAWrU7uhxgA",
+    "thumbnail": "https://i.ytimg.com/vi/iAWrU7uhxgA/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -120,8 +129,8 @@
     "type": "live",
     "title": "#マリオカート8dx 第2回全コース耐久やります",
     "videoId": "fyctJSfEx5Y",
-    "thumbnail": "https://i.ytimg.com/vi/fyctJSfEx5Y/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/fyctJSfEx5Y/maxresdefault.jpg",
+    "durationSec": 23113
   },
   {
     "date": "2026-09-13T06:02:18Z",
