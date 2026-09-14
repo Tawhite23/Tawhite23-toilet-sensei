@@ -90,6 +90,15 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-16T12:00:00Z",
+    "type": "live",
+    "title": "【マイクラ】雑談しながら普通にハードコア",
+    "videoId": "TW5t9YIGaOQ",
+    "thumbnail": "https://i.ytimg.com/vi/TW5t9YIGaOQ/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-16T10:00:00Z",
     "type": "live",
     "title": "#ポケモンsv ポケモンシール縛りで人生縛りパート1",
@@ -99,12 +108,21 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-15T11:00:00Z",
+    "type": "live",
+    "title": "#雑談 第1回企画妄想会",
+    "videoId": "45rSuqajyOg",
+    "thumbnail": "https://i.ytimg.com/vi/45rSuqajyOg/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
     "date": "2026-09-14T11:40:14Z",
     "type": "live",
     "title": "#マイクラ参加型 ブルームアドオン",
     "videoId": "rJRITAw1sOs",
-    "thumbnail": "https://i.ytimg.com/vi/rJRITAw1sOs/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/rJRITAw1sOs/maxresdefault.jpg",
+    "durationSec": 10330
   },
   {
     "date": "2026-09-14T10:01:38Z",
