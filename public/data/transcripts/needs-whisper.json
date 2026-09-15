@@ -216,14 +216,6 @@
     "checks": 5
   },
   {
-    "videoId": "EhTxnQr7lqg",
-    "title": "#マリオカート8dx 全コース耐久やります",
-    "date": "2026-09-06T08:35:33Z",
-    "durationSec": 18666,
-    "at": "2026-09-11T21:13:57Z",
-    "checks": 4
-  },
-  {
     "videoId": "rvOeGYtfuEY",
     "title": "#マイクラ参加型 目標は一旦クリア",
     "date": "2026-09-02T11:58:04Z",
@@ -320,14 +312,6 @@
     "checks": 5
   },
   {
-    "videoId": "yt0ZdCQWohE",
-    "title": "#マリオカート8dx 反省会",
-    "date": "2026-09-10T11:46:16Z",
-    "durationSec": 9243,
-    "at": "2026-09-13T21:06:48Z",
-    "checks": 3
-  },
-  {
     "videoId": "MFdEsmI_S08",
     "title": "#マリオカート8dx 【神回】被弾の度に嫁にシバかれる　下の階の人コラボ",
     "date": "2026-09-08T11:33:14Z",
@@ -350,22 +334,6 @@
     "durationSec": 10771,
     "at": "2026-09-13T21:07:15Z",
     "checks": 5
-  },
-  {
-    "videoId": "rJRITAw1sOs",
-    "title": "#マイクラ参加型 ブルームアドオン",
-    "date": "2026-09-14T11:40:14Z",
-    "durationSec": 10330,
-    "at": "2026-09-14T22:00:12Z",
-    "checks": 1
-  },
-  {
-    "videoId": "0ym3Apo7otY",
-    "title": "#apex参加型   今度こそ",
-    "date": "2026-09-14T10:01:38Z",
-    "durationSec": 5799,
-    "at": "2026-09-14T22:00:19Z",
-    "checks": 1
   },
   {
     "videoId": "fyctJSfEx5Y",
@@ -397,6 +365,46 @@
     "date": "2026-09-05T10:20:30Z",
     "durationSec": 4400,
     "at": "2026-09-14T22:00:45Z",
+    "checks": 5
+  },
+  {
+    "videoId": "45rSuqajyOg",
+    "title": "#雑談 第1回企画妄想会",
+    "date": "2026-09-15T12:47:33Z",
+    "durationSec": 7431,
+    "at": "2026-09-15T21:42:45Z",
+    "checks": 1
+  },
+  {
+    "videoId": "rJRITAw1sOs",
+    "title": "#マイクラ参加型 ブルームアドオン",
+    "date": "2026-09-14T11:40:14Z",
+    "durationSec": 10330,
+    "at": "2026-09-15T21:42:52Z",
+    "checks": 2
+  },
+  {
+    "videoId": "0ym3Apo7otY",
+    "title": "#apex参加型   今度こそ",
+    "date": "2026-09-14T10:01:38Z",
+    "durationSec": 5794,
+    "at": "2026-09-15T21:42:59Z",
+    "checks": 2
+  },
+  {
+    "videoId": "yt0ZdCQWohE",
+    "title": "#マリオカート8dx 反省会",
+    "date": "2026-09-10T11:46:16Z",
+    "durationSec": 9243,
+    "at": "2026-09-15T21:43:06Z",
+    "checks": 4
+  },
+  {
+    "videoId": "EhTxnQr7lqg",
+    "title": "#マリオカート8dx 全コース耐久やります",
+    "date": "2026-09-06T08:35:33Z",
+    "durationSec": 18666,
+    "at": "2026-09-15T21:43:13Z",
     "checks": 5
   }
 ]
