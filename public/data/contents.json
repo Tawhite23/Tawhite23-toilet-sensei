@@ -90,13 +90,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-16T12:00:00Z",
+    "date": "2026-09-16T13:28:44Z",
+    "type": "video",
+    "title": "#shorts 逆張り配信やります #おトイレ先生",
+    "videoId": "nlA0wJbcZWc",
+    "thumbnail": "https://i.ytimg.com/vi/nlA0wJbcZWc/maxresdefault.jpg",
+    "durationSec": 16
+  },
+  {
+    "date": "2026-09-16T12:08:32Z",
     "type": "live",
     "title": "【マイクラ】雑談しながら普通にハードコア",
     "videoId": "TW5t9YIGaOQ",
-    "thumbnail": "https://i.ytimg.com/vi/TW5t9YIGaOQ/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/TW5t9YIGaOQ/maxresdefault.jpg",
+    "durationSec": 9680
   },
   {
     "date": "2026-09-16T10:15:37Z",
@@ -104,7 +111,7 @@
     "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
     "videoId": "pZIk3ROGWVM",
     "thumbnail": "https://i.ytimg.com/vi/pZIk3ROGWVM/maxresdefault_live.jpg",
-    "durationSec": 0
+    "durationSec": 6589
   },
   {
     "date": "2026-09-16T05:58:21Z",
