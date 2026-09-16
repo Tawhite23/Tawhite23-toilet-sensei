@@ -99,13 +99,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-16T10:00:00Z",
+    "date": "2026-09-16T10:15:37Z",
     "type": "live",
-    "title": "#ポケモンsv ポケモンシール縛りで人生縛りパート1",
+    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
     "videoId": "pZIk3ROGWVM",
     "thumbnail": "https://i.ytimg.com/vi/pZIk3ROGWVM/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-09-16T05:58:21Z",
+    "type": "video",
+    "title": "#マリオカート8dx 神回避2連続 #shorts",
+    "videoId": "Co_mDKi9L1Q",
+    "thumbnail": "https://i.ytimg.com/vi/Co_mDKi9L1Q/maxresdefault.jpg",
+    "durationSec": 27
   },
   {
     "date": "2026-09-15T12:47:33Z",
