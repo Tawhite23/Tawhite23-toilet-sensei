@@ -32,22 +32,6 @@
     "checks": 6
   },
   {
-    "videoId": "Vw1AMDdK4r4",
-    "title": "#マイクラ参加型 #asmr ダイヤ3000ゲットするまで終われません！2【睡眠導入】",
-    "date": "2026-02-11T01:09:10Z",
-    "durationSec": 37689,
-    "at": "2026-09-08T21:23:43Z",
-    "checks": 5
-  },
-  {
-    "videoId": "6yIdGiBpDMw",
-    "title": "APEX雑談しながら参加型ランク初見さんいらっしゃい",
-    "date": "2025-12-05T09:45:17Z",
-    "durationSec": 4758,
-    "at": "2026-09-08T21:23:49Z",
-    "checks": 5
-  },
-  {
     "videoId": "z1FuQLMaMZ0",
     "title": "参加型 マイクラ #13 みんなで野球場作りたい！［睡眠導入］［作業用BGM］",
     "date": "2025-11-19T13:33:07Z",
@@ -336,14 +320,6 @@
     "checks": 5
   },
   {
-    "videoId": "fyctJSfEx5Y",
-    "title": "#マリオカート8dx 第2回全コース耐久やります",
-    "date": "2026-09-13T07:04:11Z",
-    "durationSec": 23113,
-    "at": "2026-09-14T22:00:25Z",
-    "checks": 2
-  },
-  {
     "videoId": "srQ-ykH7DEo",
     "title": "#マイクラ参加型 ハードコアチャレンジLv8",
     "date": "2026-09-09T12:16:12Z",
@@ -366,14 +342,6 @@
     "durationSec": 4400,
     "at": "2026-09-14T22:00:45Z",
     "checks": 5
-  },
-  {
-    "videoId": "45rSuqajyOg",
-    "title": "#雑談 第1回企画妄想会",
-    "date": "2026-09-15T12:47:33Z",
-    "durationSec": 7431,
-    "at": "2026-09-15T21:42:45Z",
-    "checks": 1
   },
   {
     "videoId": "rJRITAw1sOs",
@@ -406,5 +374,53 @@
     "durationSec": 18666,
     "at": "2026-09-15T21:43:13Z",
     "checks": 5
+  },
+  {
+    "videoId": "TW5t9YIGaOQ",
+    "title": "【マイクラ】雑談しながら普通にハードコア",
+    "date": "2026-09-16T12:08:32Z",
+    "durationSec": 9680,
+    "at": "2026-09-16T21:38:30Z",
+    "checks": 1
+  },
+  {
+    "videoId": "pZIk3ROGWVM",
+    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
+    "date": "2026-09-16T10:15:37Z",
+    "durationSec": 6589,
+    "at": "2026-09-16T21:38:37Z",
+    "checks": 1
+  },
+  {
+    "videoId": "45rSuqajyOg",
+    "title": "#雑談 第1回企画妄想会",
+    "date": "2026-09-15T12:47:33Z",
+    "durationSec": 7431,
+    "at": "2026-09-16T21:38:44Z",
+    "checks": 2
+  },
+  {
+    "videoId": "fyctJSfEx5Y",
+    "title": "#マリオカート8dx 第2回全コース耐久やります",
+    "date": "2026-09-13T07:04:11Z",
+    "durationSec": 23113,
+    "at": "2026-09-16T21:38:50Z",
+    "checks": 3
+  },
+  {
+    "videoId": "Vw1AMDdK4r4",
+    "title": "#マイクラ参加型 #asmr ダイヤ3000ゲットするまで終われません！2【睡眠導入】",
+    "date": "2026-02-11T01:09:10Z",
+    "durationSec": 37689,
+    "at": "2026-09-16T21:38:57Z",
+    "checks": 6
+  },
+  {
+    "videoId": "6yIdGiBpDMw",
+    "title": "APEX雑談しながら参加型ランク初見さんいらっしゃい",
+    "date": "2025-12-05T09:45:17Z",
+    "durationSec": 4758,
+    "at": "2026-09-16T21:39:04Z",
+    "checks": 6
   }
 ]
