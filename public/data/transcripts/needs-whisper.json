@@ -144,14 +144,6 @@
     "checks": 5
   },
   {
-    "videoId": "srQ-ykH7DEo",
-    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
-    "date": "2026-09-09T12:16:12Z",
-    "durationSec": 9944,
-    "at": "2026-09-14T22:00:32Z",
-    "checks": 4
-  },
-  {
     "videoId": "tBdRF0oKFC8",
     "title": "#参加型 第1回ルービックキューブ攻略参加型",
     "date": "2026-09-05T11:37:06Z",
@@ -184,14 +176,6 @@
     "checks": 5
   },
   {
-    "videoId": "fyctJSfEx5Y",
-    "title": "#マリオカート8dx 第2回全コース耐久やります",
-    "date": "2026-09-13T07:04:11Z",
-    "durationSec": 23113,
-    "at": "2026-09-16T21:38:50Z",
-    "checks": 3
-  },
-  {
     "videoId": "Vw1AMDdK4r4",
     "title": "#マイクラ参加型 #asmr ダイヤ3000ゲットするまで終われません！2【睡眠導入】",
     "date": "2026-02-11T01:09:10Z",
@@ -206,22 +190,6 @@
     "durationSec": 4758,
     "at": "2026-09-16T21:39:04Z",
     "checks": 6
-  },
-  {
-    "videoId": "TW5t9YIGaOQ",
-    "title": "【マイクラ】雑談しながら普通にハードコア",
-    "date": "2026-09-16T12:08:32Z",
-    "durationSec": 9680,
-    "at": "2026-09-17T21:41:11Z",
-    "checks": 2
-  },
-  {
-    "videoId": "pZIk3ROGWVM",
-    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
-    "date": "2026-09-16T10:15:37Z",
-    "durationSec": 6595,
-    "at": "2026-09-17T21:41:18Z",
-    "checks": 2
   },
   {
     "videoId": "45rSuqajyOg",
@@ -302,14 +270,6 @@
     "durationSec": 4591,
     "at": "2026-09-17T21:42:26Z",
     "checks": 6
-  },
-  {
-    "videoId": "Yw81p9jBGHE",
-    "title": "雑談する",
-    "date": "2026-09-18T12:00:54Z",
-    "durationSec": 6903,
-    "at": "2026-09-18T21:11:47Z",
-    "checks": 1
   },
   {
     "videoId": "ZsQ_WBahH0s",
@@ -438,5 +398,61 @@
     "durationSec": 10845,
     "at": "2026-09-18T21:13:23Z",
     "checks": 6
+  },
+  {
+    "videoId": "ZUKdInzo7PE",
+    "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ②",
+    "date": "2026-09-19T09:00:06Z",
+    "durationSec": 10565,
+    "at": "2026-09-19T20:58:19Z",
+    "checks": 1
+  },
+  {
+    "videoId": "UPgkWMescuU",
+    "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ①",
+    "date": "2026-09-18T21:49:14Z",
+    "durationSec": 40182,
+    "at": "2026-09-19T20:58:25Z",
+    "checks": 1
+  },
+  {
+    "videoId": "Yw81p9jBGHE",
+    "title": "雑談する",
+    "date": "2026-09-18T12:00:54Z",
+    "durationSec": 6903,
+    "at": "2026-09-19T20:58:32Z",
+    "checks": 2
+  },
+  {
+    "videoId": "TW5t9YIGaOQ",
+    "title": "【マイクラ】雑談しながら普通にハードコア",
+    "date": "2026-09-16T12:08:32Z",
+    "durationSec": 9680,
+    "at": "2026-09-19T20:58:39Z",
+    "checks": 3
+  },
+  {
+    "videoId": "pZIk3ROGWVM",
+    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
+    "date": "2026-09-16T10:15:37Z",
+    "durationSec": 6595,
+    "at": "2026-09-19T20:58:45Z",
+    "checks": 3
+  },
+  {
+    "videoId": "fyctJSfEx5Y",
+    "title": "#マリオカート8dx 第2回全コース耐久やります",
+    "date": "2026-09-13T07:04:11Z",
+    "durationSec": 23113,
+    "at": "2026-09-19T20:58:52Z",
+    "checks": 4
+  },
+  {
+    "videoId": "srQ-ykH7DEo",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "date": "2026-09-09T12:16:12Z",
+    "durationSec": 9944,
+    "at": "2026-09-19T20:58:59Z",
+    "checks": 5
   }
 ]
