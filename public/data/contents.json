@@ -36,13 +36,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-19T23:00:00Z",
+    "date": "2026-09-20T02:00:36Z",
+    "type": "video",
+    "title": "#shorts 家を買った男【前編】 #おトイレ先生",
+    "videoId": "xO7dypi6oeg",
+    "thumbnail": "https://i.ytimg.com/vi/xO7dypi6oeg/maxresdefault.jpg",
+    "durationSec": 58
+  },
+  {
+    "date": "2026-09-19T23:38:37Z",
     "type": "live",
     "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
     "videoId": "yzXGFy4gYOg",
     "thumbnail": "https://i.ytimg.com/vi/yzXGFy4gYOg/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
   },
   {
     "date": "2026-09-19T09:16:39Z",
