@@ -27,7 +27,7 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-21T10:00:00Z",
+    "date": "2026-09-21T11:00:00Z",
     "type": "live",
     "title": "【世界初】 第1回レゴブロック参加型  お前ら信じてる",
     "videoId": "o6ALVFpohV4",
@@ -36,12 +36,28 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-09-21T02:00:23Z",
+    "type": "video",
+    "title": "#shorts クリーパー再び #マイクラ",
+    "videoId": "7pYly0Dz_Vg",
+    "thumbnail": "https://i.ytimg.com/vi/7pYly0Dz_Vg/maxresdefault.jpg",
+    "durationSec": 57
+  },
+  {
+    "date": "2026-09-20T22:38:51Z",
+    "type": "live",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
+    "videoId": "BpUCQQ7NGG0",
+    "thumbnail": "https://i.ytimg.com/vi/BpUCQQ7NGG0/maxresdefault_live.jpg",
+    "durationSec": 3849
+  },
+  {
     "date": "2026-09-20T11:20:24Z",
     "type": "live",
     "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
     "videoId": "tzQ3T8xU2vo",
-    "thumbnail": "https://i.ytimg.com/vi/tzQ3T8xU2vo/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/tzQ3T8xU2vo/maxresdefault.jpg",
+    "durationSec": 40636
   },
   {
     "date": "2026-09-20T07:00:25Z",
@@ -1465,7 +1481,7 @@
     "title": "#マリオカート8dx お前ら運転免許もってるか？？",
     "videoId": "vrjocvS8Yj8",
     "thumbnail": "https://i.ytimg.com/vi/vrjocvS8Yj8/maxresdefault.jpg",
-    "durationSec": 7790
+    "durationSec": 7791
   },
   {
     "date": "2026-06-28T10:11:26Z",
