@@ -32,38 +32,6 @@
     "checks": 6
   },
   {
-    "videoId": "mks2mq8di1M",
-    "title": "APEX ランクプラチナ2まで頑張る",
-    "date": "2025-08-23T05:38:04Z",
-    "durationSec": 7553,
-    "at": "2026-09-12T20:54:54Z",
-    "checks": 5
-  },
-  {
-    "videoId": "mJ5tYMdxYoM",
-    "title": "APEX 基本ソロランク プラチナ3行くまで",
-    "date": "2025-08-22T15:40:00Z",
-    "durationSec": 42897,
-    "at": "2026-09-12T20:55:01Z",
-    "checks": 5
-  },
-  {
-    "videoId": "q4i7xNHrISY",
-    "title": "#マイクラ参加型  とりあえず鉄1万",
-    "date": "2026-09-04T11:19:26Z",
-    "durationSec": 21006,
-    "at": "2026-09-13T21:07:06Z",
-    "checks": 5
-  },
-  {
-    "videoId": "Xqdf4cyAW60",
-    "title": "#マリオカート8dx お前らいつもありがとう",
-    "date": "2026-09-03T11:55:14Z",
-    "durationSec": 10771,
-    "at": "2026-09-13T21:07:15Z",
-    "checks": 5
-  },
-  {
     "videoId": "tBdRF0oKFC8",
     "title": "#参加型 第1回ルービックキューブ攻略参加型",
     "date": "2026-09-05T11:37:06Z",
@@ -280,22 +248,6 @@
     "checks": 6
   },
   {
-    "videoId": "TW5t9YIGaOQ",
-    "title": "【マイクラ】雑談しながら普通にハードコア",
-    "date": "2026-09-16T12:08:32Z",
-    "durationSec": 9680,
-    "at": "2026-09-19T20:58:39Z",
-    "checks": 3
-  },
-  {
-    "videoId": "pZIk3ROGWVM",
-    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
-    "date": "2026-09-16T10:15:37Z",
-    "durationSec": 6595,
-    "at": "2026-09-19T20:58:45Z",
-    "checks": 3
-  },
-  {
     "videoId": "fyctJSfEx5Y",
     "title": "#マリオカート8dx 第2回全コース耐久やります",
     "date": "2026-09-13T07:04:11Z",
@@ -310,38 +262,6 @@
     "durationSec": 9944,
     "at": "2026-09-19T20:58:59Z",
     "checks": 5
-  },
-  {
-    "videoId": "tzQ3T8xU2vo",
-    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
-    "date": "2026-09-20T11:20:24Z",
-    "durationSec": 0,
-    "at": "2026-09-20T21:01:57Z",
-    "checks": 1
-  },
-  {
-    "videoId": "yzXGFy4gYOg",
-    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
-    "date": "2026-09-19T23:38:37Z",
-    "durationSec": 42043,
-    "at": "2026-09-20T21:02:03Z",
-    "checks": 1
-  },
-  {
-    "videoId": "ZUKdInzo7PE",
-    "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ②",
-    "date": "2026-09-19T09:00:06Z",
-    "durationSec": 10565,
-    "at": "2026-09-20T21:02:08Z",
-    "checks": 2
-  },
-  {
-    "videoId": "UPgkWMescuU",
-    "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ①",
-    "date": "2026-09-18T21:49:14Z",
-    "durationSec": 40182,
-    "at": "2026-09-20T21:02:13Z",
-    "checks": 2
   },
   {
     "videoId": "Yw81p9jBGHE",
@@ -469,6 +389,102 @@
     "date": "2025-08-23T13:26:00Z",
     "durationSec": 3622,
     "at": "2026-09-20T21:03:38Z",
+    "checks": 6
+  },
+  {
+    "videoId": "o6ALVFpohV4",
+    "title": "【レゴブロック参加型】第1回お前ら信じてる",
+    "date": "2026-09-21T11:12:30Z",
+    "durationSec": 13273,
+    "at": "2026-09-21T22:10:41Z",
+    "checks": 1
+  },
+  {
+    "videoId": "BpUCQQ7NGG0",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
+    "date": "2026-09-20T22:38:51Z",
+    "durationSec": 3854,
+    "at": "2026-09-21T22:10:48Z",
+    "checks": 1
+  },
+  {
+    "videoId": "tzQ3T8xU2vo",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
+    "date": "2026-09-20T11:20:24Z",
+    "durationSec": 40636,
+    "at": "2026-09-21T22:10:54Z",
+    "checks": 2
+  },
+  {
+    "videoId": "yzXGFy4gYOg",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
+    "date": "2026-09-19T23:38:37Z",
+    "durationSec": 42043,
+    "at": "2026-09-21T22:11:01Z",
+    "checks": 2
+  },
+  {
+    "videoId": "ZUKdInzo7PE",
+    "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ②",
+    "date": "2026-09-19T09:00:06Z",
+    "durationSec": 10565,
+    "at": "2026-09-21T22:11:08Z",
+    "checks": 3
+  },
+  {
+    "videoId": "UPgkWMescuU",
+    "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ①",
+    "date": "2026-09-18T21:49:14Z",
+    "durationSec": 40182,
+    "at": "2026-09-21T22:11:14Z",
+    "checks": 3
+  },
+  {
+    "videoId": "TW5t9YIGaOQ",
+    "title": "【マイクラ】雑談しながら普通にハードコア",
+    "date": "2026-09-16T12:08:32Z",
+    "durationSec": 9680,
+    "at": "2026-09-21T22:11:22Z",
+    "checks": 4
+  },
+  {
+    "videoId": "pZIk3ROGWVM",
+    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
+    "date": "2026-09-16T10:15:37Z",
+    "durationSec": 6595,
+    "at": "2026-09-21T22:11:29Z",
+    "checks": 4
+  },
+  {
+    "videoId": "q4i7xNHrISY",
+    "title": "#マイクラ参加型  とりあえず鉄1万",
+    "date": "2026-09-04T11:19:26Z",
+    "durationSec": 21006,
+    "at": "2026-09-21T22:11:36Z",
+    "checks": 6
+  },
+  {
+    "videoId": "Xqdf4cyAW60",
+    "title": "#マリオカート8dx お前らいつもありがとう",
+    "date": "2026-09-03T11:55:14Z",
+    "durationSec": 10771,
+    "at": "2026-09-21T22:11:42Z",
+    "checks": 6
+  },
+  {
+    "videoId": "mks2mq8di1M",
+    "title": "APEX ランクプラチナ2まで頑張る",
+    "date": "2025-08-23T05:38:04Z",
+    "durationSec": 7553,
+    "at": "2026-09-21T22:11:49Z",
+    "checks": 6
+  },
+  {
+    "videoId": "mJ5tYMdxYoM",
+    "title": "APEX 基本ソロランク プラチナ3行くまで",
+    "date": "2025-08-22T15:40:00Z",
+    "durationSec": 42897,
+    "at": "2026-09-21T22:11:55Z",
     "checks": 6
   }
 ]
