@@ -1,10 +1,37 @@
 [
   {
-    "date": "2026-09-24T12:00:00Z",
+    "date": "2026-09-27T11:30:00Z",
     "type": "live",
-    "title": "【神回確定】第3回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "videoId": "UO1KtoN2AIQ",
-    "thumbnail": "https://i.ytimg.com/vi/UO1KtoN2AIQ/maxresdefault_live.jpg",
+    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "videoId": "bpyfpLfVZL4",
+    "thumbnail": "https://i.ytimg.com/vi/bpyfpLfVZL4/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-26T11:00:00Z",
+    "type": "live",
+    "title": "【レゴブロック参加型】第2回一作品目遂に完成？？！！",
+    "videoId": "jxj2KfBVaD0",
+    "thumbnail": "https://i.ytimg.com/vi/jxj2KfBVaD0/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-25T11:00:00Z",
+    "type": "live",
+    "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
+    "videoId": "ml9EMnJEgr4",
+    "thumbnail": "https://i.ytimg.com/vi/ml9EMnJEgr4/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-09-24T11:00:00Z",
+    "type": "live",
+    "title": "【マイクラ】雑談しながらみんなでハードコア",
+    "videoId": "BU_lkiNlUa4",
+    "thumbnail": "https://i.ytimg.com/vi/BU_lkiNlUa4/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
@@ -31,8 +58,8 @@
     "type": "live",
     "title": "【レゴブロック参加型】第1回お前ら信じてる",
     "videoId": "o6ALVFpohV4",
-    "thumbnail": "https://i.ytimg.com/vi/o6ALVFpohV4/maxresdefault_live.jpg",
-    "durationSec": 0
+    "thumbnail": "https://i.ytimg.com/vi/o6ALVFpohV4/maxresdefault.jpg",
+    "durationSec": 13273
   },
   {
     "date": "2026-09-21T07:00:01Z",
