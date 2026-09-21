@@ -27,13 +27,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-21T11:00:00Z",
+    "date": "2026-09-21T11:12:30Z",
     "type": "live",
-    "title": "【世界初】 第1回レゴブロック参加型  お前ら信じてる",
+    "title": "【レゴブロック参加型】第1回お前ら信じてる",
     "videoId": "o6ALVFpohV4",
     "thumbnail": "https://i.ytimg.com/vi/o6ALVFpohV4/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-09-21T07:00:01Z",
+    "type": "video",
+    "title": "#shorts 高評価を返してください #マイクラ",
+    "videoId": "BRjHINxLSaI",
+    "thumbnail": "https://i.ytimg.com/vi/BRjHINxLSaI/maxresdefault.jpg",
+    "durationSec": 53
   },
   {
     "date": "2026-09-21T02:00:23Z",
@@ -48,8 +55,8 @@
     "type": "live",
     "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
     "videoId": "BpUCQQ7NGG0",
-    "thumbnail": "https://i.ytimg.com/vi/BpUCQQ7NGG0/maxresdefault_live.jpg",
-    "durationSec": 3849
+    "thumbnail": "https://i.ytimg.com/vi/BpUCQQ7NGG0/maxresdefault.jpg",
+    "durationSec": 3854
   },
   {
     "date": "2026-09-20T11:20:24Z",
