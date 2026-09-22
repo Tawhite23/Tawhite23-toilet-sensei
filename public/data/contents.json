@@ -45,13 +45,28 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-22T06:00:00Z",
+    "date": "2026-09-22T09:00:30Z",
+    "type": "video",
+    "title": "#shorts ビンゴ、はじめました。 #踊ってみた",
+    "videoId": "lUcKub8C3DA",
+    "thumbnail": "https://i.ytimg.com/vi/lUcKub8C3DA/maxresdefault.jpg",
+    "durationSec": 28
+  },
+  {
+    "date": "2026-09-22T07:33:48Z",
     "type": "live",
-    "title": "#マリオカート8dx 50cc全コース耐久やります",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
     "videoId": "mpU68pytw7s",
     "thumbnail": "https://i.ytimg.com/vi/mpU68pytw7s/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-09-22T07:00:27Z",
+    "type": "video",
+    "title": "#shorts 俺の相棒が攻撃力１しかない #ポケモンsv",
+    "videoId": "Yo49n75AhuE",
+    "thumbnail": "https://i.ytimg.com/vi/Yo49n75AhuE/maxresdefault.jpg",
+    "durationSec": 40
   },
   {
     "date": "2026-09-22T02:00:14Z",
