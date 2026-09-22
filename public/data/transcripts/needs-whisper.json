@@ -264,22 +264,6 @@
     "checks": 5
   },
   {
-    "videoId": "Yw81p9jBGHE",
-    "title": "雑談する",
-    "date": "2026-09-18T12:00:54Z",
-    "durationSec": 6903,
-    "at": "2026-09-20T21:02:19Z",
-    "checks": 3
-  },
-  {
-    "videoId": "ZsQ_WBahH0s",
-    "title": "第2回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "date": "2026-09-17T12:07:07Z",
-    "durationSec": 8820,
-    "at": "2026-09-20T21:02:24Z",
-    "checks": 3
-  },
-  {
     "videoId": "45rSuqajyOg",
     "title": "#雑談 第1回企画妄想会",
     "date": "2026-09-15T12:47:33Z",
@@ -392,22 +376,6 @@
     "checks": 6
   },
   {
-    "videoId": "o6ALVFpohV4",
-    "title": "【レゴブロック参加型】第1回お前ら信じてる",
-    "date": "2026-09-21T11:12:30Z",
-    "durationSec": 13273,
-    "at": "2026-09-21T22:10:41Z",
-    "checks": 1
-  },
-  {
-    "videoId": "BpUCQQ7NGG0",
-    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
-    "date": "2026-09-20T22:38:51Z",
-    "durationSec": 3854,
-    "at": "2026-09-21T22:10:48Z",
-    "checks": 1
-  },
-  {
     "videoId": "tzQ3T8xU2vo",
     "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
     "date": "2026-09-20T11:20:24Z",
@@ -486,5 +454,45 @@
     "durationSec": 42897,
     "at": "2026-09-21T22:11:55Z",
     "checks": 6
+  },
+  {
+    "videoId": "mpU68pytw7s",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
+    "date": "2026-09-22T07:33:48Z",
+    "durationSec": 19985,
+    "at": "2026-09-22T21:38:33Z",
+    "checks": 1
+  },
+  {
+    "videoId": "o6ALVFpohV4",
+    "title": "【レゴブロック参加型】第1回お前ら信じてる",
+    "date": "2026-09-21T11:12:30Z",
+    "durationSec": 13273,
+    "at": "2026-09-22T21:38:40Z",
+    "checks": 2
+  },
+  {
+    "videoId": "BpUCQQ7NGG0",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
+    "date": "2026-09-20T22:38:51Z",
+    "durationSec": 3854,
+    "at": "2026-09-22T21:38:46Z",
+    "checks": 2
+  },
+  {
+    "videoId": "Yw81p9jBGHE",
+    "title": "雑談する",
+    "date": "2026-09-18T12:00:54Z",
+    "durationSec": 6903,
+    "at": "2026-09-22T21:38:53Z",
+    "checks": 4
+  },
+  {
+    "videoId": "ZsQ_WBahH0s",
+    "title": "第2回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "date": "2026-09-17T12:07:07Z",
+    "durationSec": 8820,
+    "at": "2026-09-22T21:39:00Z",
+    "checks": 4
   }
 ]
