@@ -36,13 +36,21 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-09-23T03:00:00Z",
+    "date": "2026-09-23T05:00:00Z",
     "type": "live",
     "title": "【リアルビンゴ 】第1回 見つけた数字で揃えるまで終われません",
     "videoId": "jFXn_NLa0pM",
     "thumbnail": "https://i.ytimg.com/vi/jFXn_NLa0pM/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-09-23T04:12:21Z",
+    "type": "live",
+    "title": "【リアルビンゴ】雨降ったからドライブしながら",
+    "videoId": "Slv8uYLdiuQ",
+    "thumbnail": "https://i.ytimg.com/vi/Slv8uYLdiuQ/maxresdefault_live.jpg",
+    "durationSec": 0
   },
   {
     "date": "2026-09-22T12:20:07Z",
