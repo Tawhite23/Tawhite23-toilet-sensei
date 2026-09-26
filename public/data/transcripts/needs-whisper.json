@@ -280,22 +280,6 @@
     "checks": 6
   },
   {
-    "videoId": "TW5t9YIGaOQ",
-    "title": "【マイクラ】雑談しながら普通にハードコア",
-    "date": "2026-09-16T12:08:32Z",
-    "durationSec": 9680,
-    "at": "2026-09-21T22:11:22Z",
-    "checks": 4
-  },
-  {
-    "videoId": "pZIk3ROGWVM",
-    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
-    "date": "2026-09-16T10:15:37Z",
-    "durationSec": 6595,
-    "at": "2026-09-21T22:11:29Z",
-    "checks": 4
-  },
-  {
     "videoId": "q4i7xNHrISY",
     "title": "#マイクラ参加型  とりあえず鉄1万",
     "date": "2026-09-04T11:19:26Z",
@@ -456,14 +440,6 @@
     "checks": 7
   },
   {
-    "videoId": "BU_lkiNlUa4",
-    "title": "【マイクラ】雑談しながらみんなでハードコア",
-    "date": "2026-09-25T12:22:28Z",
-    "durationSec": 9628,
-    "at": "2026-09-25T21:47:46Z",
-    "checks": 1
-  },
-  {
     "videoId": "ml9EMnJEgr4",
     "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
     "date": "2026-09-23T11:21:53Z",
@@ -518,5 +494,29 @@
     "durationSec": 11661,
     "at": "2026-09-25T21:48:26Z",
     "checks": 6
+  },
+  {
+    "videoId": "BU_lkiNlUa4",
+    "title": "【マイクラ】雑談しながらみんなでハードコア",
+    "date": "2026-09-25T12:22:28Z",
+    "durationSec": 9628,
+    "at": "2026-09-26T21:26:58Z",
+    "checks": 2
+  },
+  {
+    "videoId": "TW5t9YIGaOQ",
+    "title": "【マイクラ】雑談しながら普通にハードコア",
+    "date": "2026-09-16T12:08:32Z",
+    "durationSec": 9680,
+    "at": "2026-09-26T21:27:05Z",
+    "checks": 5
+  },
+  {
+    "videoId": "pZIk3ROGWVM",
+    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
+    "date": "2026-09-16T10:15:37Z",
+    "durationSec": 6595,
+    "at": "2026-09-26T21:27:12Z",
+    "checks": 5
   }
 ]
