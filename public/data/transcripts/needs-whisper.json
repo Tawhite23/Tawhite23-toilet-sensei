@@ -184,14 +184,6 @@
     "checks": 6
   },
   {
-    "videoId": "srQ-ykH7DEo",
-    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
-    "date": "2026-09-09T12:16:12Z",
-    "durationSec": 9944,
-    "at": "2026-09-19T20:58:59Z",
-    "checks": 5
-  },
-  {
     "videoId": "yt0ZdCQWohE",
     "title": "#マリオカート8dx 反省会",
     "date": "2026-09-10T11:46:16Z",
@@ -312,22 +304,6 @@
     "checks": 6
   },
   {
-    "videoId": "Yw81p9jBGHE",
-    "title": "雑談する",
-    "date": "2026-09-18T12:00:54Z",
-    "durationSec": 6903,
-    "at": "2026-09-22T21:38:53Z",
-    "checks": 4
-  },
-  {
-    "videoId": "ZsQ_WBahH0s",
-    "title": "第2回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "date": "2026-09-17T12:07:07Z",
-    "durationSec": 8820,
-    "at": "2026-09-22T21:39:00Z",
-    "checks": 4
-  },
-  {
     "videoId": "fyctJSfEx5Y",
     "title": "#マリオカート8dx 第2回全コース耐久やります",
     "date": "2026-09-13T07:04:11Z",
@@ -358,14 +334,6 @@
     "durationSec": 4400,
     "at": "2026-09-23T21:45:32Z",
     "checks": 6
-  },
-  {
-    "videoId": "mpU68pytw7s",
-    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
-    "date": "2026-09-22T07:33:48Z",
-    "durationSec": 19985,
-    "at": "2026-09-24T21:45:53Z",
-    "checks": 3
   },
   {
     "videoId": "ZUKdInzo7PE",
@@ -448,14 +416,6 @@
     "checks": 3
   },
   {
-    "videoId": "Slv8uYLdiuQ",
-    "title": "【リアルビンゴ】雨降ったからドライブしながら",
-    "date": "2026-09-23T04:12:21Z",
-    "durationSec": 9550,
-    "at": "2026-09-25T21:47:57Z",
-    "checks": 2
-  },
-  {
     "videoId": "o6ALVFpohV4",
     "title": "【レゴブロック参加型】第1回お前ら信じてる",
     "date": "2026-09-21T11:12:30Z",
@@ -496,14 +456,6 @@
     "checks": 6
   },
   {
-    "videoId": "BU_lkiNlUa4",
-    "title": "【マイクラ】雑談しながらみんなでハードコア",
-    "date": "2026-09-25T12:22:28Z",
-    "durationSec": 9628,
-    "at": "2026-09-26T21:26:58Z",
-    "checks": 2
-  },
-  {
     "videoId": "TW5t9YIGaOQ",
     "title": "【マイクラ】雑談しながら普通にハードコア",
     "date": "2026-09-16T12:08:32Z",
@@ -518,5 +470,53 @@
     "durationSec": 6595,
     "at": "2026-09-26T21:27:12Z",
     "checks": 5
+  },
+  {
+    "videoId": "BU_lkiNlUa4",
+    "title": "【マイクラ】雑談しながらみんなでハードコア",
+    "date": "2026-09-25T12:22:28Z",
+    "durationSec": 9628,
+    "at": "2026-09-27T21:34:10Z",
+    "checks": 3
+  },
+  {
+    "videoId": "Slv8uYLdiuQ",
+    "title": "【リアルビンゴ】雨降ったからドライブしながら",
+    "date": "2026-09-23T04:12:21Z",
+    "durationSec": 9550,
+    "at": "2026-09-27T21:34:16Z",
+    "checks": 3
+  },
+  {
+    "videoId": "mpU68pytw7s",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
+    "date": "2026-09-22T07:33:48Z",
+    "durationSec": 19985,
+    "at": "2026-09-27T21:34:22Z",
+    "checks": 4
+  },
+  {
+    "videoId": "Yw81p9jBGHE",
+    "title": "雑談する",
+    "date": "2026-09-18T12:00:54Z",
+    "durationSec": 6903,
+    "at": "2026-09-27T21:34:27Z",
+    "checks": 5
+  },
+  {
+    "videoId": "ZsQ_WBahH0s",
+    "title": "第2回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "date": "2026-09-17T12:07:07Z",
+    "durationSec": 8820,
+    "at": "2026-09-27T21:34:35Z",
+    "checks": 5
+  },
+  {
+    "videoId": "srQ-ykH7DEo",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "date": "2026-09-09T12:16:12Z",
+    "durationSec": 9944,
+    "at": "2026-09-27T21:34:41Z",
+    "checks": 6
   }
 ]
