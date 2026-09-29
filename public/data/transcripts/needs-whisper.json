@@ -384,38 +384,6 @@
     "checks": 7
   },
   {
-    "videoId": "o6ALVFpohV4",
-    "title": "【レゴブロック参加型】第1回お前ら信じてる",
-    "date": "2026-09-21T11:12:30Z",
-    "durationSec": 13273,
-    "at": "2026-09-25T21:48:03Z",
-    "checks": 4
-  },
-  {
-    "videoId": "BpUCQQ7NGG0",
-    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
-    "date": "2026-09-20T22:38:51Z",
-    "durationSec": 3854,
-    "at": "2026-09-25T21:48:08Z",
-    "checks": 4
-  },
-  {
-    "videoId": "tzQ3T8xU2vo",
-    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
-    "date": "2026-09-20T11:20:24Z",
-    "durationSec": 40636,
-    "at": "2026-09-25T21:48:14Z",
-    "checks": 4
-  },
-  {
-    "videoId": "yzXGFy4gYOg",
-    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
-    "date": "2026-09-19T23:38:37Z",
-    "durationSec": 42043,
-    "at": "2026-09-25T21:48:20Z",
-    "checks": 4
-  },
-  {
     "videoId": "MFdEsmI_S08",
     "title": "#マリオカート8dx 【神回】被弾の度に嫁にシバかれる　下の階の人コラボ",
     "date": "2026-09-08T11:33:14Z",
@@ -438,22 +406,6 @@
     "durationSec": 6595,
     "at": "2026-09-26T21:27:12Z",
     "checks": 5
-  },
-  {
-    "videoId": "BU_lkiNlUa4",
-    "title": "【マイクラ】雑談しながらみんなでハードコア",
-    "date": "2026-09-25T12:22:28Z",
-    "durationSec": 9628,
-    "at": "2026-09-27T21:34:10Z",
-    "checks": 3
-  },
-  {
-    "videoId": "Slv8uYLdiuQ",
-    "title": "【リアルビンゴ】雨降ったからドライブしながら",
-    "date": "2026-09-23T04:12:21Z",
-    "durationSec": 9550,
-    "at": "2026-09-27T21:34:16Z",
-    "checks": 3
   },
   {
     "videoId": "mpU68pytw7s",
@@ -488,14 +440,6 @@
     "checks": 6
   },
   {
-    "videoId": "wT6gX3ALaqQ",
-    "title": "あ",
-    "date": "2026-09-28T13:32:51Z",
-    "durationSec": 5857,
-    "at": "2026-09-28T23:29:00Z",
-    "checks": 1
-  },
-  {
     "videoId": "ml9EMnJEgr4",
     "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
     "date": "2026-09-23T11:21:53Z",
@@ -526,5 +470,61 @@
     "durationSec": 9243,
     "at": "2026-09-28T23:29:26Z",
     "checks": 6
+  },
+  {
+    "videoId": "wT6gX3ALaqQ",
+    "title": "あ",
+    "date": "2026-09-28T13:32:51Z",
+    "durationSec": 5861,
+    "at": "2026-09-29T22:33:29Z",
+    "checks": 2
+  },
+  {
+    "videoId": "BU_lkiNlUa4",
+    "title": "【マイクラ】雑談しながらみんなでハードコア",
+    "date": "2026-09-25T12:22:28Z",
+    "durationSec": 9628,
+    "at": "2026-09-29T22:33:36Z",
+    "checks": 4
+  },
+  {
+    "videoId": "Slv8uYLdiuQ",
+    "title": "【リアルビンゴ】雨降ったからドライブしながら",
+    "date": "2026-09-23T04:12:21Z",
+    "durationSec": 9550,
+    "at": "2026-09-29T22:33:42Z",
+    "checks": 4
+  },
+  {
+    "videoId": "o6ALVFpohV4",
+    "title": "【レゴブロック参加型】第1回お前ら信じてる",
+    "date": "2026-09-21T11:12:30Z",
+    "durationSec": 13273,
+    "at": "2026-09-29T22:33:50Z",
+    "checks": 5
+  },
+  {
+    "videoId": "BpUCQQ7NGG0",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジend",
+    "date": "2026-09-20T22:38:51Z",
+    "durationSec": 3854,
+    "at": "2026-09-29T22:33:56Z",
+    "checks": 5
+  },
+  {
+    "videoId": "tzQ3T8xU2vo",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
+    "date": "2026-09-20T11:20:24Z",
+    "durationSec": 40636,
+    "at": "2026-09-29T22:34:02Z",
+    "checks": 5
+  },
+  {
+    "videoId": "yzXGFy4gYOg",
+    "title": "【堀大輔参加型】ポロリ即終了!!30分睡眠チャレンジ",
+    "date": "2026-09-19T23:38:37Z",
+    "durationSec": 42043,
+    "at": "2026-09-29T22:34:08Z",
+    "checks": 5
   }
 ]
