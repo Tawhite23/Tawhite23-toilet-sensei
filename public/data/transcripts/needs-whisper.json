@@ -296,14 +296,6 @@
     "checks": 6
   },
   {
-    "videoId": "fyctJSfEx5Y",
-    "title": "#マリオカート8dx 第2回全コース耐久やります",
-    "date": "2026-09-13T07:04:11Z",
-    "durationSec": 23113,
-    "at": "2026-09-23T21:45:13Z",
-    "checks": 5
-  },
-  {
     "videoId": "EhTxnQr7lqg",
     "title": "#マリオカート8dx 全コース耐久やります",
     "date": "2026-09-06T08:35:33Z",
@@ -408,14 +400,6 @@
     "checks": 5
   },
   {
-    "videoId": "mpU68pytw7s",
-    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
-    "date": "2026-09-22T07:33:48Z",
-    "durationSec": 19985,
-    "at": "2026-09-27T21:34:22Z",
-    "checks": 4
-  },
-  {
     "videoId": "Yw81p9jBGHE",
     "title": "雑談する",
     "date": "2026-09-18T12:00:54Z",
@@ -472,14 +456,6 @@
     "checks": 6
   },
   {
-    "videoId": "wT6gX3ALaqQ",
-    "title": "あ",
-    "date": "2026-09-28T13:32:51Z",
-    "durationSec": 5861,
-    "at": "2026-09-29T22:33:29Z",
-    "checks": 2
-  },
-  {
     "videoId": "BU_lkiNlUa4",
     "title": "【マイクラ】雑談しながらみんなでハードコア",
     "date": "2026-09-25T12:22:28Z",
@@ -532,7 +508,31 @@
     "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
     "date": "2026-09-30T11:36:27Z",
     "durationSec": 9089,
-    "at": "2026-09-30T22:33:19Z",
-    "checks": 1
+    "at": "2026-10-01T22:52:55Z",
+    "checks": 2
+  },
+  {
+    "videoId": "wT6gX3ALaqQ",
+    "title": "あ",
+    "date": "2026-09-28T13:32:51Z",
+    "durationSec": 5861,
+    "at": "2026-10-01T22:53:00Z",
+    "checks": 3
+  },
+  {
+    "videoId": "mpU68pytw7s",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
+    "date": "2026-09-22T07:33:48Z",
+    "durationSec": 19985,
+    "at": "2026-10-01T22:53:06Z",
+    "checks": 5
+  },
+  {
+    "videoId": "fyctJSfEx5Y",
+    "title": "#マリオカート8dx 第2回全コース耐久やります",
+    "date": "2026-09-13T07:04:11Z",
+    "durationSec": 23113,
+    "at": "2026-10-01T22:53:11Z",
+    "checks": 6
   }
 ]
