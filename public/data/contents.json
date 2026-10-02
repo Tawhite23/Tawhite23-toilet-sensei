@@ -9,13 +9,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-10-02T12:15:00Z",
+    "date": "2026-10-02T12:15:24Z",
     "type": "live",
     "title": "【マイクラ】雑談しながらみんたでハードコア",
     "videoId": "MXScyBO9XSU",
     "thumbnail": "https://i.ytimg.com/vi/MXScyBO9XSU/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-10-02T08:00:06Z",
+    "type": "video",
+    "title": "正解を言っていたのに18分迷ったおトイレ先生 #shorts",
+    "videoId": "-ufUio0zS5c",
+    "thumbnail": "https://i.ytimg.com/vi/-ufUio0zS5c/maxresdefault.jpg",
+    "durationSec": 60
   },
   {
     "date": "2026-10-02T03:00:25Z",
@@ -1663,7 +1670,7 @@
     "title": "#マリオカート8dx たたえよ大地をあああああああああああああああ",
     "videoId": "Vw56pMOlm0Q",
     "thumbnail": "https://i.ytimg.com/vi/Vw56pMOlm0Q/maxresdefault.jpg",
-    "durationSec": 4595
+    "durationSec": 4596
   },
   {
     "date": "2026-07-07T10:41:12Z",
