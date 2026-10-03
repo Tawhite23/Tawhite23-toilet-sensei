@@ -1,53 +1,5 @@
 [
   {
-    "videoId": "z1FuQLMaMZ0",
-    "title": "参加型 マイクラ #13 みんなで野球場作りたい！［睡眠導入］［作業用BGM］",
-    "date": "2025-11-19T13:33:07Z",
-    "durationSec": 11385,
-    "at": "2026-09-17T21:41:52Z",
-    "checks": 6
-  },
-  {
-    "videoId": "WV9luPr5k_M",
-    "title": "参加型 マイクラ ウォシュレッ島発展プロジェクト#11［睡眠導入］［作業用BGM］",
-    "date": "2025-11-16T11:30:29Z",
-    "durationSec": 20240,
-    "at": "2026-09-17T21:41:59Z",
-    "checks": 6
-  },
-  {
-    "videoId": "rL1Wv0MBCag",
-    "title": "雑談多めの参加型 マイクラ ウォシュレッ島発展プロジェクト#6［睡眠導入］［作業用BGM］",
-    "date": "2025-11-09T02:18:14Z",
-    "durationSec": 42900,
-    "at": "2026-09-17T21:42:06Z",
-    "checks": 6
-  },
-  {
-    "videoId": "CabLy4XyRBI",
-    "title": "参加型夫婦マイクラ参加型#15 まったり雑談おしゃれな町作り",
-    "date": "2025-10-12T15:38:34Z",
-    "durationSec": 25560,
-    "at": "2026-09-17T21:42:13Z",
-    "checks": 6
-  },
-  {
-    "videoId": "P88ZkHMtgRM",
-    "title": "APEX 参加型初見さんいらっしゃい",
-    "date": "2025-10-12T13:47:30Z",
-    "durationSec": 6122,
-    "at": "2026-09-17T21:42:20Z",
-    "checks": 6
-  },
-  {
-    "videoId": "GMQwJr4Fc44",
-    "title": "参加型マイクラ#13 1時間エンチャ釣り",
-    "date": "2025-10-11T08:17:36Z",
-    "durationSec": 4591,
-    "at": "2026-09-17T21:42:26Z",
-    "checks": 6
-  },
-  {
     "videoId": "mcn0ax7vR-8",
     "title": "#マリオカート8dx 挑戦待ってる",
     "date": "2026-09-01T12:08:03Z",
@@ -384,14 +336,6 @@
     "checks": 6
   },
   {
-    "videoId": "ml9EMnJEgr4",
-    "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
-    "date": "2026-09-23T11:21:53Z",
-    "durationSec": 5815,
-    "at": "2026-09-28T23:29:08Z",
-    "checks": 4
-  },
-  {
     "videoId": "ZUKdInzo7PE",
     "title": "【逆堀大輔】逆張り23時間30分睡眠チャレンジ②",
     "date": "2026-09-19T09:00:06Z",
@@ -464,14 +408,6 @@
     "checks": 5
   },
   {
-    "videoId": "w_xwLNJ9ooE",
-    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "date": "2026-09-30T11:36:27Z",
-    "durationSec": 9089,
-    "at": "2026-10-01T22:52:55Z",
-    "checks": 2
-  },
-  {
     "videoId": "wT6gX3ALaqQ",
     "title": "あ",
     "date": "2026-09-28T13:32:51Z",
@@ -494,14 +430,6 @@
     "durationSec": 23113,
     "at": "2026-10-01T22:53:11Z",
     "checks": 6
-  },
-  {
-    "videoId": "MXScyBO9XSU",
-    "title": "【マイクラ】雑談しながらみんたでハードコア",
-    "date": "2026-10-02T12:15:24Z",
-    "durationSec": 11518,
-    "at": "2026-10-02T22:30:21Z",
-    "checks": 1
   },
   {
     "videoId": "45rSuqajyOg",
@@ -541,6 +469,86 @@
     "date": "2025-12-05T09:45:17Z",
     "durationSec": 4758,
     "at": "2026-10-02T22:30:58Z",
+    "checks": 7
+  },
+  {
+    "videoId": "FncUyTh1yaw",
+    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
+    "date": "2026-10-03T08:32:52Z",
+    "durationSec": 19264,
+    "at": "2026-10-03T21:43:12Z",
+    "checks": 1
+  },
+  {
+    "videoId": "MXScyBO9XSU",
+    "title": "【マイクラ】雑談しながらみんたでハードコア",
+    "date": "2026-10-02T12:15:24Z",
+    "durationSec": 11518,
+    "at": "2026-10-03T21:43:19Z",
+    "checks": 2
+  },
+  {
+    "videoId": "w_xwLNJ9ooE",
+    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "date": "2026-09-30T11:36:27Z",
+    "durationSec": 9089,
+    "at": "2026-10-03T21:43:26Z",
+    "checks": 3
+  },
+  {
+    "videoId": "ml9EMnJEgr4",
+    "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
+    "date": "2026-09-23T11:21:53Z",
+    "durationSec": 5815,
+    "at": "2026-10-03T21:43:32Z",
+    "checks": 5
+  },
+  {
+    "videoId": "z1FuQLMaMZ0",
+    "title": "参加型 マイクラ #13 みんなで野球場作りたい！［睡眠導入］［作業用BGM］",
+    "date": "2025-11-19T13:33:07Z",
+    "durationSec": 11385,
+    "at": "2026-10-03T21:43:39Z",
+    "checks": 7
+  },
+  {
+    "videoId": "WV9luPr5k_M",
+    "title": "参加型 マイクラ ウォシュレッ島発展プロジェクト#11［睡眠導入］［作業用BGM］",
+    "date": "2025-11-16T11:30:29Z",
+    "durationSec": 20240,
+    "at": "2026-10-03T21:43:46Z",
+    "checks": 7
+  },
+  {
+    "videoId": "rL1Wv0MBCag",
+    "title": "雑談多めの参加型 マイクラ ウォシュレッ島発展プロジェクト#6［睡眠導入］［作業用BGM］",
+    "date": "2025-11-09T02:18:14Z",
+    "durationSec": 42900,
+    "at": "2026-10-03T21:43:52Z",
+    "checks": 7
+  },
+  {
+    "videoId": "CabLy4XyRBI",
+    "title": "参加型夫婦マイクラ参加型#15 まったり雑談おしゃれな町作り",
+    "date": "2025-10-12T15:38:34Z",
+    "durationSec": 25560,
+    "at": "2026-10-03T21:43:59Z",
+    "checks": 7
+  },
+  {
+    "videoId": "P88ZkHMtgRM",
+    "title": "APEX 参加型初見さんいらっしゃい",
+    "date": "2025-10-12T13:47:30Z",
+    "durationSec": 6122,
+    "at": "2026-10-03T21:44:07Z",
+    "checks": 7
+  },
+  {
+    "videoId": "GMQwJr4Fc44",
+    "title": "参加型マイクラ#13 1時間エンチャ釣り",
+    "date": "2025-10-11T08:17:36Z",
+    "durationSec": 4591,
+    "at": "2026-10-03T21:44:14Z",
     "checks": 7
   }
 ]
