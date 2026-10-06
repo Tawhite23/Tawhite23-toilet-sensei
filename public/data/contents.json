@@ -9,13 +9,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-10-06T11:00:00Z",
+    "date": "2026-10-06T13:00:17Z",
+    "type": "video",
+    "title": "【音MAD】おトイレ先生のグルメレース #shorts",
+    "videoId": "l6v5MdNVClE",
+    "thumbnail": "https://i.ytimg.com/vi/l6v5MdNVClE/maxresdefault.jpg",
+    "durationSec": 69
+  },
+  {
+    "date": "2026-10-06T11:32:38Z",
     "type": "live",
     "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
     "videoId": "cFv2SROe-fo",
-    "thumbnail": "https://i.ytimg.com/vi/cFv2SROe-fo/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/cFv2SROe-fo/maxresdefault.jpg",
+    "durationSec": 10933
   },
   {
     "date": "2026-10-06T06:00:38Z",
