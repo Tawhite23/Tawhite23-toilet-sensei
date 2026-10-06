@@ -1,29 +1,5 @@
 [
   {
-    "videoId": "-aKGeu-0qMs",
-    "title": "#マイクラ参加型 音量注意！！！！",
-    "date": "2026-08-22T12:25:25Z",
-    "durationSec": 19290,
-    "at": "2026-09-18T21:13:11Z",
-    "checks": 6
-  },
-  {
-    "videoId": "jBxG2xw6Wzk",
-    "title": "#マリオカート8dx 野良レート耐久やる",
-    "date": "2026-08-22T03:40:22Z",
-    "durationSec": 18674,
-    "at": "2026-09-18T21:13:17Z",
-    "checks": 6
-  },
-  {
-    "videoId": "5VxCoGQmaA8",
-    "title": "#マイクラ参加型 クリアしよ",
-    "date": "2026-08-21T11:34:17Z",
-    "durationSec": 10845,
-    "at": "2026-09-18T21:13:23Z",
-    "checks": 6
-  },
-  {
     "videoId": "rvOeGYtfuEY",
     "title": "#マイクラ参加型 目標は一旦クリア",
     "date": "2026-09-02T11:58:04Z",
@@ -200,22 +176,6 @@
     "checks": 6
   },
   {
-    "videoId": "Yw81p9jBGHE",
-    "title": "雑談する",
-    "date": "2026-09-18T12:00:54Z",
-    "durationSec": 6903,
-    "at": "2026-09-27T21:34:27Z",
-    "checks": 5
-  },
-  {
-    "videoId": "ZsQ_WBahH0s",
-    "title": "第2回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "date": "2026-09-17T12:07:07Z",
-    "durationSec": 8820,
-    "at": "2026-09-27T21:34:35Z",
-    "checks": 5
-  },
-  {
     "videoId": "srQ-ykH7DEo",
     "title": "#マイクラ参加型 ハードコアチャレンジLv8",
     "date": "2026-09-09T12:16:12Z",
@@ -336,14 +296,6 @@
     "checks": 7
   },
   {
-    "videoId": "w_xwLNJ9ooE",
-    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "date": "2026-09-30T11:36:27Z",
-    "durationSec": 9089,
-    "at": "2026-10-03T21:43:26Z",
-    "checks": 3
-  },
-  {
     "videoId": "ml9EMnJEgr4",
     "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
     "date": "2026-09-23T11:21:53Z",
@@ -398,22 +350,6 @@
     "durationSec": 4591,
     "at": "2026-10-03T21:44:14Z",
     "checks": 7
-  },
-  {
-    "videoId": "SxFXfcHKvjE",
-    "title": "【レゴブロック参加型】1作目ついに完成？？！！",
-    "date": "2026-10-04T10:59:28Z",
-    "durationSec": 16994,
-    "at": "2026-10-04T21:52:46Z",
-    "checks": 1
-  },
-  {
-    "videoId": "FncUyTh1yaw",
-    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
-    "date": "2026-10-03T08:32:52Z",
-    "durationSec": 19264,
-    "at": "2026-10-04T21:52:53Z",
-    "checks": 2
   },
   {
     "videoId": "MXScyBO9XSU",
@@ -557,6 +493,70 @@
     "date": "2026-08-23T12:17:49Z",
     "durationSec": 9937,
     "at": "2026-10-04T21:55:07Z",
+    "checks": 7
+  },
+  {
+    "videoId": "SxFXfcHKvjE",
+    "title": "【レゴブロック参加型】1作目ついに完成？？！！",
+    "date": "2026-10-04T10:59:28Z",
+    "durationSec": 16994,
+    "at": "2026-10-06T00:17:39Z",
+    "checks": 2
+  },
+  {
+    "videoId": "FncUyTh1yaw",
+    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
+    "date": "2026-10-03T08:32:52Z",
+    "durationSec": 19264,
+    "at": "2026-10-06T00:17:45Z",
+    "checks": 3
+  },
+  {
+    "videoId": "w_xwLNJ9ooE",
+    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "date": "2026-09-30T11:36:27Z",
+    "durationSec": 9089,
+    "at": "2026-10-06T00:17:51Z",
+    "checks": 4
+  },
+  {
+    "videoId": "Yw81p9jBGHE",
+    "title": "雑談する",
+    "date": "2026-09-18T12:00:54Z",
+    "durationSec": 6903,
+    "at": "2026-10-06T00:17:58Z",
+    "checks": 6
+  },
+  {
+    "videoId": "ZsQ_WBahH0s",
+    "title": "第2回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "date": "2026-09-17T12:07:07Z",
+    "durationSec": 8820,
+    "at": "2026-10-06T00:18:04Z",
+    "checks": 6
+  },
+  {
+    "videoId": "-aKGeu-0qMs",
+    "title": "#マイクラ参加型 音量注意！！！！",
+    "date": "2026-08-22T12:25:25Z",
+    "durationSec": 19290,
+    "at": "2026-10-06T00:18:10Z",
+    "checks": 7
+  },
+  {
+    "videoId": "jBxG2xw6Wzk",
+    "title": "#マリオカート8dx 野良レート耐久やる",
+    "date": "2026-08-22T03:40:22Z",
+    "durationSec": 18674,
+    "at": "2026-10-06T00:18:16Z",
+    "checks": 7
+  },
+  {
+    "videoId": "5VxCoGQmaA8",
+    "title": "#マイクラ参加型 クリアしよ",
+    "date": "2026-08-21T11:34:17Z",
+    "durationSec": 10845,
+    "at": "2026-10-06T00:18:22Z",
     "checks": 7
   }
 ]
