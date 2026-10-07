@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-06T20:27:51.178Z",
+  "generatedAt": "2026-10-07T20:42:09.405Z",
   "current": {
     "ym": "2026-10",
-    "subscriberCount": 397,
-    "viewCount": 235646
+    "subscriberCount": 402,
+    "viewCount": 237807
   },
   "entries": [
     {
@@ -73,6 +73,17 @@
       "event": "総再生数 20万回 達成",
       "detail": "総再生数の最上位桁が繰り上がりました。",
       "firstSeenAt": "2026-09-27T19:08:45.662Z"
+    },
+    {
+      "id": "subs-400",
+      "kind": "milestone",
+      "metric": "subs",
+      "value": 400,
+      "date": "2026-10-08",
+      "approx": false,
+      "event": "チャンネル登録者 400人 達成",
+      "detail": "チャンネル登録者の最上位桁が繰り上がりました。",
+      "firstSeenAt": "2026-10-07T20:42:09.405Z"
     }
   ]
 }
