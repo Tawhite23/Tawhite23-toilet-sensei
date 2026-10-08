@@ -105,7 +105,8 @@ export default function ReportCharts() {
   )
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 px-4 pb-28 pt-8 md:pt-24">
+    // ページの余白とタブは ReportTabs が持つ
+    <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-black">活動レポート</h1>
         {/* 月別 / 年別の切り替え（全グラフに反映） */}

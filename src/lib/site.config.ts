@@ -54,6 +54,17 @@ export const site = {
       "https://marshmallow-qa.com/quv8dzdx4k5rcfv?t=0lJa7j&utm_medium=url_text&utm_source=promotion",
   },
 
+  /**
+   * リスナー名鑑（レポートページの 名鑑/ランキング/日報）に載りたくない人への案内。
+   * 申請を受けたら、手元PCの非表示リスト（scripts/listeners.local.json の hiddenFile）に
+   * その人の表示名を1行足して `npm run build:listeners` で作り直す。窓口を変えるときはここだけ書き換える。
+   */
+  listenerOptOut: {
+    text: "名鑑に載せてほしくない方は、配信のチャットかマシュマロで「名鑑を非表示にして」とお知らせください。",
+    linkLabel: "マシュマロを開く",
+    url: "https://marshmallow-qa.com/quv8dzdx4k5rcfv?t=0lJa7j&utm_medium=url_text&utm_source=promotion",
+  },
+
   // プロフィール内蔵WIKI「これまでの歩み」の**フォールバック**。
   // 通常は public/data/wiki.json（scripts/build-wiki.mjs が日次生成）を表示し、
   // それが取得できないときだけこの配列が使われる。

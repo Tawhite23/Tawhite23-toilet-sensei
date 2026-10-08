@@ -85,3 +85,8 @@ __pycache__/
 
 # D1投入用に生成するSQL（サイズが大きく、いつでも再生成できる）
 /out/
+
+# リスナー名鑑（scripts/build-listeners.py）の手元専用ファイル。チャットの生データ・非表示リスト・ソルトは公開しない
+scripts/listeners.local.json
+scripts/listeners-hidden.local.txt
+.listener-chat/

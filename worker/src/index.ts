@@ -39,6 +39,7 @@
  */
 
 import { handleChat, handleChatIntro, handleChatProfile } from "./chat"
+import { handleListenerProfiles } from "./listeners"
 
 export interface Env {
   /** セリフ全文検索・名言集のD1データベース（wrangler.toml の d1_databases） */
@@ -81,6 +82,9 @@ export interface Env {
   CHAT_DAILY_TOTAL?: string
   /** 口調の参考にする言い回し（"/"区切り） */
   CHAT_PHRASES?: string
+
+  /** /api/listeners/profiles（リスナー名鑑の最新の名前とアイコン）のTTL(秒)。既定 21600 */
+  LISTENER_PROFILE_TTL_SEC?: string
 
   /** contents.json のベース(完全な一覧)を取得する raw URL。data-contents.yml が更新する */
   CONTENTS_BASE_URL?: string
@@ -752,6 +756,9 @@ export default {
         })
       }
     }
+
+    // リスナー名鑑の最新の名前とアイコン（チャンネルIDは返さない）
+    if (pathname === "/api/listeners/profiles") return handleListenerProfiles(env, ctx, cors)
 
     if (pathname === "/api/search" || pathname === "/api/quotes") {
       if (!env.DB) return json({ error: "db_not_configured" }, 500, cors)
