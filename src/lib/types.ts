@@ -180,3 +180,67 @@ export interface DiscordDoc {
   inviteUrl: string
   note?: string
 }
+
+// ---- リスナー名鑑（public/data/listeners.json。scripts/build-listeners.py が生成） ----
+
+/** 配信の種類。scripts/build-listeners.py の category() と同じ並び */
+export type StreamCategory = "マイクラ" | "マリカ" | "参加型" | "雑談・その他"
+
+/** 配信1回ぶんの日報 */
+export interface ListenerStream {
+  id: string // videoId
+  title: string
+  date: string // YYYY-MM-DD (JST)
+  start: string // HH:MM (JST)
+  min: number // 配信の長さ(分)
+  cat: StreamCategory
+  comments: number
+  chatters: number
+  /** この回が初コメントだった人数。集計の最初の数回は null（常連も初回扱いになるため） */
+  first: number | null
+  /** いちばん盛り上がった時刻 [開始からの分, その1分のコメント数] */
+  peak: [number, number] | null
+  /** 先生のひとこと [発言, 開始からの秒]（名言集から。文字起こしがまだの回は空） */
+  quotes: [string, number][]
+  /** どんな回だったかの一言（scripts/stream-summaries.json。まだ書いていない回は空文字） */
+  summary: string
+}
+
+/** シーズン（季節ごと）。from/to は streams の添字 */
+export interface ListenerSeason {
+  key: string // "2026-09"
+  label: string // "2026 秋"
+  months: string // "9〜11月"
+  from: number
+  to: number
+}
+
+export interface Listener {
+  /** URL用のキー（チャンネルIDは公開しない） */
+  key: string
+  name: string
+  /** YouTubeのアイコンのURL（サイズ指定なし。最後にコメントしたときのもの。無ければ空文字） */
+  icon: string
+  attend: number
+  /** 初めて来た回から後の配信のうち、来た割合(%) */
+  rate: number
+  comments: number
+  /** いまの連続出席 */
+  streak: number
+  /** 最長の連続出席 */
+  best: number
+  fav: StreamCategory
+  /** 出席した配信 [streams の添字, その回のコメント数]（古い順） */
+  att: [number, number][]
+}
+
+export interface ListenersFile {
+  generated: string
+  /** これ未満の出席回数の人は名鑑に載せていない */
+  minAttend: number
+  /** 1回でもコメントした人の数（名鑑に載せていない人も含む） */
+  totalChatters: number
+  seasons: ListenerSeason[]
+  streams: ListenerStream[]
+  listeners: Listener[]
+}

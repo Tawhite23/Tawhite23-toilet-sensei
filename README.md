@@ -7,6 +7,7 @@ YouTuber「おトイレ先生」の非公式ファンサイト。Next.js の静�
 - **ホーム** — チャンネルアイコンを常時表示。配信中は自動でリングエフェクトと「LIVE」バッジが付き、そのままYouTubeの配信ページへ遷移できます。
 - **カレンダー** — 過去の配信/動画投稿履歴と、今後の配信予定を月表示で確認できます。
 - **レポート** — 累計配信回数・動画本数・配信時間、登録者数と総再生数の推移をグラフで表示します。
+- **リスナー名鑑** — レポートページの「名鑑 / ランキング / 日報」タブ。配信の公開チャットから、リスナーごとの出席・コメント数、シーズン別ランキング、配信ごとの盛り上がりを表示します。
 - **プロフィール** — チャンネルの紹介、開設からの歩み、モデレーター/サポーターの紹介。
 - **セリフ全文検索** — カレンダーページの「セリフから探す」タブで、配信アーカイブの発言を全文検索し、その秒から再生できます（完全クライアントサイド検索）。
 - **Discordゲート** — Googleログイン後のみDiscordサーバーの招待リンクを表示（Firebase Auth + Firestore）。
@@ -31,6 +32,7 @@ YouTuber「おトイレ先生」の非公式ファンサイト。Next.js の静�
 | `wiki.json` | 日次 | WIKI「これまでの歩み」年表（登録者・再生数の桁上がりを自動追記） | `.github/workflows/data-report.yml` |
 | `transcripts/*.json`, `search-index.json`, `popular.json`, `quotes.json` | 日次 | 発言の文字起こし・検索インデックス・頻出キーワード・名言集 | `.github/workflows/data-transcripts.yml` |
 | `search-index.json`, `popular.json`, `quotes.json` | `transcripts/**` のpush時 | 手元PCで文字起こしをpushした直後の再集計（手動実行不要） | `.github/workflows/data-search-index.yml` |
+| `listeners.json` | 手元PCで手動（`npm run build:listeners`） | リスナー名鑑（出席・コメント数・配信日報） | なし（下記「リスナー名鑑」） |
 
 いずれも YouTube Data API v3 のクォータ消費を抑えた低コストな実装になっています（詳細は各スクリプト冒頭のコメント参照）。文字起こしワークフローは YouTube Data API を**一切呼びません**（追加クォータ 0u）。
 
@@ -135,6 +137,91 @@ npm run build:wiki      # 手元で生成/確認する場合
 ```
 
 なお `src/lib/site.config.ts` の `wikiHistory` は `wiki.json` が読めなかった場合のフォールバックです。
+
+## リスナー名鑑
+
+レポートページ（`/report/`）の「名鑑 / ランキング / 日報」タブです。配信アーカイブの公開チャット
+（チャットリプレイ）を集計した `public/data/listeners.json` を読んで表示します。
+
+| タブ | URL | 内容 |
+| --- | --- | --- |
+| 名鑑 | `/report/?tab=listeners` | リスナーごとの、この1年の出席カレンダー（1日1マス。GitHubの草と同じ並びで、コメントが多い日ほど濃い）。左下の称号を押すとアイコン付きの説明が開く。名前検索と並べ替え |
+| ランキング | `/report/?tab=ranking` | シーズン（春3〜5月・夏6〜8月・秋9〜11月・冬12〜2月）ごと・全期間の上位10人 |
+| 日報 | `/report/?tab=daily` | 配信ごとに、どんな回だったか（一言の説明・タグ・先生のひとこと）、誰のコメントが多かったか、初めて来た人、来た人の一覧 |
+
+- 「出席」＝その配信で1回以上コメントした、という意味です（見ているだけの人は数えられません）。
+- 名前を押すとその人の記録が開き、`?l=<キー>` 付きのURLで共有できます。
+  「自分の記録に登録」を押すと、その端末のブラウザ（localStorage）に覚えて名鑑タブの一番上に出します。
+- 日報の「先生のひとこと」は名言集（`quotes.json`）から、その回の点数の高い発言を集計時に拾っています。
+  文字起こしがまだの回には出ません（文字起こしが進んだあとに集計し直すと入ります）。
+- シーズン別の順位・称号・配信のタグ・「よく同じ配信にいる人」はブラウザ側（`src/lib/listeners.ts`）で計算します。
+  見せ方を変えるだけなら集計し直す必要はありません。
+
+### 配信の一言（`scripts/stream-summaries.json`）
+
+日報の各配信に出す「どんな回だったか」の一言です。`{ "動画ID": "一言" }` の形で人が書きます
+（最初の約500本は、タイトルと文字起こしをもとにまとめて書いたものです。違っていたら直してください）。
+`npm run build:listeners` を実行すると、一言がまだ無い配信の一覧が最後に出るので、
+そこに足してもう一度実行します。無い回は一言なしで表示されるだけで、エラーにはなりません。
+
+### 名前とアイコンを最新に保つ（Cloudflare Worker）
+
+`listeners.json` の名前とアイコンは集計したときのものです。リスナーが変えても追いつけるよう、
+Worker の `/api/listeners/profiles` が YouTube から最新の値を取り、ページ側で上書きします
+（配信状態の `/api/live` と同じ考え方。全閲覧者で1本のキャッシュを共有し、既定6時間に1回・1回4u程度）。
+
+- チャンネルIDは公開しないため、「キー → チャンネルID」の対応は D1 の `listener_ids` テーブルにだけ置きます。
+  Worker はキー・名前・アイコンだけを返します（`worker/src/listeners.ts`）。
+- 対応表は `npm run build:listeners` が `out/listeners/listener-ids.sql`（gitignore済み）に書き出します。
+  名鑑に載る人が増えたら、次で D1 に反映します（`wrangler login` 済みのPCで）。
+
+  ```bash
+  npm run sync-listeners
+  ```
+
+- 初回だけ Worker の再デプロイが必要です（`cd worker && npm run deploy`）。
+- Worker が未デプロイ・停止中でも、ページは `listeners.json` の値でそのまま表示されます。
+
+### データの更新（手元PCで実行）
+
+```bash
+pip install -r scripts/requirements.txt   # yt-dlp
+npm run build:listeners                   # 未取得の配信のチャットを取得 → 集計 → public/data/listeners.json
+```
+
+`contents.json` に載っている配信アーカイブのうち、まだチャットを持っていないものだけを yt-dlp で取得します
+（動画本体は落としません）。生成された `public/data/listeners.json` **だけ**をコミットして push すれば、
+ほかのデータと同じく再デプロイなしでサイトに反映されます（pre-commit フックを入れている場合は
+`npm run unprotect-data` → コミット → `npm run protect-data`）。
+
+CI（GitHub Actions）では動かしていません。チャットの生データ（合計数百MB）と非表示リストを
+公開リポジトリに置かないためです。
+
+### 公開する範囲と、手元にだけ置くもの
+
+| 項目 | 扱い |
+| --- | --- |
+| チャンネルID | **出力しない**。URL用のキーはソルト付きハッシュ（キーからチャンネルIDを逆引きできない） |
+| 表示名・アイコン | 最後にコメントしたときの名前とYouTubeのアイコンを載せる（アイコンは YouTube の画像を直接読み込む。変更・削除されたら頭文字の表示になる） |
+| コメントの本文 | 載せない |
+| 出席が少ない人 | `MIN_ATTEND`（既定3回）未満の人は名鑑・ランキングに載せない（配信ごとの人数には数える） |
+| 載せない配信 | `scripts/exclude.txt` の配信 |
+
+手元専用の設定は `scripts/listeners.local.json`（gitignore済み・初回実行時に自動作成）に置きます。
+
+```jsonc
+{
+  "chatDir": ".listener-chat",                          // チャットの生データの置き場所
+  "hiddenFile": "scripts/listeners-hidden.local.txt",   // 非表示にする人（1行に1人。チャンネルID か 表示名）
+  "salt": "…"                                           // キーのソルト
+}
+```
+
+- **非表示の申請があったら**: `hiddenFile` にその人の表示名（例: `@name-x1y`）を1行足して
+  `npm run build:listeners` を実行し、`listeners.json` をコミットします。
+  申請の窓口の案内文は `src/lib/site.config.ts` の `listenerOptOut` です。
+- **`salt` は消さない・変えない**: 変わると全員のキーが変わり、共有済みのURLと「自分の記録」の登録が外れます。
+  PCを移すときは `scripts/listeners.local.json` ごと持っていってください。
 
 ## セリフ全文検索
 

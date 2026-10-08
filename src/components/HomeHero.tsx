@@ -8,6 +8,7 @@ import {
   signOut,
   type User,
 } from "firebase/auth"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { auth, googleProvider } from "@/lib/firebase"
 import { site } from "@/lib/site.config"
@@ -156,6 +157,18 @@ export default function HomeHero() {
           </div>
           <SocialLinks />
           <QuoteSearchCard />
+          {/* 常連が自分の出席を見に来る入口（レポートページの名鑑タブ） */}
+          <Link
+            href="/report/?tab=listeners"
+            className="group block w-full max-w-md rounded-2xl border border-base-700 bg-base-800 p-3 text-left transition-colors hover:border-accent"
+          >
+            <p className="flex items-center gap-1.5 text-xs font-bold group-hover:text-accent">
+              <span aria-hidden="true">📋</span> リスナー名鑑
+            </p>
+            <p className="mt-1 text-[11px] leading-relaxed text-ink-dim">
+              配信の出席回数・コメント数・シーズン別ランキング。自分の記録も探せます。
+            </p>
+          </Link>
         </motion.div>
 
         {/* --- 会話モード --- */}

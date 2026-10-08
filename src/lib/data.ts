@@ -1,6 +1,7 @@
 import { site } from "./site.config"
 import type {
   ContentItem,
+  ListenersFile,
   LiveStatus,
   PopularFile,
   Report,
@@ -67,6 +68,44 @@ export const fetchPopular = () => getJson<PopularFile>("popular.json", 3600)
 /** 1配信ぶんの発言本文（検索ヒット表示時に遅延取得する） */
 export const fetchTranscript = (videoId: string) =>
   getJson<Transcript>(`transcripts/${encodeURIComponent(videoId)}.json`, 3600)
+
+/**
+ * リスナー名鑑。手元PCで集計してコミットするファイルなので、main に載る前
+ * （プレビュー確認中・ローカル開発中）は dataBaseUrl 側にまだ存在しない。
+ * その間も表示できるよう、取れなければサイト同梱の /data を読む。
+ * 名鑑・ランキング・日報の3タブで使い回すため、取得は1回だけにする。
+ */
+let listenersPromise: Promise<ListenersFile | null> | null = null
+export function fetchListeners(): Promise<ListenersFile | null> {
+  listenersPromise ??= getJson<ListenersFile>("listeners.json", 3600).then(async (remote) => {
+    if (remote || !site.dataBaseUrl) return remote
+    try {
+      const res = await fetch("/data/listeners.json")
+      return res.ok ? ((await res.json()) as ListenersFile) : null
+    } catch {
+      return null
+    }
+  })
+  return listenersPromise
+}
+
+/**
+ * リスナーの最新の名前とアイコン（キー → [名前, アイコンのURL]）。Cloudflare Worker が
+ * YouTube から取り直したもの。listeners.json は集計したときの値なので、取れたらこちらで上書きする。
+ * Worker 未設定・失敗時は null（listeners.json の値のまま表示する）。
+ */
+export async function fetchListenerProfiles(): Promise<Record<string, [string, string]> | null> {
+  const base = site.liveApiBaseUrl?.replace(/\/$/, "")
+  if (!base) return null
+  try {
+    const res = await fetch(`${base}/api/listeners/profiles`, { signal: AbortSignal.timeout(8000) })
+    if (!res.ok) return null
+    const data = (await res.json()) as { profiles?: Record<string, [string, string]> }
+    return data.profiles ?? null
+  } catch {
+    return null
+  }
+}
 
 export function fmtDuration(sec: number): string {
   const h = Math.floor(sec / 3600)
