@@ -42,7 +42,11 @@ export default function ListenerSection({ view }: { view: Exclude<ReportTab, "ac
           ...file,
           listeners: file.listeners.map((l) => {
             const p = profiles[l.key]
-            return p ? { ...l, name: p[0] || l.name, icon: p[1] || l.icon } : l
+            if (!p) return l
+            // YouTube API はハンドルを小文字にして返す（@9IQ0919 → @9iq0919）。
+            // 大文字小文字が違うだけなら、チャットに出ていたとおりの集計時の表記を残す。
+            const renamed = !!p[0] && p[0].toLowerCase() !== l.name.toLowerCase()
+            return { ...l, name: renamed ? p[0] : l.name, icon: p[1] || l.icon }
           }),
         })
       })
