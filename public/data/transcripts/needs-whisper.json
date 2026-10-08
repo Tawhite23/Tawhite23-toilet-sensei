@@ -192,14 +192,6 @@
     "checks": 7
   },
   {
-    "videoId": "wT6gX3ALaqQ",
-    "title": "あ",
-    "date": "2026-09-28T13:32:51Z",
-    "durationSec": 5861,
-    "at": "2026-10-04T21:53:08Z",
-    "checks": 4
-  },
-  {
     "videoId": "BU_lkiNlUa4",
     "title": "【マイクラ】雑談しながらみんなでハードコア",
     "date": "2026-09-25T12:22:28Z",
@@ -326,14 +318,6 @@
     "durationSec": 9937,
     "at": "2026-10-04T21:55:07Z",
     "checks": 7
-  },
-  {
-    "videoId": "FncUyTh1yaw",
-    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
-    "date": "2026-10-03T08:32:52Z",
-    "durationSec": 19264,
-    "at": "2026-10-06T00:17:45Z",
-    "checks": 3
   },
   {
     "videoId": "w_xwLNJ9ooE",
@@ -472,22 +456,6 @@
     "checks": 7
   },
   {
-    "videoId": "xPKlcoed9GM",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-07T12:16:39Z",
-    "durationSec": 9719,
-    "at": "2026-10-07T23:17:34Z",
-    "checks": 1
-  },
-  {
-    "videoId": "cFv2SROe-fo",
-    "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
-    "date": "2026-10-06T11:32:38Z",
-    "durationSec": 10933,
-    "at": "2026-10-07T23:17:41Z",
-    "checks": 2
-  },
-  {
     "videoId": "SxFXfcHKvjE",
     "title": "【レゴブロック参加型】1作目ついに完成？？！！",
     "date": "2026-10-04T10:59:28Z",
@@ -574,5 +542,37 @@
     "durationSec": 42897,
     "at": "2026-10-07T23:18:55Z",
     "checks": 7
+  },
+  {
+    "videoId": "xPKlcoed9GM",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-07T12:16:39Z",
+    "durationSec": 9719,
+    "at": "2026-10-08T23:33:10Z",
+    "checks": 2
+  },
+  {
+    "videoId": "cFv2SROe-fo",
+    "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
+    "date": "2026-10-06T11:32:38Z",
+    "durationSec": 10933,
+    "at": "2026-10-08T23:33:17Z",
+    "checks": 3
+  },
+  {
+    "videoId": "FncUyTh1yaw",
+    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
+    "date": "2026-10-03T08:32:52Z",
+    "durationSec": 19264,
+    "at": "2026-10-08T23:33:24Z",
+    "checks": 4
+  },
+  {
+    "videoId": "wT6gX3ALaqQ",
+    "title": "あ",
+    "date": "2026-09-28T13:32:51Z",
+    "durationSec": 5861,
+    "at": "2026-10-08T23:33:30Z",
+    "checks": 5
   }
 ]
