@@ -11,7 +11,8 @@ import ListenerModal from "./ListenerModal"
 import ListenerRanking from "./ListenerRanking"
 import StreamDaily from "./StreamDaily"
 
-const HEADINGS: Record<Exclude<ReportTab, "activity">, [string, string]> = {
+type View = Exclude<ReportTab, "activity" | "overlap">
+const HEADINGS: Record<View, [string, string]> = {
   listeners: ["リスナー名鑑", "配信でコメントした回を「出席」として、リスナーごとの記録をまとめています。"],
   ranking: ["ランキング", "シーズン（季節）ごとの出席・コメントの上位10人です。"],
   daily: ["配信日報", "配信ごとのコメントの盛り上がりを振り返れます。"],
@@ -22,7 +23,7 @@ const HEADINGS: Record<Exclude<ReportTab, "activity">, [string, string]> = {
  * 3つのタブは同じ listeners.json を見ているので、データの取得・
  * リスナー1人の記録を開くモーダル（?l=<キー>）・「自分の記録」の登録はここで持つ。
  */
-export default function ListenerSection({ view }: { view: Exclude<ReportTab, "activity"> }) {
+export default function ListenerSection({ view }: { view: View }) {
   const router = useRouter()
   const params = useSearchParams()
   const [data, setData] = useState<ListenersFile | null | undefined>(undefined)
