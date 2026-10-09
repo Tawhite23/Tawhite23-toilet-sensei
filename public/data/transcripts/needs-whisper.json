@@ -1,29 +1,5 @@
 [
   {
-    "videoId": "EhTxnQr7lqg",
-    "title": "#マリオカート8dx 全コース耐久やります",
-    "date": "2026-09-06T08:35:33Z",
-    "durationSec": 18666,
-    "at": "2026-09-23T21:45:19Z",
-    "checks": 6
-  },
-  {
-    "videoId": "tBdRF0oKFC8",
-    "title": "#参加型 第1回ルービックキューブ攻略参加型",
-    "date": "2026-09-05T11:37:06Z",
-    "durationSec": 7375,
-    "at": "2026-09-23T21:45:25Z",
-    "checks": 6
-  },
-  {
-    "videoId": "ZPJtteXDJkY",
-    "title": "#参加型  第2回知育菓子攻略参加型",
-    "date": "2026-09-05T10:20:30Z",
-    "durationSec": 4400,
-    "at": "2026-09-23T21:45:32Z",
-    "checks": 6
-  },
-  {
     "videoId": "I1R34VPAv7A",
     "title": "#原神 完全初見プレイ➈",
     "date": "2026-06-24T12:48:05Z",
@@ -574,5 +550,29 @@
     "durationSec": 5861,
     "at": "2026-10-08T23:33:30Z",
     "checks": 5
+  },
+  {
+    "videoId": "EhTxnQr7lqg",
+    "title": "#マリオカート8dx 全コース耐久やります",
+    "date": "2026-09-06T08:35:33Z",
+    "durationSec": 18666,
+    "at": "2026-10-09T22:51:47Z",
+    "checks": 7
+  },
+  {
+    "videoId": "tBdRF0oKFC8",
+    "title": "#参加型 第1回ルービックキューブ攻略参加型",
+    "date": "2026-09-05T11:37:06Z",
+    "durationSec": 7375,
+    "at": "2026-10-09T22:51:53Z",
+    "checks": 7
+  },
+  {
+    "videoId": "ZPJtteXDJkY",
+    "title": "#参加型  第2回知育菓子攻略参加型",
+    "date": "2026-09-05T10:20:30Z",
+    "durationSec": 4400,
+    "at": "2026-10-09T22:52:00Z",
+    "checks": 7
   }
 ]
