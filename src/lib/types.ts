@@ -234,6 +234,45 @@ export interface Listener {
   att: [number, number][]
 }
 
+/** overlap.json: リスナーかぶり（scripts/build-overlap.py が生成）。人数だけで、誰がどこを登録しているかは持たない */
+export interface OverlapChannel {
+  id: string // YouTubeのチャンネルID
+  title: string
+  icon: string // サイズ指定なしのURL
+  /** このチャンネルにもいる人数（コメントした / 登録している） */
+  n: number
+  /** そのうち常連（名鑑に載る基準を満たす人）の人数 */
+  regular: number
+}
+export interface OverlapFile {
+  generated: string
+  /** これまでにコメントした人の数 */
+  chatters: number
+  /** そのうち常連（名鑑に載る基準を満たす人）の数 */
+  regulars: number
+  /** これ未満の人数のチャンネルは載せていない */
+  minPeople: number
+  /** ほかの配信者のチャットでコメントしていた人数（見て回れた範囲） */
+  commented: {
+    /** 何日以内の配信を見たか */
+    days: number
+    /** 見て回った日時 (YYYY-MM-DD HH:MM) */
+    at: string
+    /** チャットを見たチャンネルの数 */
+    checked: number
+    /** 見た配信の本数 */
+    streams: number
+    channels: OverlapChannel[]
+  }
+  /** 登録しているチャンネル（登録先を公開している人だけ） */
+  subscribed: {
+    /** 登録チャンネルを公開していて調べられた人の数（割合の分母） */
+    public: number
+    publicRegular: number
+    channels: OverlapChannel[]
+  }
+}
+
 export interface ListenersFile {
   generated: string
   /** これ未満の出席回数の人は名鑑に載せていない */

@@ -2,6 +2,7 @@ import { site } from "./site.config"
 import type {
   ContentItem,
   ListenersFile,
+  OverlapFile,
   LiveStatus,
   PopularFile,
   Report,
@@ -77,16 +78,22 @@ export const fetchTranscript = (videoId: string) =>
  */
 let listenersPromise: Promise<ListenersFile | null> | null = null
 export function fetchListeners(): Promise<ListenersFile | null> {
-  listenersPromise ??= getJson<ListenersFile>("listeners.json", 3600).then(async (remote) => {
-    if (remote || !site.dataBaseUrl) return remote
-    try {
-      const res = await fetch("/data/listeners.json")
-      return res.ok ? ((await res.json()) as ListenersFile) : null
-    } catch {
-      return null
-    }
-  })
+  listenersPromise ??= getJsonOrBundled<ListenersFile>("listeners.json")
   return listenersPromise
+}
+/** リスナーかぶり（ほかにどのチャンネルを登録している人が多いか）。listeners.json と同じく手元PCで作る */
+export const fetchOverlap = () => getJsonOrBundled<OverlapFile>("overlap.json")
+
+async function getJsonOrBundled<T>(name: string): Promise<T | null> {
+  const remote = await getJson<T>(name, 3600)
+  if (remote || !site.dataBaseUrl) return remote
+  try {
+    // 同梱のファイルも作り直すたびに中身が変わるので、古いものがブラウザに残らないよう時刻を付けて取る
+    const res = await fetch(`/data/${name}?t=${Math.floor(Date.now() / 60_000)}`)
+    return res.ok ? ((await res.json()) as T) : null
+  } catch {
+    return null
+  }
 }
 
 /**
