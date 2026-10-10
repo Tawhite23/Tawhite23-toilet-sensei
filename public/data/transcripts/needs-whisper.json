@@ -56,14 +56,6 @@
     "checks": 6
   },
   {
-    "videoId": "mpU68pytw7s",
-    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
-    "date": "2026-09-22T07:33:48Z",
-    "durationSec": 19985,
-    "at": "2026-10-01T22:53:06Z",
-    "checks": 5
-  },
-  {
     "videoId": "fyctJSfEx5Y",
     "title": "#マリオカート8dx 第2回全コース耐久やります",
     "date": "2026-09-13T07:04:11Z",
@@ -296,14 +288,6 @@
     "checks": 7
   },
   {
-    "videoId": "w_xwLNJ9ooE",
-    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
-    "date": "2026-09-30T11:36:27Z",
-    "durationSec": 9089,
-    "at": "2026-10-06T00:17:51Z",
-    "checks": 4
-  },
-  {
     "videoId": "Yw81p9jBGHE",
     "title": "雑談する",
     "date": "2026-09-18T12:00:54Z",
@@ -432,14 +416,6 @@
     "checks": 7
   },
   {
-    "videoId": "SxFXfcHKvjE",
-    "title": "【レゴブロック参加型】1作目ついに完成？？！！",
-    "date": "2026-10-04T10:59:28Z",
-    "durationSec": 16994,
-    "at": "2026-10-07T23:17:48Z",
-    "checks": 3
-  },
-  {
     "videoId": "o6ALVFpohV4",
     "title": "【レゴブロック参加型】第1回お前ら信じてる",
     "date": "2026-09-21T11:12:30Z",
@@ -520,14 +496,6 @@
     "checks": 7
   },
   {
-    "videoId": "xPKlcoed9GM",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-07T12:16:39Z",
-    "durationSec": 9719,
-    "at": "2026-10-08T23:33:10Z",
-    "checks": 2
-  },
-  {
     "videoId": "cFv2SROe-fo",
     "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
     "date": "2026-10-06T11:32:38Z",
@@ -574,5 +542,53 @@
     "durationSec": 4400,
     "at": "2026-10-09T22:52:00Z",
     "checks": 7
+  },
+  {
+    "videoId": "lwfhz36GUDk",
+    "title": "【妹に運転を教える】温厚イケメンが優しく運転をレクチャー",
+    "date": "2026-10-10T11:37:27Z",
+    "durationSec": 3173,
+    "at": "2026-10-10T21:58:52Z",
+    "checks": 1
+  },
+  {
+    "videoId": "irtnA7m7ryg",
+    "title": "【笑ったら即配信終了】1回目",
+    "date": "2026-10-10T10:11:46Z",
+    "durationSec": 358,
+    "at": "2026-10-10T21:58:58Z",
+    "checks": 1
+  },
+  {
+    "videoId": "xPKlcoed9GM",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-07T12:16:39Z",
+    "durationSec": 9719,
+    "at": "2026-10-10T21:59:05Z",
+    "checks": 3
+  },
+  {
+    "videoId": "SxFXfcHKvjE",
+    "title": "【レゴブロック参加型】1作目ついに完成？？！！",
+    "date": "2026-10-04T10:59:28Z",
+    "durationSec": 16994,
+    "at": "2026-10-10T21:59:12Z",
+    "checks": 4
+  },
+  {
+    "videoId": "w_xwLNJ9ooE",
+    "title": "第3回被弾の度に嫁にシバかれる #マリオカート8dx",
+    "date": "2026-09-30T11:36:27Z",
+    "durationSec": 9089,
+    "at": "2026-10-10T21:59:18Z",
+    "checks": 5
+  },
+  {
+    "videoId": "mpU68pytw7s",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
+    "date": "2026-09-22T07:33:48Z",
+    "durationSec": 19985,
+    "at": "2026-10-10T21:59:25Z",
+    "checks": 6
   }
 ]
