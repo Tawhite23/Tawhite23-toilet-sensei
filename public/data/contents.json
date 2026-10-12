@@ -1,6 +1,6 @@
 [
   {
-    "date": "2026-10-18T10:00:00Z",
+    "date": "2026-10-18T11:00:00Z",
     "type": "live",
     "title": "【ピクミン2】GC版元ガチ勢による完全攻略　#ピクミン2",
     "videoId": "6CLkC4vAP8E",
@@ -9,13 +9,38 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-10-12T11:30:00Z",
+    "date": "2026-10-17T01:00:00Z",
+    "type": "live",
+    "title": "【参加型配信】第1回八田與一を探せ",
+    "videoId": "YmCQ58946Kc",
+    "thumbnail": "https://i.ytimg.com/vi/YmCQ58946Kc/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-10-13T12:00:00Z",
+    "type": "live",
+    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
+    "videoId": "PWmdfiQG4Es",
+    "thumbnail": "https://i.ytimg.com/vi/PWmdfiQG4Es/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-10-12T11:30:26Z",
     "type": "live",
     "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
     "videoId": "2PVxHpZrHgA",
-    "thumbnail": "https://i.ytimg.com/vi/2PVxHpZrHgA/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/2PVxHpZrHgA/maxresdefault.jpg",
+    "durationSec": 12612
+  },
+  {
+    "date": "2026-10-12T11:00:22Z",
+    "type": "video",
+    "title": "AI妹の「シスター」が変化球すぎる #おトイレ先生 #妹に運転を教える #shorts",
+    "videoId": "uHbKEeNiu3w",
+    "thumbnail": "https://i.ytimg.com/vi/uHbKEeNiu3w/maxresdefault.jpg",
+    "durationSec": 71
   },
   {
     "date": "2026-10-11T23:00:03Z",
