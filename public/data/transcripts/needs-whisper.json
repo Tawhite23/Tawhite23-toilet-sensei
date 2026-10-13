@@ -144,22 +144,6 @@
     "checks": 7
   },
   {
-    "videoId": "BU_lkiNlUa4",
-    "title": "【マイクラ】雑談しながらみんなでハードコア",
-    "date": "2026-09-25T12:22:28Z",
-    "durationSec": 9628,
-    "at": "2026-10-04T21:53:15Z",
-    "checks": 5
-  },
-  {
-    "videoId": "Slv8uYLdiuQ",
-    "title": "【リアルビンゴ】雨降ったからドライブしながら",
-    "date": "2026-09-23T04:12:21Z",
-    "durationSec": 9550,
-    "at": "2026-10-04T21:53:23Z",
-    "checks": 5
-  },
-  {
     "videoId": "TW5t9YIGaOQ",
     "title": "【マイクラ】雑談しながら普通にハードコア",
     "date": "2026-09-16T12:08:32Z",
@@ -472,14 +456,6 @@
     "checks": 7
   },
   {
-    "videoId": "FncUyTh1yaw",
-    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
-    "date": "2026-10-03T08:32:52Z",
-    "durationSec": 19264,
-    "at": "2026-10-08T23:33:24Z",
-    "checks": 4
-  },
-  {
     "videoId": "wT6gX3ALaqQ",
     "title": "あ",
     "date": "2026-09-28T13:32:51Z",
@@ -512,14 +488,6 @@
     "checks": 7
   },
   {
-    "videoId": "xPKlcoed9GM",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-07T12:16:39Z",
-    "durationSec": 9719,
-    "at": "2026-10-10T21:59:05Z",
-    "checks": 3
-  },
-  {
     "videoId": "SxFXfcHKvjE",
     "title": "【レゴブロック参加型】1作目ついに完成？？！！",
     "date": "2026-10-04T10:59:28Z",
@@ -542,30 +510,6 @@
     "durationSec": 19985,
     "at": "2026-10-10T21:59:25Z",
     "checks": 6
-  },
-  {
-    "videoId": "1m2OEkvIXsg",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-11T12:18:28Z",
-    "durationSec": 13473,
-    "at": "2026-10-11T22:23:35Z",
-    "checks": 1
-  },
-  {
-    "videoId": "lwfhz36GUDk",
-    "title": "【妹に運転を教える】温厚イケメンが優しく運転をレクチャー",
-    "date": "2026-10-10T11:37:27Z",
-    "durationSec": 3178,
-    "at": "2026-10-11T22:23:42Z",
-    "checks": 2
-  },
-  {
-    "videoId": "irtnA7m7ryg",
-    "title": "【笑ったら即配信終了】1回目",
-    "date": "2026-10-10T10:11:46Z",
-    "durationSec": 358,
-    "at": "2026-10-11T22:23:48Z",
-    "checks": 2
   },
   {
     "videoId": "cFv2SROe-fo",
@@ -598,5 +542,69 @@
     "durationSec": 11661,
     "at": "2026-10-11T22:24:15Z",
     "checks": 7
+  },
+  {
+    "videoId": "2PVxHpZrHgA",
+    "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
+    "date": "2026-10-12T11:30:26Z",
+    "durationSec": 12612,
+    "at": "2026-10-13T00:57:38Z",
+    "checks": 1
+  },
+  {
+    "videoId": "1m2OEkvIXsg",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-11T12:18:28Z",
+    "durationSec": 13473,
+    "at": "2026-10-13T00:57:44Z",
+    "checks": 2
+  },
+  {
+    "videoId": "lwfhz36GUDk",
+    "title": "【妹に運転を教える】温厚イケメンが優しく運転をレクチャー",
+    "date": "2026-10-10T11:37:27Z",
+    "durationSec": 3178,
+    "at": "2026-10-13T00:57:50Z",
+    "checks": 3
+  },
+  {
+    "videoId": "irtnA7m7ryg",
+    "title": "【笑ったら即配信終了】1回目",
+    "date": "2026-10-10T10:11:46Z",
+    "durationSec": 358,
+    "at": "2026-10-13T00:57:56Z",
+    "checks": 3
+  },
+  {
+    "videoId": "xPKlcoed9GM",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-07T12:16:39Z",
+    "durationSec": 9719,
+    "at": "2026-10-13T00:58:01Z",
+    "checks": 4
+  },
+  {
+    "videoId": "FncUyTh1yaw",
+    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
+    "date": "2026-10-03T08:32:52Z",
+    "durationSec": 19264,
+    "at": "2026-10-13T00:58:07Z",
+    "checks": 5
+  },
+  {
+    "videoId": "BU_lkiNlUa4",
+    "title": "【マイクラ】雑談しながらみんなでハードコア",
+    "date": "2026-09-25T12:22:28Z",
+    "durationSec": 9628,
+    "at": "2026-10-13T00:58:13Z",
+    "checks": 6
+  },
+  {
+    "videoId": "Slv8uYLdiuQ",
+    "title": "【リアルビンゴ】雨降ったからドライブしながら",
+    "date": "2026-09-23T04:12:21Z",
+    "durationSec": 9550,
+    "at": "2026-10-13T00:58:19Z",
+    "checks": 6
   }
 ]
