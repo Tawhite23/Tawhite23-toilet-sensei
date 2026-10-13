@@ -32,14 +32,6 @@
     "checks": 7
   },
   {
-    "videoId": "srQ-ykH7DEo",
-    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
-    "date": "2026-09-09T12:16:12Z",
-    "durationSec": 9944,
-    "at": "2026-09-27T21:34:41Z",
-    "checks": 6
-  },
-  {
     "videoId": "yt0ZdCQWohE",
     "title": "#マリオカート8dx 反省会",
     "date": "2026-09-10T11:46:16Z",
@@ -544,14 +536,6 @@
     "checks": 7
   },
   {
-    "videoId": "2PVxHpZrHgA",
-    "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
-    "date": "2026-10-12T11:30:26Z",
-    "durationSec": 12612,
-    "at": "2026-10-13T00:57:38Z",
-    "checks": 1
-  },
-  {
     "videoId": "1m2OEkvIXsg",
     "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
     "date": "2026-10-11T12:18:28Z",
@@ -606,5 +590,29 @@
     "durationSec": 9550,
     "at": "2026-10-13T00:58:19Z",
     "checks": 6
+  },
+  {
+    "videoId": "PWmdfiQG4Es",
+    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
+    "date": "2026-10-13T12:05:31Z",
+    "durationSec": 4446,
+    "at": "2026-10-13T23:03:31Z",
+    "checks": 1
+  },
+  {
+    "videoId": "2PVxHpZrHgA",
+    "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
+    "date": "2026-10-12T11:30:26Z",
+    "durationSec": 12612,
+    "at": "2026-10-13T23:03:37Z",
+    "checks": 2
+  },
+  {
+    "videoId": "srQ-ykH7DEo",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "date": "2026-09-09T12:16:12Z",
+    "durationSec": 9944,
+    "at": "2026-10-13T23:03:43Z",
+    "checks": 7
   }
 ]
