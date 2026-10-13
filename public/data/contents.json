@@ -18,13 +18,28 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-10-13T12:00:00Z",
+    "date": "2026-10-13T12:05:31Z",
     "type": "live",
     "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
     "videoId": "PWmdfiQG4Es",
     "thumbnail": "https://i.ytimg.com/vi/PWmdfiQG4Es/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 4446
+  },
+  {
+    "date": "2026-10-13T11:00:02Z",
+    "type": "video",
+    "title": "【検証】割れるたびにシバかれる男はAPEXで戦えるのか #検証 #apex #おトイレ先生",
+    "videoId": "7wZAQVzDgyo",
+    "thumbnail": "https://i.ytimg.com/vi/7wZAQVzDgyo/maxresdefault.jpg",
+    "durationSec": 53
+  },
+  {
+    "date": "2026-10-13T05:00:39Z",
+    "type": "video",
+    "title": "【検証】4位以下でシバかれる男のケツは守られるのか #検証 #マリオカート8dx #おトイレ先生",
+    "videoId": "yTBGqF2dqa8",
+    "thumbnail": "https://i.ytimg.com/vi/yTBGqF2dqa8/maxresdefault.jpg",
+    "durationSec": 83
   },
   {
     "date": "2026-10-12T11:30:26Z",
