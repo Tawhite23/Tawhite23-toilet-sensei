@@ -488,14 +488,6 @@
     "checks": 6
   },
   {
-    "videoId": "cFv2SROe-fo",
-    "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
-    "date": "2026-10-06T11:32:38Z",
-    "durationSec": 10933,
-    "at": "2026-10-11T22:23:55Z",
-    "checks": 4
-  },
-  {
     "videoId": "MXScyBO9XSU",
     "title": "【マイクラ】雑談しながらみんたでハードコア",
     "date": "2026-10-02T12:15:24Z",
@@ -560,14 +552,6 @@
     "checks": 7
   },
   {
-    "videoId": "PWmdfiQG4Es",
-    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
-    "date": "2026-10-13T12:05:31Z",
-    "durationSec": 4453,
-    "at": "2026-10-14T21:55:35Z",
-    "checks": 2
-  },
-  {
     "videoId": "1m2OEkvIXsg",
     "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
     "date": "2026-10-11T12:18:28Z",
@@ -614,5 +598,21 @@
     "durationSec": 9243,
     "at": "2026-10-15T21:42:31Z",
     "checks": 7
+  },
+  {
+    "videoId": "PWmdfiQG4Es",
+    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
+    "date": "2026-10-13T12:05:31Z",
+    "durationSec": 4453,
+    "at": "2026-10-16T21:38:04Z",
+    "checks": 3
+  },
+  {
+    "videoId": "cFv2SROe-fo",
+    "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
+    "date": "2026-10-06T11:32:38Z",
+    "durationSec": 10933,
+    "at": "2026-10-16T21:38:11Z",
+    "checks": 5
   }
 ]
