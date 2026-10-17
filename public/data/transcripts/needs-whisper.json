@@ -440,14 +440,6 @@
     "checks": 7
   },
   {
-    "videoId": "wT6gX3ALaqQ",
-    "title": "あ",
-    "date": "2026-09-28T13:32:51Z",
-    "durationSec": 5861,
-    "at": "2026-10-08T23:33:30Z",
-    "checks": 5
-  },
-  {
     "videoId": "EhTxnQr7lqg",
     "title": "#マリオカート8dx 全コース耐久やります",
     "date": "2026-09-06T08:35:33Z",
@@ -512,14 +504,6 @@
     "checks": 7
   },
   {
-    "videoId": "xPKlcoed9GM",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-07T12:16:39Z",
-    "durationSec": 9719,
-    "at": "2026-10-13T00:58:01Z",
-    "checks": 4
-  },
-  {
     "videoId": "FncUyTh1yaw",
     "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
     "date": "2026-10-03T08:32:52Z",
@@ -550,14 +534,6 @@
     "durationSec": 9944,
     "at": "2026-10-13T23:03:43Z",
     "checks": 7
-  },
-  {
-    "videoId": "1m2OEkvIXsg",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-11T12:18:28Z",
-    "durationSec": 13473,
-    "at": "2026-10-14T21:55:42Z",
-    "checks": 3
   },
   {
     "videoId": "2PVxHpZrHgA",
@@ -614,5 +590,37 @@
     "durationSec": 10933,
     "at": "2026-10-16T21:38:11Z",
     "checks": 5
+  },
+  {
+    "videoId": "zb7S0iYwHRQ",
+    "title": "反省",
+    "date": "2026-10-17T00:58:07Z",
+    "durationSec": 8653,
+    "at": "2026-10-17T20:53:48Z",
+    "checks": 1
+  },
+  {
+    "videoId": "1m2OEkvIXsg",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-11T12:18:28Z",
+    "durationSec": 13473,
+    "at": "2026-10-17T20:53:55Z",
+    "checks": 4
+  },
+  {
+    "videoId": "xPKlcoed9GM",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-07T12:16:39Z",
+    "durationSec": 9719,
+    "at": "2026-10-17T20:54:02Z",
+    "checks": 5
+  },
+  {
+    "videoId": "wT6gX3ALaqQ",
+    "title": "あ",
+    "date": "2026-09-28T13:32:51Z",
+    "durationSec": 5861,
+    "at": "2026-10-17T20:54:08Z",
+    "checks": 6
   }
 ]
