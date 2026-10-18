@@ -1,21 +1,28 @@
 [
   {
-    "date": "2026-10-18T12:15:00Z",
+    "date": "2026-10-19T11:30:00Z",
     "type": "live",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "videoId": "gbbcyqbTFac",
-    "thumbnail": "https://i.ytimg.com/vi/gbbcyqbTFac/maxresdefault_live.jpg",
+    "title": "【マイクラ】ハードコア",
+    "videoId": "PBgvDPWURoY",
+    "thumbnail": "https://i.ytimg.com/vi/PBgvDPWURoY/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
   },
   {
-    "date": "2026-10-18T10:30:00Z",
+    "date": "2026-10-18T12:17:13Z",
+    "type": "live",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "videoId": "gbbcyqbTFac",
+    "thumbnail": "https://i.ytimg.com/vi/gbbcyqbTFac/maxresdefault.jpg",
+    "durationSec": 9406
+  },
+  {
+    "date": "2026-10-18T11:05:29Z",
     "type": "live",
     "title": "【マイクラ】今後の話しながらちょっとハードコア",
     "videoId": "EW_NAR3mek8",
     "thumbnail": "https://i.ytimg.com/vi/EW_NAR3mek8/maxresdefault_live.jpg",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 4202
   },
   {
     "date": "2026-10-18T09:00:16Z",
