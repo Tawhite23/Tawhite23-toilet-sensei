@@ -1,12 +1,29 @@
 [
   {
-    "date": "2026-10-19T11:30:00Z",
+    "date": "2026-10-21T12:00:00Z",
+    "type": "live",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "videoId": "A5T0vNoG9RE",
+    "thumbnail": "https://i.ytimg.com/vi/A5T0vNoG9RE/maxresdefault_live.jpg",
+    "durationSec": 0,
+    "status": "upcoming"
+  },
+  {
+    "date": "2026-10-20T11:30:00Z",
     "type": "live",
     "title": "【マイクラ】ハードコア",
     "videoId": "PBgvDPWURoY",
     "thumbnail": "https://i.ytimg.com/vi/PBgvDPWURoY/maxresdefault_live.jpg",
     "durationSec": 0,
     "status": "upcoming"
+  },
+  {
+    "date": "2026-10-19T08:00:33Z",
+    "type": "video",
+    "title": "これが88円の集大成",
+    "videoId": "X9tejDuSyco",
+    "thumbnail": "https://i.ytimg.com/vi/X9tejDuSyco/maxresdefault.jpg",
+    "durationSec": 288
   },
   {
     "date": "2026-10-18T12:17:13Z",
