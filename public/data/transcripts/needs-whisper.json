@@ -1,37 +1,5 @@
 [
   {
-    "videoId": "I1R34VPAv7A",
-    "title": "#原神 完全初見プレイ➈",
-    "date": "2026-06-24T12:48:05Z",
-    "durationSec": 7725,
-    "at": "2026-09-24T21:46:33Z",
-    "checks": 7
-  },
-  {
-    "videoId": "FuDjhRUw0ug",
-    "title": "#マイクラ参加型 第13回サバイバル鬼ごっこシーズン3",
-    "date": "2026-05-23T11:01:21Z",
-    "durationSec": 9582,
-    "at": "2026-09-24T21:46:40Z",
-    "checks": 7
-  },
-  {
-    "videoId": "noOrRU6_h3I",
-    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
-    "date": "2026-04-21T09:09:33Z",
-    "durationSec": 96,
-    "at": "2026-09-24T21:46:47Z",
-    "checks": 7
-  },
-  {
-    "videoId": "4VMUTyOi_p8",
-    "title": "#マイクラ 雑談しながら1000days 59～65day",
-    "date": "2026-04-21T09:09:08Z",
-    "durationSec": 123,
-    "at": "2026-09-24T21:46:53Z",
-    "checks": 7
-  },
-  {
     "videoId": "Vw1AMDdK4r4",
     "title": "#マイクラ参加型 #asmr ダイヤ3000ゲットするまで終われません！2【睡眠導入】",
     "date": "2026-02-11T01:09:10Z",
@@ -408,22 +376,6 @@
     "checks": 7
   },
   {
-    "videoId": "cFv2SROe-fo",
-    "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
-    "date": "2026-10-06T11:32:38Z",
-    "durationSec": 10933,
-    "at": "2026-10-16T21:38:11Z",
-    "checks": 5
-  },
-  {
-    "videoId": "xPKlcoed9GM",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-07T12:16:39Z",
-    "durationSec": 9719,
-    "at": "2026-10-17T20:54:02Z",
-    "checks": 5
-  },
-  {
     "videoId": "wT6gX3ALaqQ",
     "title": "あ",
     "date": "2026-09-28T13:32:51Z",
@@ -560,44 +512,12 @@
     "checks": 7
   },
   {
-    "videoId": "QjO5sh3Aaq0",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-22T13:26:42Z",
-    "durationSec": 3535,
-    "at": "2026-10-23T21:37:20Z",
-    "checks": 2
-  },
-  {
-    "videoId": "Fy_cX1euBQI",
-    "title": "反省禊ケツシバキ10分耐久",
-    "date": "2026-10-22T13:12:20Z",
-    "durationSec": 768,
-    "at": "2026-10-23T21:37:25Z",
-    "checks": 2
-  },
-  {
     "videoId": "PBgvDPWURoY",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-20T11:41:34Z",
     "durationSec": 10004,
     "at": "2026-10-23T21:37:31Z",
     "checks": 3
-  },
-  {
-    "videoId": "wP1mG5zFLFE",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-24T12:01:41Z",
-    "durationSec": 13773,
-    "at": "2026-10-24T21:08:13Z",
-    "checks": 1
-  },
-  {
-    "videoId": "1hsktKAbn08",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-23T12:31:50Z",
-    "durationSec": 8766,
-    "at": "2026-10-24T21:08:20Z",
-    "checks": 2
   },
   {
     "videoId": "gbbcyqbTFac",
@@ -678,5 +598,93 @@
     "durationSec": 40182,
     "at": "2026-10-24T21:09:28Z",
     "checks": 7
+  },
+  {
+    "videoId": "oe8WZNGekoo",
+    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
+    "date": "2026-10-25T12:07:44Z",
+    "durationSec": 7186,
+    "at": "2026-10-25T21:11:28Z",
+    "checks": 1
+  },
+  {
+    "videoId": "wP1mG5zFLFE",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-24T12:01:41Z",
+    "durationSec": 13773,
+    "at": "2026-10-25T21:11:35Z",
+    "checks": 2
+  },
+  {
+    "videoId": "1hsktKAbn08",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-23T12:31:50Z",
+    "durationSec": 8766,
+    "at": "2026-10-25T21:11:42Z",
+    "checks": 3
+  },
+  {
+    "videoId": "QjO5sh3Aaq0",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-22T13:26:42Z",
+    "durationSec": 3535,
+    "at": "2026-10-25T21:11:49Z",
+    "checks": 3
+  },
+  {
+    "videoId": "Fy_cX1euBQI",
+    "title": "反省禊ケツシバキ10分耐久",
+    "date": "2026-10-22T13:12:20Z",
+    "durationSec": 768,
+    "at": "2026-10-25T21:11:56Z",
+    "checks": 3
+  },
+  {
+    "videoId": "xPKlcoed9GM",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-07T12:16:39Z",
+    "durationSec": 9719,
+    "at": "2026-10-25T21:12:03Z",
+    "checks": 6
+  },
+  {
+    "videoId": "cFv2SROe-fo",
+    "title": "【マイクラ】1ダメージ受けたらケツシバキ　エンドラ討伐",
+    "date": "2026-10-06T11:32:38Z",
+    "durationSec": 10933,
+    "at": "2026-10-25T21:12:11Z",
+    "checks": 6
+  },
+  {
+    "videoId": "I1R34VPAv7A",
+    "title": "#原神 完全初見プレイ➈",
+    "date": "2026-06-24T12:48:05Z",
+    "durationSec": 7725,
+    "at": "2026-10-25T21:12:18Z",
+    "checks": 8
+  },
+  {
+    "videoId": "FuDjhRUw0ug",
+    "title": "#マイクラ参加型 第13回サバイバル鬼ごっこシーズン3",
+    "date": "2026-05-23T11:01:21Z",
+    "durationSec": 9582,
+    "at": "2026-10-25T21:12:25Z",
+    "checks": 8
+  },
+  {
+    "videoId": "noOrRU6_h3I",
+    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
+    "date": "2026-04-21T09:09:33Z",
+    "durationSec": 96,
+    "at": "2026-10-25T21:12:32Z",
+    "checks": 8
+  },
+  {
+    "videoId": "4VMUTyOi_p8",
+    "title": "#マイクラ 雑談しながら1000days 59～65day",
+    "date": "2026-04-21T09:09:08Z",
+    "durationSec": 123,
+    "at": "2026-10-25T21:12:39Z",
+    "checks": 8
   }
 ]
