@@ -320,14 +320,6 @@
     "checks": 7
   },
   {
-    "videoId": "mpU68pytw7s",
-    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
-    "date": "2026-09-22T07:33:48Z",
-    "durationSec": 19985,
-    "at": "2026-10-10T21:59:25Z",
-    "checks": 6
-  },
-  {
     "videoId": "ml9EMnJEgr4",
     "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
     "date": "2026-09-23T11:21:53Z",
@@ -480,14 +472,6 @@
     "checks": 7
   },
   {
-    "videoId": "zb7S0iYwHRQ",
-    "title": "反省",
-    "date": "2026-10-17T00:58:07Z",
-    "durationSec": 8653,
-    "at": "2026-10-22T21:54:00Z",
-    "checks": 4
-  },
-  {
     "videoId": "2PVxHpZrHgA",
     "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
     "date": "2026-10-12T11:30:26Z",
@@ -510,14 +494,6 @@
     "durationSec": 8820,
     "at": "2026-10-22T21:54:20Z",
     "checks": 7
-  },
-  {
-    "videoId": "PBgvDPWURoY",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-20T11:41:34Z",
-    "durationSec": 10004,
-    "at": "2026-10-23T21:37:31Z",
-    "checks": 3
   },
   {
     "videoId": "gbbcyqbTFac",
@@ -600,22 +576,6 @@
     "checks": 7
   },
   {
-    "videoId": "oe8WZNGekoo",
-    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
-    "date": "2026-10-25T12:07:44Z",
-    "durationSec": 7186,
-    "at": "2026-10-25T21:11:28Z",
-    "checks": 1
-  },
-  {
-    "videoId": "wP1mG5zFLFE",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-24T12:01:41Z",
-    "durationSec": 13773,
-    "at": "2026-10-25T21:11:35Z",
-    "checks": 2
-  },
-  {
     "videoId": "1hsktKAbn08",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-23T12:31:50Z",
@@ -686,5 +646,53 @@
     "durationSec": 123,
     "at": "2026-10-25T21:12:39Z",
     "checks": 8
+  },
+  {
+    "videoId": "HriLIH7Qu6U",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-26T12:40:55Z",
+    "durationSec": 5677,
+    "at": "2026-10-26T22:52:13Z",
+    "checks": 1
+  },
+  {
+    "videoId": "oe8WZNGekoo",
+    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
+    "date": "2026-10-25T12:07:44Z",
+    "durationSec": 7184,
+    "at": "2026-10-26T22:52:19Z",
+    "checks": 2
+  },
+  {
+    "videoId": "wP1mG5zFLFE",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-24T12:01:41Z",
+    "durationSec": 13773,
+    "at": "2026-10-26T22:52:28Z",
+    "checks": 3
+  },
+  {
+    "videoId": "PBgvDPWURoY",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-20T11:41:34Z",
+    "durationSec": 10004,
+    "at": "2026-10-26T22:52:36Z",
+    "checks": 4
+  },
+  {
+    "videoId": "zb7S0iYwHRQ",
+    "title": "反省",
+    "date": "2026-10-17T00:58:07Z",
+    "durationSec": 8653,
+    "at": "2026-10-26T22:52:42Z",
+    "checks": 5
+  },
+  {
+    "videoId": "mpU68pytw7s",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
+    "date": "2026-09-22T07:33:48Z",
+    "durationSec": 19985,
+    "at": "2026-10-26T22:52:49Z",
+    "checks": 7
   }
 ]
