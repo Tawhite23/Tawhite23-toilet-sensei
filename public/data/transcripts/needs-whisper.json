@@ -320,14 +320,6 @@
     "checks": 7
   },
   {
-    "videoId": "ml9EMnJEgr4",
-    "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
-    "date": "2026-09-23T11:21:53Z",
-    "durationSec": 5815,
-    "at": "2026-10-11T22:24:09Z",
-    "checks": 6
-  },
-  {
     "videoId": "MFdEsmI_S08",
     "title": "#マリオカート8dx 【神回】被弾の度に嫁にシバかれる　下の階の人コラボ",
     "date": "2026-09-08T11:33:14Z",
@@ -576,30 +568,6 @@
     "checks": 7
   },
   {
-    "videoId": "1hsktKAbn08",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-23T12:31:50Z",
-    "durationSec": 8766,
-    "at": "2026-10-25T21:11:42Z",
-    "checks": 3
-  },
-  {
-    "videoId": "QjO5sh3Aaq0",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-22T13:26:42Z",
-    "durationSec": 3535,
-    "at": "2026-10-25T21:11:49Z",
-    "checks": 3
-  },
-  {
-    "videoId": "Fy_cX1euBQI",
-    "title": "反省禊ケツシバキ10分耐久",
-    "date": "2026-10-22T13:12:20Z",
-    "durationSec": 768,
-    "at": "2026-10-25T21:11:56Z",
-    "checks": 3
-  },
-  {
     "videoId": "xPKlcoed9GM",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-07T12:16:39Z",
@@ -648,14 +616,6 @@
     "checks": 8
   },
   {
-    "videoId": "HriLIH7Qu6U",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-26T12:40:55Z",
-    "durationSec": 5677,
-    "at": "2026-10-26T22:52:13Z",
-    "checks": 1
-  },
-  {
     "videoId": "oe8WZNGekoo",
     "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
     "date": "2026-10-25T12:07:44Z",
@@ -693,6 +653,46 @@
     "date": "2026-09-22T07:33:48Z",
     "durationSec": 19985,
     "at": "2026-10-26T22:52:49Z",
+    "checks": 7
+  },
+  {
+    "videoId": "HriLIH7Qu6U",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-26T12:40:55Z",
+    "durationSec": 5680,
+    "at": "2026-10-27T22:34:09Z",
+    "checks": 2
+  },
+  {
+    "videoId": "1hsktKAbn08",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-23T12:31:50Z",
+    "durationSec": 8766,
+    "at": "2026-10-27T22:34:15Z",
+    "checks": 4
+  },
+  {
+    "videoId": "QjO5sh3Aaq0",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-22T13:26:42Z",
+    "durationSec": 3535,
+    "at": "2026-10-27T22:34:21Z",
+    "checks": 4
+  },
+  {
+    "videoId": "Fy_cX1euBQI",
+    "title": "反省禊ケツシバキ10分耐久",
+    "date": "2026-10-22T13:12:20Z",
+    "durationSec": 768,
+    "at": "2026-10-27T22:34:27Z",
+    "checks": 4
+  },
+  {
+    "videoId": "ml9EMnJEgr4",
+    "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
+    "date": "2026-09-23T11:21:53Z",
+    "durationSec": 5815,
+    "at": "2026-10-27T22:34:33Z",
     "checks": 7
   }
 ]
