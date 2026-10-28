@@ -376,22 +376,6 @@
     "checks": 7
   },
   {
-    "videoId": "lwfhz36GUDk",
-    "title": "【妹に運転を教える】温厚イケメンが優しく運転をレクチャー",
-    "date": "2026-10-10T11:37:27Z",
-    "durationSec": 3178,
-    "at": "2026-10-19T22:37:09Z",
-    "checks": 5
-  },
-  {
-    "videoId": "irtnA7m7ryg",
-    "title": "【笑ったら即配信終了】1回目",
-    "date": "2026-10-10T10:11:46Z",
-    "durationSec": 358,
-    "at": "2026-10-19T22:37:16Z",
-    "checks": 5
-  },
-  {
     "videoId": "MXScyBO9XSU",
     "title": "【マイクラ】雑談しながらみんたでハードコア",
     "date": "2026-10-02T12:15:24Z",
@@ -486,22 +470,6 @@
     "durationSec": 8820,
     "at": "2026-10-22T21:54:20Z",
     "checks": 7
-  },
-  {
-    "videoId": "gbbcyqbTFac",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-18T12:17:13Z",
-    "durationSec": 9406,
-    "at": "2026-10-24T21:08:26Z",
-    "checks": 4
-  },
-  {
-    "videoId": "EW_NAR3mek8",
-    "title": "【マイクラ】今後の話しながらちょっとハードコア",
-    "date": "2026-10-18T11:05:29Z",
-    "durationSec": 4195,
-    "at": "2026-10-24T21:08:33Z",
-    "checks": 4
   },
   {
     "videoId": "PWmdfiQG4Es",
@@ -616,14 +584,6 @@
     "checks": 8
   },
   {
-    "videoId": "oe8WZNGekoo",
-    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
-    "date": "2026-10-25T12:07:44Z",
-    "durationSec": 7184,
-    "at": "2026-10-26T22:52:19Z",
-    "checks": 2
-  },
-  {
     "videoId": "wP1mG5zFLFE",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-24T12:01:41Z",
@@ -656,14 +616,6 @@
     "checks": 7
   },
   {
-    "videoId": "HriLIH7Qu6U",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-26T12:40:55Z",
-    "durationSec": 5680,
-    "at": "2026-10-27T22:34:09Z",
-    "checks": 2
-  },
-  {
     "videoId": "1hsktKAbn08",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-23T12:31:50Z",
@@ -694,5 +646,61 @@
     "durationSec": 5815,
     "at": "2026-10-27T22:34:33Z",
     "checks": 7
+  },
+  {
+    "videoId": "MZ91yhU_YtM",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-28T12:05:58Z",
+    "durationSec": 8314,
+    "at": "2026-10-28T22:48:49Z",
+    "checks": 1
+  },
+  {
+    "videoId": "HriLIH7Qu6U",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-26T12:40:55Z",
+    "durationSec": 5680,
+    "at": "2026-10-28T22:48:56Z",
+    "checks": 3
+  },
+  {
+    "videoId": "oe8WZNGekoo",
+    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
+    "date": "2026-10-25T12:07:44Z",
+    "durationSec": 7184,
+    "at": "2026-10-28T22:49:03Z",
+    "checks": 3
+  },
+  {
+    "videoId": "gbbcyqbTFac",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-18T12:17:13Z",
+    "durationSec": 9406,
+    "at": "2026-10-28T22:49:10Z",
+    "checks": 5
+  },
+  {
+    "videoId": "EW_NAR3mek8",
+    "title": "【マイクラ】今後の話しながらちょっとハードコア",
+    "date": "2026-10-18T11:05:29Z",
+    "durationSec": 4195,
+    "at": "2026-10-28T22:49:17Z",
+    "checks": 5
+  },
+  {
+    "videoId": "lwfhz36GUDk",
+    "title": "【妹に運転を教える】温厚イケメンが優しく運転をレクチャー",
+    "date": "2026-10-10T11:37:27Z",
+    "durationSec": 3178,
+    "at": "2026-10-28T22:49:24Z",
+    "checks": 6
+  },
+  {
+    "videoId": "irtnA7m7ryg",
+    "title": "【笑ったら即配信終了】1回目",
+    "date": "2026-10-10T10:11:46Z",
+    "durationSec": 358,
+    "at": "2026-10-28T22:49:30Z",
+    "checks": 6
   }
 ]
