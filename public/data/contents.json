@@ -9,13 +9,20 @@
     "status": "upcoming"
   },
   {
-    "date": "2026-10-30T12:00:00Z",
+    "date": "2026-10-30T12:02:48Z",
     "type": "live",
     "title": "俺の心はいつも150CC",
     "videoId": "2Qy9VXDTYwU",
     "thumbnail": "https://i.ytimg.com/vi/2Qy9VXDTYwU/maxresdefault.jpg?v=6ae0619b",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-10-30T09:00:22Z",
+    "type": "video",
+    "title": "88円のゲームに「切り抜き確定じゃねえんだよ」とキレるおトイレ先生 #ニンテンドーラボ #ゲオ #おトイレ先生",
+    "videoId": "NuUlmWxCrvY",
+    "thumbnail": "https://i.ytimg.com/vi/NuUlmWxCrvY/maxresdefault.jpg",
+    "durationSec": 30
   },
   {
     "date": "2026-10-29T09:00:16Z",
