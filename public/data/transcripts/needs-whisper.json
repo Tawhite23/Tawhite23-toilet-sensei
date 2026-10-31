@@ -552,14 +552,6 @@
     "checks": 8
   },
   {
-    "videoId": "PBgvDPWURoY",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-20T11:41:34Z",
-    "durationSec": 10004,
-    "at": "2026-10-26T22:52:36Z",
-    "checks": 4
-  },
-  {
     "videoId": "zb7S0iYwHRQ",
     "title": "反省",
     "date": "2026-10-17T00:58:07Z",
@@ -608,22 +600,6 @@
     "checks": 7
   },
   {
-    "videoId": "HriLIH7Qu6U",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-26T12:40:55Z",
-    "durationSec": 5680,
-    "at": "2026-10-28T22:48:56Z",
-    "checks": 3
-  },
-  {
-    "videoId": "oe8WZNGekoo",
-    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
-    "date": "2026-10-25T12:07:44Z",
-    "durationSec": 7184,
-    "at": "2026-10-28T22:49:03Z",
-    "checks": 3
-  },
-  {
     "videoId": "gbbcyqbTFac",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-18T12:17:13Z",
@@ -654,14 +630,6 @@
     "durationSec": 358,
     "at": "2026-10-28T22:49:30Z",
     "checks": 6
-  },
-  {
-    "videoId": "MZ91yhU_YtM",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-28T12:05:58Z",
-    "durationSec": 8314,
-    "at": "2026-10-29T22:58:26Z",
-    "checks": 2
   },
   {
     "videoId": "wP1mG5zFLFE",
@@ -696,19 +664,51 @@
     "checks": 7
   },
   {
-    "videoId": "2Qy9VXDTYwU",
-    "title": "俺の心はいつも150CC",
-    "date": "2026-10-30T12:02:48Z",
-    "durationSec": 5816,
-    "at": "2026-10-30T22:36:59Z",
-    "checks": 1
-  },
-  {
     "videoId": "2PVxHpZrHgA",
     "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
     "date": "2026-10-12T11:30:26Z",
     "durationSec": 12612,
     "at": "2026-10-30T22:37:04Z",
     "checks": 6
+  },
+  {
+    "videoId": "2Qy9VXDTYwU",
+    "title": "俺の心はいつも150CC",
+    "date": "2026-10-30T12:02:48Z",
+    "durationSec": 5821,
+    "at": "2026-10-31T21:51:06Z",
+    "checks": 2
+  },
+  {
+    "videoId": "MZ91yhU_YtM",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-28T12:05:58Z",
+    "durationSec": 8314,
+    "at": "2026-10-31T21:51:13Z",
+    "checks": 3
+  },
+  {
+    "videoId": "HriLIH7Qu6U",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-26T12:40:55Z",
+    "durationSec": 5680,
+    "at": "2026-10-31T21:51:20Z",
+    "checks": 4
+  },
+  {
+    "videoId": "oe8WZNGekoo",
+    "title": "死ぬ度にケツシバキ ステージ1~4【しょぼんのアクション】",
+    "date": "2026-10-25T12:07:44Z",
+    "durationSec": 7184,
+    "at": "2026-10-31T21:51:27Z",
+    "checks": 4
+  },
+  {
+    "videoId": "PBgvDPWURoY",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-20T11:41:34Z",
+    "durationSec": 10004,
+    "at": "2026-10-31T21:51:34Z",
+    "checks": 5
   }
 ]
