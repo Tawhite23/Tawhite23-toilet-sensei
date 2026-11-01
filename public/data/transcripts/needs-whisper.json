@@ -440,14 +440,6 @@
     "checks": 7
   },
   {
-    "videoId": "PWmdfiQG4Es",
-    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
-    "date": "2026-10-13T12:05:31Z",
-    "durationSec": 4453,
-    "at": "2026-10-24T21:08:40Z",
-    "checks": 5
-  },
-  {
     "videoId": "SxFXfcHKvjE",
     "title": "【レゴブロック参加型】1作目ついに完成？？！！",
     "date": "2026-10-04T10:59:28Z",
@@ -568,30 +560,6 @@
     "checks": 7
   },
   {
-    "videoId": "1hsktKAbn08",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-23T12:31:50Z",
-    "durationSec": 8766,
-    "at": "2026-10-27T22:34:15Z",
-    "checks": 4
-  },
-  {
-    "videoId": "QjO5sh3Aaq0",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-22T13:26:42Z",
-    "durationSec": 3535,
-    "at": "2026-10-27T22:34:21Z",
-    "checks": 4
-  },
-  {
-    "videoId": "Fy_cX1euBQI",
-    "title": "反省禊ケツシバキ10分耐久",
-    "date": "2026-10-22T13:12:20Z",
-    "durationSec": 768,
-    "at": "2026-10-27T22:34:27Z",
-    "checks": 4
-  },
-  {
     "videoId": "ml9EMnJEgr4",
     "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
     "date": "2026-09-23T11:21:53Z",
@@ -672,14 +640,6 @@
     "checks": 6
   },
   {
-    "videoId": "2Qy9VXDTYwU",
-    "title": "俺の心はいつも150CC",
-    "date": "2026-10-30T12:02:48Z",
-    "durationSec": 5821,
-    "at": "2026-10-31T21:51:06Z",
-    "checks": 2
-  },
-  {
     "videoId": "MZ91yhU_YtM",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-28T12:05:58Z",
@@ -710,5 +670,53 @@
     "durationSec": 10004,
     "at": "2026-10-31T21:51:34Z",
     "checks": 5
+  },
+  {
+    "videoId": "9U7jiMrB-ek",
+    "title": "第一回おトイレオークション",
+    "date": "2026-11-01T12:40:29Z",
+    "durationSec": 4501,
+    "at": "2026-11-01T22:19:00Z",
+    "checks": 1
+  },
+  {
+    "videoId": "2Qy9VXDTYwU",
+    "title": "俺の心はいつも150CC",
+    "date": "2026-10-30T12:02:48Z",
+    "durationSec": 5821,
+    "at": "2026-11-01T22:19:06Z",
+    "checks": 3
+  },
+  {
+    "videoId": "1hsktKAbn08",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-23T12:31:50Z",
+    "durationSec": 8766,
+    "at": "2026-11-01T22:19:13Z",
+    "checks": 5
+  },
+  {
+    "videoId": "QjO5sh3Aaq0",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-22T13:26:42Z",
+    "durationSec": 3535,
+    "at": "2026-11-01T22:19:20Z",
+    "checks": 5
+  },
+  {
+    "videoId": "Fy_cX1euBQI",
+    "title": "反省禊ケツシバキ10分耐久",
+    "date": "2026-10-22T13:12:20Z",
+    "durationSec": 768,
+    "at": "2026-11-01T22:19:27Z",
+    "checks": 5
+  },
+  {
+    "videoId": "PWmdfiQG4Es",
+    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
+    "date": "2026-10-13T12:05:31Z",
+    "durationSec": 4453,
+    "at": "2026-11-01T22:19:34Z",
+    "checks": 6
   }
 ]
