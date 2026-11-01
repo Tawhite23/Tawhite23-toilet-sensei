@@ -1,12 +1,19 @@
 [
   {
-    "date": "2026-11-01T12:00:00Z",
+    "date": "2026-11-01T12:40:29Z",
     "type": "live",
     "title": "第一回おトイレオークション",
     "videoId": "9U7jiMrB-ek",
     "thumbnail": "https://i.ytimg.com/vi/9U7jiMrB-ek/maxresdefault.jpg?v=6ae49f4a",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 0
+  },
+  {
+    "date": "2026-11-01T09:00:00Z",
+    "type": "video",
+    "title": "服を着ているのを驚かれて「脱ぎたくて脱いでるわけじゃない」と言うおトイレ先生 #マリオカート8dx #おトイレ先生 #shorts",
+    "videoId": "TGm5XhbEsJM",
+    "thumbnail": "https://i.ytimg.com/vi/TGm5XhbEsJM/maxresdefault.jpg",
+    "durationSec": 23
   },
   {
     "date": "2026-10-31T09:00:02Z",
