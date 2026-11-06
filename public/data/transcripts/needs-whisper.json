@@ -1,37 +1,5 @@
 [
   {
-    "videoId": "q4i7xNHrISY",
-    "title": "#マイクラ参加型  とりあえず鉄1万",
-    "date": "2026-09-04T11:19:26Z",
-    "durationSec": 21006,
-    "at": "2026-10-07T23:18:35Z",
-    "checks": 7
-  },
-  {
-    "videoId": "Xqdf4cyAW60",
-    "title": "#マリオカート8dx お前らいつもありがとう",
-    "date": "2026-09-03T11:55:14Z",
-    "durationSec": 10771,
-    "at": "2026-10-07T23:18:42Z",
-    "checks": 7
-  },
-  {
-    "videoId": "mks2mq8di1M",
-    "title": "APEX ランクプラチナ2まで頑張る",
-    "date": "2025-08-23T05:38:04Z",
-    "durationSec": 7553,
-    "at": "2026-10-07T23:18:49Z",
-    "checks": 7
-  },
-  {
-    "videoId": "mJ5tYMdxYoM",
-    "title": "APEX 基本ソロランク プラチナ3行くまで",
-    "date": "2025-08-22T15:40:00Z",
-    "durationSec": 42897,
-    "at": "2026-10-07T23:18:55Z",
-    "checks": 7
-  },
-  {
     "videoId": "EhTxnQr7lqg",
     "title": "#マリオカート8dx 全コース耐久やります",
     "date": "2026-09-06T08:35:33Z",
@@ -110,14 +78,6 @@
     "durationSec": 5794,
     "at": "2026-10-19T22:37:50Z",
     "checks": 7
-  },
-  {
-    "videoId": "FncUyTh1yaw",
-    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
-    "date": "2026-10-03T08:32:52Z",
-    "durationSec": 19264,
-    "at": "2026-10-21T21:57:56Z",
-    "checks": 6
   },
   {
     "videoId": "TW5t9YIGaOQ",
@@ -717,6 +677,54 @@
     "date": "2025-08-23T13:26:00Z",
     "durationSec": 3622,
     "at": "2026-11-05T23:51:44Z",
+    "checks": 8
+  },
+  {
+    "videoId": "FLUgxVF0sdQ",
+    "title": "旧居最後のレース",
+    "date": "2026-11-06T12:36:14Z",
+    "durationSec": 6274,
+    "at": "2026-11-06T23:28:01Z",
+    "checks": 1
+  },
+  {
+    "videoId": "FncUyTh1yaw",
+    "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
+    "date": "2026-10-03T08:32:52Z",
+    "durationSec": 19264,
+    "at": "2026-11-06T23:28:07Z",
+    "checks": 7
+  },
+  {
+    "videoId": "q4i7xNHrISY",
+    "title": "#マイクラ参加型  とりあえず鉄1万",
+    "date": "2026-09-04T11:19:26Z",
+    "durationSec": 21006,
+    "at": "2026-11-06T23:28:14Z",
+    "checks": 8
+  },
+  {
+    "videoId": "Xqdf4cyAW60",
+    "title": "#マリオカート8dx お前らいつもありがとう",
+    "date": "2026-09-03T11:55:14Z",
+    "durationSec": 10771,
+    "at": "2026-11-06T23:28:20Z",
+    "checks": 8
+  },
+  {
+    "videoId": "mks2mq8di1M",
+    "title": "APEX ランクプラチナ2まで頑張る",
+    "date": "2025-08-23T05:38:04Z",
+    "durationSec": 7553,
+    "at": "2026-11-06T23:28:27Z",
+    "checks": 8
+  },
+  {
+    "videoId": "mJ5tYMdxYoM",
+    "title": "APEX 基本ソロランク プラチナ3行くまで",
+    "date": "2025-08-22T15:40:00Z",
+    "durationSec": 42897,
+    "at": "2026-11-06T23:28:34Z",
     "checks": 8
   }
 ]
