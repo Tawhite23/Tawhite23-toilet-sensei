@@ -27,12 +27,20 @@
     "status": "upcoming"
   },
   {
+    "date": "2026-11-07T02:00:13Z",
+    "type": "video",
+    "title": "「お前ら、カバー...しろよ♡」配信中だよ♪ #Shorts",
+    "videoId": "yimAcZj3r_I",
+    "thumbnail": "https://i.ytimg.com/vi/yimAcZj3r_I/maxresdefault.jpg",
+    "durationSec": 33
+  },
+  {
     "date": "2026-11-06T12:36:14Z",
     "type": "live",
     "title": "旧居最後のレース",
     "videoId": "FLUgxVF0sdQ",
-    "thumbnail": "https://i.ytimg.com/vi/FLUgxVF0sdQ/maxresdefault.jpg?v=6aed9228",
-    "durationSec": 6274
+    "thumbnail": "https://i.ytimg.com/vi/FLUgxVF0sdQ/maxresdefault.jpg",
+    "durationSec": 6281
   },
   {
     "date": "2026-11-06T09:00:37Z",
