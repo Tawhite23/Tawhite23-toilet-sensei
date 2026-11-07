@@ -320,14 +320,6 @@
     "checks": 6
   },
   {
-    "videoId": "MZ91yhU_YtM",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-28T12:05:58Z",
-    "durationSec": 8314,
-    "at": "2026-11-03T01:13:13Z",
-    "checks": 4
-  },
-  {
     "videoId": "wP1mG5zFLFE",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-24T12:01:41Z",
@@ -520,14 +512,6 @@
     "checks": 8
   },
   {
-    "videoId": "9U7jiMrB-ek",
-    "title": "第一回おトイレオークション",
-    "date": "2026-11-01T12:40:29Z",
-    "durationSec": 4507,
-    "at": "2026-11-04T23:54:46Z",
-    "checks": 3
-  },
-  {
     "videoId": "HriLIH7Qu6U",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-26T12:40:55Z",
@@ -680,14 +664,6 @@
     "checks": 8
   },
   {
-    "videoId": "FLUgxVF0sdQ",
-    "title": "旧居最後のレース",
-    "date": "2026-11-06T12:36:14Z",
-    "durationSec": 6274,
-    "at": "2026-11-06T23:28:01Z",
-    "checks": 1
-  },
-  {
     "videoId": "FncUyTh1yaw",
     "title": "全コース耐久ドパガキ大歓喜のマリオカートはこちら200CC金キノ #マリオカート8dx",
     "date": "2026-10-03T08:32:52Z",
@@ -726,5 +702,29 @@
     "durationSec": 42897,
     "at": "2026-11-06T23:28:34Z",
     "checks": 8
+  },
+  {
+    "videoId": "FLUgxVF0sdQ",
+    "title": "旧居最後のレース",
+    "date": "2026-11-06T12:36:14Z",
+    "durationSec": 6281,
+    "at": "2026-11-07T22:14:56Z",
+    "checks": 2
+  },
+  {
+    "videoId": "9U7jiMrB-ek",
+    "title": "第一回おトイレオークション",
+    "date": "2026-11-01T12:40:29Z",
+    "durationSec": 4507,
+    "at": "2026-11-07T22:15:01Z",
+    "checks": 4
+  },
+  {
+    "videoId": "MZ91yhU_YtM",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-28T12:05:58Z",
+    "durationSec": 8314,
+    "at": "2026-11-07T22:15:07Z",
+    "checks": 5
   }
 ]
