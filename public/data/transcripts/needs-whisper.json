@@ -280,14 +280,6 @@
     "checks": 6
   },
   {
-    "videoId": "PBgvDPWURoY",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-20T11:41:34Z",
-    "durationSec": 10004,
-    "at": "2026-10-31T21:51:34Z",
-    "checks": 5
-  },
-  {
     "videoId": "1hsktKAbn08",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-23T12:31:50Z",
@@ -398,14 +390,6 @@
     "durationSec": 4591,
     "at": "2026-11-03T01:14:22Z",
     "checks": 8
-  },
-  {
-    "videoId": "2Qy9VXDTYwU",
-    "title": "俺の心はいつも150CC",
-    "date": "2026-10-30T12:02:48Z",
-    "durationSec": 5821,
-    "at": "2026-11-03T23:37:54Z",
-    "checks": 4
   },
   {
     "videoId": "zb7S0iYwHRQ",
@@ -704,14 +688,6 @@
     "checks": 8
   },
   {
-    "videoId": "FLUgxVF0sdQ",
-    "title": "旧居最後のレース",
-    "date": "2026-11-06T12:36:14Z",
-    "durationSec": 6281,
-    "at": "2026-11-07T22:14:56Z",
-    "checks": 2
-  },
-  {
     "videoId": "9U7jiMrB-ek",
     "title": "第一回おトイレオークション",
     "date": "2026-11-01T12:40:29Z",
@@ -726,5 +702,29 @@
     "durationSec": 8314,
     "at": "2026-11-07T22:15:07Z",
     "checks": 5
+  },
+  {
+    "videoId": "FLUgxVF0sdQ",
+    "title": "旧居最後のレース",
+    "date": "2026-11-06T12:36:14Z",
+    "durationSec": 6281,
+    "at": "2026-11-08T22:25:05Z",
+    "checks": 3
+  },
+  {
+    "videoId": "2Qy9VXDTYwU",
+    "title": "俺の心はいつも150CC",
+    "date": "2026-10-30T12:02:48Z",
+    "durationSec": 5821,
+    "at": "2026-11-08T22:25:11Z",
+    "checks": 5
+  },
+  {
+    "videoId": "PBgvDPWURoY",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-20T11:41:34Z",
+    "durationSec": 10004,
+    "at": "2026-11-08T22:25:17Z",
+    "checks": 6
   }
 ]
