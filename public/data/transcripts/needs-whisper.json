@@ -1,29 +1,5 @@
 [
   {
-    "videoId": "EhTxnQr7lqg",
-    "title": "#マリオカート8dx 全コース耐久やります",
-    "date": "2026-09-06T08:35:33Z",
-    "durationSec": 18666,
-    "at": "2026-10-09T22:51:47Z",
-    "checks": 7
-  },
-  {
-    "videoId": "tBdRF0oKFC8",
-    "title": "#参加型 第1回ルービックキューブ攻略参加型",
-    "date": "2026-09-05T11:37:06Z",
-    "durationSec": 7375,
-    "at": "2026-10-09T22:51:53Z",
-    "checks": 7
-  },
-  {
-    "videoId": "ZPJtteXDJkY",
-    "title": "#参加型  第2回知育菓子攻略参加型",
-    "date": "2026-09-05T10:20:30Z",
-    "durationSec": 4400,
-    "at": "2026-10-09T22:52:00Z",
-    "checks": 7
-  },
-  {
     "videoId": "MFdEsmI_S08",
     "title": "#マリオカート8dx 【神回】被弾の度に嫁にシバかれる　下の階の人コラボ",
     "date": "2026-09-08T11:33:14Z",
@@ -110,14 +86,6 @@
     "durationSec": 8820,
     "at": "2026-10-22T21:54:20Z",
     "checks": 7
-  },
-  {
-    "videoId": "SxFXfcHKvjE",
-    "title": "【レゴブロック参加型】1作目ついに完成？？！！",
-    "date": "2026-10-04T10:59:28Z",
-    "durationSec": 16994,
-    "at": "2026-10-24T21:08:47Z",
-    "checks": 6
   },
   {
     "videoId": "o6ALVFpohV4",
@@ -278,30 +246,6 @@
     "durationSec": 12612,
     "at": "2026-10-30T22:37:04Z",
     "checks": 6
-  },
-  {
-    "videoId": "1hsktKAbn08",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-23T12:31:50Z",
-    "durationSec": 8766,
-    "at": "2026-11-01T22:19:13Z",
-    "checks": 5
-  },
-  {
-    "videoId": "QjO5sh3Aaq0",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-22T13:26:42Z",
-    "durationSec": 3535,
-    "at": "2026-11-01T22:19:20Z",
-    "checks": 5
-  },
-  {
-    "videoId": "Fy_cX1euBQI",
-    "title": "反省禊ケツシバキ10分耐久",
-    "date": "2026-10-22T13:12:20Z",
-    "durationSec": 768,
-    "at": "2026-11-01T22:19:27Z",
-    "checks": 5
   },
   {
     "videoId": "PWmdfiQG4Es",
@@ -726,5 +670,61 @@
     "durationSec": 10004,
     "at": "2026-11-08T22:25:17Z",
     "checks": 6
+  },
+  {
+    "videoId": "1hsktKAbn08",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-23T12:31:50Z",
+    "durationSec": 8766,
+    "at": "2026-11-10T01:53:31Z",
+    "checks": 6
+  },
+  {
+    "videoId": "QjO5sh3Aaq0",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-22T13:26:42Z",
+    "durationSec": 3535,
+    "at": "2026-11-10T01:53:37Z",
+    "checks": 6
+  },
+  {
+    "videoId": "Fy_cX1euBQI",
+    "title": "反省禊ケツシバキ10分耐久",
+    "date": "2026-10-22T13:12:20Z",
+    "durationSec": 768,
+    "at": "2026-11-10T01:53:43Z",
+    "checks": 6
+  },
+  {
+    "videoId": "SxFXfcHKvjE",
+    "title": "【レゴブロック参加型】1作目ついに完成？？！！",
+    "date": "2026-10-04T10:59:28Z",
+    "durationSec": 16994,
+    "at": "2026-11-10T01:53:49Z",
+    "checks": 7
+  },
+  {
+    "videoId": "EhTxnQr7lqg",
+    "title": "#マリオカート8dx 全コース耐久やります",
+    "date": "2026-09-06T08:35:33Z",
+    "durationSec": 18666,
+    "at": "2026-11-10T01:53:55Z",
+    "checks": 8
+  },
+  {
+    "videoId": "tBdRF0oKFC8",
+    "title": "#参加型 第1回ルービックキューブ攻略参加型",
+    "date": "2026-09-05T11:37:06Z",
+    "durationSec": 7375,
+    "at": "2026-11-10T01:54:01Z",
+    "checks": 8
+  },
+  {
+    "videoId": "ZPJtteXDJkY",
+    "title": "#参加型  第2回知育菓子攻略参加型",
+    "date": "2026-09-05T10:20:30Z",
+    "durationSec": 4400,
+    "at": "2026-11-10T01:54:07Z",
+    "checks": 8
   }
 ]
