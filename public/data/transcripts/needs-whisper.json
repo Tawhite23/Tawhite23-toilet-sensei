@@ -1,13 +1,5 @@
 [
   {
-    "videoId": "srQ-ykH7DEo",
-    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
-    "date": "2026-09-09T12:16:12Z",
-    "durationSec": 9944,
-    "at": "2026-10-13T23:03:43Z",
-    "checks": 7
-  },
-  {
     "videoId": "yt0ZdCQWohE",
     "title": "#マリオカート8dx 反省会",
     "date": "2026-09-10T11:46:16Z",
@@ -710,5 +702,13 @@
     "durationSec": 13773,
     "at": "2026-11-12T00:59:14Z",
     "checks": 6
+  },
+  {
+    "videoId": "srQ-ykH7DEo",
+    "title": "#マイクラ参加型 ハードコアチャレンジLv8",
+    "date": "2026-09-09T12:16:12Z",
+    "durationSec": 9944,
+    "at": "2026-11-12T23:49:48Z",
+    "checks": 8
   }
 ]
