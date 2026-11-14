@@ -1,13 +1,5 @@
 [
   {
-    "videoId": "yt0ZdCQWohE",
-    "title": "#マリオカート8dx 反省会",
-    "date": "2026-09-10T11:46:16Z",
-    "durationSec": 9243,
-    "at": "2026-10-15T21:42:31Z",
-    "checks": 7
-  },
-  {
     "videoId": "fyctJSfEx5Y",
     "title": "#マリオカート8dx 第2回全コース耐久やります",
     "date": "2026-09-13T07:04:11Z",
@@ -710,5 +702,21 @@
     "durationSec": 358,
     "at": "2026-11-13T23:50:07Z",
     "checks": 7
+  },
+  {
+    "videoId": "7abU7pqvZnk",
+    "title": "旧居最終回",
+    "date": "2026-11-14T07:14:17Z",
+    "durationSec": 53,
+    "at": "2026-11-14T22:43:36Z",
+    "checks": 1
+  },
+  {
+    "videoId": "yt0ZdCQWohE",
+    "title": "#マリオカート8dx 反省会",
+    "date": "2026-09-10T11:46:16Z",
+    "durationSec": 9243,
+    "at": "2026-11-14T22:43:43Z",
+    "checks": 8
   }
 ]
