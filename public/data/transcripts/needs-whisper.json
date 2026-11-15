@@ -160,14 +160,6 @@
     "checks": 7
   },
   {
-    "videoId": "1m2OEkvIXsg",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-11T12:18:28Z",
-    "durationSec": 13473,
-    "at": "2026-10-29T22:58:40Z",
-    "checks": 6
-  },
-  {
     "videoId": "BU_lkiNlUa4",
     "title": "【マイクラ】雑談しながらみんなでハードコア",
     "date": "2026-09-25T12:22:28Z",
@@ -182,14 +174,6 @@
     "durationSec": 9550,
     "at": "2026-10-29T22:58:53Z",
     "checks": 7
-  },
-  {
-    "videoId": "2PVxHpZrHgA",
-    "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
-    "date": "2026-10-12T11:30:26Z",
-    "durationSec": 12612,
-    "at": "2026-10-30T22:37:04Z",
-    "checks": 6
   },
   {
     "videoId": "PWmdfiQG4Es",
@@ -552,14 +536,6 @@
     "checks": 8
   },
   {
-    "videoId": "MZ91yhU_YtM",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-28T12:05:58Z",
-    "durationSec": 8314,
-    "at": "2026-11-07T22:15:07Z",
-    "checks": 5
-  },
-  {
     "videoId": "2Qy9VXDTYwU",
     "title": "俺の心はいつも150CC",
     "date": "2026-10-30T12:02:48Z",
@@ -704,19 +680,43 @@
     "checks": 7
   },
   {
-    "videoId": "7abU7pqvZnk",
-    "title": "旧居最終回",
-    "date": "2026-11-14T07:14:17Z",
-    "durationSec": 53,
-    "at": "2026-11-14T22:43:36Z",
-    "checks": 1
-  },
-  {
     "videoId": "yt0ZdCQWohE",
     "title": "#マリオカート8dx 反省会",
     "date": "2026-09-10T11:46:16Z",
     "durationSec": 9243,
     "at": "2026-11-14T22:43:43Z",
     "checks": 8
+  },
+  {
+    "videoId": "7abU7pqvZnk",
+    "title": "旧居最終回",
+    "date": "2026-11-14T07:14:17Z",
+    "durationSec": 53,
+    "at": "2026-11-15T23:06:57Z",
+    "checks": 2
+  },
+  {
+    "videoId": "MZ91yhU_YtM",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-28T12:05:58Z",
+    "durationSec": 8314,
+    "at": "2026-11-15T23:07:03Z",
+    "checks": 6
+  },
+  {
+    "videoId": "2PVxHpZrHgA",
+    "title": "【APEX】シールド割れる度にケツをシバかれる　#apex",
+    "date": "2026-10-12T11:30:26Z",
+    "durationSec": 12612,
+    "at": "2026-11-15T23:07:09Z",
+    "checks": 7
+  },
+  {
+    "videoId": "1m2OEkvIXsg",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-11T12:18:28Z",
+    "durationSec": 13473,
+    "at": "2026-11-15T23:07:15Z",
+    "checks": 7
   }
 ]
