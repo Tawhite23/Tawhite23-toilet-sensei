@@ -536,14 +536,6 @@
     "checks": 8
   },
   {
-    "videoId": "2Qy9VXDTYwU",
-    "title": "俺の心はいつも150CC",
-    "date": "2026-10-30T12:02:48Z",
-    "durationSec": 5821,
-    "at": "2026-11-08T22:25:11Z",
-    "checks": 5
-  },
-  {
     "videoId": "PBgvDPWURoY",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-20T11:41:34Z",
@@ -688,14 +680,6 @@
     "checks": 8
   },
   {
-    "videoId": "7abU7pqvZnk",
-    "title": "旧居最終回",
-    "date": "2026-11-14T07:14:17Z",
-    "durationSec": 53,
-    "at": "2026-11-15T23:06:57Z",
-    "checks": 2
-  },
-  {
     "videoId": "MZ91yhU_YtM",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-28T12:05:58Z",
@@ -718,5 +702,21 @@
     "durationSec": 13473,
     "at": "2026-11-15T23:07:15Z",
     "checks": 7
+  },
+  {
+    "videoId": "7abU7pqvZnk",
+    "title": "旧居最終回",
+    "date": "2026-11-14T07:14:17Z",
+    "durationSec": 53,
+    "at": "2026-11-17T02:02:40Z",
+    "checks": 3
+  },
+  {
+    "videoId": "2Qy9VXDTYwU",
+    "title": "俺の心はいつも150CC",
+    "date": "2026-10-30T12:02:48Z",
+    "durationSec": 5821,
+    "at": "2026-11-17T02:02:47Z",
+    "checks": 6
   }
 ]
