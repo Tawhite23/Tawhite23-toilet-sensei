@@ -1,13 +1,5 @@
 [
   {
-    "videoId": "fyctJSfEx5Y",
-    "title": "#マリオカート8dx 第2回全コース耐久やります",
-    "date": "2026-09-13T07:04:11Z",
-    "durationSec": 23113,
-    "at": "2026-10-18T21:00:41Z",
-    "checks": 7
-  },
-  {
     "videoId": "45rSuqajyOg",
     "title": "#雑談 第1回企画妄想会",
     "date": "2026-09-15T12:47:33Z",
@@ -174,14 +166,6 @@
     "durationSec": 9550,
     "at": "2026-10-29T22:58:53Z",
     "checks": 7
-  },
-  {
-    "videoId": "PWmdfiQG4Es",
-    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
-    "date": "2026-10-13T12:05:31Z",
-    "durationSec": 4453,
-    "at": "2026-11-01T22:19:34Z",
-    "checks": 6
   },
   {
     "videoId": "wT6gX3ALaqQ",
@@ -718,5 +702,21 @@
     "durationSec": 5821,
     "at": "2026-11-17T02:02:47Z",
     "checks": 6
+  },
+  {
+    "videoId": "PWmdfiQG4Es",
+    "title": "第2回ゲオで1番安いゲームをやる switchソフト編",
+    "date": "2026-10-13T12:05:31Z",
+    "durationSec": 4453,
+    "at": "2026-11-18T01:14:29Z",
+    "checks": 7
+  },
+  {
+    "videoId": "fyctJSfEx5Y",
+    "title": "#マリオカート8dx 第2回全コース耐久やります",
+    "date": "2026-09-13T07:04:11Z",
+    "durationSec": 23113,
+    "at": "2026-11-18T01:14:36Z",
+    "checks": 8
   }
 ]
