@@ -1,29 +1,5 @@
 [
   {
-    "videoId": "45rSuqajyOg",
-    "title": "#雑談 第1回企画妄想会",
-    "date": "2026-09-15T12:47:33Z",
-    "durationSec": 7431,
-    "at": "2026-10-19T22:37:36Z",
-    "checks": 7
-  },
-  {
-    "videoId": "rJRITAw1sOs",
-    "title": "#マイクラ参加型 ブルームアドオン",
-    "date": "2026-09-14T11:40:14Z",
-    "durationSec": 10330,
-    "at": "2026-10-19T22:37:43Z",
-    "checks": 7
-  },
-  {
-    "videoId": "0ym3Apo7otY",
-    "title": "#apex参加型   今度こそ",
-    "date": "2026-09-14T10:01:38Z",
-    "durationSec": 5794,
-    "at": "2026-10-19T22:37:50Z",
-    "checks": 7
-  },
-  {
     "videoId": "TW5t9YIGaOQ",
     "title": "【マイクラ】雑談しながら普通にハードコア",
     "date": "2026-09-16T12:08:32Z",
@@ -717,6 +693,30 @@
     "date": "2026-09-13T07:04:11Z",
     "durationSec": 23113,
     "at": "2026-11-18T01:14:36Z",
+    "checks": 8
+  },
+  {
+    "videoId": "45rSuqajyOg",
+    "title": "#雑談 第1回企画妄想会",
+    "date": "2026-09-15T12:47:33Z",
+    "durationSec": 7431,
+    "at": "2026-11-19T00:42:42Z",
+    "checks": 8
+  },
+  {
+    "videoId": "rJRITAw1sOs",
+    "title": "#マイクラ参加型 ブルームアドオン",
+    "date": "2026-09-14T11:40:14Z",
+    "durationSec": 10330,
+    "at": "2026-11-19T00:42:48Z",
+    "checks": 8
+  },
+  {
+    "videoId": "0ym3Apo7otY",
+    "title": "#apex参加型   今度こそ",
+    "date": "2026-09-14T10:01:38Z",
+    "durationSec": 5794,
+    "at": "2026-11-19T00:42:53Z",
     "checks": 8
   }
 ]
