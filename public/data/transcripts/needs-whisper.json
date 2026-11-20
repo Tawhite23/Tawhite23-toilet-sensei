@@ -216,14 +216,6 @@
     "checks": 8
   },
   {
-    "videoId": "zb7S0iYwHRQ",
-    "title": "反省",
-    "date": "2026-10-17T00:58:07Z",
-    "durationSec": 8653,
-    "at": "2026-11-03T23:38:01Z",
-    "checks": 6
-  },
-  {
     "videoId": "mcn0ax7vR-8",
     "title": "#マリオカート8dx 挑戦待ってる",
     "date": "2026-09-01T12:08:03Z",
@@ -664,14 +656,6 @@
     "checks": 7
   },
   {
-    "videoId": "7abU7pqvZnk",
-    "title": "旧居最終回",
-    "date": "2026-11-14T07:14:17Z",
-    "durationSec": 53,
-    "at": "2026-11-17T02:02:40Z",
-    "checks": 3
-  },
-  {
     "videoId": "2Qy9VXDTYwU",
     "title": "俺の心はいつも150CC",
     "date": "2026-10-30T12:02:48Z",
@@ -718,5 +702,21 @@
     "durationSec": 5794,
     "at": "2026-11-19T00:42:53Z",
     "checks": 8
+  },
+  {
+    "videoId": "7abU7pqvZnk",
+    "title": "旧居最終回",
+    "date": "2026-11-14T07:14:17Z",
+    "durationSec": 53,
+    "at": "2026-11-20T00:52:31Z",
+    "checks": 4
+  },
+  {
+    "videoId": "zb7S0iYwHRQ",
+    "title": "反省",
+    "date": "2026-10-17T00:58:07Z",
+    "durationSec": 8653,
+    "at": "2026-11-20T00:52:36Z",
+    "checks": 7
   }
 ]
