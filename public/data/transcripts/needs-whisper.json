@@ -1,21 +1,5 @@
 [
   {
-    "videoId": "TW5t9YIGaOQ",
-    "title": "【マイクラ】雑談しながら普通にハードコア",
-    "date": "2026-09-16T12:08:32Z",
-    "durationSec": 9680,
-    "at": "2026-10-21T21:58:02Z",
-    "checks": 7
-  },
-  {
-    "videoId": "pZIk3ROGWVM",
-    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
-    "date": "2026-09-16T10:15:37Z",
-    "durationSec": 6595,
-    "at": "2026-10-21T21:58:12Z",
-    "checks": 7
-  },
-  {
     "videoId": "Yw81p9jBGHE",
     "title": "雑談する",
     "date": "2026-09-18T12:00:54Z",
@@ -568,14 +552,6 @@
     "checks": 8
   },
   {
-    "videoId": "9U7jiMrB-ek",
-    "title": "第一回おトイレオークション",
-    "date": "2026-11-01T12:40:29Z",
-    "durationSec": 4507,
-    "at": "2026-11-12T00:59:07Z",
-    "checks": 5
-  },
-  {
     "videoId": "wP1mG5zFLFE",
     "title": "【マイクラ】ハードコア",
     "date": "2026-10-24T12:01:41Z",
@@ -718,5 +694,45 @@
     "durationSec": 8653,
     "at": "2026-11-20T00:52:36Z",
     "checks": 7
+  },
+  {
+    "videoId": "gGI-zmiyXrI",
+    "title": "マリオカート8顔配信",
+    "date": "2026-11-17T13:43:59Z",
+    "durationSec": 2873,
+    "at": "2026-11-21T00:10:26Z",
+    "checks": 1
+  },
+  {
+    "videoId": "Ps73C7m1oCo",
+    "title": "回線ごみ",
+    "date": "2026-11-14T07:16:52Z",
+    "durationSec": 5814,
+    "at": "2026-11-21T00:10:32Z",
+    "checks": 1
+  },
+  {
+    "videoId": "9U7jiMrB-ek",
+    "title": "第一回おトイレオークション",
+    "date": "2026-11-01T12:40:29Z",
+    "durationSec": 4507,
+    "at": "2026-11-21T00:10:39Z",
+    "checks": 6
+  },
+  {
+    "videoId": "TW5t9YIGaOQ",
+    "title": "【マイクラ】雑談しながら普通にハードコア",
+    "date": "2026-09-16T12:08:32Z",
+    "durationSec": 9680,
+    "at": "2026-11-21T00:10:45Z",
+    "checks": 8
+  },
+  {
+    "videoId": "pZIk3ROGWVM",
+    "title": "#ポケモンsv 第1回ポケモンシール人生縛り",
+    "date": "2026-09-16T10:15:37Z",
+    "durationSec": 6595,
+    "at": "2026-11-21T00:10:51Z",
+    "checks": 8
   }
 ]
