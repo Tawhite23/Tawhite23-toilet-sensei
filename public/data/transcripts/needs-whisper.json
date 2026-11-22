@@ -296,22 +296,6 @@
     "checks": 7
   },
   {
-    "videoId": "gbbcyqbTFac",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-18T12:17:13Z",
-    "durationSec": 9406,
-    "at": "2026-11-05T23:50:10Z",
-    "checks": 6
-  },
-  {
-    "videoId": "EW_NAR3mek8",
-    "title": "【マイクラ】今後の話しながらちょっとハードコア",
-    "date": "2026-10-18T11:05:29Z",
-    "durationSec": 4195,
-    "at": "2026-11-05T23:50:17Z",
-    "checks": 6
-  },
-  {
     "videoId": "rvOeGYtfuEY",
     "title": "#マイクラ参加型 目標は一旦クリア",
     "date": "2026-09-02T11:58:04Z",
@@ -704,30 +688,6 @@
     "checks": 8
   },
   {
-    "videoId": "1v2sGuPJx8o",
-    "title": "新居初のレース",
-    "date": "2026-11-21T12:02:10Z",
-    "durationSec": 9993,
-    "at": "2026-11-21T23:34:54Z",
-    "checks": 1
-  },
-  {
-    "videoId": "gGI-zmiyXrI",
-    "title": "マリオカート8顔配信",
-    "date": "2026-11-17T13:43:59Z",
-    "durationSec": 2873,
-    "at": "2026-11-21T23:34:59Z",
-    "checks": 2
-  },
-  {
-    "videoId": "Ps73C7m1oCo",
-    "title": "回線ごみ",
-    "date": "2026-11-14T07:16:52Z",
-    "durationSec": 5814,
-    "at": "2026-11-21T23:35:04Z",
-    "checks": 2
-  },
-  {
     "videoId": "Yw81p9jBGHE",
     "title": "雑談する",
     "date": "2026-09-18T12:00:54Z",
@@ -742,5 +702,61 @@
     "durationSec": 8820,
     "at": "2026-11-21T23:35:15Z",
     "checks": 8
+  },
+  {
+    "videoId": "lHuNhRiSE_g",
+    "title": "おトイレスポーツリゾート",
+    "date": "2026-11-22T12:54:28Z",
+    "durationSec": 4873,
+    "at": "2026-11-22T23:48:03Z",
+    "checks": 1
+  },
+  {
+    "videoId": "X8gM0o4lSuo",
+    "title": "【APEX】雑談ランクやる",
+    "date": "2026-11-22T10:49:40Z",
+    "durationSec": 7288,
+    "at": "2026-11-22T23:48:10Z",
+    "checks": 1
+  },
+  {
+    "videoId": "1v2sGuPJx8o",
+    "title": "新居初のレース",
+    "date": "2026-11-21T12:02:10Z",
+    "durationSec": 9993,
+    "at": "2026-11-22T23:48:16Z",
+    "checks": 2
+  },
+  {
+    "videoId": "gGI-zmiyXrI",
+    "title": "マリオカート8顔配信",
+    "date": "2026-11-17T13:43:59Z",
+    "durationSec": 2873,
+    "at": "2026-11-22T23:48:23Z",
+    "checks": 3
+  },
+  {
+    "videoId": "Ps73C7m1oCo",
+    "title": "回線ごみ",
+    "date": "2026-11-14T07:16:52Z",
+    "durationSec": 5814,
+    "at": "2026-11-22T23:48:29Z",
+    "checks": 3
+  },
+  {
+    "videoId": "gbbcyqbTFac",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-18T12:17:13Z",
+    "durationSec": 9406,
+    "at": "2026-11-22T23:48:36Z",
+    "checks": 7
+  },
+  {
+    "videoId": "EW_NAR3mek8",
+    "title": "【マイクラ】今後の話しながらちょっとハードコア",
+    "date": "2026-10-18T11:05:29Z",
+    "durationSec": 4195,
+    "at": "2026-11-22T23:48:42Z",
+    "checks": 7
   }
 ]
