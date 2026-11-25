@@ -1,37 +1,5 @@
 [
   {
-    "videoId": "I1R34VPAv7A",
-    "title": "#原神 完全初見プレイ➈",
-    "date": "2026-06-24T12:48:05Z",
-    "durationSec": 7725,
-    "at": "2026-10-25T21:12:18Z",
-    "checks": 8
-  },
-  {
-    "videoId": "FuDjhRUw0ug",
-    "title": "#マイクラ参加型 第13回サバイバル鬼ごっこシーズン3",
-    "date": "2026-05-23T11:01:21Z",
-    "durationSec": 9582,
-    "at": "2026-10-25T21:12:25Z",
-    "checks": 8
-  },
-  {
-    "videoId": "noOrRU6_h3I",
-    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
-    "date": "2026-04-21T09:09:33Z",
-    "durationSec": 96,
-    "at": "2026-10-25T21:12:32Z",
-    "checks": 8
-  },
-  {
-    "videoId": "4VMUTyOi_p8",
-    "title": "#マイクラ 雑談しながら1000days 59～65day",
-    "date": "2026-04-21T09:09:08Z",
-    "durationSec": 123,
-    "at": "2026-10-25T21:12:39Z",
-    "checks": 8
-  },
-  {
     "videoId": "mpU68pytw7s",
     "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
     "date": "2026-09-22T07:33:48Z",
@@ -392,14 +360,6 @@
     "checks": 8
   },
   {
-    "videoId": "PBgvDPWURoY",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-10-20T11:41:34Z",
-    "durationSec": 10004,
-    "at": "2026-11-08T22:25:17Z",
-    "checks": 6
-  },
-  {
     "videoId": "1hsktKAbn08",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-23T12:31:50Z",
@@ -648,22 +608,6 @@
     "checks": 8
   },
   {
-    "videoId": "gGI-zmiyXrI",
-    "title": "マリオカート8顔配信",
-    "date": "2026-11-17T13:43:59Z",
-    "durationSec": 2873,
-    "at": "2026-11-22T23:48:23Z",
-    "checks": 3
-  },
-  {
-    "videoId": "Ps73C7m1oCo",
-    "title": "回線ごみ",
-    "date": "2026-11-14T07:16:52Z",
-    "durationSec": 5814,
-    "at": "2026-11-22T23:48:29Z",
-    "checks": 3
-  },
-  {
     "videoId": "gbbcyqbTFac",
     "title": "#マリオカート8dx 普通に150CCやる",
     "date": "2026-10-18T12:17:13Z",
@@ -758,5 +702,69 @@
     "durationSec": 40182,
     "at": "2026-11-24T04:20:26Z",
     "checks": 8
+  },
+  {
+    "videoId": "7gwMnfxNkG4",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-11-24T13:21:01Z",
+    "durationSec": 2751,
+    "at": "2026-11-25T02:49:37Z",
+    "checks": 1
+  },
+  {
+    "videoId": "gGI-zmiyXrI",
+    "title": "マリオカート8顔配信",
+    "date": "2026-11-17T13:43:59Z",
+    "durationSec": 2873,
+    "at": "2026-11-25T02:53:22Z",
+    "checks": 4
+  },
+  {
+    "videoId": "Ps73C7m1oCo",
+    "title": "回線ごみ",
+    "date": "2026-11-14T07:16:52Z",
+    "durationSec": 5814,
+    "at": "2026-11-25T02:56:51Z",
+    "checks": 4
+  },
+  {
+    "videoId": "PBgvDPWURoY",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-10-20T11:41:34Z",
+    "durationSec": 10004,
+    "at": "2026-11-25T03:00:07Z",
+    "checks": 7
+  },
+  {
+    "videoId": "I1R34VPAv7A",
+    "title": "#原神 完全初見プレイ➈",
+    "date": "2026-06-24T12:48:05Z",
+    "durationSec": 7725,
+    "at": "2026-11-25T03:03:43Z",
+    "checks": 9
+  },
+  {
+    "videoId": "FuDjhRUw0ug",
+    "title": "#マイクラ参加型 第13回サバイバル鬼ごっこシーズン3",
+    "date": "2026-05-23T11:01:21Z",
+    "durationSec": 9582,
+    "at": "2026-11-25T03:07:09Z",
+    "checks": 9
+  },
+  {
+    "videoId": "noOrRU6_h3I",
+    "title": "#ポケモンsv 完全初見縛りプレイ③ ルールは概要欄",
+    "date": "2026-04-21T09:09:33Z",
+    "durationSec": 96,
+    "at": "2026-11-25T03:10:39Z",
+    "checks": 9
+  },
+  {
+    "videoId": "4VMUTyOi_p8",
+    "title": "#マイクラ 雑談しながら1000days 59～65day",
+    "date": "2026-04-21T09:09:08Z",
+    "durationSec": 123,
+    "at": "2026-11-25T03:14:07Z",
+    "checks": 9
   }
 ]
