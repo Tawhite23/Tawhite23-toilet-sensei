@@ -1,13 +1,5 @@
 [
   {
-    "videoId": "mpU68pytw7s",
-    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
-    "date": "2026-09-22T07:33:48Z",
-    "durationSec": 19985,
-    "at": "2026-10-26T22:52:49Z",
-    "checks": 7
-  },
-  {
     "videoId": "ml9EMnJEgr4",
     "title": "【終われません】ランダムで3人のYoutuberの最新動画当てるまで終われません",
     "date": "2026-09-23T11:21:53Z",
@@ -360,30 +352,6 @@
     "checks": 8
   },
   {
-    "videoId": "1hsktKAbn08",
-    "title": "#マリオカート8dx 普通に150CCやる",
-    "date": "2026-10-23T12:31:50Z",
-    "durationSec": 8766,
-    "at": "2026-11-10T01:53:31Z",
-    "checks": 6
-  },
-  {
-    "videoId": "QjO5sh3Aaq0",
-    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
-    "date": "2026-10-22T13:26:42Z",
-    "durationSec": 3535,
-    "at": "2026-11-10T01:53:37Z",
-    "checks": 6
-  },
-  {
-    "videoId": "Fy_cX1euBQI",
-    "title": "反省禊ケツシバキ10分耐久",
-    "date": "2026-10-22T13:12:20Z",
-    "durationSec": 768,
-    "at": "2026-11-10T01:53:43Z",
-    "checks": 6
-  },
-  {
     "videoId": "SxFXfcHKvjE",
     "title": "【レゴブロック参加型】1作目ついに完成？？！！",
     "date": "2026-10-04T10:59:28Z",
@@ -624,22 +592,6 @@
     "checks": 7
   },
   {
-    "videoId": "lHuNhRiSE_g",
-    "title": "おトイレスポーツリゾート",
-    "date": "2026-11-22T12:54:28Z",
-    "durationSec": 4842,
-    "at": "2026-11-24T04:19:36Z",
-    "checks": 2
-  },
-  {
-    "videoId": "X8gM0o4lSuo",
-    "title": "【APEX】雑談ランクやる",
-    "date": "2026-11-22T10:49:40Z",
-    "durationSec": 7288,
-    "at": "2026-11-24T04:19:42Z",
-    "checks": 2
-  },
-  {
     "videoId": "1v2sGuPJx8o",
     "title": "新居初のレース",
     "date": "2026-11-21T12:02:10Z",
@@ -704,14 +656,6 @@
     "checks": 8
   },
   {
-    "videoId": "7gwMnfxNkG4",
-    "title": "【マイクラ】ハードコア",
-    "date": "2026-11-24T13:21:01Z",
-    "durationSec": 2751,
-    "at": "2026-11-25T02:49:37Z",
-    "checks": 1
-  },
-  {
     "videoId": "gGI-zmiyXrI",
     "title": "マリオカート8顔配信",
     "date": "2026-11-17T13:43:59Z",
@@ -766,5 +710,61 @@
     "durationSec": 123,
     "at": "2026-11-25T03:14:07Z",
     "checks": 9
+  },
+  {
+    "videoId": "7gwMnfxNkG4",
+    "title": "【マイクラ】ハードコア",
+    "date": "2026-11-24T13:21:01Z",
+    "durationSec": 2751,
+    "at": "2026-11-26T01:57:12Z",
+    "checks": 2
+  },
+  {
+    "videoId": "lHuNhRiSE_g",
+    "title": "おトイレスポーツリゾート",
+    "date": "2026-11-22T12:54:28Z",
+    "durationSec": 4842,
+    "at": "2026-11-26T01:57:18Z",
+    "checks": 3
+  },
+  {
+    "videoId": "X8gM0o4lSuo",
+    "title": "【APEX】雑談ランクやる",
+    "date": "2026-11-22T10:49:40Z",
+    "durationSec": 7288,
+    "at": "2026-11-26T01:57:24Z",
+    "checks": 3
+  },
+  {
+    "videoId": "1hsktKAbn08",
+    "title": "#マリオカート8dx 普通に150CCやる",
+    "date": "2026-10-23T12:31:50Z",
+    "durationSec": 8766,
+    "at": "2026-11-26T01:57:30Z",
+    "checks": 7
+  },
+  {
+    "videoId": "QjO5sh3Aaq0",
+    "title": "4位以下で嫁にケツをシバかれる #マリオカート8dx",
+    "date": "2026-10-22T13:26:42Z",
+    "durationSec": 3535,
+    "at": "2026-11-26T01:57:35Z",
+    "checks": 7
+  },
+  {
+    "videoId": "Fy_cX1euBQI",
+    "title": "反省禊ケツシバキ10分耐久",
+    "date": "2026-10-22T13:12:20Z",
+    "durationSec": 768,
+    "at": "2026-11-26T01:57:41Z",
+    "checks": 7
+  },
+  {
+    "videoId": "mpU68pytw7s",
+    "title": "#マリオカート8dx 世界一ストレスの溜まるマリオカート",
+    "date": "2026-09-22T07:33:48Z",
+    "durationSec": 19985,
+    "at": "2026-11-26T01:57:47Z",
+    "checks": 8
   }
 ]
