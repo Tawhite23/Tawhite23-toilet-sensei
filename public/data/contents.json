@@ -1,21 +1,35 @@
 [
   {
-    "date": "2026-11-28T12:00:00Z",
+    "date": "2026-11-28T12:38:48Z",
     "type": "live",
     "title": "【マイクラ】新企画？？",
     "videoId": "qowbEtP6aTM",
-    "thumbnail": "https://i.ytimg.com/vi/qowbEtP6aTM/maxresdefault.jpg?v=6b087805",
-    "durationSec": 0,
-    "status": "upcoming"
+    "thumbnail": "https://i.ytimg.com/vi/qowbEtP6aTM/maxresdefault.jpg",
+    "durationSec": 7749
   },
   {
-    "date": "2026-11-28T10:00:00Z",
+    "date": "2026-11-28T11:30:01Z",
+    "type": "video",
+    "title": "#shorts #夜の踊り子 #ミーム #おトイレ先生 #サカナクション",
+    "videoId": "gCRuwPDs4wU",
+    "thumbnail": "https://i.ytimg.com/vi/gCRuwPDs4wU/maxresdefault.jpg",
+    "durationSec": 15
+  },
+  {
+    "date": "2026-11-28T10:58:26Z",
     "type": "live",
     "title": "おトイレカート8デラックス",
     "videoId": "QWwEMvZoCSE",
     "thumbnail": "https://i.ytimg.com/vi/QWwEMvZoCSE/maxresdefault.jpg?v=6b0714e9",
-    "durationSec": 0,
-    "status": "upcoming"
+    "durationSec": 5566
+  },
+  {
+    "date": "2026-11-28T09:30:23Z",
+    "type": "video",
+    "title": "卓球でCPUに完封を狙った男の結末 #卓球 #おトイレ先生 #shorts #switchsports #スイッチスポーツ",
+    "videoId": "FU8oysqtNM4",
+    "thumbnail": "https://i.ytimg.com/vi/FU8oysqtNM4/maxresdefault.jpg",
+    "durationSec": 36
   },
   {
     "date": "2026-11-28T06:22:07Z",
